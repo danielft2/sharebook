@@ -1,0 +1,94 @@
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Usuario {
+  id                String             @id @default(uuid())
+  nome              String
+  email             String             @unique
+  telefone          String             @unique
+  senha             String
+  cep               String
+  estado            String
+  cidade            String
+  foto_perfil       String?
+  livro             Livro[]
+  solicitacao       Solicitacao[]
+  processo_de_troca ProcessoDeTroca[]
+  alerta            Alerta[]
+}
+
+model Livro {
+  isbn              String            @id
+  nome              String
+  sinopse           String?
+  autor             String
+  dono_publicacao   Usuario           @relation(fields: [usuario_id], references: [id])
+  usuario_id        String
+  edicao            Int               @default(1)
+  idioma            String
+  pode_buscar       Boolean           @default(false)
+  quer_receber      Boolean           @default(true)
+  capa              String
+  imagens           String[]
+  genero_livro      GeneroLivro[]
+  estado            Estado            @relation(fields: [estado_id], references: [id])
+  estado_id         String
+  solicitacao       Solicitacao[]
+  processo_de_troca ProcessoDeTroca[]
+}
+
+model GeneroLivro {
+  livro      Livro  @relation(fields: [livro_isbn], references: [isbn])
+  livro_isbn String
+  genero     Genero @relation(fields: [genero_id], references: [id])
+  genero_id  String
+
+  @@id([livro_isbn, genero_id])
+}
+
+model Genero {
+  id          String        @id @default(uuid())
+  nome        String
+  generoLivro GeneroLivro[]
+}
+
+model Estado {
+  id     String  @id @default(uuid())
+  nome   String
+  livros Livro[]
+}
+
+model Solicitacao {
+  id                     String  @id @default(uuid())
+  usuario_solicitante    Usuario @relation(fields: [usuario_solicitante_id], references: [id])
+  usuario_solicitante_id String
+  livro                  Livro   @relation(fields: [livro_isbn], references: [isbn])
+  livro_isbn             String
+  status                 String
+}
+
+model ProcessoDeTroca {
+  id                     String  @id @default(uuid())
+  usuario_solicitante    Usuario @relation(fields: [usuario_solicitante_id], references: [id])
+  usuario_solicitante_id String
+  livro                  Livro   @relation(fields: [livro_isbn], references: [isbn])
+  livro_isbn             String
+  status                 String
+}
+
+model Alerta {
+  id                  String  @id @default(uuid())
+  nome_livro          String
+  usuario             Usuario @relation(fields: [usuario_id], references: [id])
+  usuario_id          String
+  filtrado_por_estado Boolean @default(false)
+  filtrado_por_cidade Boolean @default(false)
+}
