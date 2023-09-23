@@ -1,5 +1,5 @@
 <h1 align="center">
-  <img width="250px" title="Logo goorg" alt="Logo goorg" src="/logo-goorg.svg">
+  <img width="250px" title="Logo goorg" alt="Logo ShareBook" src="/logo.svg">
 </h1>
 
 ## 💻 Sobre o Projeto
@@ -16,8 +16,6 @@
 </br>
 
 ✅ **Criar Alerta para um livro específico** - Você pode criar um alerta para um livro específico e o notifacaremos quando ele estiver disponível no aplicativo
-
-## 🎨 Layout
 
 ## 🛠 Tecnologias
 #### Aplicativo Android(Cliente)
@@ -45,7 +43,7 @@
 <table>
   <tr>
     <td align="center"><a href="https://github.com/danielft2"><img src="https://avatars.githubusercontent.com/u/73781042?v=4" width="100px;" alt="Daniel Almeida"/><br /><sub><b>Daniel Almeida</b></sub></a><br /><a href="https://github.com/danielft2" title="FrontEnd">
-            <img src="https://download.logo.wine/logo/Kotlin_(programming_language)/Kotlin_(programming_language)-Logo.wine.png" width="20px" />
+            <img src="https://download.logo.wine/logo/Kotlin_(programming_language)/Kotlin_(programming_language)-Logo.wine.png" width="100px" />
     </a></td>
      <td align="center"><a href="https://github.com/JoseVitorNobre"><img src="https://avatars.githubusercontent.com/u/62249331?v=4" width="100px;" alt="José Vitor"/><br /><sub><b>José Vitor</b></sub></a><br /><a href="https://github.com/JoseVitorNobre" title="BackEnd">
      <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/spring/spring-original.svg" width="20px"/>
