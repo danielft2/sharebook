@@ -49,10 +49,16 @@
       </div>
     </a></td>
      <td align="center"><a href="https://github.com/JoseVitorNobre"><img src="https://avatars.githubusercontent.com/u/62249331?v=4" width="100px;" alt="José Vitor"/><br /><sub><b>José Vitor</b></sub></a><br /><a href="https://github.com/JoseVitorNobre" title="BackEnd">
-     <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/spring/spring-original.svg" width="20px"/>
+        <div style="displa: 'flex'; align-item: 'center'; gap: '8px' "> 
+            <img src="https://download.logo.wine/logo/Kotlin_(programming_language)/Kotlin_(programming_language)-Logo.wine.png" width="30px" />
+            <img src="https://seeklogo.com/images/N/nestjs-logo-09342F76C0-seeklogo.com.png" width="20px"/>
+        </div>
      </a></td>
      <td align="center"><a href="https://github.com/alexsonalmeida"><img src="https://avatars.githubusercontent.com/u/101877352?v=4" width="100px;" alt="Higor Santiago"/><br /><sub><b>Alexson Almeida</b></sub></a><br /><a href="https://github.com/alexsonalmeida" title="FrontEnd">
-     <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg" width="20px" />
+        <div style="displa: 'flex'; align-item: 'center'; gap: '8px' "> 
+            <img src="https://download.logo.wine/logo/Kotlin_(programming_language)/Kotlin_(programming_language)-Logo.wine.png" width="30px" />
+            <img src="https://seeklogo.com/images/N/nestjs-logo-09342F76C0-seeklogo.com.png" width="20px"/>
+        </div>
      </a></td>
   </tr>
 </table>
