@@ -44,7 +44,7 @@
   <tr>
     <td align="center"><a href="https://github.com/danielft2"><img src="https://avatars.githubusercontent.com/u/73781042?v=4" width="100px;" alt="Daniel Almeida"/><br /><sub><b>Daniel Almeida</b></sub></a><br /><a href="https://github.com/danielft2" title="FrontEnd">
       <div style="displa: 'flex'; align-item: 'center'; gap: '8px' "> 
-            <img src="https://download.logo.wine/logo/Kotlin_(programming_language)/Kotlin_(programming_language)-Logo.wine.png" width="20px" />
+            <img src="https://download.logo.wine/logo/Kotlin_(programming_language)/Kotlin_(programming_language)-Logo.wine.png" width="30px" />
             <img src="https://upload.wikimedia.org/wikipedia/commons/a/ad/Figma-1-logo.png" width="20px" />
       </div>
     </a></td>
