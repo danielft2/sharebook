@@ -44,8 +44,8 @@
   <tr>
     <td align="center"><a href="https://github.com/danielft2"><img src="https://avatars.githubusercontent.com/u/73781042?v=4" width="100px;" alt="Daniel Almeida"/><br /><sub><b>Daniel Almeida</b></sub></a><br /><a href="https://github.com/danielft2" title="FrontEnd">
       <div style="displa: 'flex'; align-item: 'center'; gap: '8px' "> 
-            <img src="https://download.logo.wine/logo/Kotlin_(programming_language)/Kotlin_(programming_language)-Logo.wine.png" width="10px" />
-            <img src="https://upload.wikimedia.org/wikipedia/commons/a/ad/Figma-1-logo.png" width="10px" />
+            <img src="https://download.logo.wine/logo/Kotlin_(programming_language)/Kotlin_(programming_language)-Logo.wine.png" width="20px" />
+            <img src="https://upload.wikimedia.org/wikipedia/commons/a/ad/Figma-1-logo.png" width="20px" />
       </div>
     </a></td>
      <td align="center"><a href="https://github.com/JoseVitorNobre"><img src="https://avatars.githubusercontent.com/u/62249331?v=4" width="100px;" alt="José Vitor"/><br /><sub><b>José Vitor</b></sub></a><br /><a href="https://github.com/JoseVitorNobre" title="BackEnd">
