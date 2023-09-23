@@ -1,7 +1,5 @@
 "use strict";
 
-"use strict";
-
 module.exports = {
   types: [
     { value: "feat", name: "feat:     A new feature" },
@@ -28,30 +26,29 @@ module.exports = {
     { value: "WIP", name: "WIP:      Work in progress" },
   ],
 
-   scopes: [
-      { name: "server" },
-      { name: "cliente" },
-      { name: "root" },
-   ],
+  scopes: [
+    { name: "server" },
+    { name: "cliente" },
+    { name: "root" },
+    { name: "docs" },
+  ],
 
-   messages: {
-      type: "Select the type of change that you're committing:",
-      scope: "\nDenote the SCOPE of this change:",
-      customScope: "Denote the SCOPE of this change:",
-      subject: "Write a SHORT, IMPERATIVE tense description of the change:\n",
-      body: 'Provide a LONGER description of the change (optional). Use "|" to break new line:\n',
-      breaking: "List any BREAKING CHANGES (optional):\n",
-      footer:
-      "List any ISSUES CLOSED by this change (optional). E.g.: #31, #34:\n",
-      confirmCommit: "Are you sure you want to proceed with the commit above?",
-   } ,
+  messages: {
+    type: "Select the type of change that you're committing:",
+    scope: "\nDenote the SCOPE of this change:",
+    customScope: "Denote the SCOPE of this change:",
+    subject: "Write a SHORT, IMPERATIVE tense description of the change:\n",
+    body: 'Provide a LONGER description of the change (optional). Use "|" to break new line:\n',
+    breaking: "List any BREAKING CHANGES (optional):\n",
+    footer:
+    "List any ISSUES CLOSED by this change (optional). E.g.: #31, #34:\n",
+    confirmCommit: "Are you sure you want to proceed with the commit above?",
+  } ,
 
-   skipQuestions: ['breaking', 'footer'],
-   skipEmptyScopes: true,
-
+  skipQuestions: ['breaking', 'footer'],
+  skipEmptyScopes: true,
 
   allowBreakingChanges: ["feat", "fix", "perf"],
 
-  // limit subject length
   subjectLimit: 100,
 };
