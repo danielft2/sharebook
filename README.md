@@ -2,7 +2,7 @@
   <img width="250px" title="Logo goorg" alt="Logo ShareBook" src="/logo.svg">
 </h1>
 
-## 💻 Sobre o Projeto
+## 🎯 Sobre o Projeto
  A ideia do projeto é desenvolver uma aplicação mobile que tem como finalidade servir como ponte entre leitores que desejam trocar livros físicos entre si. Permitindo que leitores que têm ou não esse hábito possam ter mais facilidade e maior número de opções na hora de trocarem seus livros. 
 
 ## 🚀 Funcionalidades Principais
