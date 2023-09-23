@@ -39,7 +39,7 @@
  - Node 18.18 LTS
  - postgresql configurado
 
-## 📸 Autores
+## 💻 Equipe
 <table>
   <tr>
     <td align="center"><a href="https://github.com/danielft2"><img src="https://avatars.githubusercontent.com/u/73781042?v=4" width="100px;" alt="Daniel Almeida"/><br /><sub><b>Daniel Almeida</b></sub></a><br /><a href="https://github.com/danielft2" title="FrontEnd">
