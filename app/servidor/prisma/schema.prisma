@@ -10,10 +10,10 @@ datasource db {
 }
 
 model Usuario {
-  id                String             @id @default(uuid())
+  id                String            @id @default(uuid())
   nome              String
-  email             String             @unique
-  telefone          String             @unique
+  email             String            @unique
+  telefone          String            @unique
   senha             String
   cep               String
   estado            String
@@ -23,6 +23,7 @@ model Usuario {
   solicitacao       Solicitacao[]
   processo_de_troca ProcessoDeTroca[]
   alerta            Alerta[]
+  avaliacao         Avaliacao[]
 }
 
 model Livro {
@@ -91,4 +92,13 @@ model Alerta {
   usuario_id          String
   filtrado_por_estado Boolean @default(false)
   filtrado_por_cidade Boolean @default(false)
+}
+
+model Avaliacao {
+  id                   String  @id @default(uuid())
+  usuario_avaliador_id String
+  nota                 Float
+  comentario           String
+  usuario_avaliado     Usuario @relation(fields: [usuario_avaliado_id], references: [id])
+  usuario_avaliado_id  String
 }
