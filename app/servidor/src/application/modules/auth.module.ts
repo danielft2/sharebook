@@ -10,7 +10,7 @@ import { LoginValidationMiddleware } from 'src/interfaces/middlewares/login-vali
 
 @Module({
   imports:[UserModule, 
-    JwtModule.register({secret: process.env.JWT_SECRET, signOptions: {expiresIn:'1h'}})
+    JwtModule.register({secret: process.env.JWT_SECRET, signOptions: {expiresIn:'1d'}})
   ],
   controllers: [AuthController],
   providers: [AuthService, LocalStrategy, JwtStrategy],

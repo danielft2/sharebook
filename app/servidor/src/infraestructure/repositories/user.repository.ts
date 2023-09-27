@@ -8,25 +8,25 @@ export class UserRepository {
   constructor(private readonly prisma: PrismaService) {}
 
   async create(user: User) {
+    console.log(user)
     const userData = {
       ...user,
-      password: await bcrypt.hash(user.password, 10),
+      senha: await bcrypt.hash(user.senha, 10),
     };
 
     return await this.prisma.usuario.create({
       data: {
         nome: userData.nome,
         email: userData.email,
-        senha: userData.password,
+        senha: userData.senha,
         telefone: userData.telefone,
         cep: userData.cep,
-        cidade: userData.city,
-        estado: userData.state,
+        cidade: userData.cidade,
+        estado: userData.estado,
         foto_perfil: userData.profile_photo
       }
     });
   }
-
 
   async findById(id: string) {
     return this.prisma.usuario.findUnique({

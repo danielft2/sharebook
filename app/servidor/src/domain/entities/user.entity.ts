@@ -1,11 +1,11 @@
 export class User {
     id?: string;
     nome: string;
-    password: string;
+    senha: string;
     email: string;
     telefone: string;
     cep: string;
-    city: string;
-    state: string;
+    cidade: string;
+    estado: string;
     profile_photo?: string;
 }

@@ -16,13 +16,14 @@ export class JwtAuthGuard extends AuthGuard('jwt') {
   }
 
   handleRequest(err: Error, user: any, info: any, context: any, status?: any) {
+   
     const isPublic = this.reflector.getAllAndOverride<boolean>(IS_PUBLIC_KEY, [
       context.getHandler(),
       context.getClass(),
     ]);
-
+  
     if (isPublic) return true;
-
+  
     if (info?.name === 'TokenExpiredError') {
       throw new UnauthorizedException('Token expired');
     }
@@ -30,7 +31,7 @@ export class JwtAuthGuard extends AuthGuard('jwt') {
     if (err || !user) {
       throw err || new UnauthorizedException();
     }
-
+    
     return user;
   }
 }
