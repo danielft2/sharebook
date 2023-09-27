@@ -1,0 +1,119 @@
+//// ------------------------------------------------------
+//// THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
+//// ------------------------------------------------------
+
+Table Usuario {
+  id String [pk]
+  nome String [not null]
+  email String [unique, not null]
+  telefone String [unique, not null]
+  senha String [not null]
+  cep String [not null]
+  estado String [not null]
+  cidade String [not null]
+  foto_perfil String
+  livro Livro [not null]
+  solicitacao Solicitacao [not null]
+  processo_de_troca ProcessoDeTroca [not null]
+  alerta Alerta [not null]
+  avaliacao Avaliacao [not null]
+}
+
+Table Livro {
+  isbn String [pk]
+  nome String [not null]
+  sinopse String
+  autor String [not null]
+  dono_publicacao Usuario [not null]
+  usuario_id String [not null]
+  edicao Int [not null, default: 1]
+  idioma String [not null]
+  pode_buscar Boolean [not null, default: false]
+  quer_receber Boolean [not null, default: true]
+  capa String [not null]
+  imagens String[] [not null]
+  genero_livro GeneroLivro [not null]
+  estado Estado [not null]
+  estado_id String [not null]
+  solicitacao Solicitacao [not null]
+  processo_de_troca ProcessoDeTroca [not null]
+}
+
+Table GeneroLivro {
+  livro Livro [not null]
+  livro_isbn String [not null]
+  genero Genero [not null]
+  genero_id String [not null]
+
+  indexes {
+    (livro_isbn, genero_id) [pk]
+  }
+}
+
+Table Genero {
+  id String [pk]
+  nome String [not null]
+  generoLivro GeneroLivro [not null]
+}
+
+Table Estado {
+  id String [pk]
+  nome String [not null]
+  livros Livro [not null]
+}
+
+Table Solicitacao {
+  id String [pk]
+  usuario_solicitante Usuario [not null]
+  usuario_solicitante_id String [not null]
+  livro Livro [not null]
+  livro_isbn String [not null]
+  status String [not null]
+}
+
+Table ProcessoDeTroca {
+  id String [pk]
+  usuario_solicitante Usuario [not null]
+  usuario_solicitante_id String [not null]
+  livro Livro [not null]
+  livro_isbn String [not null]
+  status String [not null]
+}
+
+Table Alerta {
+  id String [pk]
+  nome_livro String [not null]
+  usuario Usuario [not null]
+  usuario_id String [not null]
+  filtrado_por_estado Boolean [not null, default: false]
+  filtrado_por_cidade Boolean [not null, default: false]
+}
+
+Table Avaliacao {
+  id String [pk]
+  usuario_avaliador_id String [not null]
+  nota Float [not null]
+  comentario String [not null]
+  usuario_avaliado Usuario [not null]
+  usuario_avaliado_id String [not null]
+}
+
+Ref: Livro.usuario_id > Usuario.id
+
+Ref: Livro.estado_id > Estado.id
+
+Ref: GeneroLivro.livro_isbn > Livro.isbn
+
+Ref: GeneroLivro.genero_id > Genero.id
+
+Ref: Solicitacao.usuario_solicitante_id > Usuario.id
+
+Ref: Solicitacao.livro_isbn > Livro.isbn
+
+Ref: ProcessoDeTroca.usuario_solicitante_id > Usuario.id
+
+Ref: ProcessoDeTroca.livro_isbn > Livro.isbn
+
+Ref: Alerta.usuario_id > Usuario.id
+
+Ref: Avaliacao.usuario_avaliado_id > Usuario.id
