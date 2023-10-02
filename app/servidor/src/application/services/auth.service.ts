@@ -17,12 +17,11 @@ export class AuthService {
         const user = await this.userService.findOneByEmail(email);
        
         if (user) {
-            //const isPasswordValid = await bcrypt.compare(password, user.senha);
-            const isPasswordValid = password === user.senha;
-           
+            const isPasswordValid = await bcrypt.compare(password, user.senha);
+            
             if (isPasswordValid) return {
                 ...user, 
-                password: undefined
+                senha: undefined
             };
         }
         

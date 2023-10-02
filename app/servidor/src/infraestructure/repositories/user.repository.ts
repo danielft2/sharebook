@@ -8,24 +8,29 @@ export class UserRepository {
   constructor(private readonly prisma: PrismaService) {}
 
   async create(user: User) {
-    console.log(user)
     const userData = {
       ...user,
       senha: await bcrypt.hash(user.senha, 10),
     };
+    let result
+    try {
+      result = await this.prisma.usuario.create({
+        data: {
+          nome: userData.nome,
+          email: userData.email,
+          senha: userData.senha,
+          telefone: userData.telefone,
+          cep: userData.cep,
+          cidade: userData.cidade,
+          estado: userData.estado,
+          foto_perfil: userData.profile_photo
+        }
+      });
+    } catch (error) {
+      result = error
+    }
 
-    return await this.prisma.usuario.create({
-      data: {
-        nome: userData.nome,
-        email: userData.email,
-        senha: userData.senha,
-        telefone: userData.telefone,
-        cep: userData.cep,
-        cidade: userData.cidade,
-        estado: userData.estado,
-        foto_perfil: userData.profile_photo
-      }
-    });
+    return result;
   }
 
   async findById(id: string) {

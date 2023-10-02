@@ -3,20 +3,20 @@ import {
     Injectable,
     NotFoundException,
   } from '@nestjs/common';
-  import { UserRepository } from 'src/infraestructure/repositories/user.repository';
-  import { User } from 'src/domain/entities/user.entity';
+  import { UserRepository } from '../../infraestructure/repositories/user.repository';
+  import { User } from '../..//domain/entities/user.entity';
+import { PrismaClientKnownRequestError } from '@prisma/client/runtime/library';
   
   @Injectable()
   export class UserService {
     constructor(private userRepository: UserRepository) {}
   
     async create(user: User) {
-      const existUser = await this.userRepository.findByEmail(
-        user.email,
-      );
-      if (existUser) throw new ConflictException();
-  
-      return this.userRepository.create(user);
+      const result: PrismaClientKnownRequestError | any = await this.userRepository.create(user);
+      if (result.code === 'P2002') {
+        throw new ConflictException();
+      }
+      return result;
     }
   
     async findAll() {
