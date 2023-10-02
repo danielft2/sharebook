@@ -14,6 +14,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import com.example.sharebook.ui.login.Login
 import com.example.sharebook.ui.cadastro.Cadastro
+import com.example.sharebook.ui.cadastro.Genero
 import com.example.sharebook.ui.theme.SharebookTheme
 import com.example.sharebook.ui.theme.gray200
 import com.example.sharebook.ui.theme.green900
@@ -28,7 +29,7 @@ class MainActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colors.background
                 ) {
-                    Cadastro()
+                    Genero()
                 }
             }
         }
@@ -52,6 +53,6 @@ fun Greeting() {
 @Composable
 fun DefaultPreview() {
     SharebookTheme {
-        Cadastro()
+        Genero()
     }
 }
