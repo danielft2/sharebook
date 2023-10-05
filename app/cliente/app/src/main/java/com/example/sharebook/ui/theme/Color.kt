@@ -18,5 +18,8 @@ val gray300 = Color(0xFF9DB2BF)
 val gray500 = Color(0xFF526D82)
 val gray800 = Color(0xFF27374D)
 
+val golden = Color(0xFFFF9E00)
+val lightGolden = Color(0xFFFFF2DD)
+
 val background = Color(0xFFF8F8F8)
 val white = Color(0xFFFFFFFF)
