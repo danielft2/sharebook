@@ -68,6 +68,7 @@ Table Solicitacao {
   usuario_solicitante_id String [not null]
   livro Livro [not null]
   livro_isbn String [not null]
+  livro_isbn_solicitante String [not null]
   status String [not null]
 }
 
@@ -85,7 +86,6 @@ Table Alerta {
   nome_livro String [not null]
   usuario Usuario [not null]
   usuario_id String [not null]
-  filtrado_por_estado Boolean [not null, default: false]
   filtrado_por_cidade Boolean [not null, default: false]
 }
 

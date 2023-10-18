@@ -77,6 +77,7 @@ model Solicitacao {
   usuario_solicitante_id String
   livro                  Livro   @relation(fields: [livro_isbn], references: [isbn])
   livro_isbn             String
+  livro_isbn_solicitante String
   status                 String
 }
 
@@ -94,7 +95,6 @@ model Alerta {
   nome_livro          String
   usuario             Usuario @relation(fields: [usuario_id], references: [id])
   usuario_id          String
-  filtrado_por_estado Boolean @default(false)
   filtrado_por_cidade Boolean @default(false)
 }
 
