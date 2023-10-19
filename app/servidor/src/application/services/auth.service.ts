@@ -4,7 +4,7 @@ import { UserService } from './user.service';
 import { User } from '../../domain/entities/user.entity';
 import { JwtService } from '@nestjs/jwt';
 import { UserDataReturn } from '../../domain/models/UserDataReturn';
-import { UserPayload } from 'src/domain/models/UserPayload';
+import { UserPayload } from '../../../src/domain/models/UserPayload';
 
 @Injectable()
 export class AuthService {
@@ -17,12 +17,11 @@ export class AuthService {
         const user = await this.userService.findOneByEmail(email);
        
         if (user) {
-            //const isPasswordValid = await bcrypt.compare(password, user.senha);
-            const isPasswordValid = password === user.senha;
-           
+            const isPasswordValid = await bcrypt.compare(password, user.senha);
+            
             if (isPasswordValid) return {
                 ...user, 
-                password: undefined
+                senha: undefined
             };
         }
         

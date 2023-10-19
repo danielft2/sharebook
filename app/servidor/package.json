@@ -69,7 +69,7 @@
       "json",
       "ts"
     ],
-    "rootDir": "src",
+    "rootDir": "./",
     "testRegex": ".*\\.spec\\.ts$",
     "transform": {
       "^.+\\.(t|j)s$": "ts-jest"
@@ -77,7 +77,25 @@
     "collectCoverageFrom": [
       "**/*.(t|j)s"
     ],
-    "coverageDirectory": "../coverage",
+    "coverageDirectory": "./coverage",
+    "coveragePathIgnorePatterns": [
+      "/node_modules/",
+      "/dist/",
+      "/data/",
+      "/src/main.ts",
+      "/src/application/modules/supabase.module.ts",
+      "/src/interfaces/http/middlewares",
+      "/src/domain/entities",
+      "/src/domain/models",
+      "/src/domain/enums",
+      "/src/interfaces/http/dtos",
+      "/test/app/e2e",
+      "/.eslintrc.js",
+      "/src/interfaces/guards",
+      "/src/interfaces/middlewares",
+      "/coverage",
+      "/test"
+    ],
     "testEnvironment": "node"
   }
 }

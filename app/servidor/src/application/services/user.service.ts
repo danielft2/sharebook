@@ -3,8 +3,8 @@ import {
     Injectable,
     NotFoundException,
   } from '@nestjs/common';
-  import { UserRepository } from 'src/infraestructure/repositories/user.repository';
-  import { User } from 'src/domain/entities/user.entity';
+  import { UserRepository } from '../../infraestructure/repositories/user.repository';
+  import { User } from '../../domain/entities/user.entity';
   
   @Injectable()
   export class UserService {
