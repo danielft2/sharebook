@@ -1,6 +1,6 @@
 import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
-import { UserService } from 'src/application/services/user.service';
-import { User } from 'src/domain/entities/user.entity';
+import { UserService } from '../../application/services/user.service';
+import { User } from '../../domain/entities/user.entity';
 import { IsPublic } from '../decorators/is-public.decorator';
 
 @Controller('user')

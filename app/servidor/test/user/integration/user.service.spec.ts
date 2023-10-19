@@ -33,29 +33,14 @@ describe('UserService', () => {
      });
 
      describe('POST methods', () => {
-        it('should return a 409 status when some unique value cause conflict', async () => {
-          const user = {
-            nome:'fulando de tal', 
-            email:'email1@email.com', 
-            senha:'111111111',
-            telefone: '99-99999999',
-            cep: '99999-999',
-            cidade: 'itapina',
-            estado: 'ceara'
-        };
-    
-          await expect(service.create(user)).rejects.toThrow(ConflictException);
-        });
-      });
-
       it('should create a user', async () => {
         const user = {
             nome:'fulando de tal', 
-            email:'emailteste@email.com', 
+            email:'email1@email.com', 
             senha:'111111111',
             telefone: '91-99999999',
             cep: '99999-999',
-            cidade: 'itapina',
+            cidade: 'itapiuna',
             estado: 'ceara'
         };
 
@@ -63,4 +48,19 @@ describe('UserService', () => {
 
         expect(userCreated).toBeDefined();
       })
+
+      it('should return a 409 status when some unique value cause conflict', async () => {
+          const user = {
+            nome:'fulando de tal', 
+            email:'email1@email.com', 
+            senha:'111111111',
+            telefone: '99-99999999',
+            cep: '99999-999',
+            cidade: 'itapiuna',
+            estado: 'ceara'
+        };
+    
+          await expect(service.create(user)).rejects.toThrow(ConflictException);
+        });
+      });
 });

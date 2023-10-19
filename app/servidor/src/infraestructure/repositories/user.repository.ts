@@ -8,7 +8,6 @@ export class UserRepository {
   constructor(private readonly prisma: PrismaService) {}
 
   async create(user: User) {
-    console.log(user)
     const userData = {
       ...user,
       senha: await bcrypt.hash(user.senha, 10),

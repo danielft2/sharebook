@@ -14,6 +14,7 @@ dotenv.config({ path: 'test/.env.test' });
 describe('AuthService', () => {
     let service: AuthService;
     let prismaService: PrismaService;
+    let userRepositoryGetted: UserRepository;
   
     beforeEach(async () => {
       const prismaModule: TestingModule = await Test.createTestingModule({
@@ -36,6 +37,7 @@ describe('AuthService', () => {
       }).compile();
   
       service = module.get<AuthService>(AuthService);
+      userRepositoryGetted = module.get<UserRepository>(UserRepository)
     });
 
     it('should be defined', () => {
@@ -56,7 +58,7 @@ describe('AuthService', () => {
         id: "528e7277-ed6a-4768-b35a-cc6a669f5003",
         nome:'Alexson1',
         email:'email1@email.com',
-        senha:'1234aA',
+        senha:'111111111',
         telefone: '99-99999999',
         cep: '99999-999',
         estado: 'itapiuna',
