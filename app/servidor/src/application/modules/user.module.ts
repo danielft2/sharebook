@@ -9,7 +9,7 @@ import { JwtStrategy } from '../strategies/jwt.strategy';
 @Module({
   imports: [PrismaModule, JwtModule.register({secret: process.env.JWT_SECRET, signOptions: {expiresIn:'1d'}})],
   controllers: [UserController],
-  providers: [UserService, UserRepository, JwtStrategy],
+  providers: [UserService, UserRepository, JwtStrategy, ],
   exports:[UserService]
 })
 export class UserModule {}
