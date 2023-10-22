@@ -1,6 +1,6 @@
 import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
-import { UserService } from 'src/application/services/user.service';
-import { User } from 'src/domain/entities/user.entity';
+import { UserService } from '../../application/services/user.service';
+import { User } from '../../domain/entities/user.entity';
 import { IsPublic } from '../decorators/is-public.decorator';
 
 @Controller('user')
@@ -9,8 +9,12 @@ export class UserController {
 
   @IsPublic()
   @Post()
-  create(@Body() user: User) {
-    return this.userService.create(user);
+  async create(@Body() user: User) {
+    const userDataReturn = await this.userService.create(user);
+    return {
+      ...userDataReturn,
+      senha: undefined
+    }
   }
 
   @Get()
@@ -23,7 +27,7 @@ export class UserController {
     const userDataReturn = await this.userService.findOneById(id);
     return {
       ...userDataReturn,
-      password: undefined
+      senha: undefined
     }
   }
 }
