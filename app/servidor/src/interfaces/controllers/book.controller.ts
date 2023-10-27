@@ -1,13 +1,13 @@
 import { Controller, Get, Param } from "@nestjs/common";
-import { BookService } from "../../../src/application/services/book.service";
+import { BookService } from "../../application/services/book.service";
 
 @Controller('book')
 export class BookControler {
     constructor(private bookService: BookService) {}
 
-    @Get()
-    async findAll(){
-        return this.bookService.findAll();
+    @Get('home/:user_id')
+    async findMany(@Param('user_id') user_id: string){
+        return this.bookService.findAll(user_id);
     }
     
     @Get(':isbn')

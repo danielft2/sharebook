@@ -1,4 +1,3 @@
-/* eslint-disable prettier/prettier */
 import { Test, TestingModule } from "@nestjs/testing";
 import { BookService } from "../../../src/application/services/book.service"
 import { PrismaService } from "../../../src/infraestructure/database/prisma/prisma.service"
