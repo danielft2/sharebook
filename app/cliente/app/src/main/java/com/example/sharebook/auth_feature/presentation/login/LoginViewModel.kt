@@ -9,18 +9,21 @@ import com.example.sharebook.core.utils.Resource
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import javax.inject.Inject
-import androidx.compose.runtime.getValue
+import androidx.compose.runtime.getValue;
 import androidx.compose.runtime.setValue
+import com.example.sharebook.auth_feature.data.remote.response.toUserModel
 import com.example.sharebook.auth_feature.presentation.login.event.LoginFormEvent
 import com.example.sharebook.auth_feature.presentation.login.state.LoginFormState
 import com.example.sharebook.auth_feature.domain.usecase.validations.ValidateUseCases
 import com.example.sharebook.auth_feature.presentation.login.state.toLoginModel
+import com.example.sharebook.core.domain.adapter.UserStorageManagement
 import com.example.sharebook.core.utils.UiText
 
 @HiltViewModel
 class LoginViewModel @Inject constructor(
     private val loginUseCase: LoginUseCase,
-    private val validateUseCases: ValidateUseCases
+    private val validateUseCases: ValidateUseCases,
+    private val userStorageManagement: UserStorageManagement
 ): ViewModel() {
     var uiRequestState by mutableStateOf(LoginRequestState())
         private set
@@ -68,15 +71,16 @@ class LoginViewModel @Inject constructor(
     fun login() {
         viewModelScope.launch {
             loginUseCase(uiFormState.toLoginModel()).collect { result ->
-                uiRequestState = when(result) {
+                when(result) {
                     is Resource.Success -> {
-                        uiRequestState.copy(success = true, isLoading = false)
+                        uiRequestState = uiRequestState.copy(success = true, isLoading = false)
+                        userStorageManagement.saved(result.data!!.toUserModel())
                     }
                     is Resource.Error -> {
-                        uiRequestState.copy(error = result.message, isLoading = false)
+                        uiRequestState = uiRequestState.copy(error = result.message, isLoading = false)
                     }
                     is Resource.Loading -> {
-                        uiRequestState.copy(isLoading = true)
+                        uiRequestState = uiRequestState.copy(isLoading = true)
                     }
                 }
             }

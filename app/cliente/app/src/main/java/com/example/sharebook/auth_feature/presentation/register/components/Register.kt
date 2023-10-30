@@ -28,6 +28,7 @@ import com.example.sharebook.auth_feature.presentation.register.event.RegisterFo
 import com.example.sharebook.core.presentation.components.ButtonPrimary
 import com.example.sharebook.core.presentation.components.Header
 import com.example.sharebook.core.presentation.components.TextFieldCustom
+import com.example.sharebook.core.presentation.navigation.routes.PublicRoutes
 import com.example.sharebook.core.presentation.ui.theme.*
 import com.example.sharebook.core.utils.UiText
 
@@ -62,7 +63,7 @@ fun Register(
                     .verticalScroll(rememberScrollState())
                     .weight(1f, false)
             ) {
-                Header(onClick = { navController.navigate("login") })
+                Header(onClick = { navController.navigate(PublicRoutes.LoginScreen.route) })
 
                 Spacer(modifier = Modifier.height(24.dp))
 
