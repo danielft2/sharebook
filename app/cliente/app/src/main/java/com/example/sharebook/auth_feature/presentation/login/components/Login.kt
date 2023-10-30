@@ -27,6 +27,7 @@ import com.example.sharebook.auth_feature.presentation.login.LoginViewModel
 import com.example.sharebook.auth_feature.presentation.login.event.LoginFormEvent
 import com.example.sharebook.core.presentation.components.ButtonPrimary
 import com.example.sharebook.core.presentation.components.TextFieldCustom
+import com.example.sharebook.core.presentation.navigation.routes.PublicRoutes
 import com.example.sharebook.core.presentation.ui.theme.*
 import com.example.sharebook.core.utils.UiText
 
@@ -158,7 +159,7 @@ fun Login(
                         modifier = Modifier.padding(end = 2.dp)
                     )
                     TextButton(
-                        onClick = { navController.navigate("register") },
+                        onClick = { navController.navigate(PublicRoutes.RegisterScreen.route) },
                         contentPadding = PaddingValues(0.dp),
                         modifier = Modifier.defaultMinSize(minHeight = 1.dp)
                     ){
