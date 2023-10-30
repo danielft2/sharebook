@@ -11,7 +11,7 @@ export class BookRepository {
     });
   }
 
-  async findMany(){
+  async findMany() {
     return await this.prisma.livro.findMany();
   }
 }
