@@ -26,6 +26,6 @@ val red400 = Color(0xFFFF3030)
 val golden = Color(0xFFFF9E00)
 val lightGolden = Color(0xFFFFF2DD)
 
-val background = Color(0xFFF8F8F8)
+val background = Color(0xFFF3F3F3)
 val white = Color(0xFFFFFFFF)
 

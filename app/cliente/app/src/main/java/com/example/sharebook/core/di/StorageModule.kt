@@ -3,7 +3,9 @@ package com.example.sharebook.core.di
 import android.content.Context
 import androidx.datastore.core.DataStore
 import androidx.datastore.preferences.core.Preferences
+import com.example.sharebook.core.data.local.storage.TokenStorageManagerImpl
 import com.example.sharebook.core.data.local.storage.UserStorageManagerImpl
+import com.example.sharebook.core.domain.adapter.TokenStorageManagement
 import com.example.sharebook.core.domain.adapter.UserStorageManagement
 import com.example.sharebook.core.utils.dataStorage
 import com.google.gson.Gson
@@ -28,6 +30,12 @@ class StorageModule {
     @Provides
     fun provideUserStorageManagement(dataStore: DataStore<Preferences>, gson: Gson): UserStorageManagement {
         return UserStorageManagerImpl(dataStore, gson)
+    }
+
+    @Singleton
+    @Provides
+    fun provideTokenStorageManagement(dataStore: DataStore<Preferences>): TokenStorageManagement {
+        return TokenStorageManagerImpl(dataStore)
     }
 
     @Singleton
