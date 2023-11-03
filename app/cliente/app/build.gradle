@@ -77,6 +77,11 @@ dependencies {
     implementation("androidx.lifecycle:lifecycle-viewmodel-compose:2.6.1")
 
     implementation 'com.google.accompanist:accompanist-systemuicontroller:0.25.1'
+    implementation "androidx.datastore:datastore-preferences:1.0.0"
+    implementation("io.coil-kt:coil-compose:2.4.0")
+
+    implementation "androidx.compose.material3:material3:1.0.1"
+    implementation "androidx.compose.material3:material3-window-size-class:1.0.1"
 
     // Drager - Hilt
     implementation "com.google.dagger:hilt-android:2.44"

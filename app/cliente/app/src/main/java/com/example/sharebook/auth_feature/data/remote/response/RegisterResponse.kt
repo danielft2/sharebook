@@ -1,5 +1,6 @@
 package com.example.sharebook.auth_feature.data.remote.response
 
+import com.example.sharebook.core.domain.model.UserModel
 import com.google.gson.annotations.SerializedName
 
 data class RegisterResponse(
@@ -24,6 +25,16 @@ data class RegisterResponse(
     @SerializedName("nome")
     val nome: String,
 
-    @SerializedName("phone")
-    val phone: String
+    @SerializedName("telefone")
+    val telefone: String
 )
+
+fun RegisterResponse.toUserModel() : UserModel {
+    return UserModel(
+        phone = telefone,
+        cep = cep,
+        email = email,
+        name = nome,
+        id = id
+    )
+}

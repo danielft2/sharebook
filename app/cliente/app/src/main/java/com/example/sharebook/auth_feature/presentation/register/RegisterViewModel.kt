@@ -6,12 +6,14 @@ import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.sharebook.R
+import com.example.sharebook.auth_feature.data.remote.response.toUserModel
 import com.example.sharebook.auth_feature.domain.usecase.RegisterUseCase
 import com.example.sharebook.auth_feature.domain.usecase.validations.ValidateUseCases
 import com.example.sharebook.auth_feature.presentation.register.event.RegisterFormEvent
 import com.example.sharebook.auth_feature.presentation.register.state.RegisterFormState
 import com.example.sharebook.auth_feature.presentation.register.state.RegisterRequestState
 import com.example.sharebook.auth_feature.presentation.register.state.toRegisterModel
+import com.example.sharebook.core.domain.adapter.UserStorageManagement
 import com.example.sharebook.core.domain.usecase.ConsultCepUseCase
 import com.example.sharebook.core.utils.Resource
 import com.example.sharebook.core.utils.UiText
@@ -23,7 +25,8 @@ import javax.inject.Inject
 class RegisterViewModel @Inject constructor(
     private val registerUseCase: RegisterUseCase,
     private val consultCepUseCase: ConsultCepUseCase,
-    private val validateUseCases: ValidateUseCases
+    private val validateUseCases: ValidateUseCases,
+    private val userStorageManagement: UserStorageManagement
 ) : ViewModel()
 {
     var uiFormState by mutableStateOf(RegisterFormState())
@@ -142,7 +145,8 @@ class RegisterViewModel @Inject constructor(
                         requestState = requestState.copy(isLoading = true)
                     }
                     is Resource.Success -> {
-                       requestState = requestState.copy(sucess = true, isLoading = false)
+                        requestState = requestState.copy(sucess = true, isLoading = false)
+                        userStorageManagement.saved(it.data!!.toUserModel())
                     }
                 }
             }
