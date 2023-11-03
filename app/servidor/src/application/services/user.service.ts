@@ -33,6 +33,7 @@ import { JwtService } from '@nestjs/jwt';
         ...userDataCreated,
         access_token: this.jwtService.sign(payload)
       }
+      
       return userDataReturn;
     }
   
