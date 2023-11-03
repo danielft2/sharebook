@@ -38,4 +38,12 @@
     <string name="field_password_min">A senha deve ter pelo menos 6 caracteres.</string>
     <string name="field_different_passwords">As senhas devem ser iguais.</string>
     <string name="field_cep_invalid">Informe um CEP válido.</string>
+
+    <string name="home_route_title">Inicio</string>
+    <string name="discovery_route_title">Descobrir</string>
+    <string name="exchanges_route_title">Trocas</string>
+    <string name="maps_route_title">Mapa</string>
+
+    <string name="home_carousel_available">Disponivéis para troca</string>
+    <string name="home_caroseul_nearToYou">Perto de você</string>
 </resources>

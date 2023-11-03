@@ -27,17 +27,17 @@ import com.example.sharebook.auth_feature.presentation.login.LoginViewModel
 import com.example.sharebook.auth_feature.presentation.login.event.LoginFormEvent
 import com.example.sharebook.core.presentation.components.ButtonPrimary
 import com.example.sharebook.core.presentation.components.TextFieldCustom
-import com.example.sharebook.core.presentation.navigation.routes.PublicRoutes
+import com.example.sharebook.core.presentation.navigation.routes.unauthenticated.PublicRoutes
 import com.example.sharebook.core.presentation.ui.theme.*
 import com.example.sharebook.core.utils.UiText
 
-@OptIn(ExperimentalMaterialApi::class)
+@OptIn(ExperimentalMaterialApi::class, ExperimentalLayoutApi::class)
 @Composable
 fun Login(
     navController: NavController,
     viewModel: LoginViewModel = hiltViewModel()
 ) {
-    Surface(modifier = Modifier.fillMaxSize(), color = gray100) {
+    Surface(modifier = Modifier.fillMaxSize()) {
         Column(
             modifier = Modifier
                 .fillMaxSize()
@@ -63,7 +63,7 @@ fun Login(
             Spacer(modifier = Modifier.height(32.dp))
 
             Image(
-                painter = painterResource(id = R.drawable.login_ilustration),
+                painter = painterResource(id = R.drawable.ilus_login),
                 contentDescription = null,
                 contentScale = ContentScale.FillWidth,
                 modifier = Modifier

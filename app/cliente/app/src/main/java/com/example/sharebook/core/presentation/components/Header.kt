@@ -15,7 +15,6 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import com.example.sharebook.R
 import com.example.sharebook.core.presentation.ui.theme.green400
-import com.example.sharebook.core.presentation.ui.theme.green500
 
 @Composable
 fun Header(onClick: () -> Unit) {
@@ -34,7 +33,7 @@ fun Header(onClick: () -> Unit) {
                     .height(44.dp)
             ) {
                 Image(
-                    painter = painterResource(id = R.drawable.arrow_back),
+                    painter = painterResource(id = R.drawable.icon_arrow_back),
                     contentDescription = null,
                     contentScale = ContentScale.FillWidth,
                     modifier = Modifier
