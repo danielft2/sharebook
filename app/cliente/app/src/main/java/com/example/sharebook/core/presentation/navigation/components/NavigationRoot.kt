@@ -15,6 +15,7 @@ import com.example.sharebook.core.presentation.navigation.routes.authenticated.b
 import com.example.sharebook.core.presentation.navigation.routes.unauthenticated.PublicRoutes
 import com.example.sharebook.core.presentation.ui.theme.*
 import com.example.sharebook.core.utils.Constants
+import com.example.sharebook.welcome_feature.presentation.Welcome
 
 @SuppressLint("UnusedMaterialScaffoldPaddingParameter")
 @Composable
@@ -24,9 +25,14 @@ fun NavigationRoot(
 ) {
     NavHost(navController = navController, startDestination = Constants.NAVIGATION_PUBLIC) {
         navigation(
-            startDestination = PublicRoutes.LoginScreen.route,
+            startDestination = PublicRoutes.WelcomeScreen.route,
             route = Constants.NAVIGATION_PUBLIC
         ) {
+            composable(PublicRoutes.WelcomeScreen.route) {
+                RedirectRoute(navigationViewModel.isLogged, navController = navController)
+                Welcome(navController = navController)
+            }
+
             composable(PublicRoutes.LoginScreen.route) {
                 RedirectRoute(navigationViewModel.isLogged, navController = navController)
                 Login(navController = navController)

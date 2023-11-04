@@ -1,6 +1,15 @@
 <resources>
     <string name="app_name">sharebook</string>
 
+    <string name="welcome_title">Agora ficou fácil trocar seus livros.</string>
+    <string name="welcome_subtitle">
+        Encontre pessoas de todos os lugares e
+        troque seus livros com outros usuários.
+    </string>
+    <string name="welcome_button_login">Fazer Login</string>
+    <string name="welcome_button_register">Realizar Cadastro</string>
+
+
     <string name="login_title">Acesse sua conta.</string>
     <string name="login_subtitle">
         Informe suas credencias abaixo para acessar,

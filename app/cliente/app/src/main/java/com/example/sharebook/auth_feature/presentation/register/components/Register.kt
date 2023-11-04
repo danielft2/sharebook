@@ -63,7 +63,7 @@ fun Register(
                     .verticalScroll(rememberScrollState())
                     .weight(1f, false)
             ) {
-                Header(onClick = { navController.navigate(PublicRoutes.LoginScreen.route) })
+                Header { navController.popBackStack() }
 
                 Spacer(modifier = Modifier.height(24.dp))
 
@@ -207,7 +207,7 @@ fun Register(
                         modifier = Modifier.padding(end = 2.dp)
                     )
                     TextButton(
-                        onClick = { navController.navigate("login") },
+                        onClick = { navController.navigate(PublicRoutes.LoginScreen.route) },
                         contentPadding = PaddingValues(0.dp),
                         modifier = Modifier.defaultMinSize(minHeight = 1.dp)
                     ){
