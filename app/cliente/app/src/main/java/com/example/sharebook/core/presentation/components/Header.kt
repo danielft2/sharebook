@@ -18,7 +18,7 @@ import com.example.sharebook.core.presentation.ui.theme.green400
 
 @Composable
 fun Header(onClick: () -> Unit) {
-    Box(modifier = Modifier.fillMaxSize()) {
+    Box(modifier = Modifier.fillMaxWidth()) {
         Row(
             horizontalArrangement = Arrangement.SpaceBetween,
             verticalAlignment = Alignment.CenterVertically
@@ -48,7 +48,7 @@ fun Header(onClick: () -> Unit) {
                     .padding(end = 44.dp),
                 contentAlignment = Alignment.Center
             ) {
-                Logo()
+                Logo(type = LogoType.green)
             }
         }
     }

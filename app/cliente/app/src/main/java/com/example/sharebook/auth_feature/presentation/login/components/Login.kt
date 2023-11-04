@@ -25,13 +25,12 @@ import androidx.navigation.NavController
 import com.example.sharebook.R
 import com.example.sharebook.auth_feature.presentation.login.LoginViewModel
 import com.example.sharebook.auth_feature.presentation.login.event.LoginFormEvent
-import com.example.sharebook.core.presentation.components.ButtonPrimary
-import com.example.sharebook.core.presentation.components.TextFieldCustom
+import com.example.sharebook.core.presentation.components.*
 import com.example.sharebook.core.presentation.navigation.routes.unauthenticated.PublicRoutes
 import com.example.sharebook.core.presentation.ui.theme.*
 import com.example.sharebook.core.utils.UiText
 
-@OptIn(ExperimentalMaterialApi::class, ExperimentalLayoutApi::class)
+@OptIn(ExperimentalMaterialApi::class)
 @Composable
 fun Login(
     navController: NavController,
@@ -48,29 +47,23 @@ fun Login(
                         endY = 500f
                     )
                 )
-                .padding(20.dp)
+                .padding(20.dp),
         ) {
-            Image(
-                painter = painterResource(id = R.drawable.logo),
-                contentDescription = null,
-                contentScale = ContentScale.FillWidth,
-                modifier = Modifier
-                    .align(Alignment.CenterHorizontally)
-                    .width(116.dp)
-                    .height(20.dp)
-            )
+            Column(horizontalAlignment = Alignment.CenterHorizontally) {
+                Header { navController.popBackStack() }
 
-            Spacer(modifier = Modifier.height(32.dp))
+                Spacer(modifier = Modifier.height(32.dp))
 
-            Image(
-                painter = painterResource(id = R.drawable.ilus_login),
-                contentDescription = null,
-                contentScale = ContentScale.FillWidth,
-                modifier = Modifier
-                    .width(244.dp)
-                    .height(124.dp)
-                    .align(Alignment.CenterHorizontally)
-            )
+                Image(
+                    painter = painterResource(id = R.drawable.ilus_login),
+                    contentDescription = null,
+                    contentScale = ContentScale.FillWidth,
+                    modifier = Modifier
+                        .width(244.dp)
+                        .height(124.dp)
+                        .align(Alignment.CenterHorizontally)
+                )
+            }
 
             Spacer(modifier = Modifier.height(24.dp))
 
