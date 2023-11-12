@@ -8,4 +8,5 @@ sealed class PrivateRoutes(val route: String) {
     object DiscoveryScreen: PrivateRoutes(Constants.DISCOVERY_ROUTE)
     object ExchangesScreen: PrivateRoutes(Constants.EXCHANGES_ROUTE)
     object MapsScreen: PrivateRoutes(Constants.MAPS_ROUTE)
+    object ExternalBook: PrivateRoutes(Constants.EXTERNAL_BOOK_ROUTE)
 }
