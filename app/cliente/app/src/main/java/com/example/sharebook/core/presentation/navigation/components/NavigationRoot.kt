@@ -32,9 +32,8 @@ fun NavigationRoot(
             route = Constants.NAVIGATION_PUBLIC
         ) {
             composable(PublicRoutes.WelcomeScreen.route) {
-                //RedirectRoute(navigationViewModel.isLogged, navController = navController)
-                //Welcome(navController = navController)
-                ExternalBook(navController = navController)
+                RedirectRoute(navigationViewModel.isLogged, navController = navController)
+                Welcome(navController = navController)
             }
 
             composable(PublicRoutes.LoginScreen.route) {
@@ -53,7 +52,10 @@ fun NavigationRoot(
             route = Constants.NAVIGATION_PRIVATE
         ) {
             composable(PrivateRoutes.MainScreen.route) {
-                BottomNavigation(itens = bottomNavigationItens)
+                BottomNavigation(navControllerRoot = navController, itens = bottomNavigationItens)
+            }
+            composable(PrivateRoutes.ExternalBook.route) {
+                ExternalBook(navController = navController)
             }
         }
     }

@@ -25,8 +25,8 @@ import com.example.sharebook.home_feature.domain.BookModel
 @Composable
 fun SectionCarousel(
     modifier: Modifier = Modifier,
-    books: List<BookModel>,
-    title: String
+    title: String,
+    content: @Composable ColumnScope.() -> Unit
 ) {
     Column(modifier = modifier) {
         Row(
@@ -60,11 +60,6 @@ fun SectionCarousel(
 
         Spacer(modifier = Modifier.height(8.dp))
 
-        LazyRow() {
-            items(books) {
-                BookPreview(book = it, onClick = { TODO() })
-                Spacer(modifier = Modifier.width(8.dp))
-            }
-        }
+        content()
     }
 }

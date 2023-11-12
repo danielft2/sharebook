@@ -56,6 +56,7 @@
     <string name="home_carousel_available">Disponivéis para troca</string>
     <string name="home_caroseul_nearToYou">Perto de você</string>
 
+    <string name="book_details_header">Detalhes do Livro</string>
     <string name="book_datails_descreption_session">Descrição</string>
     <string name="book_datails_gallery_session">Galeria de Imagens</string>
     <string name="book_datails_requests_session">Lista de Solicitações</string>
