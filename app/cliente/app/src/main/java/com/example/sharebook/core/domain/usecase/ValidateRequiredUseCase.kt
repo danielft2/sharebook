@@ -1,4 +1,4 @@
-package com.example.sharebook.auth_feature.domain.usecase.validations
+package com.example.sharebook.core.domain.usecase
 
 import com.example.sharebook.R
 import com.example.sharebook.core.utils.ValidationFieldResult

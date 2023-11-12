@@ -55,4 +55,25 @@
 
     <string name="home_carousel_available">Disponivéis para troca</string>
     <string name="home_caroseul_nearToYou">Perto de você</string>
+
+    <string name="add_book_title">Adicionar Livro para troca</string>
+    <string name="add_book_step_1_subtitle">Etapa 1 - Dados</string>
+    <string name="add_book_step_2_subtitle">Etapa 2 - Imagens</string>
+    <string name="field_isbn">Isbn</string>
+    <string name="field_book_name">Nome do Livro</string>
+    <string name="field_genre">Gênero</string>
+    <string name="field_author">Autor</string>
+    <string name="field_edition">Edição</string>
+    <string name="field_language">Idioma</string>
+    <string name="field_book_state">Estado do Livro</string>
+    <string name="check_get_preference">Tenho preferência em buscar</string>
+    <string name="description_get_preference">
+        Marque se você tem disponibilidade para buscar o livro no outro usuário.
+    </string>
+    <string name="check_receive_preference">Tenho preferencia em receber</string>
+    <string name="description_receive_preference">
+        Marque se você tem preferência para receber o livro do outro usuário.
+    </string>
+
+    <string name="field_isbn_invalid">Insira um Isbn Válido</string>
 </resources>

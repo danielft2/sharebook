@@ -9,6 +9,7 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.navigation
 import com.example.sharebook.auth_feature.presentation.login.components.Login
 import com.example.sharebook.auth_feature.presentation.register.components.Register
+import com.example.sharebook.book_management_feature.presentation.add_book.components.AddBook
 import com.example.sharebook.core.presentation.navigation.NavigationViewModel
 import com.example.sharebook.core.presentation.navigation.routes.authenticated.PrivateRoutes
 import com.example.sharebook.core.presentation.navigation.routes.authenticated.bottomNavigationItens
@@ -30,7 +31,8 @@ fun NavigationRoot(
         ) {
             composable(PublicRoutes.WelcomeScreen.route) {
                 RedirectRoute(navigationViewModel.isLogged, navController = navController)
-                Welcome(navController = navController)
+                // Welcome(navController = navController)
+                AddBook(navController = navController)
             }
 
             composable(PublicRoutes.LoginScreen.route) {

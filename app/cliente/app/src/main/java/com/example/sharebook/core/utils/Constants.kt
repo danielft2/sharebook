@@ -3,7 +3,8 @@ package com.example.sharebook.core.utils
 object Constants {
     // Remote
     const val VIA_CEP_URL = "https://viacep.com.br/ws/"
-
+    const val GOOGLE_BOOKS_URL = "www.googleapis.com/books/v1/volumes?q=isbn:"
+    
     // Data Storage
     const val STORAGE_USER_KEY = "USER_KEY"
     const val STORAGE_TOKEN_KEY = "TOKEN_KEY"
