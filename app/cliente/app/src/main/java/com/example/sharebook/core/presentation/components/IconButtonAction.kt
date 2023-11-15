@@ -24,7 +24,7 @@ fun IconButtonAction(
         onClick = { onClick() },
         modifier = Modifier
             .clip(RoundedCornerShape(100))
-            .size(42.dp)
+            .size(40.dp)
             .then(modifier)
     ) {
         Image(

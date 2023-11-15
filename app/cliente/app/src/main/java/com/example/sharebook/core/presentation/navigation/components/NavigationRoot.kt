@@ -10,14 +10,14 @@ import androidx.navigation.compose.navigation
 import com.example.sharebook.auth_feature.presentation.login.components.Login
 import com.example.sharebook.auth_feature.presentation.register.components.Register
 import com.example.sharebook.book_feature.presentation.external_book.components.ExternalBook
-import com.example.sharebook.book_feature.presentation.self_book.SelfBookViewModel
-import com.example.sharebook.book_feature.presentation.self_book.components.Book
+import com.example.sharebook.book_feature.presentation.self_book.components.SelfBook
 import com.example.sharebook.core.presentation.navigation.NavigationViewModel
 import com.example.sharebook.core.presentation.navigation.routes.authenticated.PrivateRoutes
 import com.example.sharebook.core.presentation.navigation.routes.authenticated.bottomNavigationItens
 import com.example.sharebook.core.presentation.navigation.routes.unauthenticated.PublicRoutes
 import com.example.sharebook.core.presentation.ui.theme.*
 import com.example.sharebook.core.utils.Constants
+import com.example.sharebook.exchanges_feature.presentation.processdetails.components.ProcessDetails
 import com.example.sharebook.welcome_feature.presentation.Welcome
 
 @SuppressLint("UnusedMaterialScaffoldPaddingParameter")
@@ -56,6 +56,12 @@ fun NavigationRoot(
             }
             composable(PrivateRoutes.ExternalBook.route) {
                 ExternalBook(navController = navController)
+            }
+            composable(PrivateRoutes.UserBook.route) {
+                SelfBook(navController = navController)
+            }
+            composable(PrivateRoutes.BookProcess.route) {
+                ProcessDetails(navController = navController)
             }
         }
     }

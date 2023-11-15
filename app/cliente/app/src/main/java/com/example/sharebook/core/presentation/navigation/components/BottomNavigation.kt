@@ -14,21 +14,19 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import androidx.navigation.NavController
 import androidx.navigation.NavGraph.Companion.findStartDestination
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
-import com.example.sharebook.book_feature.presentation.external_book.components.ExternalBook
 import com.example.sharebook.core.presentation.navigation.routes.authenticated.BottomNavigationItem
 import com.example.sharebook.core.presentation.navigation.routes.authenticated.PrivateRoutes
 import com.example.sharebook.core.presentation.ui.theme.*
 import com.example.sharebook.core.utils.Constants
 import com.example.sharebook.core.utils.UiText
 import com.example.sharebook.discovery_feature.presentation.components.Discovery
-import com.example.sharebook.exchanges_feature.presentation.components.Exchanges
+import com.example.sharebook.exchanges_feature.presentation.tabs.components.Exchanges
 import com.example.sharebook.home_feature.presentation.components.Home
 import com.example.sharebook.maps_feature.presentation.components.Maps
 
@@ -84,7 +82,7 @@ fun BottomNavigation(
         NavHost(navController = navBottomController, startDestination = Constants.HOME_ROUTE) {
             composable(PrivateRoutes.HomeScreen.route) { Home(navControllerRoot) }
             composable(PrivateRoutes.DiscoveryScreen.route) { Discovery() }
-            composable(PrivateRoutes.ExchangesScreen.route) { Exchanges() }
+            composable(PrivateRoutes.ExchangesScreen.route) { Exchanges(navControllerRoot) }
             composable(PrivateRoutes.MapsScreen.route) { Maps() }
         }
     }
