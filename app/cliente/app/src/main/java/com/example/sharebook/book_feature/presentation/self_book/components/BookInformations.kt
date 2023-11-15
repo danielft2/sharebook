@@ -1,11 +1,7 @@
-package com.example.sharebook.book_feature.presentation.external_book.components
+package com.example.sharebook.book_feature.presentation.self_book.components
 
 import androidx.compose.foundation.Image
-import androidx.compose.foundation.background
-import androidx.compose.foundation.horizontalScroll
 import androidx.compose.foundation.layout.*
-import androidx.compose.foundation.rememberScrollState
-import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -20,15 +16,12 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.sharebook.R
 import com.example.sharebook.book_feature.data.mock.model.BookDatailsMock
-import com.example.sharebook.book_feature.data.mock.model.PedidoTrocaMock
 import com.example.sharebook.core.presentation.components.BookTag
 import com.example.sharebook.core.presentation.ui.theme.*
 
 @Composable
 fun BookInformations() {
     val bookDatails = BookDatailsMock()
-    val pedidoTroca = PedidoTrocaMock()
-
     Row(
         modifier = Modifier.fillMaxWidth(),
         verticalAlignment = Alignment.CenterVertically
@@ -42,7 +35,7 @@ fun BookInformations() {
                 .height(160.dp)
                 .clip(Shapes.medium)
         )
-        
+
         Spacer(modifier = Modifier.width(16.dp))
 
         Column(modifier = Modifier.fillMaxWidth()) {
@@ -75,48 +68,10 @@ fun BookInformations() {
 
                 Spacer(modifier = Modifier.height(12.dp))
 
-                Row(
-                    modifier = Modifier
-                        .horizontalScroll(rememberScrollState())
-                        .fillMaxWidth()
-                ) {
+                Column(modifier = Modifier.fillMaxWidth()) {
                     BookTag(text = bookDatails.status, background = blue100, colorText = blue500)
-                    Spacer(modifier = Modifier.width(8.dp))
+                    Spacer(modifier = Modifier.height(8.dp))
                     BookTag(text = bookDatails.podeBuscar, background = green100, colorText = green600)
-                }
-            }
-            
-            Spacer(modifier = Modifier.height(12.dp))
-            
-            Row {
-                Image(
-                    painter = painterResource(id = R.drawable.profile),
-                    contentDescription = null,
-                    contentScale = ContentScale.Crop,
-                    modifier = Modifier
-                        .width(40.dp)
-                        .height(40.dp)
-                        .clip(RoundedCornerShape(22.dp))
-                )
-
-                Spacer(modifier = Modifier.width(8.dp))
-
-                Column (modifier = Modifier.align(Alignment.CenterVertically)) {
-                    Text(
-                        text = pedidoTroca.nomePessoa,
-                        fontFamily = Inter,
-                        fontSize = 12.sp,
-                        color = green900,
-                        fontWeight = FontWeight.Medium
-                    )
-
-                    Text(
-                        text = pedidoTroca.localPessoa,
-                        fontFamily = Inter,
-                        fontSize = 12.sp,
-                        color = gray500,
-                        fontWeight = FontWeight.Medium
-                    )
                 }
             }
         }

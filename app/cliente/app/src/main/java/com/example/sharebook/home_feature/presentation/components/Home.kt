@@ -18,6 +18,7 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import com.example.sharebook.R
 import com.example.sharebook.core.presentation.components.BookPreview
+import com.example.sharebook.core.presentation.components.FloatingButtonNewBook
 import com.example.sharebook.core.presentation.navigation.routes.authenticated.PrivateRoutes
 import com.example.sharebook.core.presentation.ui.theme.*
 import com.example.sharebook.core.utils.UiText
@@ -31,22 +32,7 @@ fun Home(
 ) {
     val genders = listOf("Todos","Ação", "Aventura", "Ficção", "Romance", "Anime", "Terror", "Aventura")
     Surface(modifier = Modifier.fillMaxSize()) {
-        Box(
-            modifier = Modifier
-                .fillMaxSize()
-                .padding(bottom = 68.dp, end = 16.dp)
-                .zIndex(100f),
-            contentAlignment = Alignment.BottomEnd
-        ) {
-            FloatingActionButton(
-                onClick = { },
-                elevation = FloatingActionButtonDefaults.elevation(12.dp),
-                backgroundColor = green500,
-                contentColor = white
-            ) {
-                Icon(Icons.Filled.Add, null)
-            }
-        }
+        FloatingButtonNewBook {}
 
         Column(modifier = Modifier
             .fillMaxSize()

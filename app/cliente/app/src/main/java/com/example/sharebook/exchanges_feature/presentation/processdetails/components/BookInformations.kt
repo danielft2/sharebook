@@ -1,7 +1,6 @@
-package com.example.sharebook.book_feature.presentation.external_book.components
+package com.example.sharebook.exchanges_feature.presentation.processdetails.components
 
 import androidx.compose.foundation.Image
-import androidx.compose.foundation.background
 import androidx.compose.foundation.horizontalScroll
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.rememberScrollState
@@ -19,36 +18,32 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.sharebook.R
-import com.example.sharebook.book_feature.data.mock.model.BookDatailsMock
-import com.example.sharebook.book_feature.data.mock.model.PedidoTrocaMock
 import com.example.sharebook.core.presentation.components.BookTag
+import com.example.sharebook.core.presentation.components.ImageCustom
 import com.example.sharebook.core.presentation.ui.theme.*
+import com.example.sharebook.exchanges_feature.data.local.BookProcessMock
 
 @Composable
 fun BookInformations() {
-    val bookDatails = BookDatailsMock()
-    val pedidoTroca = PedidoTrocaMock()
-
+    val book = BookProcessMock()
     Row(
         modifier = Modifier.fillMaxWidth(),
         verticalAlignment = Alignment.CenterVertically
     ) {
-        Image(
-            painter = painterResource(id = R.drawable.morro_dos_ventos_uivantes),
-            contentDescription = null,
-            contentScale = ContentScale.Crop,
+        ImageCustom(
+            url = book.coverUrl,
             modifier = Modifier
                 .width(108.dp)
                 .height(160.dp)
                 .clip(Shapes.medium)
         )
-        
+
         Spacer(modifier = Modifier.width(16.dp))
 
         Column(modifier = Modifier.fillMaxWidth()) {
             Column {
                 Text(
-                    text = "${bookDatails.genero} - ${bookDatails.edicao}",
+                    text = "${book.gender} - ${book.edtion}",
                     color = green500,
                     fontFamily = FontFamily(Font(R.font.inter_semibold)),
                     fontWeight = FontWeight.SemiBold,
@@ -58,7 +53,7 @@ fun BookInformations() {
                 Spacer(modifier = Modifier.height(2.dp))
 
                 Text(
-                    text = bookDatails.titulo,
+                    text = book.name,
                     color = green900,
                     fontFamily = FontFamily(Font(R.font.lato_bold)),
                     fontSize = 14.sp
@@ -67,7 +62,7 @@ fun BookInformations() {
                 Spacer(modifier = Modifier.height(2.dp))
 
                 Text(
-                    text = bookDatails.autor,
+                    text = book.author,
                     color = gray500,
                     fontFamily = FontFamily(Font(R.font.inter_regular)),
                     fontSize = 12.sp
@@ -80,14 +75,14 @@ fun BookInformations() {
                         .horizontalScroll(rememberScrollState())
                         .fillMaxWidth()
                 ) {
-                    BookTag(text = bookDatails.status, background = blue100, colorText = blue500)
+                    BookTag(text = book.state.title, background = blue100, colorText = blue500)
                     Spacer(modifier = Modifier.width(8.dp))
-                    BookTag(text = bookDatails.podeBuscar, background = green100, colorText = green600)
+                    BookTag(text = book.preference, background = green100, colorText = green600)
                 }
             }
-            
+
             Spacer(modifier = Modifier.height(12.dp))
-            
+
             Row {
                 Image(
                     painter = painterResource(id = R.drawable.profile),
@@ -103,7 +98,7 @@ fun BookInformations() {
 
                 Column (modifier = Modifier.align(Alignment.CenterVertically)) {
                     Text(
-                        text = pedidoTroca.nomePessoa,
+                        text = book.userName,
                         fontFamily = Inter,
                         fontSize = 12.sp,
                         color = green900,
@@ -111,7 +106,7 @@ fun BookInformations() {
                     )
 
                     Text(
-                        text = pedidoTroca.localPessoa,
+                        text = book.userLocation,
                         fontFamily = Inter,
                         fontSize = 12.sp,
                         color = gray500,
