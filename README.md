@@ -15,7 +15,7 @@
  **Documento de Escopo Atualizado** - https://docs.google.com/document/d/1vuJnEYzRhwt86NPMNhOOySjTMevtoxxZ/edit 
  <br>
  
- **Documento de Arquitetura Atualizado** - https://docs.google.com/document/d/1mv4_FJ0ieI8-nuFf7TSWcj-5oE-bOmsh/edit?usp=sharing&ouid=109796314474878783388&rtpof=true&sd=true <br>
+ **Documento de Arquitetura Atualizado** - https://docs.google.com/document/d/1Nw65DceqZodmHG7-GU9B2m-nI2gShkFOWlb1eS2SMpM/edit?usp=sharing <br>
 
 ## 🎯 Sobre o Projeto
  A ideia do projeto é desenvolver uma aplicação mobile que tem como finalidade servir como ponte entre leitores que desejam trocar livros físicos entre si. Permitindo que leitores que têm ou não esse hábito possam ter mais facilidade e maior número de opções na hora de trocarem seus livros. 
