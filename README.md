@@ -3,7 +3,7 @@
 </h1>
 
 ## 🚩 Status Report 3:
- **Link Atualizado do Notion** - https://quixotic-zephyr-14e.notion.site/ShareBook-PI3-9394c7372c794188947d3cdfbb453e3f <br>
+ **Link Atualizado do Notion** - https://quixotic-zephyr-14e.notion.site/ShareBook-PI3-9394c7372c794188947d3cdfbb453e3f
  <br>
  
  **Video da Apresentação** - https://drive.google.com/file/d/1grePq1gr1DgW2Y5zHHbjW7sPDM0u0ctK/view?usp=sharing <br>
