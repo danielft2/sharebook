@@ -4,12 +4,16 @@
 
 ## 🚩 Status Report 3:
  **Link Atualizado do Notion** - https://quixotic-zephyr-14e.notion.site/ShareBook-PI3-9394c7372c794188947d3cdfbb453e3f <br>
+ <br>
  
  **Video da Apresentação** - https://drive.google.com/file/d/1grePq1gr1DgW2Y5zHHbjW7sPDM0u0ctK/view?usp=sharing <br>
+ <br>
  
  **Documento de Requisitos Atualizado** - https://docs.google.com/document/d/1dub9zq42SKB65NXj_hXShz_w1WiHzDGzqkjJc-n2p90/edit#heading=h.lmao9w9i8s0s <br>
+ <br>
  
  **Documento de Escopo Atualizado** - https://docs.google.com/document/d/1vuJnEYzRhwt86NPMNhOOySjTMevtoxxZ/edit <br>
+ <br>
  
  **Documento de Arquitetura Atualizado** - https://docs.google.com/document/d/1mv4_FJ0ieI8-nuFf7TSWcj-5oE-bOmsh/edit?usp=sharing&ouid=109796314474878783388&rtpof=true&sd=true <br>
 
