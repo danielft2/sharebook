@@ -33,7 +33,6 @@ fun ButtonPrimary(
             contentColor = white
         ),
         shape = Shapes.medium,
-        border = BorderStroke(2.dp, green600),
         elevation = ButtonDefaults.elevation(
             defaultElevation = 1.dp,
             pressedElevation = 2.dp
