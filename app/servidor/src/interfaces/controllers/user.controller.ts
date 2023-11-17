@@ -9,8 +9,12 @@ export class UserController {
 
   @IsPublic()
   @Post()
-  create(@Body() user: User) {
-    return this.userService.create(user);
+  async create(@Body() user: User) {
+    const userDataReturn = await this.userService.create(user);
+    return {
+      ...userDataReturn,
+      senha: undefined
+    }
   }
 
   @Get()
@@ -23,7 +27,7 @@ export class UserController {
     const userDataReturn = await this.userService.findOneById(id);
     return {
       ...userDataReturn,
-      password: undefined
+      senha: undefined
     }
   }
 }

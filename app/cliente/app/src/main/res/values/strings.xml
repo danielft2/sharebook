@@ -1,3 +1,66 @@
 <resources>
     <string name="app_name">sharebook</string>
+
+    <string name="welcome_title">Agora ficou fácil trocar seus livros.</string>
+    <string name="welcome_subtitle">
+        Encontre pessoas de todos os lugares e
+        troque seus livros com outros usuários.
+    </string>
+    <string name="welcome_button_login">Fazer Login</string>
+    <string name="welcome_button_register">Realizar Cadastro</string>
+
+
+    <string name="login_title">Acesse sua conta.</string>
+    <string name="login_subtitle">
+        Informe suas credencias abaixo para acessar,
+        caso não tenha realize o cadastro.
+    </string>
+    
+    <string name="login_forgot_password">Esqueceu a senha?</string>
+    <string name="login_submit">Entrar</string>
+    <string name="login_have_account">Não tem uma conta ainda?</string>
+    <string name="login_register_action">Cadastre-se</string>
+
+    <string name="register_title">Criar nova conta.</string>
+    <string name="register_subtitle">
+        Informe seus dados abaixo e em seguida verifique sua 
+        conta para acessar o aplicativo.
+    </string>
+    <string name="register_alredy_account">Já tem uma conta?</string>
+    <string name="register_login_action">Entre aqui</string>
+    <string name="register_submit">Criar conta</string>
+
+    <string name="field_name">Nome</string>
+    <string name="field_email">E-mail</string>
+    <string name="field_phone">Telefone</string>
+    <string name="field_password">Senha</string>
+    <string name="field_confirm_password">Confirmar Senha</string>
+    <string name="field_cep">CEP</string>
+    <string name="field_state">Estado</string>
+    <string name="field_city">Cidade</string>
+    
+    <string name="field_valid"> </string>
+    <string name="field_required">Campo obrigátorio.</string>
+
+    <string name="field_email_invalid">Insira um e-mail válido.</string>
+    <string name="field_phone_invalid">Insira um telefone válido.</string>
+    <string name="field_password_min">A senha deve ter pelo menos 6 caracteres.</string>
+    <string name="field_different_passwords">As senhas devem ser iguais.</string>
+    <string name="field_cep_invalid">Informe um CEP válido.</string>
+
+    <string name="home_route_title">Inicio</string>
+    <string name="discovery_route_title">Descobrir</string>
+    <string name="exchanges_route_title">Trocas</string>
+    <string name="maps_route_title">Mapa</string>
+
+    <string name="home_carousel_available">Disponivéis para troca</string>
+    <string name="home_caroseul_nearToYou">Perto de você</string>
+
+    <string name="book_details_header">Detalhes do Livro</string>
+    <string name="book_datails_descreption_session">Descrição</string>
+    <string name="book_datails_gallery_session">Galeria de Imagens</string>
+    <string name="book_datails_requests_session">Lista de Solicitações</string>
+    <string name="book_datails_accept_button">Aceitar</string>
+    <string name="book_datails_refuse_button">Recusar</string>
+    <string name="book_datails_request_book_button">Solicitar Troca</string>
 </resources>

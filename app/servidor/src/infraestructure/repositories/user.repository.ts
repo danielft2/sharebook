@@ -22,14 +22,14 @@ export class UserRepository {
         cep: userData.cep,
         cidade: userData.cidade,
         estado: userData.estado,
-        foto_perfil: userData.profile_photo
-      }
+        foto_perfil: userData.profile_photo,
+      },
     });
   }
 
   async findById(id: string) {
     return this.prisma.usuario.findUnique({
-        where: {id},
+      where: { id },
     });
   }
 
