@@ -21,4 +21,7 @@ object Constants {
     const val DISCOVERY_ROUTE = "discovery_route"
     const val EXCHANGES_ROUTE = "exchanges_route"
     const val MAPS_ROUTE = "maps_route"
+    const val EXTERNAL_BOOK_ROUTE = "external_book_route"
+    const val USER_BOOK_ROUTE = "user_book_route"
+    const val BOOK_PROCESS_ROUTE = "book_process_route"
 }

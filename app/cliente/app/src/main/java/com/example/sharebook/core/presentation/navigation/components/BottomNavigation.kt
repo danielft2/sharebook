@@ -15,6 +15,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavGraph.Companion.findStartDestination
+import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.currentBackStackEntryAsState
@@ -25,15 +26,18 @@ import com.example.sharebook.core.presentation.ui.theme.*
 import com.example.sharebook.core.utils.Constants
 import com.example.sharebook.core.utils.UiText
 import com.example.sharebook.discovery_feature.presentation.components.Discovery
-import com.example.sharebook.exchanges_feature.presentation.components.Exchanges
+import com.example.sharebook.exchanges_feature.presentation.tabs.components.Exchanges
 import com.example.sharebook.home_feature.presentation.components.Home
 import com.example.sharebook.maps_feature.presentation.components.Maps
 
 @SuppressLint("UnusedMaterialScaffoldPaddingParameter")
 @Composable
-fun BottomNavigation(itens: List<BottomNavigationItem>) {
-    val navController = rememberNavController()
-    val backStackEntry = navController.currentBackStackEntryAsState()
+fun BottomNavigation(
+    navControllerRoot: NavHostController,
+    itens: List<BottomNavigationItem>
+) {
+    val navBottomController = rememberNavController()
+    val backStackEntry = navBottomController.currentBackStackEntryAsState()
 
     Scaffold(bottomBar = {
         androidx.compose.material.BottomNavigation(
@@ -48,8 +52,8 @@ fun BottomNavigation(itens: List<BottomNavigationItem>) {
                 BottomNavigationItem (
                     selected = itemSelected,
                     onClick = {
-                        navController.navigate(item.route) {
-                            popUpTo(navController.graph.findStartDestination().id) { saveState = true }
+                        navBottomController.navigate(item.route) {
+                            popUpTo(navBottomController.graph.findStartDestination().id) { saveState = true }
                         }
                               },
                     selectedContentColor = green500,
@@ -75,10 +79,10 @@ fun BottomNavigation(itens: List<BottomNavigationItem>) {
             }
         }
     }) {
-        NavHost(navController = navController, startDestination = Constants.HOME_ROUTE) {
-            composable(PrivateRoutes.HomeScreen.route) { Home() }
+        NavHost(navController = navBottomController, startDestination = Constants.HOME_ROUTE) {
+            composable(PrivateRoutes.HomeScreen.route) { Home(navControllerRoot) }
             composable(PrivateRoutes.DiscoveryScreen.route) { Discovery(navController = navController) }
-            composable(PrivateRoutes.ExchangesScreen.route) { Exchanges() }
+            composable(PrivateRoutes.ExchangesScreen.route) { Exchanges(navControllerRoot) }
             composable(PrivateRoutes.MapsScreen.route) { Maps() }
         }
     }

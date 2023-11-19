@@ -46,14 +46,14 @@ fun Header(homeViewModel: HomeViewModel) {
         Column(
             modifier = Modifier
                 .fillMaxSize()
-                .padding(20.dp)
+                .padding(16.dp)
         ) {
             Row(
                 modifier = Modifier.fillMaxWidth(),
                 horizontalArrangement = Arrangement.SpaceBetween
             ) {
                 Box(modifier = Modifier
-                    .size(42.dp)
+                    .size(40.dp)
                     .clip(RoundedCornerShape(100))
                     .background(white)
                     .wrapContentSize(Alignment.Center)
@@ -73,13 +73,13 @@ fun Header(homeViewModel: HomeViewModel) {
                         .clip(RoundedCornerShape(100))
                         .background(white)
                         .padding(0.dp)
-                        .size(42.dp)
+                        .size(40.dp)
                 ) {
                     Image(
                         painter = painterResource(id = R.drawable.icon_notification),
                         contentDescription = null,
                         modifier = Modifier
-                            .size(22.dp)
+                            .size(24.dp)
                             .padding(end = 1.dp, bottom = 1.dp)
                     )
                 }

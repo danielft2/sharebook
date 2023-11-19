@@ -1,4 +1,4 @@
-package com.example.sharebook.home_feature.domain
+package com.example.sharebook.home_feature.domain.model
 
 data class BookModel (
     val name: String,

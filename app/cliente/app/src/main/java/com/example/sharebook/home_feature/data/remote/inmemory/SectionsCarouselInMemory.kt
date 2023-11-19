@@ -1,5 +1,5 @@
 package com.example.sharebook.home_feature.data.remote.inmemory
-import com.example.sharebook.home_feature.domain.BookModel
+import com.example.sharebook.home_feature.domain.model.BookModel
 
 object SectionsCarouselInMemory {
     val availableForExchange: List<BookModel> = listOf(

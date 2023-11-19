@@ -56,8 +56,6 @@ fun Register(
                 .padding(20.dp)
                 .verticalScroll(rememberScrollState())
         ) {
-
-
             Column(
                 modifier = Modifier
                     .verticalScroll(rememberScrollState())

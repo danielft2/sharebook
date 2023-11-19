@@ -14,7 +14,7 @@ import com.example.sharebook.core.presentation.ui.theme.Lato
 import com.example.sharebook.core.presentation.ui.theme.Shapes
 import com.example.sharebook.core.presentation.ui.theme.gray500
 import com.example.sharebook.core.presentation.ui.theme.green700
-import com.example.sharebook.home_feature.domain.BookModel
+import com.example.sharebook.home_feature.domain.model.BookModel
 
 @Composable
 fun BookPreview(book: BookModel, onClick: () -> Unit) {
