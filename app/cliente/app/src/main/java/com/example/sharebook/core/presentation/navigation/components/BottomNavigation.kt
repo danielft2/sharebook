@@ -77,7 +77,7 @@ fun BottomNavigation(itens: List<BottomNavigationItem>) {
     }) {
         NavHost(navController = navController, startDestination = Constants.HOME_ROUTE) {
             composable(PrivateRoutes.HomeScreen.route) { Home() }
-            composable(PrivateRoutes.DiscoveryScreen.route) { Discovery() }
+            composable(PrivateRoutes.DiscoveryScreen.route) { Discovery(navController = navController) }
             composable(PrivateRoutes.ExchangesScreen.route) { Exchanges() }
             composable(PrivateRoutes.MapsScreen.route) { Maps() }
         }

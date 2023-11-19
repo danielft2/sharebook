@@ -62,4 +62,19 @@
     <string name="book_datails_accept_button">Aceitar</string>
     <string name="book_datails_refuse_button">Recusar</string>
     <string name="book_datails_request_book_button">Solicitar Troca</string>
+    
+    <string name="search_not_found_title">Nenhum Livro correspondeu a sua busca.</string>
+    <string name="search_not_found_description">Crie um alerta e receba uma notificação quando esse livro estiver disponível no aplicativo.</string>
+    <string name="create_alert_button">Crir Alerta</string>
+    <string name="novo_alerta_title">Novo Alerta</string>
+    <string name="alert_localization_title">Notificar apenas perto da minha localização.</string>
+    <string name="alert_localization_description">Você só será notificado se o livro estiver disponível perto da sua localização.</string>
+    <string name="alert_user_send_title">Notificar apenas de usuários dispostos a enviar.</string>
+    <string name="alert_use_send_description">Você só será notificado se o usuário do livro tiver disponibilidade em entregar/enviar o livro.</string>
+    <string name="search_filter_localizacao_title">Apenas perto da minha localização.</string>
+    <string name="search_filter_localizacao_description">Mostrar apenas livros disponíveis perto da sua localização.</string>
+    <string name="search_filter_usuario_envia_title">Apenas usuários dispostos a enviar.</string>
+    <string name="search_filter_usuario_envia_description">Mostrar apenas usuários que se dispõem enviar o livro.</string>
+    <string name="search_filter_usuario_recebe_title">Apenas usuários dispostos a receber.</string>
+    <string name="search_filter_usuario_recebe_description">Mostrar apenas usuários que se dispõem a receber o livro.</string>
 </resources>
