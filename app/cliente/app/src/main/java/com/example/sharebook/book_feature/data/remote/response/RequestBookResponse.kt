@@ -13,6 +13,5 @@ data class RequestBookResponse(
 
 fun RequestBookResponse.toUserModel(): PedidoTrocaMock {
     return PedidoTrocaMock(
-
     )
 }

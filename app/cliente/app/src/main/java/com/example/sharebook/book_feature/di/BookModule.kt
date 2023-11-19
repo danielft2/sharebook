@@ -1,7 +1,6 @@
 package com.example.sharebook.book_feature.di
 
 import com.example.sharebook.BuildConfig
-import com.example.sharebook.auth_feature.data.remote.service.AuthService
 import com.example.sharebook.book_feature.data.remote.service.RequestBookService
 import dagger.Module
 import dagger.Provides
