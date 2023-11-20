@@ -78,4 +78,8 @@
     <string name="search_filter_usuario_envia_description">Mostrar apenas usuários que se dispõem enviar o livro.</string>
     <string name="search_filter_usuario_recebe_title">Apenas usuários dispostos a receber.</string>
     <string name="search_filter_usuario_recebe_description">Mostrar apenas usuários que se dispõem a receber o livro.</string>
+
+    <string name="notification_header">Notificações</string>
+
+    <string name="maps_device_location">Ocorreu um erro inesperado ao recuperar sua localização!</string>
 </resources>
