@@ -10,5 +10,5 @@ sealed class TabScreen(
     val badgeValue: Int
 ) {
     object MyBooksScreen: TabScreen("Meus livros", 3)
-    object EnteredProcessScreen: TabScreen("Solicitações", 0)
+    object EnteredProcessScreen: TabScreen("Entrou em processo", 1)
 }

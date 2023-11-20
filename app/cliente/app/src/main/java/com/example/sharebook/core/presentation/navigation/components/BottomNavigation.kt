@@ -29,6 +29,7 @@ import com.example.sharebook.discovery_feature.presentation.components.Discovery
 import com.example.sharebook.home_feature.presentation.components.Home
 import com.example.sharebook.maps_feature.presentation.components.Maps
 import androidx.compose.material.BottomNavigation
+import com.example.sharebook.exchanges_feature.presentation.tabs.components.Exchanges
 
 @SuppressLint("UnusedMaterialScaffoldPaddingParameter")
 @Composable
@@ -82,12 +83,8 @@ fun BottomNavigation(
         NavHost(navController = navBottomController, startDestination = Constants.HOME_ROUTE) {
             composable(PrivateRoutes.HomeScreen.route) { Home(navControllerRoot) }
             composable(PrivateRoutes.DiscoveryScreen.route) { Discovery(navController = navControllerRoot) }
-<<<<<<< HEAD
-            composable(PrivateRoutes.MapsScreen.route) { Maps() }
-=======
+            composable(PrivateRoutes.MapsScreen.route) { Maps(navControllerRoot) }
             composable(PrivateRoutes.ExchangesScreen.route) { Exchanges(navControllerRoot) }
-            composable(PrivateRoutes.MapsScreen.route) { Maps(navController = navControllerRoot) }
->>>>>>> fe96ad519d3a8ca87e820f72623eda9d6424ba90
         }
     }
 }
