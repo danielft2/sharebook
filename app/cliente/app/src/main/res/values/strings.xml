@@ -79,5 +79,10 @@
     <string name="search_filter_usuario_recebe_title">Apenas usuários dispostos a receber.</string>
     <string name="search_filter_usuario_recebe_description">Mostrar apenas usuários que se dispõem a receber o livro.</string>
 
+<<<<<<< HEAD
     <string name="notification_header">Notificações</string>
+=======
+
+    <string name="maps_device_location">Ocorreu um erro inesperado ao recuperar sua localização!</string>
+>>>>>>> fe96ad519d3a8ca87e820f72623eda9d6424ba90
 </resources>
