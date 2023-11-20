@@ -2,8 +2,6 @@ package com.example.sharebook.exchanges_feature.presentation.processdetails.comp
 
 import androidx.compose.foundation.*
 import androidx.compose.foundation.layout.*
-import androidx.compose.foundation.pager.HorizontalPager
-import androidx.compose.foundation.pager.rememberPagerState
 import androidx.compose.material.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
@@ -21,22 +19,12 @@ import com.example.sharebook.core.presentation.components.*
 import com.example.sharebook.core.presentation.ui.theme.*
 import com.example.sharebook.exchanges_feature.data.local.BookProcessMock
 import com.example.sharebook.exchanges_feature.presentation.processdetails.tabs.listTabs
-import com.example.sharebook.exchanges_feature.presentation.tabs.tabsList
 
-@OptIn(ExperimentalFoundationApi::class)
 @Composable
 fun ProcessDetails(navController: NavHostController) {
     val book = BookProcessMock()
     var selectedTabIndex by remember { mutableStateOf(0) }
-    val pagerState = rememberPagerState()
 
-    LaunchedEffect(key1 = selectedTabIndex) {
-        pagerState.animateScrollToPage(selectedTabIndex)
-    }
-
-    LaunchedEffect(pagerState.currentPage) {
-        selectedTabIndex = pagerState.currentPage
-    }
 
     Surface(modifier = Modifier.fillMaxSize()) {
         Column (modifier = Modifier
