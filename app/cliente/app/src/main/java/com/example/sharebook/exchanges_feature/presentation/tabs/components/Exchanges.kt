@@ -21,7 +21,6 @@ import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
 import com.example.sharebook.core.presentation.components.HeaderDefault
 import com.example.sharebook.core.presentation.ui.theme.*
-import com.example.sharebook.exchanges_feature.presentation.enteredprocess.components.EnteredProcess
 import com.example.sharebook.exchanges_feature.presentation.mybooks.components.MyBooks
 import com.example.sharebook.exchanges_feature.presentation.tabs.tabsList
 
@@ -30,7 +29,7 @@ import com.example.sharebook.exchanges_feature.presentation.tabs.tabsList
 fun Exchanges(navController: NavHostController) {
     Surface(modifier = Modifier.fillMaxSize()) {
         var selectedTabIndex by remember { mutableStateOf(0) }
-        val pagerState = rememberPagerState(0)
+        val pagerState = rememberPagerState { 2 }
 
         LaunchedEffect(key1 = selectedTabIndex) {
             pagerState.animateScrollToPage(selectedTabIndex)
@@ -86,7 +85,6 @@ fun Exchanges(navController: NavHostController) {
 
             HorizontalPager(
                 state = pagerState,
-                pageCount = tabsList.size,
                 modifier = Modifier
                     .fillMaxWidth()
                     .weight(1f)
@@ -94,7 +92,6 @@ fun Exchanges(navController: NavHostController) {
             ) {
                 when(it) {
                     0 -> { MyBooks { route -> navController.navigate(route) } }
-                    1 -> { EnteredProcess { route -> navController.navigate(route) } }
                 }
             }
         }
