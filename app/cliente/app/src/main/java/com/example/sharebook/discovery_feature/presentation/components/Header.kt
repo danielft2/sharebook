@@ -26,7 +26,9 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
+import androidx.navigation.NavController
 import com.example.sharebook.R
+import com.example.sharebook.core.presentation.navigation.routes.authenticated.PrivateRoutes
 import com.example.sharebook.core.presentation.ui.theme.Lato
 import com.example.sharebook.core.presentation.ui.theme.green500
 import com.example.sharebook.core.presentation.ui.theme.white
@@ -34,7 +36,7 @@ import com.example.sharebook.core.utils.Functions
 import com.example.sharebook.discovery_feature.presentation.SearchBookViewModel
 
 @Composable
-fun Header (searchBookViewModel: SearchBookViewModel) {
+fun Header (searchBookViewModel: SearchBookViewModel, navController: NavController) {
     //val userLogged = searchBookViewModel.uiState.user
     Box(
         modifier = Modifier
@@ -50,6 +52,7 @@ fun Header (searchBookViewModel: SearchBookViewModel) {
                 .fillMaxWidth()
                 .padding(20.dp, 76.dp),
             horizontalArrangement = Arrangement.SpaceBetween,
+            verticalAlignment = Alignment.CenterVertically
         ) {
             Image(
                 painter = painterResource(id = R.drawable.sharebook), 
@@ -59,7 +62,7 @@ fun Header (searchBookViewModel: SearchBookViewModel) {
                 verticalAlignment = Alignment.CenterVertically
             ) {
                 IconButton(
-                    onClick = { /*TODO*/ },
+                    onClick = { navController.navigate(PrivateRoutes.Notification.route) },
                     modifier = Modifier
                         .clip(RoundedCornerShape(100))
                         .background(white)

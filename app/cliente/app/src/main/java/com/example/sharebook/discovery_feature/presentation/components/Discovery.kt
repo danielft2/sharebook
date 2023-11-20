@@ -145,7 +145,8 @@ fun Discovery(
             .background(background))
         {
             Header(
-                searchBookViewModel = viewModel
+                searchBookViewModel = viewModel,
+                navController
             )
             LazyColumn(
             ) {
