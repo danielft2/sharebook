@@ -40,4 +40,14 @@ export class SupabaseService {
 
     if (error) throw new InternalServerErrorException('Error removing file');
   }
+
+  async getFileURL(fileName: string, bucketName: string) {
+    const { data, error } = await this.supabase.storage
+      .from(bucketName)
+      .createSignedUrl(fileName, 120);
+
+    if (error) throw new InternalServerErrorException('Error in file access');
+
+    return data.signedUrl;
+  }
 }
