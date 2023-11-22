@@ -10,7 +10,7 @@ import okio.IOException
 import retrofit2.HttpException
 import javax.inject.Inject
 
-class AddBookUseCase @Inject constructor(private val repository: BookManagementRepository){
+class AddBookUseCases @Inject constructor(private val repository: BookManagementRepository){
     operator fun invoke(body: AddBookModel): Flow<Resource<AddBookResponse>> {
         return flow {
             try{

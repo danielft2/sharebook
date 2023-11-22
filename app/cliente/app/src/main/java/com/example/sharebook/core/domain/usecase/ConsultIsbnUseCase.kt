@@ -8,6 +8,7 @@ import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 import javax.inject.Inject
 import retrofit2.HttpException
+import java.io.IOException
 
 class ConsultIsbnUseCase @Inject constructor(private val repository: IsbnRepository) {
     operator fun invoke(isbn: String): Flow<Resource<IsbnModel>> {
@@ -21,7 +22,9 @@ class ConsultIsbnUseCase @Inject constructor(private val repository: IsbnReposit
                     emit(Resource.Success(response.toIsbnModel()))
                 }
             } catch (e: HttpException) {
-                
+                emit(Resource.Error(e.localizedMessage ?: "Ocorreu um erro inesperado!"))
+            } catch (e: IOException) {
+                emit(Resource.Error("Aconteu um erro inesperado, verifique sua conexão!"))
             }
         }
     }

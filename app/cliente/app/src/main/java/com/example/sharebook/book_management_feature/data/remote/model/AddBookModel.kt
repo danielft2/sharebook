@@ -8,7 +8,10 @@ data class AddBookModel(
     val autor: String,
     val edicao: String,
     val idioma: String,
-    // val estadoLivro: String,
+    val sinopse: String,
+    val capaLivro: String,
+    val imagemLivro: String,
+    val estadoLivro: String,
     val queroBuscar: Boolean,
     val queroReceber: Boolean
 )

@@ -41,7 +41,7 @@ import com.example.sharebook.core.utils.UiText
 fun AddBookHeader(onClick: () -> Unit) {
     Column(
         modifier = Modifier
-            .padding(20.dp)
+            .padding(15.dp)
     ) {
         Row(
             horizontalArrangement = Arrangement.SpaceBetween,

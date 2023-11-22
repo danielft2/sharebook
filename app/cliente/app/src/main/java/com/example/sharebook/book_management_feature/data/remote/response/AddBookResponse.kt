@@ -31,14 +31,14 @@ data class AddBookResponse (
     @SerializedName("quer_receber")
     val queroReceber: Boolean,
 
-    /*@SerializedName("capa")
+    @SerializedName("capa")
     val capaLivro: String,
 
     @SerializedName("imagens")
     val imagensLivro: List<String>,
 
     @SerializedName("sinopse")
-    val sinopse: String*/
+    val sinopse: String
 )
 // Falta adicionar campos comentados
 fun AddBookResponse.toAddBookModel() : AddBookModel {
@@ -50,6 +50,10 @@ fun AddBookResponse.toAddBookModel() : AddBookModel {
         edicao = edicao,
         idioma = idioma,
         queroReceber = queroReceber,
-        queroBuscar = queroBuscar
+        queroBuscar = queroBuscar,
+        estadoLivro = estadoLivro,
+        sinopse = sinopse,
+        capaLivro = capaLivro,
+        imagemLivro = imagensLivro[0]
     )
 }

@@ -76,4 +76,12 @@
     </string>
 
     <string name="field_isbn_invalid">Insira um Isbn Válido</string>
+
+    <string name="save_book">Salvar</string>
+
+    <string name="book_cape_title">Capa do Livro</string>
+    <string name="book_cape_field">Escolher Ficheiro</string>
+
+    <string name="book_images_title">Imagens Extras</string>
+    <string name="book_images_field">Adicionar Imagens</string>
 </resources>

@@ -3,12 +3,10 @@ package com.example.sharebook.book_management_feature.presentation.add_book.stat
 import com.example.sharebook.book_management_feature.data.remote.model.AddBookModel
 import com.example.sharebook.core.utils.UiText
 
-// Analisar como lidar com os campos comentados
 // Analisar adição dos campos capa, imagem e sinopse
 data class AddBookFormState (
     val nome: String = "",
     val nomeError: UiText = UiText.DynamicText(""),
-
 
     val genero: String = "",
     val generoError: UiText = UiText.DynamicText(""),
@@ -22,7 +20,18 @@ data class AddBookFormState (
     val idioma: String = "",
     val idiomaError: UiText = UiText.DynamicText(""),
 
-    // estado do livro tem que ser enum
+    val estadoLivro: String = "",
+    val estadoLivroError: UiText = UiText.DynamicText(""),
+
+    val sinopse: String = "",
+    val sinopseError: UiText = UiText.DynamicText(""),
+
+    val capaLivro: String = "",
+    val capaLivroError: UiText = UiText.DynamicText(""),
+
+    val imagemLivro: String = "",
+    val imagemLivroError: UiText = UiText.DynamicText(""),
+
     val isbn: String = "",
     val isbnSearchIsLoading: Boolean = false,
     val isbnError: UiText = UiText.DynamicText(""),
@@ -39,9 +48,11 @@ fun AddBookFormState.toAddBookModel() : AddBookModel {
         autor = autor,
         edicao = edicao,
         idioma = idioma,
-        // estadoLivro = estadoLivro
+        estadoLivro = estadoLivro,
         queroBuscar = preferenciaBuscar,
-        queroReceber = preferenciaReceber
-
+        queroReceber = preferenciaReceber,
+        capaLivro = capaLivro,
+        imagemLivro = imagemLivro,
+        sinopse = sinopse
     )
 }

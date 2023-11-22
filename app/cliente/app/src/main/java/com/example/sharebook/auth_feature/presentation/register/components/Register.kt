@@ -143,14 +143,14 @@ fun Register(
                         onChange = { viewModel.onEvent(RegisterFormEvent.CepChange(it.take(8))) }
                     )
                     if (viewModel.uiFormState.cepSearchIsLoading) {
-                        CircularProgressIndicator(
-                            color = green500,
+                        CircularProgressIndicator(color = green500,
                             strokeWidth = 2.dp,
                             modifier = Modifier
                                 .width(18.dp)
                                 .height(18.dp)
                                 .align(Alignment.CenterEnd)
                                 .offset(y = 10.dp, x = (-14).dp)
+
                         )
                     }
                 }
