@@ -14,7 +14,7 @@ export class BookService {
   async getUserIBGE(user_id: string) {
     const user = await this.userService.findOneById(user_id);
     return this.ibgeFinderService.getIBGE(user.cep);
-  } /*  */
+  }
 
   async findAll(user_id: string) {
     // Pega os 20 primeiros livros disponiveis, tirando os do proprio usuario
@@ -27,7 +27,7 @@ export class BookService {
     // const favoriteGenders = (await this.bookRepository.findMany()).filter(
     //     (book) => {
     //         if(user_id !== book.usuario_id) {
-
+    //
     //         }
     //     }
     // ).slice(0, 20);
@@ -49,7 +49,7 @@ export class BookService {
     };
   }
 
-  async findOne(isbn: string) {
-    return this.bookRepository.findOne(isbn);
+  async findOne(id: string) {
+    return this.bookRepository.findOne(id);
   }
 }
