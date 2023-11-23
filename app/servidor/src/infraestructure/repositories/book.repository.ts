@@ -5,9 +5,9 @@ import { PrismaService } from '../database/prisma/prisma.service';
 export class BookRepository {
   constructor(private prisma: PrismaService) {}
 
-  async findOne(isbn: string) {
+  async findOne(id: string) {
     return await this.prisma.livro.findUnique({
-      where: { isbn },
+      where: { id },
     });
   }
 
