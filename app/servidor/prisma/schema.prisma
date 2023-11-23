@@ -53,10 +53,10 @@ model Livro {
 }
 
 model GeneroLivro {
-  livro      Livro  @relation(fields: [livro_id], references: [id])
-  livro_id String
-  genero     Genero @relation(fields: [genero_id], references: [id])
-  genero_id  String
+  livro     Livro  @relation(fields: [livro_id], references: [id])
+  livro_id  String
+  genero    Genero @relation(fields: [genero_id], references: [id])
+  genero_id String
 
   @@id([livro_id, genero_id])
 }
@@ -88,7 +88,7 @@ model Solicitacao {
   usuario_solicitante    Usuario @relation(fields: [usuario_solicitante_id], references: [id])
   usuario_solicitante_id String
   livro                  Livro   @relation(fields: [livro_id], references: [id])
-  livro_id             String
+  livro_id               String
   status                 String
 }
 
@@ -97,17 +97,17 @@ model ProcessoDeTroca {
   usuario_solicitante    Usuario @relation(fields: [usuario_solicitante_id], references: [id])
   usuario_solicitante_id String
   livro                  Livro   @relation(fields: [livro_id], references: [id])
-  livro_id             String
+  livro_id               String
   status                 String
 }
 
 model Alerta {
-  id                  String  @id @default(uuid())
-  nome_livro          String
-  usuario             Usuario @relation(fields: [usuario_id], references: [id])
-  usuario_id          String
-  filtrado_por_estado Boolean @default(false)
-  filtrado_por_cidade Boolean @default(false)
+  id                       String  @id @default(uuid())
+  nome_livro               String
+  usuario                  Usuario @relation(fields: [usuario_id], references: [id])
+  usuario_id               String
+  filtrado_por_localizacao Boolean @default(false)
+  filtrado_por_envio       Boolean @default(false)
 }
 
 model Avaliacao {
