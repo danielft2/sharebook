@@ -1,0 +1,1 @@
+This file purpose is for tests in supabase only
