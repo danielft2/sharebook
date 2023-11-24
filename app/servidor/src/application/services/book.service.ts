@@ -1,18 +1,18 @@
 import { Injectable } from '@nestjs/common';
 import { BookRepository } from '../../infraestructure/repositories/book.repository';
 import { IbgeFinderService } from './ibge-finder.service';
-import { UserService } from './user.service';
+import { UserRepository } from '../../infraestructure/repositories/user.repository';
 
 @Injectable()
 export class BookService {
   constructor(
     private bookRepository: BookRepository,
     private ibgeFinderService: IbgeFinderService,
-    private userService: UserService,
+    private userRepository: UserRepository,
   ) {}
 
   async getUserIBGE(user_id: string) {
-    const user = await this.userService.findOneById(user_id);
+    const user = await this.userRepository.findById(user_id);
     return this.ibgeFinderService.getIBGE(user.cep);
   }
 
