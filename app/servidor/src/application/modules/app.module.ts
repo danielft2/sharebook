@@ -7,9 +7,10 @@ import { APP_GUARD } from '@nestjs/core';
 import { JwtAuthGuard } from '../../interfaces/guards/jwt-auth.guard';
 import { RequestLoggingMiddleware } from 'src/interfaces/middlewares/request-loggin.middleware';
 import { BookModule } from './book.module';
+import { AlertModule } from './alert.module';
 
 @Module({
-  imports: [UserModule, AuthModule, BookModule],
+  imports: [UserModule, AuthModule, BookModule, AlertModule],
   controllers: [AppController],
   providers: [AppService, { provide: APP_GUARD, useClass: JwtAuthGuard}],
 })

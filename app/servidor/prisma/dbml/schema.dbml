@@ -99,8 +99,8 @@ Table Alerta {
   nome_livro String [not null]
   usuario Usuario [not null]
   usuario_id String [not null]
-  filtrado_por_estado Boolean [not null, default: false]
-  filtrado_por_cidade Boolean [not null, default: false]
+  filtrado_por_localizacao Boolean [not null, default: false]
+  filtrado_por_envio Boolean [not null, default: false]
 }
 
 Table Avaliacao {
