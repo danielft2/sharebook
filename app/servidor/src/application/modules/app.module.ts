@@ -8,9 +8,10 @@ import { JwtAuthGuard } from '../../interfaces/guards/jwt-auth.guard';
 import { RequestLoggingMiddleware } from 'src/interfaces/middlewares/request-loggin.middleware';
 import { BookModule } from './book.module';
 import { AlertModule } from './alert.module';
+import { RescueModule } from './rescue.module';
 
 @Module({
-  imports: [UserModule, AuthModule, BookModule, AlertModule],
+  imports: [UserModule, AuthModule, BookModule, AlertModule, RescueModule],
   controllers: [AppController],
   providers: [AppService, { provide: APP_GUARD, useClass: JwtAuthGuard}],
 })

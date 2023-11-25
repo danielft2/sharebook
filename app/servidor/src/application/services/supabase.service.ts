@@ -46,7 +46,10 @@ export class SupabaseService {
       .from(bucketName)
       .createSignedUrl(fileName, 120);
 
-    if (error) throw new InternalServerErrorException('Error in file access');
+    if (error) {
+      console.log(error)
+       throw new InternalServerErrorException('Error in file access')
+  };
 
     return data.signedUrl;
   }
