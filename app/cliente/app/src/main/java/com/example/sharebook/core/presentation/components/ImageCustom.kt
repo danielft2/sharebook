@@ -25,6 +25,6 @@ fun ImageCustom(url: String, modifier: Modifier) {
             modifier = modifier
         )
 
-        SkeletonBook(isLoading = isLoading)
+        //SkeletonBook(isLoading = isLoading)
     }
 }

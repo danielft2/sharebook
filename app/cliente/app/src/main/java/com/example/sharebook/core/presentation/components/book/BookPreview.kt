@@ -1,4 +1,4 @@
-package com.example.sharebook.core.presentation.components
+package com.example.sharebook.core.presentation.components.book
 
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
@@ -10,6 +10,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.example.sharebook.core.presentation.components.ImageCustom
 import com.example.sharebook.core.presentation.ui.theme.Lato
 import com.example.sharebook.core.presentation.ui.theme.Shapes
 import com.example.sharebook.core.presentation.ui.theme.gray500

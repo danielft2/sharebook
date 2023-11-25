@@ -10,14 +10,15 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.example.sharebook.core.domain.model.BookSummaryModel
+import com.example.sharebook.core.domain.model.BookUserLoggedModel
 import com.example.sharebook.core.presentation.components.BookTag
 import com.example.sharebook.core.presentation.components.DividerCustom
 import com.example.sharebook.core.presentation.components.ImageCustom
 import com.example.sharebook.core.presentation.ui.theme.*
-import com.example.sharebook.exchanges_feature.domain.model.UserBookModel
 
 @Composable
-fun BookItem(book: UserBookModel, onClick: () -> Unit) {
+fun BookItem(book: BookUserLoggedModel, onClick: () -> Unit) {
     Box(modifier = Modifier
         .fillMaxWidth()
         .height(200.dp)
@@ -34,7 +35,7 @@ fun BookItem(book: UserBookModel, onClick: () -> Unit) {
             Column(modifier = Modifier.padding(20.dp)) {
                 Column {
                     Text(
-                        text = "${book.gender} - ${book.edtion}",
+                        text = "${book.gender} - ${book.edition}",
                         color = green600,
                         fontSize = 14.sp,
                         fontFamily = Lato,
@@ -68,12 +69,12 @@ fun BookItem(book: UserBookModel, onClick: () -> Unit) {
                 DividerCustom(spaceTop = 16.dp, spaceBottom = 16.dp)
 
                 BookTag(
-                    text = book.state.title,
+                    text = book.state.tag,
                     background = blue100,
                     colorText = blue500
                 )
                 Spacer(modifier = Modifier.height(8.dp))
-                BookTag(text = book.preference, background = green100, colorText = green600)
+                BookTag(text = book.preference.tag, background = green100, colorText = green600)
             }
         }
     }

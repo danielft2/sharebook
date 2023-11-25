@@ -17,7 +17,7 @@ import com.example.sharebook.core.presentation.navigation.routes.authenticated.b
 import com.example.sharebook.core.presentation.navigation.routes.unauthenticated.PublicRoutes
 import com.example.sharebook.core.presentation.ui.theme.*
 import com.example.sharebook.core.utils.Constants
-import com.example.sharebook.exchanges_feature.presentation.processdetails.components.ProcessDetails
+import com.example.sharebook.exchangerequest_feature.presentation.exchangerequest.components.ExchangeRequest
 import com.example.sharebook.welcome_feature.presentation.Welcome
 
 @SuppressLint("UnusedMaterialScaffoldPaddingParameter")
@@ -60,8 +60,8 @@ fun NavigationRoot(
             composable(PrivateRoutes.UserBook.route) {
                 SelfBook(navController = navController)
             }
-            composable(PrivateRoutes.BookProcess.route) {
-                ProcessDetails(navController = navController)
+            composable(PrivateRoutes.ExchangeRequest.route) {
+                ExchangeRequest(navController = navController)
             }
         }
     }
