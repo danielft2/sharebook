@@ -1,6 +1,5 @@
 package com.example.sharebook.exchanges_feature.domain.model
-
-import com.example.sharebook.exchanges_feature.domain.enum.BookState
+import com.example.sharebook.core.domain.enum.BookStateTag
 
 data class UserBookModel(
     val id: String,
@@ -9,6 +8,6 @@ data class UserBookModel(
     val author: String,
     val edtion: String,
     val coverUrl: String,
-    val state: BookState,
+    val state: BookStateTag,
     val preference: String,
 )

@@ -6,19 +6,32 @@ import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.sharebook.core.domain.adapter.UserStorageManagement
-import com.example.sharebook.home_feature.presentation.state.HomeState
+import com.example.sharebook.core.utils.Resource
+import com.example.sharebook.home_feature.domain.usecases.ListBooksUseCase
+import com.example.sharebook.home_feature.presentation.state.ListBooksRequestState
+import com.example.sharebook.home_feature.presentation.state.UiState
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
 class HomeViewModel @Inject constructor(
-    val userStorageManagement: UserStorageManagement
+    private val userStorageManagement: UserStorageManagement,
+    private val listBooksUseCase: ListBooksUseCase
     ): ViewModel() {
-    var uiState by mutableStateOf(HomeState())
+    var uiState by mutableStateOf(UiState())
+        private set
+
+    var listBooksRequestState by mutableStateOf(ListBooksRequestState())
+        private set
 
     init {
         retryUser()
+
+        if (
+            uiState.nextToYou.isEmpty() &&
+            uiState.availableBooks.isEmpty()
+        ) { listBooks() }
     }
 
     private fun retryUser() {
@@ -27,6 +40,33 @@ class HomeViewModel @Inject constructor(
             user.collect {
                 if (it != null) {
                     uiState = uiState.copy(user = it)
+                }
+            }
+        }
+    }
+
+    fun listBooks() {
+        viewModelScope.launch {
+            uiState.user?.let {
+                listBooksUseCase(it.id).collect {response ->
+                    when (response) {
+                        is Resource.Success -> {
+                            uiState = uiState.copy(
+                                availableBooks = response.data!!.availableBooks,
+                                favoriteGenders = response.data.favoriteGenders,
+                                nextToYou = response.data.nextToYou
+                            )
+                        }
+                        is Resource.Error -> {
+                            listBooksRequestState = listBooksRequestState.copy(error = response.message)
+                        }
+                        is Resource.Loading -> {
+                            listBooksRequestState = listBooksRequestState.copy(isLoading = true)
+                        }
+                        is Resource.Finnaly -> {
+                            listBooksRequestState = listBooksRequestState.copy(isLoading = false)
+                        }
+                    }
                 }
             }
         }
