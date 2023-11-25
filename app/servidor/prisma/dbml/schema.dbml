@@ -82,6 +82,7 @@ Table Solicitacao {
   usuario_solicitante_id String [not null]
   livro Livro [not null]
   livro_id String [not null]
+  livro_oferecido_id String [not null]
   status String [not null]
 }
 
@@ -91,6 +92,7 @@ Table ProcessoDeTroca {
   usuario_solicitante_id String [not null]
   livro Livro [not null]
   livro_id String [not null]
+  livro_oferecido_id String [not null]
   status String [not null]
 }
 
