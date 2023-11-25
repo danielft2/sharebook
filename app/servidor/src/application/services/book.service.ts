@@ -65,6 +65,13 @@ export class BookService {
   }
 
   async findOne(id: string) {
+    // Adicionar para retornar também a:
+    /* 
+    A foto de perfil do usuario
+    O nome do usuario
+    A cidade do usuario
+    A sigla do estado? / Estado do usuario
+    */
     return await this.bookRepository.findOne(id);
   }
 }
