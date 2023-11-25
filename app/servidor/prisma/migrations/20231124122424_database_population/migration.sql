@@ -32,12 +32,12 @@ VALUES ('dfe8be88-3b0d-496e-baab-395b63751f43', 'b7d791c1-2060-4aae-a788-bef9773
 ('c0741322-0592-46a2-8206-9fd950b97f00', '6e265cbe-3aaf-4268-862d-55f5c41f26c0'),
 ('eb43f38c-887b-410e-ad5f-624861cf6c95', '1c527b0a-6da8-4ccd-b23f-fcd946cf488a');
 
-INSERT INTO "Solicitacao"( id, usuario_solicitante_id, livro_id, "status")
+/* INSERT INTO "Solicitacao"( id, usuario_solicitante_id, livro_id, "status")
 VALUES ('13139b6c-6b53-41e6-9c6e-91d3bc3120be', '05304a82-8a06-11ee-b9d1-0242ac120002', 'dfe8be88-3b0d-496e-baab-395b63751f43', 'ATIVO');
 
 INSERT INTO "ProcessoDeTroca"( id, usuario_solicitante_id, livro_id, "status")
 VALUES ('05306472-8a06-11ee-b9d1-0242ac120002', '05304a82-8a06-11ee-b9d1-0242ac120002', 'dfe8be88-3b0d-496e-baab-395b63751f43', 'ATIVO');
-
+ */
 INSERT INTO "Alerta"( id, nome_livro, usuario_id, filtrado_por_envio, filtrado_por_localizacao)
 VALUES('3e8bbafb-a739-4452-8192-2716a4d3f001', 'O Menino do Pijama Listrado', '05304a82-8a06-11ee-b9d1-0242ac120002', FALSE, FALSE);
 
