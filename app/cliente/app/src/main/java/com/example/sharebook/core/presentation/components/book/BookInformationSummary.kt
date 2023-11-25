@@ -25,17 +25,21 @@ fun BookInformationSummary(book: BookSummaryModel) {
     Column(modifier = Modifier.fillMaxWidth()) {
         Row(
             modifier = Modifier.fillMaxWidth(),
-            verticalAlignment = Alignment.CenterVertically
+            verticalAlignment = Alignment.CenterVertically,
+            horizontalArrangement = Arrangement.spacedBy(16.dp)
         ) {
             ImageCustom(url = book.coverUrl, modifier = Modifier
                 .width(108.dp)
                 .height(160.dp)
                 .clip(Shapes.medium)
-            )
+            ) {
+                BookCoverSkeleton(modifier = Modifier.width(108.dp).height(160.dp))
+            }
 
-            Spacer(modifier = Modifier.width(16.dp))
-
-            Column(modifier = Modifier.fillMaxWidth()) {
+            Column(
+                modifier = Modifier.fillMaxWidth(),
+                verticalArrangement = Arrangement.spacedBy(12.dp)
+            ) {
                 Column {
                     Text(
                         text = "${book.gender} - ${book.edition}",
@@ -73,15 +77,13 @@ fun BookInformationSummary(book: BookSummaryModel) {
                     Row(
                         modifier = Modifier
                             .horizontalScroll(rememberScrollState())
-                            .fillMaxWidth()
+                            .fillMaxWidth(),
+                        horizontalArrangement = Arrangement.spacedBy(8.dp)
                     ) {
                         BookTag(text = book.state.tag, background = blue100, colorText = blue500)
-                        Spacer(modifier = Modifier.width(8.dp))
                         BookTag(text = book.preference.tag, background = green100, colorText = green600)
                     }
                 }
-
-                Spacer(modifier = Modifier.height(12.dp))
 
                 BookOwnerInformations(
                     name = book.userName,

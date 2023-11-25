@@ -22,7 +22,7 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavHostController
 import com.example.sharebook.R
 import com.example.sharebook.core.domain.model.toBookSummary
-import com.example.sharebook.core.presentation.components.ButtonPrimary
+import com.example.sharebook.core.presentation.components.button.ButtonPrimary
 import com.example.sharebook.core.presentation.components.HeaderWithBackground
 import com.example.sharebook.core.presentation.components.IconButtonAction
 import com.example.sharebook.core.presentation.components.book.BookInformationSummary

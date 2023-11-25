@@ -15,10 +15,10 @@ import com.example.sharebook.core.presentation.ui.theme.Lato
 import com.example.sharebook.core.presentation.ui.theme.Shapes
 import com.example.sharebook.core.presentation.ui.theme.gray500
 import com.example.sharebook.core.presentation.ui.theme.green700
-import com.example.sharebook.home_feature.domain.model.BookModel
+import com.example.sharebook.home_feature.domain.model.BookPreviewModel
 
 @Composable
-fun BookPreview(book: BookModel, onClick: () -> Unit) {
+fun BookPreview(book: BookPreviewModel, onClick: () -> Unit) {
     Column(modifier = Modifier
         .widthIn(max = 110.dp)
         .fillMaxWidth()
@@ -28,8 +28,12 @@ fun BookPreview(book: BookModel, onClick: () -> Unit) {
             .height(150.dp)
             .width(110.dp)
             .clip(shape = Shapes.small)
-        )
+        ) {
+            BookCoverSkeleton(modifier = Modifier.height(150.dp).width(110.dp))
+        }
+
         Spacer(modifier = Modifier.height(8.dp))
+
         Text(
             text = book.name,
             color = green700,
@@ -39,6 +43,7 @@ fun BookPreview(book: BookModel, onClick: () -> Unit) {
             fontWeight = FontWeight.Bold,
             fontFamily = Lato
         )
+
         Text(
             text = book.author,
             color = gray500,
