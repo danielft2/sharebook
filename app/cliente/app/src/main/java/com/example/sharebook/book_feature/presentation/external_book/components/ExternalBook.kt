@@ -17,6 +17,7 @@ import androidx.compose.ui.unit.sp
 import com.example.sharebook.R
 import com.example.sharebook.book_feature.data.mock.model.BookDatailsMock
 import com.example.sharebook.core.presentation.components.*
+import com.example.sharebook.core.presentation.components.button.ButtonPrimary
 import com.example.sharebook.core.presentation.navigation.routes.authenticated.PrivateRoutes
 import com.example.sharebook.core.presentation.ui.theme.*
 import com.example.sharebook.core.utils.UiText

@@ -26,6 +26,8 @@ class RegisterUseCase @Inject constructor(private val repository: AuthRepository
                 } else {
                     emit(Resource.Error("Ocorreu um erro inesperado!"))
                 }
+            } finally {
+                emit(Resource.Finnaly())
             }
         }
     }

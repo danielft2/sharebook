@@ -1,6 +1,5 @@
-package com.example.sharebook.core.presentation.components
+package com.example.sharebook.core.presentation.components.button
 
-import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
@@ -12,8 +11,10 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.example.sharebook.core.presentation.components.button.types.ButtonType
 import com.example.sharebook.core.presentation.ui.theme.*
 
 @Composable
@@ -22,20 +23,23 @@ fun ButtonPrimary(
     text: String,
     loading: Boolean = false,
     enabled: Boolean = true,
+    buttonType: ButtonType = ButtonType.PRIMARY,
     onClick: () -> Unit
 ) {
+    val style = getStyleByType(buttonType)
+
     Button(
         onClick = onClick,
         enabled = enabled && !loading,
         colors = ButtonDefaults.buttonColors(
-            backgroundColor = green600,
-            disabledBackgroundColor = green200,
-            contentColor = white
+            backgroundColor = style.backgroundColor,
+            contentColor = style.contentColor,
+            disabledBackgroundColor = style.disabledBackgroundColor
         ),
         shape = Shapes.medium,
         elevation = ButtonDefaults.elevation(
-            defaultElevation = 1.dp,
-            pressedElevation = 2.dp
+            defaultElevation = style.defaultElevation,
+            pressedElevation = style.pressedElevation
         ),
         modifier = Modifier
             .fillMaxWidth()
@@ -64,3 +68,33 @@ fun ButtonPrimary(
         }
     }
 }
+
+@Composable
+fun getStyleByType(buttonType: ButtonType): ButtonTypeStyle {
+    return if (buttonType == ButtonType.PRIMARY) {
+        ButtonTypeStyle(
+            backgroundColor = green600,
+            contentColor = white,
+            disabledBackgroundColor = green200,
+            defaultElevation = 1.dp,
+            pressedElevation = 2.dp
+        )
+    } else {
+        ButtonTypeStyle(
+            backgroundColor = gray200,
+            contentColor = gray800,
+            disabledBackgroundColor = green200,
+            defaultElevation = 0.dp,
+            pressedElevation = 2.dp
+        )
+    }
+}
+
+data class ButtonTypeStyle(
+    val backgroundColor: Color,
+    val contentColor: Color,
+    val disabledBackgroundColor: Color,
+    val defaultElevation: Dp,
+    val pressedElevation: Dp
+)
+

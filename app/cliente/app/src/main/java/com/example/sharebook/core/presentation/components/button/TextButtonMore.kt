@@ -4,10 +4,7 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.defaultMinSize
 import androidx.compose.foundation.layout.wrapContentWidth
-import androidx.compose.material.ExperimentalMaterialApi
-import androidx.compose.material.LocalMinimumTouchTargetEnforcement
-import androidx.compose.material.Text
-import androidx.compose.material.TextButton
+import androidx.compose.material.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -19,7 +16,6 @@ import androidx.compose.ui.unit.sp
 import com.example.sharebook.core.presentation.ui.theme.Inter
 import com.example.sharebook.core.presentation.ui.theme.gray500
 import com.example.sharebook.core.presentation.ui.theme.green500
-
 
 @OptIn(ExperimentalMaterialApi::class)
 @Composable
@@ -38,7 +34,7 @@ fun TextButtonMore(text: String) {
 
         if (text.length > 150) {
             CompositionLocalProvider(
-                LocalMinimumTouchTargetEnforcement provides false
+                LocalMinimumInteractiveComponentEnforcement provides false
             ) {
                 TextButton(
                     onClick = { isExpanded = !isExpanded },

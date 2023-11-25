@@ -15,6 +15,7 @@ import com.example.sharebook.core.domain.model.BookUserLoggedModel
 import com.example.sharebook.core.presentation.components.BookTag
 import com.example.sharebook.core.presentation.components.DividerCustom
 import com.example.sharebook.core.presentation.components.ImageCustom
+import com.example.sharebook.core.presentation.components.book.BookCoverSkeleton
 import com.example.sharebook.core.presentation.ui.theme.*
 
 @Composable
@@ -31,7 +32,12 @@ fun BookItem(book: BookUserLoggedModel, onClick: () -> Unit) {
                 modifier = Modifier
                     .fillMaxHeight()
                     .width(115.dp)
-            )
+            ) {
+                BookCoverSkeleton(Modifier
+                .fillMaxHeight()
+                .width(115.dp))
+            }
+
             Column(modifier = Modifier.padding(20.dp)) {
                 Column {
                     Text(
