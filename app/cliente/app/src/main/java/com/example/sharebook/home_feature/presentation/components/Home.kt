@@ -34,7 +34,7 @@ fun Home(
             .fillMaxSize()
             .background(background)
         ) {
-            Header(homeViewModel)
+            Header(homeViewModel, navController)
             Column(
                 modifier = Modifier
                     .padding(16.dp, 8.dp, end = 4.dp)

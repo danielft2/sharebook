@@ -11,4 +11,6 @@ sealed class PrivateRoutes(val route: String) {
     object ExternalBook: PrivateRoutes(Constants.EXTERNAL_BOOK_ROUTE)
     object UserBook: PrivateRoutes(Constants.USER_BOOK_ROUTE)
     object ExchangeRequest: PrivateRoutes(Constants.EXCHANGE_REQUEST_ROUTE)
+    object BookProcess: PrivateRoutes(Constants.BOOK_PROCESS_ROUTE)
+    object Notification: PrivateRoutes(Constants.NOTIFICATION_ROUTE)
 }

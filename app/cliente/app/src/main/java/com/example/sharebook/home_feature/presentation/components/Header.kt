@@ -17,13 +17,15 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavController
 import com.example.sharebook.R
+import com.example.sharebook.core.presentation.navigation.routes.authenticated.PrivateRoutes
 import com.example.sharebook.core.presentation.ui.theme.*
 import com.example.sharebook.core.utils.Functions
 import com.example.sharebook.home_feature.presentation.HomeViewModel
 
 @Composable
-fun Header(homeViewModel: HomeViewModel) {
+fun Header(homeViewModel: HomeViewModel, navController: NavController) {
     val userLogged = homeViewModel.uiState.user
 
     Box(
@@ -68,7 +70,7 @@ fun Header(homeViewModel: HomeViewModel) {
                 }
 
                 IconButton(
-                    onClick = { /*TODO*/ },
+                    onClick = { navController.navigate(PrivateRoutes.Notification.route) },
                     modifier = Modifier
                         .clip(RoundedCornerShape(100))
                         .background(white)
