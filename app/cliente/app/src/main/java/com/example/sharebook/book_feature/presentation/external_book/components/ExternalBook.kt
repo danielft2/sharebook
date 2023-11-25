@@ -1,6 +1,5 @@
 package com.example.sharebook.book_feature.presentation.external_book.components
 
-import com.example.sharebook.book_feature.presentation.external_book.ExternalBookViewModel
 import androidx.navigation.NavController
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
@@ -15,19 +14,15 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import androidx.hilt.navigation.compose.hiltViewModel
 import com.example.sharebook.R
 import com.example.sharebook.book_feature.data.mock.model.BookDatailsMock
-import com.example.sharebook.book_feature.presentation.external_book.event.SendRequestBookEvent
 import com.example.sharebook.core.presentation.components.*
+import com.example.sharebook.core.presentation.navigation.routes.authenticated.PrivateRoutes
 import com.example.sharebook.core.presentation.ui.theme.*
 import com.example.sharebook.core.utils.UiText
 
 @Composable
-fun ExternalBook(
-    viewModel: ExternalBookViewModel = hiltViewModel(),
-    navController: NavController
-) {
+fun ExternalBook(navController: NavController) {
     val bookDatails = BookDatailsMock()
     Surface(modifier = Modifier.fillMaxSize()) {
         Column (modifier = Modifier
@@ -87,7 +82,7 @@ fun ExternalBook(
                 Spacer(modifier = Modifier.height(16.dp))
                 ButtonPrimary(
                     text = UiText.StringResource(R.string.book_datails_request_book_button).asString(),
-                    onClick = { viewModel.onEvent(SendRequestBookEvent.SendRequest) }
+                    onClick = { navController.navigate(PrivateRoutes.ExchangeRequest.route) }
                 )
             }
         }

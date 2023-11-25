@@ -12,7 +12,7 @@ export class BookControler {
     description: 'return books of homepage based on user id',
   })
   async findMany(@Param('user_id') user_id: string) {
-    return this.bookService.findAll(user_id);
+    return await this.bookService.findAll(user_id);
   }
 
   @Get(':id')

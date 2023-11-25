@@ -13,7 +13,7 @@ import javax.inject.Inject
 
 @HiltViewModel
 class HomeViewModel @Inject constructor(
-    val userStorageManagement: UserStorageManagement
+    private val userStorageManagement: UserStorageManagement
     ): ViewModel() {
     var uiState by mutableStateOf(HomeState())
 

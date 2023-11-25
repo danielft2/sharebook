@@ -11,10 +11,11 @@ import androidx.compose.ui.unit.dp
 import com.example.sharebook.core.presentation.ui.theme.*
 import com.example.sharebook.core.presentation.components.*
 import com.example.sharebook.core.presentation.navigation.routes.authenticated.PrivateRoutes
-import com.example.sharebook.exchanges_feature.data.local.BooksDataInMemory
+import com.example.sharebook.exchanges_feature.data.local.booksInMemory
 
 @Composable
 fun MyBooks(onNavigate: (route: String) -> Unit) {
+    val booksList = booksInMemory()
     Surface(modifier = Modifier.fillMaxSize()) {
         FloatingButtonNewBook { }
 
@@ -26,7 +27,7 @@ fun MyBooks(onNavigate: (route: String) -> Unit) {
                 contentPadding = PaddingValues(bottom = 100.dp),
                 verticalArrangement = Arrangement.spacedBy(16.dp)
             ) {
-                items(BooksDataInMemory.myBoooksList) {
+                items(booksList) {
                     BookItem(book = it) { onNavigate(PrivateRoutes.UserBook.route) }
                 }
             }

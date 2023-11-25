@@ -21,7 +21,6 @@ import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
 import com.example.sharebook.core.presentation.components.HeaderDefault
 import com.example.sharebook.core.presentation.ui.theme.*
-import com.example.sharebook.exchanges_feature.presentation.enteredprocess.components.EnteredProcess
 import com.example.sharebook.exchanges_feature.presentation.mybooks.components.MyBooks
 import com.example.sharebook.exchanges_feature.presentation.tabs.tabsList
 
