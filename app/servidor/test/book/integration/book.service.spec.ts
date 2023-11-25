@@ -2,9 +2,12 @@ import { Test, TestingModule } from '@nestjs/testing';
 import { BookService } from '../../../src/application/services/book.service';
 import { PrismaService } from '../../../src/infraestructure/database/prisma/prisma.service';
 import { BookRepository } from '../../../src/infraestructure/repositories/book.repository';
-import { BookControler } from '../../../src/interfaces/controllers/book.controller';
 import { UserRepository } from '../../../src/infraestructure/repositories/user.repository';
 import { IbgeFinderService } from '../../../src/application/services/ibge-finder.service';
+import { UserGendersService } from '../../../src/application/services/user-gender.service';
+import { BookGendersService } from '../../../src/application/services/book-gender.service';
+import { UserGendersRepository } from '../../../src/infraestructure/repositories/user-gender.repository';
+import { BookGendersRepository } from '../../../src/infraestructure/repositories/book-gender.repository';
 
 describe('BookService', () => {
   let service: BookService;
@@ -18,13 +21,16 @@ describe('BookService', () => {
     prismaService = prismaModule.get<PrismaService>(PrismaService);
 
     const bookRepository = new BookRepository(prismaService);
+    const userGenderRepository = new UserGendersRepository(prismaService);
+    const bookGenderRepository = new BookGendersRepository(prismaService);
     const userRepository = new UserRepository(prismaService);
     const module: TestingModule = await Test.createTestingModule({
-      controllers: [BookControler],
       providers: [
         BookService,
         UserRepository,
         IbgeFinderService,
+        UserGendersService,
+        BookGendersService,
         {
           provide: BookRepository,
           useValue: bookRepository,
@@ -33,6 +39,14 @@ describe('BookService', () => {
           provide: UserRepository,
           useValue: userRepository,
         },
+        {
+          provide: BookGendersRepository,
+          useValue: bookGenderRepository,
+        },
+        {
+          provide: UserGendersRepository,
+          useValue: userGenderRepository,
+        }
       ],
     }).compile();
 
@@ -56,7 +70,11 @@ describe('BookService', () => {
         '05304a82-8a06-11ee-b9d1-0242ac120002',
       );
 
-      expect(books).toBeInstanceOf(Object);
+      expect(
+        books.availableBooks.length ||
+          books.nextToYou.length ||
+          books.favoriteGenders,
+      ).toBeGreaterThan(0);
     });
   });
 });
