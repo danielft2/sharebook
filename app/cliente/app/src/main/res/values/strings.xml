@@ -9,7 +9,6 @@
     <string name="welcome_button_login">Fazer Login</string>
     <string name="welcome_button_register">Realizar Cadastro</string>
 
-
     <string name="login_title">Acesse sua conta.</string>
     <string name="login_subtitle">
         Informe suas credencias abaixo para acessar,
@@ -54,7 +53,7 @@
     <string name="maps_route_title">Mapa</string>
 
     <string name="home_carousel_available">Disponivéis para troca</string>
-    <string name="home_caroseul_nearToYou">Perto de você</string>
+    <string name="home_carousel_nearToYou">Perto de você</string>
 
     <string name="book_details_header">Detalhes do Livro</string>
     <string name="book_datails_descreption_session">Descrição</string>
@@ -82,4 +81,28 @@
     <string name="notification_header">Notificações</string>
 
     <string name="maps_device_location">Ocorreu um erro inesperado ao recuperar sua localização!</string>
+
+    <string name="exchange_request_header_title">Solicitação de Troca</string>
+    <string name="exchange_request_choose_book_title">Escolha seu livro</string>
+    <string name="exchange_request_choose_book_description">
+        O livro que você escolher será oferecido na troca.
+    </string>
+    <string name="exchange_request_owner_book">"Dono(a) do Livro"</string>
+    <string name="exchange_request_user_logged">Você</string>
+    <string name="exchange_request_confirm_checkbox">
+        Confirmo que disponibilizo minhas informações de contato se
+        a solicitação de troca for aceita."
+    </string>
+    <string name="exchange_request_button_request">
+        Enviar solicitação
+    </string>
+
+    <string name="choose_book_sheet_search_not_found_title">
+        Nenhum livro correspondeu a sua busca.
+    </string>
+    <string name="choose_book_sheet_search_not_found_description">
+        Você ainda não possui nenhum livro cadastrado com esse nome.
+    </string>
+
+    <string name="book_preference_tag_send">Preferência em entregar</string>
 </resources>

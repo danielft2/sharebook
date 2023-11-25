@@ -17,6 +17,7 @@ import com.example.sharebook.core.presentation.navigation.routes.authenticated.b
 import com.example.sharebook.core.presentation.navigation.routes.unauthenticated.PublicRoutes
 import com.example.sharebook.core.presentation.ui.theme.*
 import com.example.sharebook.core.utils.Constants
+import com.example.sharebook.exchangerequest_feature.presentation.exchangerequest.components.ExchangeRequest
 import com.example.sharebook.notification_feature.presentation.components.Notification
 import com.example.sharebook.welcome_feature.presentation.Welcome
 
@@ -60,8 +61,13 @@ fun NavigationRoot(
             composable(PrivateRoutes.UserBook.route) {
                 SelfBook(navController = navController)
             }
+<<<<<<< HEAD
+            composable(PrivateRoutes.ExchangeRequest.route) {
+                ExchangeRequest(navController = navController)
+=======
             composable(PrivateRoutes.Notification.route) {
                 Notification(navController = navController)
+>>>>>>> 5ec029d602d1aaea248c2193885e9504b339c7bd
             }
         }
     }
