@@ -61,13 +61,13 @@ fun NavigationRoot(
             composable(PrivateRoutes.UserBook.route) {
                 SelfBook(navController = navController)
             }
-<<<<<<< HEAD
+
             composable(PrivateRoutes.ExchangeRequest.route) {
                 ExchangeRequest(navController = navController)
-=======
+            }
+
             composable(PrivateRoutes.Notification.route) {
                 Notification(navController = navController)
->>>>>>> 5ec029d602d1aaea248c2193885e9504b339c7bd
             }
         }
     }
