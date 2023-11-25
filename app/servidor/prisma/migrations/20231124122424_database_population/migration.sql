@@ -44,3 +44,8 @@ VALUES('3e8bbafb-a739-4452-8192-2716a4d3f001', 'O Menino do Pijama Listrado', '0
 INSERT INTO "Avaliacao"( id, usuario_avaliador_id, nota, comentario, usuario_avaliado_id)
 VALUES('cf374f11-fcf9-4976-9e5c-31a69658f1d9', '05304a82-8a06-11ee-b9d1-0242ac120002', '5', 'Realmente está em perfeito estado!', '1734ed59-eaa8-4c31-9b38-f546790668e8');
 
+INSERT INTO "GeneroUsuario"(usuario_id, genero_id) VALUES
+('05304a82-8a06-11ee-b9d1-0242ac120002', '1c527b0a-6da8-4ccd-b23f-fcd946cf488a'), 
+('1734ed59-eaa8-4c31-9b38-f546790668e8', 'b7d791c1-2060-4aae-a788-bef977341a2f'),
+('05304a82-8a06-11ee-b9d1-0242ac120002', 'b7d791c1-2060-4aae-a788-bef977341a2f'), 
+('1734ed59-eaa8-4c31-9b38-f546790668e8', '1c527b0a-6da8-4ccd-b23f-fcd946cf488a');
