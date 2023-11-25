@@ -1,4 +1,9 @@
-import { MiddlewareConsumer, Module, NestModule } from '@nestjs/common';
+import {
+  MiddlewareConsumer,
+  Module,
+  NestModule,
+  RequestMethod,
+} from '@nestjs/common';
 import { AppController } from '../../interfaces/controllers/app.controller';
 import { AppService } from '../services/app.service';
 import { UserModule } from './user.module';
@@ -8,10 +13,22 @@ import { JwtAuthGuard } from '../../interfaces/guards/jwt-auth.guard';
 import { RequestLoggingMiddleware } from 'src/interfaces/middlewares/request-loggin.middleware';
 import { BookModule } from './book.module';
 import { AlertModule } from './alert.module';
+import { JwtService } from '@nestjs/jwt';
+import { JwtMiddleware } from 'src/interfaces/middlewares/jwt-request.middleware';
 
 @Module({
   imports: [UserModule, AuthModule, BookModule, AlertModule],
   controllers: [AppController],
-  providers: [AppService, { provide: APP_GUARD, useClass: JwtAuthGuard}],
+  providers: [
+    AppService,
+    { provide: APP_GUARD, useClass: JwtAuthGuard },
+    JwtService,
+  ],
 })
-export class AppModule {}
+export class AppModule {
+  configure(consumer: MiddlewareConsumer) {
+    consumer
+      .apply(JwtMiddleware)
+      .forRoutes({ path: '/book', method: RequestMethod.GET });
+  }
+}

@@ -7,4 +7,9 @@ export class IbgeFinderService {
     const response = await axios.get(`https://viacep.com.br/ws/${cep}/json/`);
     return response.data.ibge;
   }
+
+  async getUf(cep: string) {
+    const response = await axios.get(`https://viacep.com.br/ws/${cep}/json/`);
+    return response.data.uf;
+  }
 }

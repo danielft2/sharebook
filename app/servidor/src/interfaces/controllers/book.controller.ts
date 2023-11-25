@@ -1,4 +1,4 @@
-import { Controller, Get, Param } from '@nestjs/common';
+import { Controller, Get, Param, Req } from '@nestjs/common';
 import { BookService } from '../../application/services/book.service';
 import { ApiParam } from '@nestjs/swagger';
 
@@ -6,21 +6,30 @@ import { ApiParam } from '@nestjs/swagger';
 export class BookControler {
   constructor(private bookService: BookService) {}
 
-  @Get('home/:user_id')
+  @Get('home/:token')
   @ApiParam({
-    name: 'user_id',
-    description: 'return books of homepage based on user id',
+    name: 'token',
+    description: 'return books of homepage based on the token',
   })
-  async findMany(@Param('user_id') user_id: string) {
-    return await this.bookService.findAll(user_id);
+  async findMany(@Req() token) {
+    return await this.bookService.findAll(token.returnData.id);
   }
 
-  @Get(':id')
+  @Get('mybooks/:token')
   @ApiParam({
-    name: 'id',
-    description: 'return a book based on the id',
+    name: 'token',
+    description: 'return your books based on the token',
   })
-  async findOne(@Param('id') id: string) {
-    return this.bookService.findOne(id);
+  async findMyBooks(@Req() token) {
+    return await this.bookService.findMyBooks(token.returnData.id);
+  }
+
+  @Get(':book_id/:token')
+  @ApiParam({
+    name: 'book id and token',
+    description: 'return a book based on the book_id and the token',
+  })
+  async findOne(@Param('book_id') book_id: string, @Req() token) {
+    return this.bookService.findOne(book_id, token.returnData.id);
   }
 }
