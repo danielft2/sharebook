@@ -75,18 +75,14 @@ export class BookService {
   async findMyBooks(user_id: string) {
     const books = await this.bookRepository.findMany();
 
-    const myBooks = await Promise.all(
-      books.map(async (book) => {
-        if (user_id === book.usuario_id) {
-          return {
-            id: book.id,
-            nome: book.nome,
-            autores: book.autor,
-            capa: book.capa,
-          };
-        }
-      }),
-    );
+    const myBooks = books
+      .filter((book) => user_id === book.usuario_id)
+      .map((book) => ({
+        id: book.id,
+        nome: book.nome,
+        autores: book.autor,
+        capa: book.capa,
+      }));
 
     return myBooks;
   }
@@ -102,7 +98,7 @@ export class BookService {
         profilePhoto: user.foto_perfil,
         userName: bookOwner.nome,
         city: user.cidade,
-        uf: this.getUserUf(user.cep),
+        uf: await this.getUserUf(user.cep),
       };
       return {
         userInformation,
