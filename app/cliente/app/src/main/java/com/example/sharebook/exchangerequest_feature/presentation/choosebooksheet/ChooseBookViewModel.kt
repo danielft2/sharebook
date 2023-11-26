@@ -6,7 +6,6 @@ import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
 import com.example.sharebook.exchangerequest_feature.presentation.choosebooksheet.event.ChooseBookEvent
 import com.example.sharebook.exchangerequest_feature.presentation.choosebooksheet.state.ChosseBookState
-import com.example.sharebook.exchanges_feature.data.local.booksInMemory
 import dagger.hilt.android.lifecycle.HiltViewModel
 import java.util.*
 import javax.inject.Inject
@@ -31,10 +30,6 @@ class ChooseBookViewModel @Inject constructor() : ViewModel() {
     }
 
     init {
-        val bookList = booksInMemory()
-        state = state.copy(
-            bookListOriginal = bookList,
-            bookListFilter = bookList
-        )
+        state = state.copy()
     }
 }

@@ -11,11 +11,11 @@ import java.io.IOException
 import javax.inject.Inject
 
 class ListBooksUseCase @Inject constructor (private val homeRepository: HomeRepository) {
-    operator fun invoke(usuario_id: String): Flow<Resource<ListBooksModel>> {
+    operator fun invoke(): Flow<Resource<ListBooksModel>> {
         return flow {
             try {
                 emit(Resource.Loading())
-                val response = homeRepository.listBooks(usuario_id)
+                val response = homeRepository.listBooks()
                 emit(Resource.Success(ListBooksModel(
                     availableBooks = response.availableBooks.map { it.toBookPreviewModel() },
                     favoriteGenders = response.favoriteGenders.map { it.toBookPreviewModel() },
