@@ -32,58 +32,44 @@ export class BookService {
 
   async findAll(user_id: string) {
     const user = await this.userRepository.findById(user_id);
-    const books = (await this.bookRepository.findMany()).filter(
-      (book) => user_id !== book.usuario_id,
-    );
+    const userUf = await this.getUserUf(user.cep);
 
-    const availableBooks = await Promise.all(
-      books.map(async (book) => {
-        return {
-          id: book.id,
-          nome: book.nome,
-          autores: book.autor,
-          capa: book.capa,
-        };
-      }),
-    );
+    const books = await this.bookRepository.findMany();
 
-    const favoriteGenders = await Promise.all(
-      books.map(async (book) => {
-        if (this.containsGender(user_id, book.id)) {
-          return {
-            id: book.id,
-            nome: book.nome,
-            autores: book.autor,
-            capa: book.capa,
-          };
-        }
-      }),
-    );
+    const filteredBooks = books.filter((book) => book.usuario_id !== user_id);
 
-    // Realizar nessa variavel uma filtragem para remover possiveis nulos
-    const nextToYou = await Promise.all(
-      books.map(async (book) => {
+    const availableBooks = filteredBooks.map((book) => ({
+      id: book.id,
+      nome: book.nome,
+      autores: book.autor,
+      capa: book.capa,
+    }));
+
+    const favoriteGenders = filteredBooks
+      .filter((book) => this.containsGender(user_id, book.id))
+      .map((book) => ({
+        id: book.id,
+        nome: book.nome,
+        autores: book.autor,
+        capa: book.capa,
+      }));
+
+    const nextToYou = filteredBooks
+      .filter(async (book) => {
         const userNextToYou = await this.userRepository.findById(
           book.usuario_id,
         );
-        const userUf = await this.getUserUf(user.cep);
         const userNextToYouUf = await this.getUserUf(userNextToYou.cep);
-        if (userUf === userNextToYouUf) {
-          return {
-            id: book.id,
-            nome: book.nome,
-            autores: book.autor,
-            capa: book.capa,
-          };
-        }
-      }),
-    );
+        return userUf === userNextToYouUf;
+      })
+      .map((book) => ({
+        id: book.id,
+        nome: book.nome,
+        autores: book.autor,
+        capa: book.capa,
+      }));
 
-    return {
-      availableBooks,
-      favoriteGenders,
-      nextToYou,
-    };
+    return { availableBooks, favoriteGenders, nextToYou };
   }
 
   async findMyBooks(user_id: string) {
