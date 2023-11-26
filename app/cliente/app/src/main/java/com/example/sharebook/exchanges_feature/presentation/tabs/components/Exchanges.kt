@@ -86,7 +86,6 @@ fun Exchanges(navController: NavHostController) {
             HorizontalPager(
                 state = pagerState,
                 modifier = Modifier
-                    .fillMaxHeight()
                     .fillMaxWidth()
                     .weight(1f)
                     .padding(top = 16.dp)

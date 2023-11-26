@@ -23,18 +23,22 @@ fun MyBooks(
     Surface(modifier = Modifier.fillMaxSize()) {
         FloatingButtonNewBook { }
 
-        StateWraper(
-            onClickTryAgain = { myBooksViewModel.getListMyBooks() },
-            isLoading = myBooksViewModel.uiState.isLoading,
-            isError = !myBooksViewModel.uiState.isError.isNullOrEmpty()
-        ) {
-            Column(modifier = Modifier.fillMaxSize().background(background)) {
-                LazyColumn(
-                    contentPadding = PaddingValues(bottom = 100.dp),
-                    verticalArrangement = Arrangement.spacedBy(16.dp)
-                ) {
-                    items(myBooksViewModel.uiState.listMyBooks) {
-                        BookItem(book = it) { onNavigate(PrivateRoutes.UserBook.route) }
+        Column(modifier = Modifier.background(background).fillMaxSize()) {
+            StateWraper(
+                onClickTryAgain = { myBooksViewModel.getListMyBooks() },
+                isLoading = myBooksViewModel.uiState.isLoading,
+                isError = !myBooksViewModel.uiState.isError.isNullOrEmpty()
+            ) {
+                Column(modifier = Modifier
+                    .fillMaxSize()
+                    .background(background)) {
+                    LazyColumn(
+                        contentPadding = PaddingValues(bottom = 100.dp),
+                        verticalArrangement = Arrangement.spacedBy(16.dp)
+                    ) {
+                        items(myBooksViewModel.uiState.listMyBooks) {
+                            BookItem(book = it) { onNavigate(PrivateRoutes.UserBook.route) }
+                        }
                     }
                 }
             }
