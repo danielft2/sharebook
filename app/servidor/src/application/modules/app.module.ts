@@ -1,4 +1,4 @@
-import { MiddlewareConsumer, Module, NestModule } from '@nestjs/common';
+import { MiddlewareConsumer, Module, NestModule, RequestMethod } from '@nestjs/common';
 import { AppController } from '../../interfaces/controllers/app.controller';
 import { AppService } from '../services/app.service';
 import { UserModule } from './user.module';
@@ -9,10 +9,16 @@ import { RequestLoggingMiddleware } from 'src/interfaces/middlewares/request-log
 import { BookModule } from './book.module';
 import { AlertModule } from './alert.module';
 import { RescueModule } from './rescue.module';
+import { JwtMiddleware } from 'src/interfaces/middlewares/jwt-request.middleware';
+import { JwtService } from '@nestjs/jwt';
 
 @Module({
   imports: [UserModule, AuthModule, BookModule, AlertModule, RescueModule],
   controllers: [AppController],
-  providers: [AppService, { provide: APP_GUARD, useClass: JwtAuthGuard}],
+  providers: [AppService, { provide: APP_GUARD, useClass: JwtAuthGuard}, JwtService],
 })
-export class AppModule {}
+export class AppModule {
+  configure(consumer: MiddlewareConsumer) {
+    consumer.apply(JwtMiddleware).forRoutes({path: '/rescue/user', method: RequestMethod.GET});
+  }
+}

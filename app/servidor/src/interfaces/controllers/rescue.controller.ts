@@ -1,4 +1,4 @@
-import { Body, Controller, Get, Param, Post, Put } from '@nestjs/common';
+import { Body, Controller, Get, Param, Post, Put, Req } from '@nestjs/common';
 import { RescueService } from 'src/application/services/rescue.service';
 import { Rescue } from 'src/domain/entities/rescue.entity';
 
@@ -22,7 +22,9 @@ export class RescueController {
     }
 
     @Get('user/:id')
-    async findRescuesFromAUser(@Param('id') userId: string) {
+    async findRescuesFromAUser(@Param('id') userId: string, @Req() req) {
+        const userData = req.user;
+        console.log(userData)
         return this.rescueService.findRescuesFromAUser(userId);
     }
 }
