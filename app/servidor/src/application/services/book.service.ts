@@ -4,6 +4,8 @@ import { IbgeFinderService } from './ibge-finder.service';
 import { UserRepository } from '../../infraestructure/repositories/user.repository';
 import { UserGendersService } from './user-gender.service';
 import { BookGendersService } from './book-gender.service';
+import { BookStateService } from './book-state.service';
+import { RescueService } from './rescue.service';
 
 @Injectable()
 export class BookService {
@@ -13,6 +15,8 @@ export class BookService {
     private userRepository: UserRepository,
     private userGenderService: UserGendersService,
     private bookGenderService: BookGendersService,
+    private bookStateService: BookStateService,
+    private rescueService: RescueService,
   ) {}
 
   private async getUserIBGE(user_cep: string) {
@@ -28,6 +32,41 @@ export class BookService {
     const bookGenders = await this.bookGenderService.findAllByBookId(book_id);
 
     return userGenders.some((userGenders) => bookGenders.includes(userGenders));
+  }
+
+  private async detailedBook(book_id: string) {
+    const book = await this.bookRepository.findOne(book_id);
+    const bookOwner = await this.userRepository.findById(book.usuario_id);
+
+    const userInformation = {
+      profilePhoto: bookOwner.foto_perfil,
+      userName: bookOwner.nome,
+      city: bookOwner.cidade,
+      uf: await this.getUserUf(bookOwner.cep),
+    };
+    let images = [];
+    if (book.imagens && Array.isArray(book.imagens)) {
+      images = book.imagens.filter((image) => image !== '');
+    }
+    return {
+      userInformation,
+      book: {
+        id: book.id,
+        isbn: book.isbn,
+        nome: book.nome,
+        sinopse: book.sinopse,
+        autor: book.autor,
+        usuario_id: book.usuario_id,
+        edicao: book.edicao,
+        idioma: book.idioma,
+        pode_buscar: book.pode_buscar,
+        pode_receber: book.quer_receber,
+        capa: book.capa,
+        imagens: images,
+        genders: await this.bookGenderService.findGenderName(book.id),
+        book_state: (await this.bookStateService.findOne(book.estado_id)).nome,
+      },
+    };
   }
 
   async findAll(user_id: string) {
@@ -90,20 +129,12 @@ export class BookService {
   async findOne(book_id: string, user_id: string) {
     const book = await this.bookRepository.findOne(book_id);
     const user = await this.userRepository.findById(user_id);
+    const detailedBook = await this.detailedBook(book_id);
     if (user.id === book.usuario_id) {
-      return book;
+      // const rescues = await this.rescueService.findRescuesFromAUser(user_id);
+      return { detailedBook };
     } else {
-      const bookOwner = await this.userRepository.findById(user_id);
-      const userInformation = {
-        profilePhoto: user.foto_perfil,
-        userName: bookOwner.nome,
-        city: user.cidade,
-        uf: await this.getUserUf(user.cep),
-      };
-      return {
-        userInformation,
-        book,
-      };
+      return detailedBook;
     }
   }
 }
