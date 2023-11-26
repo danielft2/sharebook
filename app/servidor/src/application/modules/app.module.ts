@@ -22,9 +22,9 @@ import { JwtMiddleware } from 'src/interfaces/middlewares/jwt-request.middleware
   providers: [AppService, { provide: APP_GUARD, useClass: JwtAuthGuard}, JwtService],
 })
 export class AppModule {
-  // configure(consumer: MiddlewareConsumer) {
-  //   consumer
-  //     .apply(JwtMiddleware)
-  //     .forRoutes({ path: '/book', method: RequestMethod.GET });
-  // }
+  configure(consumer: MiddlewareConsumer) {
+    consumer
+      .apply(JwtMiddleware)
+      .forRoutes({ path: '/book', method: RequestMethod.GET }, {path: '/rescue/{id}', method: RequestMethod.GET});
+  }
 }
