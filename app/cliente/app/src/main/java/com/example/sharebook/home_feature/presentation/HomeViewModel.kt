@@ -47,25 +47,23 @@ class HomeViewModel @Inject constructor(
 
     fun listBooks() {
         viewModelScope.launch {
-            uiState.user?.let {
-                listBooksUseCase(it.id).collect {response ->
-                    when (response) {
-                        is Resource.Success -> {
-                            uiState = uiState.copy(
-                                availableBooks = response.data!!.availableBooks,
-                                favoriteGenders = response.data.favoriteGenders,
-                                nextToYou = response.data.nextToYou
-                            )
-                        }
-                        is Resource.Error -> {
-                            listBooksRequestState = listBooksRequestState.copy(error = response.message)
-                        }
-                        is Resource.Loading -> {
-                            listBooksRequestState = listBooksRequestState.copy(isLoading = true)
-                        }
-                        is Resource.Finnaly -> {
-                            listBooksRequestState = listBooksRequestState.copy(isLoading = false)
-                        }
+            listBooksUseCase().collect {response ->
+                when (response) {
+                    is Resource.Success -> {
+                        uiState = uiState.copy(
+                            availableBooks = response.data!!.availableBooks,
+                            favoriteGenders = response.data.favoriteGenders,
+                            nextToYou = response.data.nextToYou
+                        )
+                    }
+                    is Resource.Error -> {
+                        listBooksRequestState = listBooksRequestState.copy(error = response.message)
+                    }
+                    is Resource.Loading -> {
+                        listBooksRequestState = listBooksRequestState.copy(isLoading = true)
+                    }
+                    is Resource.Finnaly -> {
+                        listBooksRequestState = listBooksRequestState.copy(isLoading = false)
                     }
                 }
             }
