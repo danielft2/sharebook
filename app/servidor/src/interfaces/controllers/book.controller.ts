@@ -6,30 +6,22 @@ import { ApiParam } from '@nestjs/swagger';
 export class BookControler {
   constructor(private bookService: BookService) {}
 
-  @Get('home/:token')
-  @ApiParam({
-    name: 'token',
-    description: 'return books of homepage based on the token',
-  })
+  @Get('/home')
   async findMany(@Req() token) {
-    return await this.bookService.findAll(token.returnData.id);
+    return await this.bookService.findAll(token.user.id);
   }
 
-  @Get('mybooks/:token')
-  @ApiParam({
-    name: 'token',
-    description: 'return your books based on the token',
-  })
+  @Get('/mybooks')
   async findMyBooks(@Req() token) {
-    return await this.bookService.findMyBooks(token.returnData.id);
+    return await this.bookService.findMyBooks(token.user.id);
   }
 
-  @Get(':book_id/:token')
+  @Get(':book_id')
   @ApiParam({
-    name: 'book id and token',
-    description: 'return a book based on the book_id and the token',
+    name: 'book id',
+    description: 'return a book based on the book_id',
   })
   async findOne(@Param('book_id') book_id: string, @Req() token) {
-    return this.bookService.findOne(book_id, token.returnData.id);
+    return this.bookService.findOne(book_id, token.user.id);
   }
 }
