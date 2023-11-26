@@ -15,7 +15,9 @@ import androidx.compose.ui.unit.sp
 import com.example.sharebook.R
 import com.example.sharebook.core.domain.model.BookUserLoggedModel
 import com.example.sharebook.core.presentation.components.ImageCustom
+import com.example.sharebook.core.presentation.components.book.BookCoverSkeleton
 import com.example.sharebook.core.presentation.ui.theme.*
+import com.example.sharebook.core.utils.Functions
 
 @Composable
 fun BookItemRow(book: BookUserLoggedModel, onClick: () -> Unit) {
@@ -36,7 +38,10 @@ fun BookItemRow(book: BookUserLoggedModel, onClick: () -> Unit) {
                     .width(48.dp)
                     .height(48.dp)
                     .clip(shape = Shapes.small)
-            )
+            ) {
+                BookCoverSkeleton(modifier = Modifier.width(48.dp).height(48.dp))
+            }
+
             Column {
                 Text(
                     text = book.name,
@@ -46,7 +51,7 @@ fun BookItemRow(book: BookUserLoggedModel, onClick: () -> Unit) {
                     color = green900
                 )
                 Text(
-                    text = book.author,
+                    text = Functions.getValuesFromList(book.authors),
                     fontSize = 13.sp,
                     fontFamily = Inter,
                     fontWeight = FontWeight.Medium,

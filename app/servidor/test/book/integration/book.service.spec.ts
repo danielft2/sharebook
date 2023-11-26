@@ -46,7 +46,7 @@ describe('BookService', () => {
         {
           provide: UserGendersRepository,
           useValue: userGenderRepository,
-        }
+        },
       ],
     }).compile();
 
@@ -60,8 +60,8 @@ describe('BookService', () => {
   describe('GET methods', () => {
     it('should return a book', async () => {
       const bookId = 'dfe8be88-3b0d-496e-baab-395b63751f43';
-
-      const book = await service.findOne(bookId);
+      const userId = '58d43f0c-5442-48b4-8103-4ec2bcd42ea6';
+      const book = await service.findOne(bookId, userId);
       expect(book).toBeTruthy();
     });
 

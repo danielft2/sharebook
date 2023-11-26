@@ -13,6 +13,7 @@ import com.example.sharebook.auth_feature.presentation.register.event.RegisterFo
 import com.example.sharebook.auth_feature.presentation.register.state.RegisterFormState
 import com.example.sharebook.auth_feature.presentation.register.state.RegisterRequestState
 import com.example.sharebook.auth_feature.presentation.register.state.toRegisterModel
+import com.example.sharebook.core.domain.adapter.TokenStorageManagement
 import com.example.sharebook.core.domain.adapter.UserStorageManagement
 import com.example.sharebook.core.domain.usecase.ConsultCepUseCase
 import com.example.sharebook.core.utils.Resource
@@ -26,7 +27,8 @@ class RegisterViewModel @Inject constructor(
     private val registerUseCase: RegisterUseCase,
     private val consultCepUseCase: ConsultCepUseCase,
     private val validateUseCases: ValidateUseCases,
-    private val userStorageManagement: UserStorageManagement
+    private val userStorageManagement: UserStorageManagement,
+    private val tokenStorageManagement: TokenStorageManagement
 ) : ViewModel()
 {
     var uiFormState by mutableStateOf(RegisterFormState())
@@ -112,19 +114,17 @@ class RegisterViewModel @Inject constructor(
                         uiFormState = uiFormState.copy(
                             cidade = it.data!!.localidade,
                             estado = it.data.uf,
-                            cepError = UiText.StringResource(R.string.field_valid),
-                            cepSearchIsLoading = false
+                            cepError = UiText.StringResource(R.string.field_valid)
                         )
                     }
                     is Resource.Error -> {
-                        uiFormState = uiFormState.copy(
-                            cepError = UiText.DynamicText(it.message),
-                            cepSearchIsLoading = false
-                        )
+                        uiFormState = uiFormState.copy(cepError = UiText.DynamicText(it.message))
+                    }
+                    is Resource.Finnaly -> {
+                        uiFormState = uiFormState.copy(cepSearchIsLoading = false)
                     }
                 }
             }
-
         }
     }
 
@@ -138,15 +138,17 @@ class RegisterViewModel @Inject constructor(
                         } else {
                             requestState = requestState.copy(error = it.message)
                         }
-
-                        requestState = requestState.copy(isLoading = false)
                     }
                     is Resource.Loading -> {
                         requestState = requestState.copy(isLoading = true)
                     }
                     is Resource.Success -> {
-                        requestState = requestState.copy(sucess = true, isLoading = false)
+                        requestState = requestState.copy(sucess = true)
                         userStorageManagement.saved(it.data!!.toUserModel())
+                        tokenStorageManagement.saved(it.data.accessToken)
+                    }
+                    is Resource.Finnaly -> {
+                        requestState = requestState.copy(isLoading = false)
                     }
                 }
             }

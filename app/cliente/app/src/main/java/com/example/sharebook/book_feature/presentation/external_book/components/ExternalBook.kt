@@ -14,16 +14,24 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.hilt.navigation.compose.hiltViewModel
 import com.example.sharebook.R
-import com.example.sharebook.book_feature.data.mock.model.BookDatailsMock
+import com.example.sharebook.book_feature.domain.model.toBookBookSummaryModel
+import com.example.sharebook.book_feature.presentation.external_book.ExternalBookViewModel
 import com.example.sharebook.core.presentation.components.*
+import com.example.sharebook.core.presentation.components.book.BookInformationSummary
+import com.example.sharebook.core.presentation.components.button.ButtonPrimary
+import com.example.sharebook.core.presentation.components.statewrapper.StateWraper
 import com.example.sharebook.core.presentation.navigation.routes.authenticated.PrivateRoutes
 import com.example.sharebook.core.presentation.ui.theme.*
 import com.example.sharebook.core.utils.UiText
 
 @Composable
-fun ExternalBook(navController: NavController) {
-    val bookDatails = BookDatailsMock()
+fun ExternalBook(
+    navController: NavController,
+    externalBookViewModel: ExternalBookViewModel = hiltViewModel()
+) {
+
     Surface(modifier = Modifier.fillMaxSize()) {
         Column (modifier = Modifier
             .background(white)
@@ -48,43 +56,54 @@ fun ExternalBook(navController: NavController) {
                 )
             }
 
-            Column(modifier = Modifier
-                .padding(top = 0.dp, start = 16.dp, bottom = 16.dp, end = 16.dp)
-                .fillMaxSize(),
-                verticalArrangement = Arrangement.SpaceBetween
+            StateWraper(
+                onClickTryAgain = {  },
+                isLoading = externalBookViewModel.uiState.isLoadingDetails,
+                isError = externalBookViewModel.uiState.isErrorDetails.toBoolean()
             ) {
                 Column(modifier = Modifier
-                    .weight(1f, fill = false)
-                    .verticalScroll(rememberScrollState())
-                )  {
-                    Spacer(modifier = Modifier.height(16.dp))
+                    .padding(top = 0.dp, start = 16.dp, bottom = 16.dp, end = 16.dp)
+                    .fillMaxSize(),
+                    verticalArrangement = Arrangement.SpaceBetween
+                ) {
+                    Column(modifier = Modifier
+                        .weight(1f, fill = false)
+                        .verticalScroll(rememberScrollState())
+                    )  {
+                        Spacer(modifier = Modifier.height(16.dp))
 
-                    BookInformations()
-
-                    DividerCustom(spaceTop = 20.dp, spaceBottom = 20.dp)
-
-                    Column {
-                        Text(
-                            text = UiText.StringResource(R.string.book_datails_descreption_session).asString(),
-                            fontFamily = FontFamily(Font(R.font.lato_bold)),
-                            fontSize = 15.sp,
-                            color = green900,
+                        BookInformationSummary(
+                            book = externalBookViewModel.uiState.bookDetails!!.toBookBookSummaryModel()
                         )
 
-                        Spacer(modifier = Modifier.height(16.dp))
-                        TextButtonMore(text = bookDatails.descricao)
+                        DividerCustom(spaceTop = 20.dp, spaceBottom = 20.dp)
+
+                        Column {
+                            Text(
+                                text = UiText.StringResource(R.string.book_datails_descreption_session).asString(),
+                                fontFamily = FontFamily(Font(R.font.lato_bold)),
+                                fontSize = 15.sp,
+                                color = green900,
+                            )
+
+                            Spacer(modifier = Modifier.height(8.dp))
+                            TextButtonMore(text = externalBookViewModel.uiState.bookDetails!!.synopsis)
+                        }
+
+                        DividerCustom(spaceTop = 20.dp, spaceBottom = 20.dp)
+
+                        BoolGaleryImage(
+                            externalBookViewModel.uiState.bookDetails!!.images
+                        )
                     }
 
-                    DividerCustom(spaceTop = 20.dp, spaceBottom = 20.dp)
-                    BoolGaleryImage()
+                    Spacer(modifier = Modifier.height(16.dp))
+                    ButtonPrimary(
+                        text = UiText.StringResource(R.string.book_datails_request_book_button).asString(),
+                        onClick = { navController.navigate(PrivateRoutes.ExchangeRequest.route) }
+                    )
                 }
-
-                Spacer(modifier = Modifier.height(16.dp))
-                ButtonPrimary(
-                    text = UiText.StringResource(R.string.book_datails_request_book_button).asString(),
-                    onClick = { navController.navigate(PrivateRoutes.ExchangeRequest.route) }
-                )
             }
-        }
+         }
     }
 }

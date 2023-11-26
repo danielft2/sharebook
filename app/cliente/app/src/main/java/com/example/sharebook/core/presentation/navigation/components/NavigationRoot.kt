@@ -4,9 +4,11 @@ import android.annotation.SuppressLint
 import androidx.compose.runtime.*
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavHostController
+import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.navigation
+import androidx.navigation.navArgument
 import com.example.sharebook.auth_feature.presentation.login.components.Login
 import com.example.sharebook.auth_feature.presentation.register.components.Register
 import com.example.sharebook.book_feature.presentation.external_book.components.ExternalBook
@@ -55,7 +57,12 @@ fun NavigationRoot(
             composable(PrivateRoutes.MainScreen.route) {
                 BottomNavigation(navControllerRoot = navController, itens = bottomNavigationItens)
             }
-            composable(PrivateRoutes.ExternalBook.route) {
+            composable(
+                route = PrivateRoutes.ExternalBook.route + "/{book_id}",
+                arguments = listOf(
+                    navArgument(Constants.EXTERNAL_BOOK_PARAM_ID) { type = NavType.StringType }
+                )
+            ) {
                 ExternalBook(navController = navController)
             }
             composable(PrivateRoutes.UserBook.route) {

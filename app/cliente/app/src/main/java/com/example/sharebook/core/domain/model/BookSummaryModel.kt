@@ -4,15 +4,15 @@ import com.example.sharebook.core.domain.enum.BookPreferenceTag
 import com.example.sharebook.core.domain.enum.BookStateTag
 
 data class BookSummaryModel(
-    val id: String?,
-    val gender: String,
     val name: String,
-    val edition: String,
-    val author: String,
+    val edition: Int,
+    val authors: String,
+    val genders: String,
     val coverUrl: String,
-    val state: BookStateTag,
+    val bookState: String,
     val preference: BookPreferenceTag,
 
     val userName: String,
+    val userProfilePhoto: String?,
     val secondaryText: String
 )

@@ -26,7 +26,10 @@ data class RegisterResponse(
     val nome: String,
 
     @SerializedName("telefone")
-    val telefone: String
+    val telefone: String,
+
+    @SerializedName("access_token")
+    val accessToken: String
 )
 
 fun RegisterResponse.toUserModel() : UserModel {

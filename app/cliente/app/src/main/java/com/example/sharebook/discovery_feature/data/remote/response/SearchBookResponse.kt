@@ -1,6 +1,5 @@
 package com.example.sharebook.discovery_feature.data.remote.response
 
-import com.example.sharebook.book_feature.data.mock.model.PedidoTrocaMock
 import com.example.sharebook.discovery_feature.data.remote.mock.model.BookSearchMock
 import com.google.gson.annotations.SerializedName
 

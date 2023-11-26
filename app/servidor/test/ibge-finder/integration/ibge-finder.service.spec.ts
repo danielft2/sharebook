@@ -22,5 +22,11 @@ describe('IbgeFinderService', () => {
       const ibge = await service.getIBGE(cep);
       expect(ibge).toBe('2304400');
     });
+
+    it('should return the uf of a specific CEP', async () => {
+      const cep = '60764020';
+      const uf = await service.getUf(cep);
+      expect(uf).toBe('CE');
+    });
   });
 });

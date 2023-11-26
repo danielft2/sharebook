@@ -12,6 +12,6 @@ export class GenderRepository {
   }
 
   async findMany() {
-    return await this.prisma.livro.findMany();
+    return await this.prisma.genero.findMany();
   }
 }

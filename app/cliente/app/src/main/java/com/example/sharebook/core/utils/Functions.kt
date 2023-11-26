@@ -1,5 +1,6 @@
 package com.example.sharebook.core.utils
 
+import com.example.sharebook.core.domain.enum.BookPreferenceTag
 import java.util.*
 
 object Functions {
@@ -18,6 +19,22 @@ object Functions {
         }
 
         return nameCapitalize
+    }
+
+
+    fun getValuesFromList(args: List<String>): String {
+        var value = ""
+        args.forEachIndexed { index, author ->
+            value += if (index == args.lastIndex) author
+            else "$author, "
+        }
+
+        return value
+    }
+
+    fun getPreference(podeBuscar: Boolean): BookPreferenceTag {
+        return if (podeBuscar) BookPreferenceTag.SEARCH
+        else BookPreferenceTag.RECEIVE
     }
 }
 

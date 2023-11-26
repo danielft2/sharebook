@@ -105,4 +105,8 @@
     </string>
 
     <string name="book_preference_tag_send">Preferência em entregar</string>
+
+    <string name="something_wrong_title">Ops! Parece que algo deu errado.</string>
+    <string name="something_wrong_description">Algo inesperado aconteceu, tente novamente abaixo.</string>
+    <string name="something_wrong_try_again">Tentar novamente</string>
 </resources>

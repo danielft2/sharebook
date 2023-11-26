@@ -9,6 +9,13 @@ import { UserGendersService } from '../services/user-gender.service';
 import { BookGendersService } from '../services/book-gender.service';
 import { UserGendersRepository } from '../../infraestructure/repositories/user-gender.repository';
 import { BookGendersRepository } from '../../infraestructure/repositories/book-gender.repository';
+import { GenderService } from '../services/gender.service';
+import { GenderRepository } from 'src/infraestructure/repositories/gender.repository';
+import { BookStateRepository } from 'src/infraestructure/repositories/book-state.repository';
+import { BookStateService } from '../services/book-state.service';
+import { RescueService } from '../services/rescue.service';
+import { RescueRepository } from 'src/infraestructure/repositories/rescue.repository';
+import { SupabaseService } from '../services/supabase.service';
 
 @Module({
   imports: [PrismaModule],
@@ -22,6 +29,13 @@ import { BookGendersRepository } from '../../infraestructure/repositories/book-g
     BookGendersRepository,
     UserGendersService,
     BookGendersService,
+    GenderService,
+    GenderRepository,
+    BookStateRepository,
+    BookStateService,
+    RescueService,
+    RescueRepository,
+    SupabaseService,
   ],
 })
 export class BookModule {}

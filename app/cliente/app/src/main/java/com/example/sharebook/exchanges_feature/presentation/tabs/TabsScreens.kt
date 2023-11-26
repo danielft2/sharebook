@@ -9,6 +9,6 @@ sealed class TabScreen(
     val title: String,
     val badgeValue: Int
 ) {
-    object MyBooksScreen: TabScreen("Meus livros", 3)
-    object EnteredProcessScreen: TabScreen("Solicitações", 1)
+    object MyBooksScreen: TabScreen("Meus livros", 0)
+    object EnteredProcessScreen: TabScreen("Solicitações", 0)
 }
