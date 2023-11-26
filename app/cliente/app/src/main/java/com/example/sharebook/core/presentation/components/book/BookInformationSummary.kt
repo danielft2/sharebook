@@ -19,7 +19,6 @@ import com.example.sharebook.core.domain.model.BookSummaryModel
 import com.example.sharebook.core.presentation.components.BookTag
 import com.example.sharebook.core.presentation.components.ImageCustom
 import com.example.sharebook.core.presentation.ui.theme.*
-import com.example.sharebook.core.utils.Functions
 
 @Composable
 fun BookInformationSummary(book: BookSummaryModel) {
@@ -43,7 +42,7 @@ fun BookInformationSummary(book: BookSummaryModel) {
             ) {
                 Column {
                     Text(
-                        text = "${Functions.getValuesFromList(book.genders)} - ${book.edition} Edição",
+                        text = "${book.genders} - ${book.edition} Edição",
                         color = green500,
                         fontFamily = FontFamily(Font(R.font.inter_semibold)),
                         fontWeight = FontWeight.SemiBold,
@@ -65,7 +64,7 @@ fun BookInformationSummary(book: BookSummaryModel) {
                     Spacer(modifier = Modifier.height(2.dp))
 
                     Text(
-                        text = Functions.getValuesFromList(book.authors),
+                        text = book.authors,
                         color = gray500,
                         fontFamily = FontFamily(Font(R.font.inter_regular)),
                         fontSize = 12.sp,

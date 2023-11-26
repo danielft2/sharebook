@@ -1,7 +1,7 @@
 package com.example.sharebook.core.domain.model
 
 import com.example.sharebook.core.domain.enum.BookPreferenceTag
-import com.example.sharebook.core.domain.enum.BookStateTag
+import com.example.sharebook.core.utils.Functions
 
 data class BookUserLoggedModel(
     val id: String,
@@ -16,13 +16,13 @@ data class BookUserLoggedModel(
 
 fun BookUserLoggedModel.toBookSummary(): BookSummaryModel {
     return BookSummaryModel(
-        genders = genders,
+        genders = Functions.getValuesFromList(genders),
         name = name,
         bookState = bookState,
         preference = preference,
         coverUrl = coverUrl,
         edition = edition,
-        authors = authors,
+        authors = Functions.getValuesFromList(authors),
 
         userName = "Você",
         userProfilePhoto = "",

@@ -11,8 +11,8 @@ data class BookDetailsModel(
     val userProfilePhoto: String?,
 
     val name: String,
-    val authors: List<String>,
-    val genders: List<String>,
+    val authors: String,
+    val genders: String,
     val cover: String,
     val edition: Int,
     val images: List<String>,

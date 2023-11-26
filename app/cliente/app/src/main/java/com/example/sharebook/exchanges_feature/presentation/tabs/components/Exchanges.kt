@@ -29,7 +29,7 @@ import com.example.sharebook.exchanges_feature.presentation.tabs.tabsList
 fun Exchanges(navController: NavHostController) {
     Surface(modifier = Modifier.fillMaxSize()) {
         var selectedTabIndex by remember { mutableStateOf(0) }
-        val pagerState = rememberPagerState{2}
+        val pagerState = rememberPagerState(pageCount = { 2 })
 
         LaunchedEffect(key1 = selectedTabIndex) {
             pagerState.animateScrollToPage(selectedTabIndex)
@@ -86,6 +86,7 @@ fun Exchanges(navController: NavHostController) {
             HorizontalPager(
                 state = pagerState,
                 modifier = Modifier
+                    .fillMaxHeight()
                     .fillMaxWidth()
                     .weight(1f)
                     .padding(top = 16.dp)
