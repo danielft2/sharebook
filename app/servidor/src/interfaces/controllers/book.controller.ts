@@ -7,21 +7,21 @@ export class BookControler {
   constructor(private bookService: BookService) {}
 
   @Get('/home')
-  async findMany(@Req() token) {
-    return await this.bookService.findAll(token.user.id);
+  async findMany(@Req() req) {
+    return await this.bookService.findAll(req.user.id);
   }
 
   @Get('/mybooks')
-  async findMyBooks(@Req() token) {
-    return await this.bookService.findMyBooks(token.user.id);
+  async findMyBooks(@Req() req) {
+    return await this.bookService.findMyBooks(req.user.id);
   }
 
-  @Get(':book_id')
+  @Get('/:book_id')
   @ApiParam({
     name: 'book id',
     description: 'return a book based on the book_id',
   })
-  async findOne(@Param('book_id') book_id: string, @Req() token) {
-    return this.bookService.findOne(book_id, token.user.id);
+  async findOne(@Param('book_id') book_id: string, @Req() req) {
+    return this.bookService.findOne(book_id, req.user.id);
   }
 }

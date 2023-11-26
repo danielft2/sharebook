@@ -27,9 +27,9 @@ import { RescueModule } from './rescue.module';
   ],
 })
 export class AppModule {
-  configure(consumer: MiddlewareConsumer) {
-    consumer
-      .apply(JwtMiddleware)
-      .forRoutes({ path: '/book', method: RequestMethod.GET });
-  }
+  // configure(consumer: MiddlewareConsumer) {
+  //   consumer
+  //     .apply(JwtMiddleware)
+  //     .forRoutes({ path: '/book', method: RequestMethod.GET });
+  // }
 }
