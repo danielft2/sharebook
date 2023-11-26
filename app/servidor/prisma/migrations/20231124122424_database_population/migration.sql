@@ -1,6 +1,6 @@
 INSERT INTO "Usuario"( id,nome, telefone, email, senha,cep,estado,cidade,foto_perfil)
 VALUES ('05304a82-8a06-11ee-b9d1-0242ac120002', 'Joao', '88999475456', 'joaof@gmail.com', '$2a$12$XjoIS.0cym.9iMcDcRZmu.2IaetYGxU2U0/96Ua7212E5lUE9Fv4q', '63800000', 'Ceara', 'Quixeramobim', ''),
-('1734ed59-eaa8-4c31-9b38-f546790668e8', 'Pedro', '88999475455', 'pedrolucas@gmail.com', '$2a$12$XjoIS.0cym.9iMcDcRZmu.2IaetYGxU2U0/96Ua7212E5lUE9Fv4q', '63900000', 'Ceara', 'Quixada', ''),
+('1734ed59-eaa8-4c31-9b38-f546790668e8', 'Pedro', '88999475455', 'pedrolucas@gmail.com', '$2a$12$XjoIS.0cym.9iMcDcRZmu.2IaetYGxU2U0/96Ua7212E5lUE9Fv4q', '60878055', 'Ceara', 'Fortaleza', ''),
 ('58d43f0c-5442-48b4-8103-4ec2bcd42ea6', 'Maria', '88988475455', 'mariajoaquina@gmail.com', '$2a$12$XjoIS.0cym.9iMcDcRZmu.2IaetYGxU2U0/96Ua7212E5lUE9Fv4q', '63900025', 'Ceara','Quixada', '');
 
 

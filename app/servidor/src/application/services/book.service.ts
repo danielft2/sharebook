@@ -32,27 +32,24 @@ export class BookService {
 
   async findAll(user_id: string) {
     const user = await this.userRepository.findById(user_id);
-    const books = await this.bookRepository.findMany();
+    const books = (await this.bookRepository.findMany()).filter(
+      (book) => user_id !== book.usuario_id,
+    );
 
     const availableBooks = await Promise.all(
       books.map(async (book) => {
-        if (user_id !== book.usuario_id) {
-          return {
-            id: book.id,
-            nome: book.nome,
-            autores: book.autor,
-            capa: book.capa,
-          };
-        }
+        return {
+          id: book.id,
+          nome: book.nome,
+          autores: book.autor,
+          capa: book.capa,
+        };
       }),
     );
 
     const favoriteGenders = await Promise.all(
       books.map(async (book) => {
-        if (
-          user_id !== book.usuario_id &&
-          this.containsGender(user_id, book.id)
-        ) {
+        if (this.containsGender(user_id, book.id)) {
           return {
             id: book.id,
             nome: book.nome,
@@ -63,15 +60,15 @@ export class BookService {
       }),
     );
 
+    // Realizar nessa variavel uma filtragem para remover possiveis nulos
     const nextToYou = await Promise.all(
       books.map(async (book) => {
         const userNextToYou = await this.userRepository.findById(
           book.usuario_id,
         );
-        if (
-          user_id !== book.usuario_id &&
-          this.getUserIBGE(user.cep) === this.getUserIBGE(userNextToYou.cep)
-        ) {
+        const userUf = await this.getUserUf(user.cep);
+        const userNextToYouUf = await this.getUserUf(userNextToYou.cep);
+        if (userUf === userNextToYouUf) {
           return {
             id: book.id,
             nome: book.nome,
@@ -114,9 +111,10 @@ export class BookService {
     if (user.id === book.usuario_id) {
       return book;
     } else {
+      const bookOwner = await this.userRepository.findById(user_id);
       const userInformation = {
         profilePhoto: user.foto_perfil,
-        userName: user.nome,
+        userName: bookOwner.nome,
         city: user.cidade,
         uf: this.getUserUf(user.cep),
       };
