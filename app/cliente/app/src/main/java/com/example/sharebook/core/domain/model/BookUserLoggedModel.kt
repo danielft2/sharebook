@@ -5,26 +5,27 @@ import com.example.sharebook.core.domain.enum.BookStateTag
 
 data class BookUserLoggedModel(
     val id: String,
-    val gender: String,
+    val genders: List<String>,
     val name: String,
-    val author: String,
-    val edition: String,
+    val authors: List<String>,
+    val edition: Int,
     val coverUrl: String,
-    val state: BookStateTag,
+    val bookState: String,
     val preference: BookPreferenceTag,
 )
 
 fun BookUserLoggedModel.toBookSummary(): BookSummaryModel {
     return BookSummaryModel(
-        id = id,
-        gender = gender,
+        genders = genders,
         name = name,
-        state = state,
+        bookState = bookState,
         preference = preference,
         coverUrl = coverUrl,
         edition = edition,
-        author = author,
+        authors = authors,
+
         userName = "Você",
+        userProfilePhoto = "",
         secondaryText = "Dono(a) do Livro"
     )
 }

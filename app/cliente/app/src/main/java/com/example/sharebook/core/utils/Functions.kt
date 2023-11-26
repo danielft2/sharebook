@@ -19,5 +19,16 @@ object Functions {
 
         return nameCapitalize
     }
+
+
+    fun getValuesFromList(args: List<String>): String {
+        var value = ""
+        args.forEachIndexed { index, author ->
+            value += if (index == args.lastIndex) author
+            else "$author, "
+        }
+
+        return value
+    }
 }
 

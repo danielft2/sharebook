@@ -11,13 +11,11 @@ export class UserGendersService {
 
   async findAllByUserId(usuario_id: string) {
     const userGenders = await this.findAll();
-    const genders = await Promise.all(
-      userGenders.map(async (userGender) => {
-        if (userGender.usuario_id === usuario_id) {
-          return userGender.genero_id;
-        }
-      }),
-    );
+
+    const genders = userGenders
+      .filter((userGender) => userGender.usuario_id === usuario_id)
+      .map((userGender) => userGender.genero_id);
+
     return genders;
   }
 }

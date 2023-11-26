@@ -6,7 +6,7 @@ import com.example.sharebook.home_feature.domain.adpater.HomeRepository
 import javax.inject.Inject
 
 class HomeRepositoryImpl @Inject constructor(private val homeService: HomeService) : HomeRepository {
-    override suspend fun listBooks(usuario_id: String): ListBooksResponse {
-        return homeService.listBooks(usuario_id)
+    override suspend fun listBooks(): ListBooksResponse {
+        return homeService.listBooks()
     }
 }

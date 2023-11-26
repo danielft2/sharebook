@@ -27,7 +27,6 @@ import com.example.sharebook.core.presentation.components.HeaderWithBackground
 import com.example.sharebook.core.presentation.components.IconButtonAction
 import com.example.sharebook.core.presentation.components.book.BookInformationSummary
 import com.example.sharebook.core.presentation.ui.theme.*
-import com.example.sharebook.exchangerequest_feature.data.local.bookInMemory
 import com.example.sharebook.exchangerequest_feature.presentation.choosebooksheet.components.ChooseBookSheet
 import com.example.sharebook.exchangerequest_feature.presentation.exchangerequest.ExchangeRequestViewModel
 import com.example.sharebook.exchangerequest_feature.presentation.exchangerequest.event.ExchangeEvent
@@ -37,7 +36,6 @@ fun ExchangeRequest(
     navController: NavHostController,
     exchangeRequestViewModel: ExchangeRequestViewModel = hiltViewModel()
 ) {
-    val book = bookInMemory()
     var showBottomSheet by remember { mutableStateOf(false) }
 
     Surface(modifier = Modifier.fillMaxSize()) {
@@ -67,7 +65,7 @@ fun ExchangeRequest(
 
                 Column(modifier = Modifier.background(white)) {
                     Column(modifier = Modifier.padding(horizontal = 16.dp, vertical = 32.dp)) {
-                        BookInformationSummary(book = book.toBookSummary())
+                        //BookInformationSummary(book = book.toBookSummary())
                         DividerDecorator()
 
                         if (exchangeRequestViewModel.state.bookSelected != null) {
