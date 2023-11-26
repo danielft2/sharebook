@@ -1,5 +1,6 @@
 package com.example.sharebook.core.utils
 
+import com.example.sharebook.core.domain.enum.BookPreferenceTag
 import java.util.*
 
 object Functions {
@@ -29,6 +30,11 @@ object Functions {
         }
 
         return value
+    }
+
+    fun getPreference(podeBuscar: Boolean): BookPreferenceTag {
+        return if (podeBuscar) BookPreferenceTag.SEARCH
+        else BookPreferenceTag.RECEIVE
     }
 }
 

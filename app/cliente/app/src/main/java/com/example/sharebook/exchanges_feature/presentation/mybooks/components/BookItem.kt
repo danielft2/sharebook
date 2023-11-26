@@ -10,16 +10,15 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.example.sharebook.core.domain.model.BookUserLoggedModel
 import com.example.sharebook.core.presentation.components.BookTag
 import com.example.sharebook.core.presentation.components.DividerCustom
 import com.example.sharebook.core.presentation.components.ImageCustom
 import com.example.sharebook.core.presentation.components.book.BookCoverSkeleton
 import com.example.sharebook.core.presentation.ui.theme.*
-import com.example.sharebook.core.utils.Functions
+import com.example.sharebook.exchanges_feature.domain.model.MyBookModel
 
 @Composable
-fun BookItem(book: BookUserLoggedModel, onClick: () -> Unit) {
+fun BookItem(book: MyBookModel, onClick: () -> Unit) {
     Box(modifier = Modifier
         .fillMaxWidth()
         .height(200.dp)
@@ -28,7 +27,7 @@ fun BookItem(book: BookUserLoggedModel, onClick: () -> Unit) {
     ) {
         Row {
             ImageCustom(
-                url = book.coverUrl,
+                url = book.cover,
                 modifier = Modifier
                     .fillMaxHeight()
                     .width(115.dp)
@@ -41,7 +40,7 @@ fun BookItem(book: BookUserLoggedModel, onClick: () -> Unit) {
             Column(modifier = Modifier.padding(20.dp)) {
                 Column {
                     Text(
-                        text = "${Functions.getValuesFromList(book.genders)} - ${book.edition}",
+                        text = "${book.genders} - ${book.edition} Edição",
                         color = green600,
                         fontSize = 14.sp,
                         fontFamily = Lato,
@@ -63,7 +62,7 @@ fun BookItem(book: BookUserLoggedModel, onClick: () -> Unit) {
                     Spacer(modifier = Modifier.height(4.dp))
 
                     Text(
-                        text = Functions.getValuesFromList(book.authors),
+                        text = book.authors,
                         color = gray500,
                         fontSize = 14.sp,
                         fontFamily = Lato,
