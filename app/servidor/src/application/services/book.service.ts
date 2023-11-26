@@ -114,14 +114,21 @@ export class BookService {
   async findMyBooks(user_id: string) {
     const books = await this.bookRepository.findMany();
 
-    const myBooks = books
-      .filter((book) => user_id === book.usuario_id)
-      .map((book) => ({
-        id: book.id,
-        nome: book.nome,
-        autores: book.autor,
-        capa: book.capa,
-      }));
+    const myBooks = await Promise.all(
+      books
+        .filter((book) => user_id === book.usuario_id)
+        .map(async (book) => ({
+          id: book.id,
+          nome: book.nome,
+          autores: book.autor,
+          capa: book.capa,
+          edicao: book.edicao,
+          pode_receber: book.quer_receber,
+          pode_enviar: book.pode_buscar,
+          genero: await this.bookGenderService.findGenderName(book.id),
+          estado: (await this.bookStateService.findOne(book.estado_id)).nome,
+        })),
+    );
 
     return myBooks;
   }
