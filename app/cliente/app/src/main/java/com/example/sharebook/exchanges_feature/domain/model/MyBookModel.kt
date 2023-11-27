@@ -14,7 +14,10 @@ data class MyBookModel(
     val edition: Int
 )
 
-fun MyBookModel.toBookSummaryModel(userProfile: String): BookSummaryModel {
+fun MyBookModel.toBookSummaryModel(
+    userName: String,
+    userProfile: String
+): BookSummaryModel {
     return BookSummaryModel(
         name = name,
         authors = authors,
@@ -25,6 +28,7 @@ fun MyBookModel.toBookSummaryModel(userProfile: String): BookSummaryModel {
         genders = genders,
 
         userName = "Você",
+        userFalbackPhoto = userName ,
         userProfilePhoto = userProfile,
         secondaryText = "Dono(a) do Livro"
     )

@@ -92,13 +92,7 @@ fun ExchangeRequest(
                                     .clip(RoundedCornerShape(100))
                                     .background(red400)
                                     .size(36.dp)
-                                    .clickable {
-                                        exchangeRequestViewModel.event(
-                                            ExchangeEvent.SelectedBook(
-                                                null
-                                            )
-                                        )
-                                    },
+                                    .clickable { showBottomSheet = true },
                                     contentAlignment = Alignment.Center
                                 ) {
                                     Icon(
@@ -109,6 +103,7 @@ fun ExchangeRequest(
                                 BookSummary(
                                     book = exchangeRequestViewModel.uiState.bookSelected!!
                                         .toBookSummaryModel(
+                                            exchangeRequestViewModel.uiState.userLogged?.name ?: "",
                                             exchangeRequestViewModel.uiState.userLogged?.photoUrl ?: ""
                                         ),
                                 )

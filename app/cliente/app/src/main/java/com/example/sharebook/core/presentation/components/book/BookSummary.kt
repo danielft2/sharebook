@@ -87,6 +87,7 @@ fun BookSummary(book: BookSummaryModel) {
 
                 BookOwnerInformations(
                     name = book.userName,
+                    falbackPhoto = book.userFalbackPhoto ?: book.userName,
                     secondaryText = book.secondaryText,
                     profileUrl = book.userProfilePhoto ?: ""
                 )

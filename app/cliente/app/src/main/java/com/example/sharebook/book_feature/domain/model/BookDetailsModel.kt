@@ -18,7 +18,9 @@ data class BookDetailsModel(
     val images: List<String>,
     val synopsis: String,
     val preference: BookPreferenceTag,
-    val bookState: String
+    val bookState: String,
+
+    val isRequest: Boolean
 )
 
 fun BookDetailsModel.toBookBookSummaryModel(): BookSummaryModel {
