@@ -5,15 +5,12 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.pager.HorizontalPager
 import androidx.compose.foundation.pager.rememberPagerState
-import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Surface
 import androidx.compose.material.Tab
 import androidx.compose.material.TabRow
 import androidx.compose.material.Text
 import androidx.compose.runtime.*
-import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.clip
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
@@ -51,33 +48,13 @@ fun Exchanges(navController: NavHostController) {
                         selected = tabSelected,
                         onClick = { selectedTabIndex = index },
                         text = {
-                            Row {
-                                Text(
-                                    text = tabItem.title,
-                                    color = if (tabSelected) white else gray300,
-                                    fontFamily = Lato,
-                                    fontWeight = FontWeight.Bold,
-                                    style = TextStyle(letterSpacing = 0.sp)
-                                )
-                                
-                                Spacer(modifier = Modifier.width(8.dp))
-                                
-                                Box(modifier = Modifier
-                                    .width(20.dp)
-                                    .height(20.dp)
-                                    .clip(RoundedCornerShape(100))
-                                    .background(if (tabSelected) green400 else gray300),
-                                    contentAlignment = Alignment.Center
-                                ) {
-                                    Text(
-                                        text = tabItem.badgeValue.toString(),
-                                        color = if (tabSelected) white else gray800,
-                                        fontFamily = Lato,
-                                        fontWeight = FontWeight.Bold,
-                                    )
-                                }
-                            }
-
+                            Text(
+                                text = tabItem.title,
+                                color = if (tabSelected) white else gray300,
+                                fontFamily = Lato,
+                                fontWeight = FontWeight.Bold,
+                                style = TextStyle(letterSpacing = 0.sp)
+                            )
                         }
                     )
                 }

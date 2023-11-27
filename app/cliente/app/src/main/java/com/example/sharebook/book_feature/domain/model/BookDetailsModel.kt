@@ -38,3 +38,19 @@ fun BookDetailsModel.toBookBookSummaryModel(): BookSummaryModel {
         secondaryText = userLocation ?: ""
     )
 }
+
+fun BookDetailsModel.toBookBookYourSummaryModel(): BookSummaryModel {
+    return BookSummaryModel(
+        name = name,
+        authors = authors,
+        edition = edition,
+        preference = preference,
+        bookState = bookState,
+        coverUrl = cover,
+        genders = genders,
+
+        userName = "",
+        userProfilePhoto = "",
+        secondaryText = ""
+    )
+}

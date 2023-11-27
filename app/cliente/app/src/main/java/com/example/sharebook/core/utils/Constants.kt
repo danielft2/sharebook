@@ -25,7 +25,6 @@ object Constants {
     const val EXTERNAL_BOOK_ROUTE = "external_book_route"
     const val USER_BOOK_ROUTE = "user_book_route"
     const val EXCHANGE_REQUEST_ROUTE = "exchange_request_route"
-    const val BOOK_PROCESS_ROUTE = "book_process_route"
     const val NOTIFICATION_ROUTE = "notification_route"
 
     const val BOOK_PARAM_ID = "book_id"

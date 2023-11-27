@@ -37,7 +37,7 @@ fun MyBooks(
                         verticalArrangement = Arrangement.spacedBy(16.dp)
                     ) {
                         items(myBooksViewModel.uiState.listMyBooks) {
-                            BookItem(book = it) { onNavigate(PrivateRoutes.UserBook.route) }
+                            BookItem(book = it) { onNavigate(PrivateRoutes.UserBook.withArgs(it.id)) }
                         }
                     }
                 }
