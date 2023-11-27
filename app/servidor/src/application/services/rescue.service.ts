@@ -5,6 +5,7 @@ import { Rescue } from 'src/domain/entities/rescue.entity';
 import { BookRepository } from 'src/infraestructure/repositories/book.repository';
 import { UserRepository } from 'src/infraestructure/repositories/user.repository';
 import { BookStateRepository } from 'src/infraestructure/repositories/book-state.repository';
+import { BookGendersService } from './book-gender.service';
 
 @Injectable()
 export class RescueService {
@@ -13,7 +14,8 @@ export class RescueService {
         private readonly supabaseService: SupabaseService,
         private readonly bookRepository: BookRepository,
         private readonly userRepository: UserRepository,
-        private readonly bookStateRepository: BookStateRepository
+        private readonly bookStateRepository: BookStateRepository,
+        private readonly bookGenderService: BookGendersService,
     ){}
 
     async create(rescue: Rescue) {
@@ -54,7 +56,7 @@ export class RescueService {
                 bookId: bookUser.id,
                 capa: bookUser.capa,
                 titulo: bookUser.nome,
-                genero: "Romance",
+                genero: await this.bookGenderService.findGenderName(bookUser.id),
                 edicao: bookUser.edicao,
                 estado: await this.bookStateRepository.findOne(bookUser.estado_id),
                 podeBuscar: bookUser.pode_buscar,
@@ -65,7 +67,7 @@ export class RescueService {
             extertalUserRescueData = {
                 bookId: externalBokUser.id,
                 capa: externalBokUser.capa,
-                genero: "Romance",
+                genero: await this.bookGenderService.findGenderName(externalBokUser.id),
                 titulo: externalBokUser.nome,
                 edicao: externalBokUser.edicao,
                 estado: await this.bookStateRepository.findOne(externalBokUser.estado_id),
@@ -85,7 +87,7 @@ export class RescueService {
                 bookId: bookUser.id,
                 capa: bookUser.capa,
                 titulo: bookUser.nome,
-                genero: "Romance",
+                genero: await this.bookGenderService.findGenderName(bookUser.id),
                 edicao: bookUser.edicao,
                 estado: await this.bookStateRepository.findOne(bookUser.estado_id),
                 podeBuscar: bookUser.pode_buscar,
@@ -97,7 +99,7 @@ export class RescueService {
                 bookId: externalBokUser.id,
                 capa: externalBokUser.capa,
                 titulo: externalBokUser.nome,
-                genero: "Romance",
+                genero: await this.bookGenderService.findGenderName(externalBokUser.id),
                 edicao: externalBokUser.edicao,
                 estado: await this.bookStateRepository.findOne(externalBokUser.estado_id),
                 podeBuscar: externalBokUser.pode_buscar,
