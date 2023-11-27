@@ -1,6 +1,5 @@
 package com.example.sharebook.core.domain.model
 import com.example.sharebook.core.domain.enum.BookPreferenceTag
-import com.example.sharebook.core.domain.enum.BookStateTag
 import com.example.sharebook.core.utils.Functions
 
 data class BookExternalModel (

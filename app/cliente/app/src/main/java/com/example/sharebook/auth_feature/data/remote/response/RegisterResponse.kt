@@ -38,6 +38,7 @@ fun RegisterResponse.toUserModel() : UserModel {
         cep = cep,
         email = email,
         name = nome,
-        id = id
+        id = id,
+        photoUrl = ""
     )
 }

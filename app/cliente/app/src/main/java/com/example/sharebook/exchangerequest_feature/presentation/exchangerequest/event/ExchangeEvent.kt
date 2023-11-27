@@ -1,8 +1,9 @@
 package com.example.sharebook.exchangerequest_feature.presentation.exchangerequest.event
 
-import com.example.sharebook.core.domain.model.BookUserLoggedModel
+import com.example.sharebook.exchanges_feature.domain.model.MyBookModel
 
-sealed class ExchangeEvent(val bookModel: BookUserLoggedModel? = null) {
-    class SelectedBook(bookModel: BookUserLoggedModel?): ExchangeEvent(bookModel)
+sealed class ExchangeEvent(val bookModel: MyBookModel? = null) {
+    class SelectedBook(bookModel: MyBookModel?): ExchangeEvent(bookModel)
     object ChangeCheckboxValue: ExchangeEvent()
+    object SendRequest: ExchangeEvent()
 }

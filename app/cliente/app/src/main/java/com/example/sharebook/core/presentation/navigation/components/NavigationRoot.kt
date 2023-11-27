@@ -60,7 +60,7 @@ fun NavigationRoot(
             composable(
                 route = PrivateRoutes.ExternalBook.route + "/{book_id}",
                 arguments = listOf(
-                    navArgument(Constants.EXTERNAL_BOOK_PARAM_ID) { type = NavType.StringType }
+                    navArgument(Constants.BOOK_PARAM_ID) { type = NavType.StringType }
                 )
             ) {
                 ExternalBook(navController = navController)
@@ -69,7 +69,12 @@ fun NavigationRoot(
                 SelfBook(navController = navController)
             }
 
-            composable(PrivateRoutes.ExchangeRequest.route) {
+            composable(
+                route = PrivateRoutes.ExchangeRequest.route + "/{book_id}",
+                arguments = listOf(
+                    navArgument(Constants.BOOK_PARAM_ID) { type = NavType.StringType }
+                )
+            ) {
                 ExchangeRequest(navController = navController)
             }
 

@@ -23,7 +23,7 @@ class ExternalBookViewModel @Inject constructor(
         private set
 
     init {
-        stateHandle.get<String>(Constants.EXTERNAL_BOOK_PARAM_ID)?.let { bookId ->
+        stateHandle.get<String>(Constants.BOOK_PARAM_ID)?.let { bookId ->
             getDetailsBook(bookId)
         }
     }
