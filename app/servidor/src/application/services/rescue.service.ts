@@ -4,6 +4,7 @@ import { SupabaseService } from './supabase.service';
 import { Rescue } from 'src/domain/entities/rescue.entity';
 import { BookRepository } from 'src/infraestructure/repositories/book.repository';
 import { UserRepository } from 'src/infraestructure/repositories/user.repository';
+import { BookStateRepository } from 'src/infraestructure/repositories/book-state.repository';
 
 @Injectable()
 export class RescueService {
@@ -11,7 +12,8 @@ export class RescueService {
         private readonly rescueRepository: RescueRepository,
         private readonly supabaseService: SupabaseService,
         private readonly bookRepository: BookRepository,
-        private readonly userRepository: UserRepository
+        private readonly userRepository: UserRepository,
+        private readonly bookStateRepository: BookStateRepository
     ){}
 
     async create(rescue: Rescue) {
@@ -36,6 +38,92 @@ export class RescueService {
     
         return requestedByUser;
       }
+
+    async findRescueById(id: string, req: any) {
+        const rescue = await this.rescueRepository.findById(id);
+        const isRescueFromUserLogged = rescue.usuario_solicitante_id === req.id;
+        let userRescueData = {};
+        let extertalUserRescueData = {};
+        
+        if (isRescueFromUserLogged) {
+            const bookUser = await this.bookRepository.findOne(rescue.livro_oferecido_id);
+            const externalBokUser = await this.bookRepository.findOne(rescue.livro_id);
+            const externalUser = await this.userRepository.findById(externalBokUser.usuario_id);
+
+            userRescueData = {
+                bookId: bookUser.id,
+                capa: bookUser.capa,
+                titulo: bookUser.nome,
+                genero: "Romance",
+                edicao: bookUser.edicao,
+                estado: await this.bookStateRepository.findOne(bookUser.estado_id),
+                podeBuscar: bookUser.pode_buscar,
+                querReceber: bookUser.quer_receber,
+                perfil: (await this.userRepository.findById(req.id)).foto_perfil
+            }
+
+            extertalUserRescueData = {
+                bookId: externalBokUser.id,
+                capa: externalBokUser.capa,
+                genero: "Romance",
+                titulo: externalBokUser.nome,
+                edicao: externalBokUser.edicao,
+                estado: await this.bookStateRepository.findOne(externalBokUser.estado_id),
+                podeBuscar: externalBokUser.pode_buscar,
+                querReceber: externalBokUser.quer_receber,
+                nome: externalUser.nome,
+                perfil: await this.supabaseService.getFileURL(externalUser.nome, "UserImages"),
+                telefone: externalUser.telefone,
+                localizacao: `${externalUser.cidade} - ${externalUser.estado}`
+            }
+        } else {
+            const bookUser = await this.bookRepository.findOne(rescue.livro_id);
+            const externalBokUser = await this.bookRepository.findOne(rescue.livro_oferecido_id);
+            const externalUser = await this.userRepository.findById(externalBokUser.usuario_id);
+
+            userRescueData = {
+                bookId: bookUser.id,
+                capa: bookUser.capa,
+                titulo: bookUser.nome,
+                genero: "Romance",
+                edicao: bookUser.edicao,
+                estado: await this.bookStateRepository.findOne(bookUser.estado_id),
+                podeBuscar: bookUser.pode_buscar,
+                querReceber: bookUser.quer_receber,
+                perfil: (await this.userRepository.findById(req.id)).foto_perfil
+            }
+
+            extertalUserRescueData = {
+                bookId: externalBokUser.id,
+                capa: externalBokUser.capa,
+                titulo: externalBokUser.nome,
+                genero: "Romance",
+                edicao: externalBokUser.edicao,
+                estado: await this.bookStateRepository.findOne(externalBokUser.estado_id),
+                podeBuscar: externalBokUser.pode_buscar,
+                querReceber: externalBokUser.quer_receber,
+                nome: externalUser.nome,
+                perfil: await this.supabaseService.getFileURL(externalUser.nome, "UserImages"),
+                telefone: externalUser.telefone,
+                localizacao: `${externalUser.cidade} - ${externalUser.estado}`
+            }
+        }
+
+        if (rescue.status !== "Solicitação Aceita" && rescue.status !== "Solicitação Finalizada") {
+            extertalUserRescueData = {
+                ...extertalUserRescueData,
+                telefone: undefined,
+                localizacao: undefined
+            }            
+        }
+
+        const returnData = {
+            userRescueData,
+            extertalUserRescueData
+        }
+        return returnData;
+    }
+
     async findRescuesFromAUser(userId: string) {
         let dataReturn = {};
         let rescuesFromUserReturn = [];
@@ -48,6 +136,7 @@ export class RescueService {
                 const user = await this.userRepository.findById(book.usuario_id);
                 
                 const dataReturnMember = {
+                    id: rescue.id,
                     bookImageURL: await this.supabaseService.getFileURL(book.nome, 'BookImages'),
                     edition: book.edicao,
                     title: book.nome,
@@ -72,6 +161,7 @@ export class RescueService {
                 
                 if (userId === book.usuario_id) {
                     const dataReturnMember = {
+                        id: rescue.id,
                         bookImageURL: await this.supabaseService.getFileURL(book.nome, 'BookImages'),
                         edition: book.edicao,
                         title: book.nome,

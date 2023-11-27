@@ -6,7 +6,6 @@ import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.*
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
@@ -48,13 +47,17 @@ fun Home(
                     SectionCarousel(
                         title = stringResource(R.string.home_carousel_available),
                         listBook = homeViewModel.uiState.availableBooks,
-                        onClickBook = { navController.navigate(PrivateRoutes.ExternalBook.route) }
+                        onClickBook = { bookId ->
+                            navController.navigate(PrivateRoutes.ExternalBook.withArgs(bookId))
+                        }
                     )
 
                     SectionCarousel(
                         title = stringResource(R.string.home_carousel_nearToYou),
                         listBook = homeViewModel.uiState.nextToYou,
-                        onClickBook = { navController.navigate(PrivateRoutes.ExternalBook.route) }
+                        onClickBook = { bookId ->
+                            navController.navigate(PrivateRoutes.ExternalBook.withArgs(bookId))
+                        }
                     )
 
                     Spacer(modifier = Modifier.height(132.dp))

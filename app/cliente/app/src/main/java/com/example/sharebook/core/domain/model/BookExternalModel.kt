@@ -1,15 +1,16 @@
 package com.example.sharebook.core.domain.model
 import com.example.sharebook.core.domain.enum.BookPreferenceTag
 import com.example.sharebook.core.domain.enum.BookStateTag
+import com.example.sharebook.core.utils.Functions
 
 data class BookExternalModel (
     val id: String,
-    val gender: String,
+    val genders: List<String>,
     val name: String,
-    val author: String,
-    val edition: String,
+    val author: List<String>,
+    val edition: Int,
     val coverUrl: String,
-    val state: BookStateTag,
+    val bookState: String,
     val preference: BookPreferenceTag,
 
     val userName: String,
@@ -19,15 +20,16 @@ data class BookExternalModel (
 
 fun BookExternalModel.toBookSummary(): BookSummaryModel {
     return BookSummaryModel(
-        id = id,
-        gender = gender,
+        genders = Functions.getValuesFromList(genders),
         name = name,
-        state = state,
+        bookState = bookState,
         preference = preference,
         coverUrl = coverUrl,
         edition = edition,
-        author = author,
+        authors = Functions.getValuesFromList(author),
         userName = userName,
+
+        userProfilePhoto = userProfileUrl,
         secondaryText = "Dono(a) do Livro"
     )
 }

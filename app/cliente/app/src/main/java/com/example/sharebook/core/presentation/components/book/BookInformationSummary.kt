@@ -42,7 +42,7 @@ fun BookInformationSummary(book: BookSummaryModel) {
             ) {
                 Column {
                     Text(
-                        text = "${book.gender} - ${book.edition}",
+                        text = "${book.genders} - ${book.edition} Edição",
                         color = green500,
                         fontFamily = FontFamily(Font(R.font.inter_semibold)),
                         fontWeight = FontWeight.SemiBold,
@@ -64,7 +64,7 @@ fun BookInformationSummary(book: BookSummaryModel) {
                     Spacer(modifier = Modifier.height(2.dp))
 
                     Text(
-                        text = book.author,
+                        text = book.authors,
                         color = gray500,
                         fontFamily = FontFamily(Font(R.font.inter_regular)),
                         fontSize = 12.sp,
@@ -80,14 +80,15 @@ fun BookInformationSummary(book: BookSummaryModel) {
                             .fillMaxWidth(),
                         horizontalArrangement = Arrangement.spacedBy(8.dp)
                     ) {
-                        BookTag(text = book.state.tag, background = blue100, colorText = blue500)
+                        BookTag(text = book.bookState, background = blue100, colorText = blue500)
                         BookTag(text = book.preference.tag, background = green100, colorText = green600)
                     }
                 }
 
                 BookOwnerInformations(
                     name = book.userName,
-                    secondaryText = book.secondaryText
+                    secondaryText = book.secondaryText,
+                    profileUrl = book.userProfilePhoto ?: ""
                 )
             }
         }

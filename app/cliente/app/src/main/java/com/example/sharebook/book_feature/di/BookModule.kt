@@ -1,7 +1,10 @@
 package com.example.sharebook.book_feature.di
 
 import com.example.sharebook.BuildConfig
-import com.example.sharebook.book_feature.data.remote.service.RequestBookService
+import com.example.sharebook.book_feature.data.remote.repository.BookRepositoryImpl
+import com.example.sharebook.book_feature.data.remote.service.BookService
+import com.example.sharebook.book_feature.domain.adapter.BookRepository
+import com.example.sharebook.book_feature.domain.usecase.DetailsBookUseCase
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -17,12 +20,27 @@ object BookModule {
 
     @Provides
     @Singleton
-    fun provideRequestBookService(): RequestBookService {
+    fun provideRequestBookService(
+        gsonConverterFactory: GsonConverterFactory,
+        okHttpClient: OkHttpClient,
+    ): BookService {
         return Retrofit.Builder()
             .baseUrl(BuildConfig.BASE_URL)
-            .client(OkHttpClient.Builder().build())
-            .addConverterFactory(GsonConverterFactory.create())
+            .client(okHttpClient)
+            .addConverterFactory(gsonConverterFactory)
             .build()
-            .create(RequestBookService::class.java)
+            .create(BookService::class.java)
+    }
+
+    @Provides
+    @Singleton
+    fun provideBookRepository(bookService: BookService): BookRepository {
+        return BookRepositoryImpl(bookService)
+    }
+
+    @Provides
+    @Singleton
+    fun provideDetailsBookUseCase(bookRepository: BookRepository): DetailsBookUseCase {
+        return DetailsBookUseCase(bookRepository)
     }
 }

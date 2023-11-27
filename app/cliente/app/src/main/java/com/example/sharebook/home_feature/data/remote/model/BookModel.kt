@@ -1,28 +1,33 @@
 package com.example.sharebook.home_feature.data.remote.model
 
 import com.example.sharebook.home_feature.domain.model.BookPreviewModel
+import com.google.gson.annotations.SerializedName
 
 data class BookModel(
-    val autor: List<String>,
+    @SerializedName("autores")
+    val autores: List<String>,
+
+    @SerializedName("capa")
     val capa: String,
+
+    @SerializedName("edicao")
     val edicao: Int,
+
+    @SerializedName("estado_id")
     val estado_id: String,
+
+    @SerializedName("id")
     val id: String,
-    val idioma: String,
-    val imagens: List<String>,
-    val isbn: String,
+
+    @SerializedName("nome")
     val nome: String,
-    val pode_buscar: Boolean,
-    val quer_receber: Boolean,
-    val sinopse: String,
-    val usuario_id: String
 )
 
 fun BookModel.toBookPreviewModel(): BookPreviewModel {
     return BookPreviewModel(
         id = id,
         name = nome,
-        author = autor[0],
+        author = autores[0],
         coverUrl = capa,
     )
 }

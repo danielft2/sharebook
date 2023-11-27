@@ -25,9 +25,7 @@ import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.example.sharebook.core.presentation.components.DividerCustom
 import com.example.sharebook.core.presentation.ui.theme.*
-import com.example.sharebook.exchanges_feature.data.local.booksInMemory
 import com.example.sharebook.R
-import com.example.sharebook.core.domain.model.BookSummaryModel
 import com.example.sharebook.core.domain.model.BookUserLoggedModel
 import com.example.sharebook.exchangerequest_feature.presentation.choosebooksheet.ChooseBookViewModel
 import com.example.sharebook.exchangerequest_feature.presentation.choosebooksheet.event.ChooseBookEvent
@@ -42,7 +40,6 @@ fun ChooseBookSheet(
     onSelected: (book: BookUserLoggedModel) -> Unit,
     chooseBookViewModel: ChooseBookViewModel = hiltViewModel()
 ) {
-    val booksList = booksInMemory()
     val sheetState = rememberModalBottomSheetState(skipPartiallyExpanded = true)
     val scope = rememberCoroutineScope()
 
@@ -104,7 +101,7 @@ fun ChooseBookSheet(
                                 }
                             }
 
-                            if (index != booksList.lastIndex) DividerCustom(spaceTop = 16.dp)
+                            //if (index != booksList.lastIndex) DividerCustom(spaceTop = 16.dp)
                         }
                     }
                 } else {
