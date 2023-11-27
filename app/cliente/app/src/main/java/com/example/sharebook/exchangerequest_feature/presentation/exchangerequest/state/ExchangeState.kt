@@ -9,7 +9,7 @@ data class ExchangeState(
     val bookSelected: MyBookModel? = null,
 
     val requestBookId: String? = null,
-    val isSuccessRequest: Boolean = false,
+    val requestSent: Boolean = false,
     val isLoadingRequest: Boolean = false,
     val isErrorRequest: String? = null,
 
