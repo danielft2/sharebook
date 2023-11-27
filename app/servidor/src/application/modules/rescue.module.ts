@@ -7,6 +7,10 @@ import { UserRepository } from 'src/infraestructure/repositories/user.repository
 import { BookRepository } from 'src/infraestructure/repositories/book.repository';
 import { RescueRepository } from 'src/infraestructure/repositories/rescue.repository';
 import { BookStateRepository } from 'src/infraestructure/repositories/book-state.repository';
+import { BookGendersService } from '../services/book-gender.service';
+import { GenderService } from '../services/gender.service';
+import { GenderRepository } from 'src/infraestructure/repositories/gender.repository';
+import { BookGendersRepository } from 'src/infraestructure/repositories/book-gender.repository';
 
 @Module({
   providers: [
@@ -17,6 +21,10 @@ import { BookStateRepository } from 'src/infraestructure/repositories/book-state
     BookRepository, 
     RescueRepository, 
     BookStateRepository,
+    BookGendersService,
+    GenderService,
+    GenderRepository,
+    BookGendersRepository
   ],
   controllers: [RescueController]
 })
