@@ -16,7 +16,7 @@ INSERT INTO "Livro"(
     ) VALUES (
     '1f65ae09-61e4-49eb-ba3e-f7aa5a72eddc',
     '9780385121675',
-    'O iluminado',
+    'O Iluminado',
     '"O lugar perfeito para recomeçar", é o que pensa Jack Torrance ao ser contratado como zelador para o inverno. Hora de deixar para trás o alcoolismo, os acessos de fúria, os repetidos fracassos. Isolado pela neve com a esposa e o filho, tudo o que Jack deseja é um pouco de paz para se dedicar à escrita.',
     '{"Stephen King"}',
     '58d43f0c-5442-48b4-8103-4ec2bcd42ea6',
@@ -38,7 +38,7 @@ INSERT INTO "Livro"(
     'Inglês',
     TRUE,
     TRUE,
-    'Ana carienina',
+    'Ana Carienina',
     '{""}',
     '448358ea-c333-4982-ac6e-627b75d2e6cc'
     );
