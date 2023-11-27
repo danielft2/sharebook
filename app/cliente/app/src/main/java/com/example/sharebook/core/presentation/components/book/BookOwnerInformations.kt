@@ -11,7 +11,6 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.example.sharebook.core.presentation.components.ImageCustom
 import com.example.sharebook.core.presentation.components.avatar.AvatarUser
 import com.example.sharebook.core.presentation.ui.theme.Inter
 import com.example.sharebook.core.presentation.ui.theme.gray200
@@ -29,8 +28,8 @@ fun BookOwnerInformations(
             falback = name,
             profileUrl = profileUrl,
             modifier = Modifier
-                .size(42.dp)
-                .clip(RoundedCornerShape(21.dp))
+                .size(40.dp)
+                .clip(RoundedCornerShape(20.dp))
                 .background(gray200)
         )
 

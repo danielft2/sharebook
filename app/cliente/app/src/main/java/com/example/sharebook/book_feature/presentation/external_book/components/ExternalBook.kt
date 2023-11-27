@@ -19,7 +19,7 @@ import com.example.sharebook.R
 import com.example.sharebook.book_feature.domain.model.toBookBookSummaryModel
 import com.example.sharebook.book_feature.presentation.external_book.ExternalBookViewModel
 import com.example.sharebook.core.presentation.components.*
-import com.example.sharebook.core.presentation.components.book.BookInformationSummary
+import com.example.sharebook.core.presentation.components.book.BookSummary
 import com.example.sharebook.core.presentation.components.button.ButtonPrimary
 import com.example.sharebook.core.presentation.components.statewrapper.StateWraper
 import com.example.sharebook.core.presentation.navigation.routes.authenticated.PrivateRoutes
@@ -72,7 +72,7 @@ fun ExternalBook(
                     )  {
                         Spacer(modifier = Modifier.height(16.dp))
 
-                        BookInformationSummary(
+                        BookSummary(
                             book = externalBookViewModel.uiState.bookDetails!!.toBookBookSummaryModel()
                         )
 
@@ -100,7 +100,9 @@ fun ExternalBook(
                     Spacer(modifier = Modifier.height(16.dp))
                     ButtonPrimary(
                         text = UiText.StringResource(R.string.book_datails_request_book_button).asString(),
-                        onClick = { navController.navigate(PrivateRoutes.ExchangeRequest.route) }
+                        onClick = { navController.navigate(PrivateRoutes.ExchangeRequest.withArgs(
+                            externalBookViewModel.uiState.bookDetails!!.id) )
+                        }
                     )
                 }
             }

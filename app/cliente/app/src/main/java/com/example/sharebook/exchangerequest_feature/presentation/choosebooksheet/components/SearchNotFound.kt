@@ -35,7 +35,7 @@ fun SearchNotFound() {
         )
         Column(horizontalAlignment = Alignment.CenterHorizontally) {
             Text(
-                text = stringResource(id = R.string.exchange_request_choose_book_title),
+                text = stringResource(id = R.string.choose_book_sheet_search_not_found_title),
                 fontSize = 16.sp,
                 fontFamily = Lato,
                 fontWeight = FontWeight.Bold,
@@ -43,7 +43,7 @@ fun SearchNotFound() {
                 textAlign = TextAlign.Center
             )
             Text(
-                text = stringResource(id = R.string.exchange_request_choose_book_description),
+                text = stringResource(id = R.string.choose_book_sheet_search_not_found_description),
                 fontSize = 13.sp,
                 fontFamily = Inter,
                 color = gray500,

@@ -1,7 +1,6 @@
 package com.example.sharebook.core.domain.model
 
 import com.example.sharebook.core.domain.enum.BookPreferenceTag
-import com.example.sharebook.core.domain.enum.BookStateTag
 
 data class BookSummaryModel(
     val name: String,

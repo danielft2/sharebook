@@ -21,7 +21,7 @@ import com.example.sharebook.core.presentation.components.ImageCustom
 import com.example.sharebook.core.presentation.ui.theme.*
 
 @Composable
-fun BookInformationSummary(book: BookSummaryModel) {
+fun BookSummary(book: BookSummaryModel) {
     Column(modifier = Modifier.fillMaxWidth()) {
         Row(
             modifier = Modifier.fillMaxWidth(),
