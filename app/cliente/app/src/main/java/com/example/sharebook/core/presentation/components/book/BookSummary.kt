@@ -74,23 +74,37 @@ fun BookSummary(book: BookSummaryModel) {
 
                     Spacer(modifier = Modifier.height(12.dp))
 
-                    Row(
-                        modifier = Modifier
-                            .horizontalScroll(rememberScrollState())
-                            .fillMaxWidth(),
-                        horizontalArrangement = Arrangement.spacedBy(8.dp)
-                    ) {
-                        BookTag(text = book.bookState, background = blue100, colorText = blue500)
-                        BookTag(text = book.preference.tag, background = green100, colorText = green600)
+                    if (book.userName.isNotEmpty()) {
+                        Row(
+                            modifier = Modifier
+                                .horizontalScroll(rememberScrollState())
+                                .fillMaxWidth(),
+                            horizontalArrangement = Arrangement.spacedBy(8.dp)
+                        ) {
+                            BookTag(text = book.bookState, background = blue100, colorText = blue500)
+                            BookTag(text = book.preference.tag, background = green100, colorText = green600)
+                        }
+                    } else {
+                        Column(
+                            modifier = Modifier
+                                .horizontalScroll(rememberScrollState())
+                                .fillMaxWidth(),
+                            verticalArrangement = Arrangement.spacedBy(8.dp)
+                        ) {
+                            BookTag(text = book.bookState, background = blue100, colorText = blue500)
+                            BookTag(text = book.preference.tag, background = green100, colorText = green600)
+                        }
                     }
                 }
 
-                BookOwnerInformations(
-                    name = book.userName,
-                    falbackPhoto = book.userFalbackPhoto ?: book.userName,
-                    secondaryText = book.secondaryText,
-                    profileUrl = book.userProfilePhoto ?: ""
-                )
+                if (book.userName.isNotEmpty()) {
+                    BookOwnerInformations(
+                        name = book.userName,
+                        falbackPhoto = book.userFalbackPhoto ?: book.userName,
+                        secondaryText = book.secondaryText,
+                        profileUrl = book.userProfilePhoto ?: ""
+                    )
+                }
             }
         }
     }

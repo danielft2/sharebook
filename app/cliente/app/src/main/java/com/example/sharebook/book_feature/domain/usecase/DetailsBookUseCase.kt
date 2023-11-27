@@ -16,7 +16,6 @@ class DetailsBookUseCase @Inject constructor(private val bookRepository: BookRep
             try {
                 emit(Resource.Loading())
                 val response = bookRepository.detailsBook(bookId)
-                println(response)
                 emit(Resource.Success(response.toBookDetailsModel()))
             } catch (e: HttpException) {
                 emit(Resource.Error("Ocorreu um erro inesperado!"))

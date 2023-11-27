@@ -21,7 +21,7 @@ import com.example.sharebook.core.presentation.ui.theme.gray500
 import com.example.sharebook.core.presentation.ui.theme.green900
 
 @Composable
-fun BoolGaleryImage(images: List<String>) {
+fun BookGaleryImage(images: List<String>) {
     Column {
         Text(
             text = stringResource(id = R.string.book_datails_gallery_session),
