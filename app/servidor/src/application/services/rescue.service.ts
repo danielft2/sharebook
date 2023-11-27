@@ -178,6 +178,7 @@ export class RescueService {
           ),
           edition: book.edicao,
           title: book.nome,
+          genero: await this.bookGenderService.findGenderName(book.id),
           author: book.autor,
           status: rescue.status,
           owner: user.nome,
@@ -209,6 +210,7 @@ export class RescueService {
             edition: book.edicao,
             title: book.nome,
             author: book.autor,
+            genero: await this.bookGenderService.findGenderName(book.id),
             status: rescue.status,
             owner: user.nome,
             ownerProfileURL: await this.supabaseService.getFileURL(
