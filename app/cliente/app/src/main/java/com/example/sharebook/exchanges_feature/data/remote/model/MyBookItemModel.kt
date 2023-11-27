@@ -1,7 +1,6 @@
 package com.example.sharebook.exchanges_feature.data.remote.model
 
 import com.example.sharebook.core.utils.Functions
-import com.example.sharebook.exchanges_feature.data.remote.responses.MyBooksResponse
 import com.example.sharebook.exchanges_feature.domain.model.MyBookModel
 import com.google.gson.annotations.SerializedName
 
@@ -18,11 +17,11 @@ data class MyBookItemModel(
     @SerializedName("nome")
     val nome: String,
 
-    @SerializedName("genders")
-    val genders: List<String>,
+    @SerializedName("genero")
+    val generos: List<String>,
 
-    @SerializedName("book_state")
-    val bookState: String,
+    @SerializedName("estado")
+    val estado: String,
 
     @SerializedName("edicao")
     val edicao: Int,
@@ -40,9 +39,9 @@ fun MyBookItemModel.toMyBookModel(): MyBookModel {
         name = nome,
         cover = capa,
         edition = edicao,
-        genders = "",
+        genders = Functions.getValuesFromList(generos),
         authors = Functions.getValuesFromList(autores),
-        preference = Functions.getPreference(false),
-        bookState = "Novo",
+        preference = Functions.getPreference(podeReceber),
+        bookState = estado,
     )
 }

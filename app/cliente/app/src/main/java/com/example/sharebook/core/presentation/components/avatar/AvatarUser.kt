@@ -14,7 +14,8 @@ import com.example.sharebook.core.utils.Functions
 
 @Composable
 fun AvatarUser(
-    falback: String, profileUrl: String,
+    falback: String,
+    profileUrl: String,
     modifier: Modifier
 ) {
     if (profileUrl.isNotBlank()) {

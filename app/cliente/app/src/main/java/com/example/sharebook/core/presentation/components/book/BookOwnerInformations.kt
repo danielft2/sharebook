@@ -21,11 +21,13 @@ import com.example.sharebook.core.presentation.ui.theme.green900
 fun BookOwnerInformations(
     name: String,
     secondaryText: String,
-    profileUrl: String
+    profileUrl: String,
+    falbackPhoto: String
+
 ) {
     Row {
         AvatarUser(
-            falback = name,
+            falback = falbackPhoto,
             profileUrl = profileUrl,
             modifier = Modifier
                 .size(40.dp)

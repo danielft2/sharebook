@@ -12,6 +12,7 @@ data class BookSummaryModel(
     val preference: BookPreferenceTag,
 
     val userName: String,
+    val userFalbackPhoto: String? = null,
     val userProfilePhoto: String?,
     val secondaryText: String
 )
