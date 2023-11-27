@@ -53,11 +53,22 @@ class ExchangeRequestViewModel @Inject constructor(
     private fun getDetailsBook(bookId: String) {
         viewModelScope.launch {
             detailsBookUseCase(bookId).collect { response ->
-                when (response) {
-                    is Resource.Success -> { uiState = uiState.copy(bookRequestDetails = response.data) }
-                    is Resource.Error -> { uiState = uiState.copy(isErrorBookDetails = response.message) }
-                    is Resource.Loading -> { uiState = uiState.copy(isLoadingBookDetails = true) }
-                    is Resource.Finnaly -> { uiState = uiState.copy(isLoadingBookDetails = false) }
+                uiState = when (response) {
+                    is Resource.Success -> {
+                        uiState.copy(
+                            bookRequestDetails = response.data,
+                            requestSent = response.data!!.isRequest
+                        )
+                    }
+                    is Resource.Error -> {
+                        uiState.copy(isErrorBookDetails = response.message)
+                    }
+                    is Resource.Loading -> {
+                        uiState.copy(isLoadingBookDetails = true)
+                    }
+                    is Resource.Finnaly -> {
+                        uiState.copy(isLoadingBookDetails = false)
+                    }
                 }
             }
         }
@@ -80,7 +91,7 @@ class ExchangeRequestViewModel @Inject constructor(
                 sendRequestUseCase(body).collect { response ->
                     when (response) {
                         is Resource.Success -> {
-                            uiState = uiState.copy(isSuccessRequest = true)
+                            uiState = uiState.copy(requestSent = true)
                             requestChannel.send(SendRequestChannel.SuccessRequest())
                         }
                         is Resource.Error -> {
