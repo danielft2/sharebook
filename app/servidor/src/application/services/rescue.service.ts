@@ -27,6 +27,15 @@ export class RescueService {
         return this.rescueRepository.update(rescue);
     }
 
+    async findIfUserHasRequestedBook(book_id: string, user_id: string) {
+        const rescueFromUser = await this.rescueRepository.findByUser(user_id);
+    
+        const requestedByUser = rescueFromUser.some(
+          (rescue) => rescue.livro_id === book_id,
+        );
+    
+        return requestedByUser;
+      }
     async findRescuesFromAUser(userId: string) {
         let dataReturn = {};
         let rescuesFromUserReturn = [];

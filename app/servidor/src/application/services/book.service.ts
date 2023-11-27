@@ -139,9 +139,17 @@ export class BookService {
     const detailedBook = await this.detailedBook(book_id);
     if (user.id === book.usuario_id) {
       // const rescues = await this.rescueService.findRescuesFromAUser(user_id);
-      return { detailedBook };
+      return {
+        // rescues,
+        detailedBook,
+        is_request: false,
+      };
     } else {
-      return detailedBook;
+      const is_request = await this.rescueService.findIfUserHasRequestedBook(book_id, user_id);
+      return {
+        detailedBook,
+        is_request,
+      };
     }
   }
 }
