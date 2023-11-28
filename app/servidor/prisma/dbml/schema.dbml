@@ -37,6 +37,8 @@ Table Livro {
   genero_livro GeneroLivro [not null]
   estado Estado [not null]
   estado_id String [not null]
+  latitude String [not null]
+  longitude String [not null]
   solicitacao Solicitacao [not null]
   processo_de_troca ProcessoDeTroca [not null]
 }

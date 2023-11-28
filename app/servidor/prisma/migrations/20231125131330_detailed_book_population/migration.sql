@@ -12,7 +12,9 @@ INSERT INTO "Livro"(
     quer_receber, 
     capa, 
     imagens, 
-    estado_id
+    estado_id,
+    latitude, 
+    longitude
     ) VALUES (
     '1f65ae09-61e4-49eb-ba3e-f7aa5a72eddc',
     '9780385121675',
@@ -26,7 +28,9 @@ INSERT INTO "Livro"(
     TRUE,
     'O Iluminado',
     '{"b468a625-1b22-42fe-a15d-ac8ed82a4808"}',
-    '448358ea-c333-4982-ac6e-627b75d2e6cc'), 
+    '448358ea-c333-4982-ac6e-627b75d2e6cc',
+    '-4.966680',
+    '-39.015421'), 
     (
     '9e8716ef-a32c-4dac-8158-2a6e654a96cf',
     '9780075536321',
@@ -40,7 +44,9 @@ INSERT INTO "Livro"(
     TRUE,
     'Ana Carienina',
     '{""}',
-    '448358ea-c333-4982-ac6e-627b75d2e6cc'
+    '448358ea-c333-4982-ac6e-627b75d2e6cc',
+    '-3.729616',
+    '-38.524885'
     );
 
 INSERT INTO "GeneroLivro"( livro_id, genero_id )
