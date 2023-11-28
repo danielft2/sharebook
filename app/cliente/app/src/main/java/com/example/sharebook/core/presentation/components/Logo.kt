@@ -18,7 +18,7 @@ fun Logo(type: LogoType) {
         contentDescription = null,
         contentScale = ContentScale.FillWidth,
         modifier = Modifier
-            .width(110.dp)
+            .width(100.dp)
             .height(20.dp)
     )
 }

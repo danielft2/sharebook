@@ -25,6 +25,8 @@ class LoginUseCase @Inject constructor(private val repository: AuthRepository)  
                 }
             } catch (e: IOException) {
                 emit(Resource.Error("Aconteu um erro inesperado, verifique sua conexão!"))
+            } finally {
+                emit(Resource.Finnaly())
             }
         }
     }

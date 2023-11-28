@@ -3,18 +3,36 @@ import {
   Injectable,
   NotFoundException,
 } from '@nestjs/common';
-import { UserRepository } from 'src/infraestructure/repositories/user.repository';
-import { User } from 'src/domain/entities/user.entity';
+import { UserRepository } from '../../infraestructure/repositories/user.repository';
+import { User } from '../../domain/entities/user.entity';
+import { JwtService } from '@nestjs/jwt';
 
 @Injectable()
 export class UserService {
-  constructor(private userRepository: UserRepository) {}
+  constructor(
+    private userRepository: UserRepository,
+    private jwtService: JwtService,
+  ) {}
 
   async create(user: User) {
     const existUser = await this.userRepository.findByEmail(user.email);
     if (existUser) throw new ConflictException();
+    const userDataCreated = await this.userRepository.create(user);
 
-    return this.userRepository.create(user);
+    const payload = {
+      sub: user.id,
+      email: user.email,
+      name: user.nome,
+      cep: user.cep,
+      phone: user.telefone,
+    };
+
+    const userDataReturn = {
+      ...userDataCreated,
+      // access_token: this.jwtService.sign(payload),
+    };
+
+    return userDataReturn;
   }
 
   async findAll() {

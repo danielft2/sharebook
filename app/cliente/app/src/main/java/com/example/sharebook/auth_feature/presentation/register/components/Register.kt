@@ -25,7 +25,7 @@ import androidx.navigation.NavController
 import com.example.sharebook.R
 import com.example.sharebook.auth_feature.presentation.register.RegisterViewModel
 import com.example.sharebook.auth_feature.presentation.register.event.RegisterFormEvent
-import com.example.sharebook.core.presentation.components.ButtonPrimary
+import com.example.sharebook.core.presentation.components.button.ButtonPrimary
 import com.example.sharebook.core.presentation.components.Header
 import com.example.sharebook.core.presentation.components.TextFieldCustom
 import com.example.sharebook.core.presentation.navigation.routes.unauthenticated.PublicRoutes
@@ -56,8 +56,6 @@ fun Register(
                 .padding(20.dp)
                 .verticalScroll(rememberScrollState())
         ) {
-
-
             Column(
                 modifier = Modifier
                     .verticalScroll(rememberScrollState())

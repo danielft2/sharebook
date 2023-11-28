@@ -28,13 +28,15 @@ model Usuario {
   processo_de_troca ProcessoDeTroca[]
   alerta            Alerta[]
   avaliacao         Avaliacao[]
+  generosFavoritos  GeneroUsuario[]
 }
 
 model Livro {
-  isbn              String            @id
+  id                String            @id @default(uuid())
+  isbn              String
   nome              String
   sinopse           String?
-  autor             String
+  autor             String[]
   dono_publicacao   Usuario           @relation(fields: [usuario_id], references: [id])
   usuario_id        String
   edicao            Int               @default(1)
@@ -51,18 +53,28 @@ model Livro {
 }
 
 model GeneroLivro {
-  livro      Livro  @relation(fields: [livro_isbn], references: [isbn])
-  livro_isbn String
-  genero     Genero @relation(fields: [genero_id], references: [id])
+  livro     Livro  @relation(fields: [livro_id], references: [id])
+  livro_id  String
+  genero    Genero @relation(fields: [genero_id], references: [id])
+  genero_id String
+
+  @@id([livro_id, genero_id])
+}
+
+model GeneroUsuario {
+  usuario    Usuario @relation(fields: [usuario_id], references: [id])
+  usuario_id String
+  genero     Genero  @relation(fields: [genero_id], references: [id])
   genero_id  String
 
-  @@id([livro_isbn, genero_id])
+  @@id([usuario_id, genero_id])
 }
 
 model Genero {
-  id          String        @id @default(uuid())
-  nome        String
-  generoLivro GeneroLivro[]
+  id            String          @id @default(uuid())
+  nome          String
+  generoLivro   GeneroLivro[]
+  GeneroUsuario GeneroUsuario[]
 }
 
 model Estado {
@@ -75,8 +87,9 @@ model Solicitacao {
   id                     String  @id @default(uuid())
   usuario_solicitante    Usuario @relation(fields: [usuario_solicitante_id], references: [id])
   usuario_solicitante_id String
-  livro                  Livro   @relation(fields: [livro_isbn], references: [isbn])
-  livro_isbn             String
+  livro                  Livro   @relation(fields: [livro_id], references: [id])
+  livro_id               String
+  livro_oferecido_id String
   status                 String
 }
 
@@ -84,18 +97,19 @@ model ProcessoDeTroca {
   id                     String  @id @default(uuid())
   usuario_solicitante    Usuario @relation(fields: [usuario_solicitante_id], references: [id])
   usuario_solicitante_id String
-  livro                  Livro   @relation(fields: [livro_isbn], references: [isbn])
-  livro_isbn             String
+  livro                  Livro   @relation(fields: [livro_id], references: [id])
+  livro_id               String
+  livro_oferecido_id String
   status                 String
 }
 
 model Alerta {
-  id                  String  @id @default(uuid())
-  nome_livro          String
-  usuario             Usuario @relation(fields: [usuario_id], references: [id])
-  usuario_id          String
-  filtrado_por_estado Boolean @default(false)
-  filtrado_por_cidade Boolean @default(false)
+  id                       String  @id @default(uuid())
+  nome_livro               String
+  usuario                  Usuario @relation(fields: [usuario_id], references: [id])
+  usuario_id               String
+  filtrado_por_localizacao Boolean @default(false)
+  filtrado_por_envio       Boolean @default(false)
 }
 
 model Avaliacao {

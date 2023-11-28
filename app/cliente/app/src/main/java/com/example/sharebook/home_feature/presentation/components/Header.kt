@@ -17,13 +17,15 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavController
 import com.example.sharebook.R
+import com.example.sharebook.core.presentation.navigation.routes.authenticated.PrivateRoutes
 import com.example.sharebook.core.presentation.ui.theme.*
 import com.example.sharebook.core.utils.Functions
 import com.example.sharebook.home_feature.presentation.HomeViewModel
 
 @Composable
-fun Header(homeViewModel: HomeViewModel) {
+fun Header(homeViewModel: HomeViewModel, navController: NavController) {
     val userLogged = homeViewModel.uiState.user
 
     Box(
@@ -46,14 +48,14 @@ fun Header(homeViewModel: HomeViewModel) {
         Column(
             modifier = Modifier
                 .fillMaxSize()
-                .padding(20.dp)
+                .padding(16.dp)
         ) {
             Row(
                 modifier = Modifier.fillMaxWidth(),
                 horizontalArrangement = Arrangement.SpaceBetween
             ) {
                 Box(modifier = Modifier
-                    .size(42.dp)
+                    .size(40.dp)
                     .clip(RoundedCornerShape(100))
                     .background(white)
                     .wrapContentSize(Alignment.Center)
@@ -68,18 +70,18 @@ fun Header(homeViewModel: HomeViewModel) {
                 }
 
                 IconButton(
-                    onClick = { /*TODO*/ },
+                    onClick = { navController.navigate(PrivateRoutes.Notification.route) },
                     modifier = Modifier
                         .clip(RoundedCornerShape(100))
                         .background(white)
                         .padding(0.dp)
-                        .size(42.dp)
+                        .size(40.dp)
                 ) {
                     Image(
                         painter = painterResource(id = R.drawable.icon_notification),
                         contentDescription = null,
                         modifier = Modifier
-                            .size(22.dp)
+                            .size(24.dp)
                             .padding(end = 1.dp, bottom = 1.dp)
                     )
                 }

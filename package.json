@@ -33,5 +33,9 @@
     "commitizen": {
       "path": "./node_modules/cz-conventional-changelog"
     }
+  },
+  "dependencies": {
+    "@nestjs/jwt": "^10.2.0",
+    "jsonwebtoken": "^9.0.2"
   }
 }

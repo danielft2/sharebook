@@ -9,7 +9,6 @@
     <string name="welcome_button_login">Fazer Login</string>
     <string name="welcome_button_register">Realizar Cadastro</string>
 
-
     <string name="login_title">Acesse sua conta.</string>
     <string name="login_subtitle">
         Informe suas credencias abaixo para acessar,
@@ -84,4 +83,60 @@
 
     <string name="book_images_title">Imagens Extras</string>
     <string name="book_images_field">Adicionar Imagens</string>
+    <string name="home_carousel_nearToYou">Perto de você</string>
+
+    <string name="book_details_header">Detalhes do Livro</string>
+    <string name="book_datails_descreption_session">Descrição</string>
+    <string name="book_datails_gallery_session">Galeria de Imagens</string>
+    <string name="book_datails_requests_session">Lista de Solicitações</string>
+    <string name="book_datails_accept_button">Aceitar</string>
+    <string name="book_datails_refuse_button">Recusar</string>
+    <string name="book_datails_request_book_button">Solicitar Troca</string>
+    
+    <string name="search_not_found_title">Nenhum Livro correspondeu a sua busca.</string>
+    <string name="search_not_found_description">Crie um alerta e receba uma notificação quando esse livro estiver disponível no aplicativo.</string>
+    <string name="create_alert_button">Crir Alerta</string>
+    <string name="novo_alerta_title">Novo Alerta</string>
+    <string name="alert_localization_title">Notificar apenas perto da minha localização.</string>
+    <string name="alert_localization_description">Você só será notificado se o livro estiver disponível perto da sua localização.</string>
+    <string name="alert_user_send_title">Notificar apenas de usuários dispostos a enviar.</string>
+    <string name="alert_use_send_description">Você só será notificado se o usuário do livro tiver disponibilidade em entregar/enviar o livro.</string>
+    <string name="search_filter_localizacao_title">Apenas perto da minha localização.</string>
+    <string name="search_filter_localizacao_description">Mostrar apenas livros disponíveis perto da sua localização.</string>
+    <string name="search_filter_usuario_envia_title">Apenas usuários dispostos a enviar.</string>
+    <string name="search_filter_usuario_envia_description">Mostrar apenas usuários que se dispõem enviar o livro.</string>
+    <string name="search_filter_usuario_recebe_title">Apenas usuários dispostos a receber.</string>
+    <string name="search_filter_usuario_recebe_description">Mostrar apenas usuários que se dispõem a receber o livro.</string>
+
+    <string name="notification_header">Notificações</string>
+
+    <string name="maps_device_location">Ocorreu um erro inesperado ao recuperar sua localização!</string>
+
+    <string name="exchange_request_header_title">Solicitação de Troca</string>
+    <string name="exchange_request_choose_book_title">Escolha seu livro</string>
+    <string name="exchange_request_choose_book_description">
+        O livro que você escolher será oferecido na troca.
+    </string>
+    <string name="exchange_request_owner_book">"Dono(a) do Livro"</string>
+    <string name="exchange_request_user_logged">Você</string>
+    <string name="exchange_request_confirm_checkbox">
+        Confirmo que disponibilizo minhas informações de contato se
+        a solicitação de troca for aceita."
+    </string>
+    <string name="exchange_request_button_request">
+        Enviar solicitação
+    </string>
+
+    <string name="choose_book_sheet_search_not_found_title">
+        Nenhum livro correspondeu a sua busca.
+    </string>
+    <string name="choose_book_sheet_search_not_found_description">
+        Você ainda não possui nenhum livro cadastrado com esse nome.
+    </string>
+
+    <string name="book_preference_tag_send">Preferência em entregar</string>
+
+    <string name="something_wrong_title">Ops! Parece que algo deu errado.</string>
+    <string name="something_wrong_description">Algo inesperado aconteceu, tente novamente abaixo.</string>
+    <string name="something_wrong_try_again">Tentar novamente</string>
 </resources>

@@ -18,6 +18,7 @@ fun LoginResponse.toUserModel(): UserModel {
         name = userLoginModel.name,
         email = userLoginModel.email,
         phone = userLoginModel.phone,
-        cep = userLoginModel.cep
+        cep = userLoginModel.cep,
+        photoUrl = ""
     )
 }
