@@ -10,22 +10,32 @@ export class BookRepository {
     return await this.prisma.livro.create({
       data: {
         isbn: book.isbn,
-        nome: book.name,
-        sinopse: book.synopsis,
-        autor: book.writer,
-        usuario_id: book.owner_id,
-        edicao: book.edition,
-        idioma: book.language,
-        pode_buscar: book.can_get,
-        quer_receber: book.can_receive,
-        capa: book.cape,
-        imagens: book.images,
-        estado_id: book.state_id,
+        nome: book.nome,
+        sinopse: book.sinopse,
+        autor: book.autor,
+        usuario_id: book.usuario_id,
+        edicao: book.edicao,
+        idioma: book.idioma,
+        pode_buscar: book.pode_buscar,
+        quer_receber: book.quer_receber,
+        capa: book.capa,
+        imagens: book.imagens,
+        estado_id: book.estado_id,
         longitude: book.longitude,
         latitude: book.latitude,
       },
     });
   }
+
+  async update(book: Book) {
+    return await this.prisma.livro.update({
+      where: { id: book.id },
+      data: {
+        ...book,
+      },
+    });
+  }
+
   async findOne(id: string) {
     return await this.prisma.livro.findUnique({
       where: { id },

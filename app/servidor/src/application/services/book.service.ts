@@ -1,5 +1,5 @@
 /* eslint-disable prettier/prettier */
-import { ConflictException, Injectable } from '@nestjs/common';
+import { ConflictException, Injectable, NotFoundException } from '@nestjs/common';
 import { BookRepository } from '../../infraestructure/repositories/book.repository';
 import { IbgeFinderService } from './ibge-finder.service';
 import { UserRepository } from '../../infraestructure/repositories/user.repository';
@@ -156,6 +156,13 @@ export class BookService {
   }
 
   async create(book: Book) {
-    return this.bookRepository.create(book);
+    return await this.bookRepository.create(book);
+  }
+
+  async update(book: Book){
+    const findedBook = await this.bookRepository.findOne(book.id);
+
+    if(!findedBook.id) throw new NotFoundException();
+    return this.bookRepository.update(book);
   }
 }
