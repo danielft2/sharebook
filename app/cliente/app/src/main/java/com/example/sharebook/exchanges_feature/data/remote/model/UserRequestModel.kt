@@ -26,6 +26,12 @@ data class UserRequestModel(
     @SerializedName("nome")
     val nome: String?,
 
+    @SerializedName("telefone")
+    val telefone: String?,
+
+    @SerializedName("localizacao")
+    val localizacao: String?,
+
     @SerializedName("perfil")
     val perfil: String,
 

@@ -141,4 +141,14 @@
     <string name="something_wrong_try_again">Tentar novamente</string>
 
     <string name="request_details_header">Detalhes da Solicitação</string>
+    <string name="request_details_book_offered">Livro ofertado para troca</string>
+    <string name="request_details_field_location">Localização</string>
+    <string name="request_details_field_phone">Telefone</string>
+    <string name="request_details_button_cancel_request">Cancelar Solicitação</string>
+    <string name="request_details_button_accepet_request">Aceitar</string>
+    <string name="request_details_button_reject_request">Rejeitar</string>
+    <string name="request_details_button_finalize_exchange">Finalizar Troca</string>
+    <string name="request_details_button_cancel_exchange">Cancelar Troca</string>
+    <string name="request_details_button_back">Voltar</string>
+    <string name="request_update_success">Solicitação atualizada com sucesso!</string>
 </resources>

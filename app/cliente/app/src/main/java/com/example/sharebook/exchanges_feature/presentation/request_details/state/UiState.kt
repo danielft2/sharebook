@@ -9,4 +9,7 @@ data class UiState(
     val isLoadingDetails: Boolean = false,
     val isErrorDetails: String? = "",
     val requestDetails: RequestDetailsModel? = null,
+
+    val isLoadingUpdateRequest: Boolean = false,
+    val isErrorUpdateRequest: String? = null
 )

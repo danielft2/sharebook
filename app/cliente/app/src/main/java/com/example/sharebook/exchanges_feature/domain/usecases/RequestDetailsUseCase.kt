@@ -1,5 +1,6 @@
 package com.example.sharebook.exchanges_feature.domain.usecases
 
+import com.example.sharebook.core.utils.Functions
 import com.example.sharebook.core.utils.Resource
 import com.example.sharebook.exchanges_feature.data.remote.model.toBookSumaryExternalModel
 import com.example.sharebook.exchanges_feature.data.remote.model.toBookYourSumaryModel
@@ -23,10 +24,13 @@ class RequestDetailsUseCase @Inject constructor(
                 val response = exchangesRepository.requestDetails(requestId)
                 emit(Resource.Success(
                     RequestDetailsModel(
-                        userLoggedRequest = response.userLoggedRequest
+                        userLoggedBook = response.userLoggedRequest
                             .toBookYourSumaryModel(userNameLogged ?: ""),
-                        extertalUserRequest = response.extertalUserRequest
-                            .toBookSumaryExternalModel()
+                        userExternalBook = response.extertalUserRequest
+                            .toBookSumaryExternalModel(),
+                        userExternalLocation = response.extertalUserRequest.localizacao ?: "",
+                        userExternalPhone = response.extertalUserRequest.telefone ?: "",
+                        status = Functions.getStatusByName(response.status)
                     )
                 ))
             } catch (e: HttpException) {

@@ -16,7 +16,6 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.sharebook.R
 import com.example.sharebook.core.domain.model.BookSummaryModel
-import com.example.sharebook.core.presentation.components.BookTag
 import com.example.sharebook.core.presentation.components.ImageCustom
 import com.example.sharebook.core.presentation.ui.theme.*
 

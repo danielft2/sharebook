@@ -7,11 +7,11 @@ val bottomNavigationItens = listOf(
         route = PrivateRoutes.HomeScreen.route,
         icon = R.drawable.icon_home
     ),
-    BottomNavigationItem(
-        title = R.string.discovery_route_title,
-        route = PrivateRoutes.DiscoveryScreen.route,
-        icon = R.drawable.icon_search
-    ),
+//    BottomNavigationItem(
+//        title = R.string.discovery_route_title,
+//        route = PrivateRoutes.DiscoveryScreen.route,
+//        icon = R.drawable.icon_search
+//    ),
     BottomNavigationItem(
         title = R.string.exchanges_route_title,
         route = PrivateRoutes.ExchangesScreen.route,

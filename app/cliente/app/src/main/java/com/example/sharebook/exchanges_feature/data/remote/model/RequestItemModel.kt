@@ -1,6 +1,5 @@
 package com.example.sharebook.exchanges_feature.data.remote.model
 
-import com.example.sharebook.core.domain.enum.BookRequestStatus
 import com.example.sharebook.core.utils.Functions
 import com.example.sharebook.exchanges_feature.domain.model.RequestModel
 import com.google.gson.annotations.SerializedName
@@ -43,14 +42,8 @@ fun RequestItemModel.toRequestModel(): RequestModel {
         owner = owner,
         ownerProfileURL = ownerProfileURL,
         author = Functions.getValuesFromList(author),
-        status = getStatusByName(status),
+        status = Functions.getStatusByName(status),
         bookImageURL = bookImageURL
     )
 }
 
-fun getStatusByName(name: String): BookRequestStatus {
-    return if (name == BookRequestStatus.SEND.tag) BookRequestStatus.SEND
-    else if (name == BookRequestStatus.FINALIZE.tag) BookRequestStatus.FINALIZE
-    else if (name == BookRequestStatus.CANCEL.tag) BookRequestStatus.CANCEL
-    else BookRequestStatus.ANONYMUS
-}
