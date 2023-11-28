@@ -1,9 +1,7 @@
 package com.example.sharebook.exchanges_feature.presentation.request_details.components
 
 import androidx.compose.foundation.background
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.*
 import androidx.compose.material.Surface
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
@@ -12,6 +10,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavHostController
 import com.example.sharebook.R
@@ -21,6 +20,7 @@ import com.example.sharebook.core.presentation.components.book.BookSummary
 import com.example.sharebook.core.presentation.components.statewrapper.StateWraper
 import com.example.sharebook.core.presentation.ui.theme.Lato
 import com.example.sharebook.core.presentation.ui.theme.background
+import com.example.sharebook.core.presentation.ui.theme.green900
 import com.example.sharebook.core.presentation.ui.theme.white
 import com.example.sharebook.exchangerequest_feature.presentation.exchangerequest.components.DividerDecorator
 import com.example.sharebook.exchanges_feature.presentation.request_details.RequestDetailsViewModel
@@ -56,7 +56,7 @@ fun RequestDetails(
             }
 
             StateWraper(
-                onClickTryAgain = { /*TODO*/ },
+                onClickTryAgain = { requestDetailsViewModel.getRequestDetails(requestDetailsViewModel.requestId) },
                 isLoading = uiState.isLoadingDetails,
                 isError = !uiState.isErrorDetails.isNullOrEmpty()
             ) {
@@ -64,6 +64,17 @@ fun RequestDetails(
                     Column(modifier = Modifier.padding(horizontal = 16.dp, vertical = 32.dp)) {
                         BookSummary(book = uiState.requestDetails!!.userLoggedRequest)
                         DividerDecorator()
+
+                        Text(
+                            text = "Livro ofertado na troca",
+                            fontFamily = Lato,
+                            fontWeight = FontWeight.Bold,
+                            fontSize = 15.sp,
+                            color = green900
+                        )
+                        
+                        Spacer(modifier = Modifier.height(12.dp))
+
                         BookSummary(book = uiState.requestDetails.extertalUserRequest)
                     }
                 }

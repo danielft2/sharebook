@@ -14,8 +14,11 @@ data class UserRequestModel(
     @SerializedName("edicao")
     val edicao: Int,
 
+    @SerializedName("autor")
+    val autor: List<String>,
+
     @SerializedName("estado")
-    val estado: BookStateModel,
+    val estado: String,
 
     @SerializedName("genero")
     val genero: List<String>,
@@ -40,8 +43,8 @@ fun UserRequestModel.toBookSumaryExternalModel(): BookSummaryModel {
     return BookSummaryModel(
         name = titulo,
         edition = edicao,
-        authors = "Daniel",
-        bookState = estado.nome,
+        authors = Functions.getValuesFromList(autor),
+        bookState = estado,
         preference = Functions.getPreference(podeBuscar),
         genders = Functions.getValuesFromList(genero),
         userProfilePhoto = perfil,
@@ -58,13 +61,13 @@ fun UserRequestModel.toBookYourSumaryModel(
     return BookSummaryModel(
         name = titulo,
         edition = edicao,
-        authors = "Daniel",
-        bookState = estado.nome,
+        authors = Functions.getValuesFromList(autor),
+        bookState = estado,
         preference = Functions.getPreference(podeBuscar),
         genders = Functions.getValuesFromList(genero),
         userProfilePhoto = perfil,
         userFalbackPhoto = userName,
-        userName = userName,
+        userName = "Você",
         secondaryText = "Dono(a) do Livro",
         coverUrl = capa
     )

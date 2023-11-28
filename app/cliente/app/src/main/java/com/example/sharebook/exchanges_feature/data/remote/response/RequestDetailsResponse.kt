@@ -8,5 +8,8 @@ data class RequestDetailsResponse(
     val extertalUserRequest: UserRequestModel,
 
     @SerializedName("userRescueData")
-    val userLoggedRequest: UserRequestModel
+    val userLoggedRequest: UserRequestModel,
+
+    @SerializedName("status")
+    val status: String
 )

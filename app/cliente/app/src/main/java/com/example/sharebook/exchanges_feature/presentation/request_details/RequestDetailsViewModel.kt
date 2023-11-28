@@ -25,20 +25,22 @@ class RequestDetailsViewModel @Inject constructor(
 ) : ViewModel() {
 
     var uiState by mutableStateOf(UiState())
+    var requestId: String = ""
 
     init {
-        stateHandle.get<String>(Constants.REQUEST_PARAM_ID)?.let { requestId ->
+        stateHandle.get<String>(Constants.REQUEST_PARAM_ID)?.let { requestParamId ->
+            this.requestId = requestParamId
             val user = runBlocking {
                 userStorageManagement.retry().first()
             }
             uiState = uiState.copy(userLogged = user)
-            getRequestDetails(requestId)
+            getRequestDetails(requestParamId)
         }
     }
 
     fun getRequestDetails(requestId: String) {
         viewModelScope.launch {
-            requestDetailsUseCase(requestId).collect { response ->
+            requestDetailsUseCase(requestId, uiState.userLogged?.name).collect { response ->
                 uiState = when (response) {
                     is Resource.Success -> { uiState.copy(requestDetails = response.data) }
                     is Resource.Error -> { uiState.copy(isErrorDetails = response.message) }
