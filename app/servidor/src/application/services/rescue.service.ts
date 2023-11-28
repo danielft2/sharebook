@@ -74,7 +74,10 @@ export class RescueService {
 
       userRescueData = {
         bookId: bookUser.id,
-        capa: bookUser.capa,
+        capa: await this.supabaseService.getFileURL(
+          bookUser.capa,
+          'BookImages',
+        ),
         titulo: bookUser.nome,
         autor: bookUser.autor,
         genero: await this.bookGenderService.findGenderName(bookUser.id),
@@ -88,7 +91,10 @@ export class RescueService {
 
       extertalUserRescueData = {
         bookId: externalBokUser.id,
-        capa: externalBokUser.capa,
+        capa: await this.supabaseService.getFileURL(
+          externalBokUser.capa,
+          'BookImages',
+        ),
         titulo: externalBokUser.nome,
         genero: await this.bookGenderService.findGenderName(externalBokUser.id),
         autor: externalBokUser.autor,
@@ -117,7 +123,10 @@ export class RescueService {
 
       userRescueData = {
         bookId: bookUser.id,
-        capa: bookUser.capa,
+        capa: await this.supabaseService.getFileURL(
+          bookUser.capa,
+          'BookImages',
+        ),
         titulo: bookUser.nome,
         autor: bookUser.autor,
         genero: await this.bookGenderService.findGenderName(bookUser.id),
@@ -131,7 +140,10 @@ export class RescueService {
 
       extertalUserRescueData = {
         bookId: externalBokUser.id,
-        capa: externalBokUser.capa,
+        capa: await this.supabaseService.getFileURL(
+          externalBokUser.capa,
+          'BookImages',
+        ),
         titulo: externalBokUser.nome,
         genero: await this.bookGenderService.findGenderName(externalBokUser.id),
         autor: externalBokUser.autor,
