@@ -19,6 +19,7 @@ import androidx.navigation.NavHostController
 import com.example.sharebook.core.presentation.components.HeaderDefault
 import com.example.sharebook.core.presentation.ui.theme.*
 import com.example.sharebook.exchanges_feature.presentation.mybooks.components.MyBooks
+import com.example.sharebook.exchanges_feature.presentation.requests.components.Requests
 import com.example.sharebook.exchanges_feature.presentation.tabs.tabsList
 
 @OptIn(ExperimentalFoundationApi::class)
@@ -69,6 +70,7 @@ fun Exchanges(navController: NavHostController) {
             ) {
                 when(it) {
                     0 -> { MyBooks { route -> navController.navigate(route) } }
+                    1 -> { Requests { route -> navController.navigate(route) } }
                 }
             }
         }

@@ -11,6 +11,7 @@ import com.example.sharebook.core.presentation.components.ImageCustom
 import com.example.sharebook.core.presentation.ui.theme.Inter
 import com.example.sharebook.core.presentation.ui.theme.gray500
 import com.example.sharebook.core.utils.Functions
+import com.example.sharebook.core.utils.skeleton
 
 @Composable
 fun AvatarUser(
@@ -21,11 +22,11 @@ fun AvatarUser(
     if (profileUrl.isNotBlank()) {
         ImageCustom(
             url = profileUrl,
-            modifier = Modifier.then(modifier)
-        ) {}
+            modifier = modifier
+        ) { Box(modifier = Modifier.then(modifier).skeleton()) }
     } else {
         Box(
-            modifier = modifier.then(modifier),
+            modifier = modifier,
             contentAlignment = Alignment.Center
         ) {
             Text(

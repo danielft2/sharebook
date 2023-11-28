@@ -1,7 +1,8 @@
 package com.example.sharebook.core.domain.enum
 
 enum class BookRequestStatus(val tag: String) {
-    SEND("Arguadando Confirmação"),
+    SEND("Aguardando Confirmação"),
     CANCEL("Solicitação Cancelada / Rejeitada"),
-    FINALIZE("Solicitação Finalizada")
+    FINALIZE("Solicitação Finalizada"),
+    ANONYMUS("Desconhecido")
 }

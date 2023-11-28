@@ -1,4 +1,4 @@
-package com.example.sharebook.exchanges_feature.presentation.mybooks.components
+package com.example.sharebook.exchanges_feature.presentation.requests.components
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
@@ -13,34 +13,40 @@ import androidx.compose.ui.unit.sp
 import com.example.sharebook.core.presentation.components.BookTag
 import com.example.sharebook.core.presentation.components.DividerCustom
 import com.example.sharebook.core.presentation.components.ImageCustom
-import com.example.sharebook.core.presentation.components.book.BookCoverSkeleton
+import com.example.sharebook.core.presentation.components.book.BookOwnerInformations
 import com.example.sharebook.core.presentation.ui.theme.*
-import com.example.sharebook.exchanges_feature.domain.model.MyBookModel
+import com.example.sharebook.core.utils.Functions
+import com.example.sharebook.core.utils.skeleton
+import com.example.sharebook.exchanges_feature.domain.model.RequestModel
 
 @Composable
-fun BookItem(book: MyBookModel, onClick: () -> Unit) {
+fun RequestItem(requestBook: RequestModel, onClick: () -> Unit) {
+    val statusColors = Functions.getColorsByRequestStatus(status = requestBook.status)
+
     Box(modifier = Modifier
         .fillMaxWidth()
-        .height(200.dp)
+        .height(210.dp)
         .background(white)
         .clickable { onClick() }
     ) {
         Row {
             ImageCustom(
-                url = book.cover,
+                url = requestBook.bookImageURL,
                 modifier = Modifier
                     .fillMaxHeight()
                     .width(115.dp)
             ) {
-                BookCoverSkeleton(Modifier
-                .fillMaxHeight()
-                .width(115.dp))
+                Box(modifier = Modifier
+                    .fillMaxHeight()
+                    .width(115.dp)
+                    .skeleton()
+                )
             }
 
             Column(modifier = Modifier.padding(20.dp)) {
                 Column {
                     Text(
-                        text = "${book.genders} - ${book.edition}° Edição",
+                        text = "${requestBook.genders} - ${requestBook.edition}° Edição",
                         color = green600,
                         fontSize = 14.sp,
                         fontFamily = Lato,
@@ -50,7 +56,7 @@ fun BookItem(book: MyBookModel, onClick: () -> Unit) {
                     Spacer(modifier = Modifier.height(4.dp))
 
                     Text(
-                        text = book.name,
+                        text = requestBook.title,
                         color = green900,
                         fontSize = 15.sp,
                         fontFamily = Lato,
@@ -62,7 +68,7 @@ fun BookItem(book: MyBookModel, onClick: () -> Unit) {
                     Spacer(modifier = Modifier.height(4.dp))
 
                     Text(
-                        text = book.authors,
+                        text = requestBook.author,
                         color = gray500,
                         fontSize = 14.sp,
                         fontFamily = Lato,
@@ -74,12 +80,19 @@ fun BookItem(book: MyBookModel, onClick: () -> Unit) {
                 DividerCustom(spaceTop = 16.dp, spaceBottom = 16.dp)
 
                 BookTag(
-                    text = book.bookState,
-                    background = blue100,
-                    colorText = blue500
+                    text = requestBook.status.tag,
+                    background = statusColors.background,
+                    colorText = statusColors.colorText
                 )
-                Spacer(modifier = Modifier.height(8.dp))
-                BookTag(text = book.preference.tag, background = green100, colorText = green600)
+
+                Spacer(modifier = Modifier.height(12.dp))
+
+                BookOwnerInformations(
+                    name = requestBook.owner,
+                    secondaryText = "Dono(a) do Livro",
+                    profileUrl = requestBook.ownerProfileURL,
+                    falbackPhoto = requestBook.owner
+                )
             }
         }
     }
