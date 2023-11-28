@@ -1,4 +1,4 @@
-package com.example.sharebook.exchanges_feature.data.remote.responses
+package com.example.sharebook.exchanges_feature.data.remote.response
 
 import com.example.sharebook.exchanges_feature.data.remote.model.RequestItemModel
 import com.google.gson.annotations.SerializedName

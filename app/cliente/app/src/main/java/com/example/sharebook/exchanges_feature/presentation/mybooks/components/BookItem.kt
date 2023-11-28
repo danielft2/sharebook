@@ -40,7 +40,7 @@ fun BookItem(book: MyBookModel, onClick: () -> Unit) {
             Column(modifier = Modifier.padding(20.dp)) {
                 Column {
                     Text(
-                        text = "${book.genders} - ${book.edition} Edição",
+                        text = "${book.genders} - ${book.edition}° Edição",
                         color = green600,
                         fontSize = 14.sp,
                         fontFamily = Lato,

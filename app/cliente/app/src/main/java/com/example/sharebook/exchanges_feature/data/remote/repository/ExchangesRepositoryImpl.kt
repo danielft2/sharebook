@@ -1,7 +1,7 @@
 package com.example.sharebook.exchanges_feature.data.remote.repository
 
-import com.example.sharebook.exchanges_feature.data.remote.responses.MyBooksResponse
-import com.example.sharebook.exchanges_feature.data.remote.responses.RequestsReponse
+import com.example.sharebook.exchanges_feature.data.remote.response.MyBooksResponse
+import com.example.sharebook.exchanges_feature.data.remote.response.RequestsReponse
 import com.example.sharebook.exchanges_feature.data.remote.service.ExchangesService
 import com.example.sharebook.exchanges_feature.domain.adapter.ExchangesRepository
 import javax.inject.Inject

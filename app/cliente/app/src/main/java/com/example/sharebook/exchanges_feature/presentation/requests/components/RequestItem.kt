@@ -15,14 +15,17 @@ import com.example.sharebook.core.presentation.components.DividerCustom
 import com.example.sharebook.core.presentation.components.ImageCustom
 import com.example.sharebook.core.presentation.components.book.BookOwnerInformations
 import com.example.sharebook.core.presentation.ui.theme.*
+import com.example.sharebook.core.utils.Functions
 import com.example.sharebook.core.utils.skeleton
 import com.example.sharebook.exchanges_feature.domain.model.RequestModel
 
 @Composable
 fun RequestItem(requestBook: RequestModel, onClick: () -> Unit) {
+    val statusColors = Functions.getColorsByRequestStatus(status = requestBook.status)
+
     Box(modifier = Modifier
         .fillMaxWidth()
-        .height(200.dp)
+        .height(210.dp)
         .background(white)
         .clickable { onClick() }
     ) {
@@ -33,7 +36,8 @@ fun RequestItem(requestBook: RequestModel, onClick: () -> Unit) {
                     .fillMaxHeight()
                     .width(115.dp)
             ) {
-                Box(modifier = Modifier.fillMaxHeight()
+                Box(modifier = Modifier
+                    .fillMaxHeight()
                     .width(115.dp)
                     .skeleton()
                 )
@@ -42,7 +46,7 @@ fun RequestItem(requestBook: RequestModel, onClick: () -> Unit) {
             Column(modifier = Modifier.padding(20.dp)) {
                 Column {
                     Text(
-                        text = "Romance - ${requestBook.edition}° Edição",
+                        text = "${requestBook.genders} - ${requestBook.edition}° Edição",
                         color = green600,
                         fontSize = 14.sp,
                         fontFamily = Lato,
@@ -76,12 +80,12 @@ fun RequestItem(requestBook: RequestModel, onClick: () -> Unit) {
                 DividerCustom(spaceTop = 16.dp, spaceBottom = 16.dp)
 
                 BookTag(
-                    text = requestBook.status,
-                    background = blue100,
-                    colorText = blue500
+                    text = requestBook.status.tag,
+                    background = statusColors.background,
+                    colorText = statusColors.colorText
                 )
 
-                Spacer(modifier = Modifier.height(8.dp))
+                Spacer(modifier = Modifier.height(12.dp))
 
                 BookOwnerInformations(
                     name = requestBook.owner,
