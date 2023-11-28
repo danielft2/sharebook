@@ -24,6 +24,7 @@ export class SupabaseService {
   }
 
   async findOne(fileName: string, bucketName: string) {
+    console.log(fileName)
     const { data, error } = await this.supabase.storage
       .from(bucketName)
       .download(fileName);
