@@ -21,7 +21,7 @@ fun MyBooks(
     onNavigate: (route: String) -> Unit
 ) {
     Surface(modifier = Modifier.fillMaxSize()) {
-        FloatingButtonNewBook { }
+        FloatingButtonNewBook { onNavigate(PrivateRoutes.AddBookScreen.route) }
 
         Column(modifier = Modifier.background(background).fillMaxSize()) {
             StateWraper(

@@ -37,8 +37,7 @@ fun NavigationRoot(
         ) {
             composable(PublicRoutes.WelcomeScreen.route) {
                 RedirectRoute(navigationViewModel.isLogged, navController = navController)
-                // Welcome(navController = navController)
-                AddBook(navController = navController)
+                Welcome(navController = navController)
             }
 
             composable(PublicRoutes.LoginScreen.route) {
@@ -72,6 +71,11 @@ fun NavigationRoot(
                 SelfBook(navController = navController)
             }
 
+            composable(
+                route = PrivateRoutes.AddBookScreen.route
+            ){
+                AddBook(navController = navController)
+            }
             composable(
                 route = PrivateRoutes.ExchangeRequest.route + "/{book_id}",
                 arguments = listOf(navArgument(Constants.BOOK_PARAM_ID) { type = NavType.StringType })

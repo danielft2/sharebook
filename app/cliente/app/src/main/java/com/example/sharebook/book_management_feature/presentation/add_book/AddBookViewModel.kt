@@ -154,6 +154,10 @@ class AddBookViewModel @Inject constructor(
                     is Resource.Success -> {
                         requestState = requestState.copy(sucess = true, isLoading = false)
                     }
+
+                    is Resource.Finnaly -> {
+                        requestState = requestState.copy(isLoading = false)
+                    }
                 }
             }
         }

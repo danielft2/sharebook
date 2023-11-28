@@ -31,11 +31,11 @@ import com.example.sharebook.R
 import com.example.sharebook.auth_feature.presentation.register.event.RegisterFormEvent
 import com.example.sharebook.book_management_feature.presentation.add_book.AddBookViewModel
 import com.example.sharebook.book_management_feature.presentation.add_book.event.AddBookFormEvent
-import com.example.sharebook.core.presentation.components.ButtonPrimary
 import com.example.sharebook.core.presentation.components.CheckboxFieldCustom
 import com.example.sharebook.core.presentation.components.ImageFieldCustom
 import com.example.sharebook.core.presentation.components.SelectFieldCustom
 import com.example.sharebook.core.presentation.components.TextFieldCustom
+import com.example.sharebook.core.presentation.components.button.ButtonPrimary
 import com.example.sharebook.core.presentation.ui.theme.green500
 import com.example.sharebook.core.utils.UiText
 
