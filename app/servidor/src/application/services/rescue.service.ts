@@ -3,12 +3,12 @@ import {
   Injectable,
   NotFoundException,
 } from '@nestjs/common';
-import { RescueRepository } from 'src/infraestructure/repositories/rescue.repository';
+import { RescueRepository } from '../../infraestructure/repositories/rescue.repository';
 import { SupabaseService } from './supabase.service';
-import { Rescue } from 'src/domain/entities/rescue.entity';
-import { BookRepository } from 'src/infraestructure/repositories/book.repository';
-import { UserRepository } from 'src/infraestructure/repositories/user.repository';
-import { BookStateRepository } from 'src/infraestructure/repositories/book-state.repository';
+import { Rescue } from '../../domain/entities/rescue.entity';
+import { BookRepository } from '../../infraestructure/repositories/book.repository';
+import { UserRepository } from '../../infraestructure/repositories/user.repository';
+import { BookStateRepository } from '../../infraestructure/repositories/book-state.repository';
 import { BookGendersService } from './book-gender.service';
 
 @Injectable()
