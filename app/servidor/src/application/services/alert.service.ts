@@ -1,6 +1,6 @@
 import { ConflictException, Injectable } from "@nestjs/common";
-import { Alert } from "src/domain/entities/alert.entity";
-import { AlertRepository } from "src/infraestructure/repositories/alert.repository";
+import { Alert } from "../../domain/entities/alert.entity";
+import { AlertRepository } from "../../infraestructure/repositories/alert.repository";
 
 @Injectable()
 export class AlertService {

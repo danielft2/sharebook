@@ -55,14 +55,14 @@ describe('AuthService', () => {
       };
 
     const userDataAuthenticated: User = {
-        id: "528e7277-ed6a-4768-b35a-cc6a669f5003",
-        nome:'Alexson1',
-        email:'email1@email.com',
-        senha:'111111111',
-        telefone: '99-99999999',
-        cep: '99999-999',
-        estado: 'itapiuna',
-        cidade: 'ceara'
+        id: "05304a82-8a06-11ee-b9d1-0242ac120002",
+        nome:'Joao',
+        email:'joaof@gmail.com',
+        senha:'123456',
+        telefone: '88999475456',
+        cep: '63800000',
+        estado: 'Quixeramobim',
+        cidade: 'Ceara'
     };
   
     it('should return a 409 when data is incorrect', async () => {
@@ -71,7 +71,7 @@ describe('AuthService', () => {
 
     it('should return a user when data is correct', async () => {
         const responseValidate = await service.validateUser(userDataAuthenticated.email, userDataAuthenticated.senha);
-        expect(Object.keys(responseValidate)).toEqual(["id", "nome", "email", "telefone", "senha", "cep", "estado", "cidade", "foto_perfil"]);
+        expect(Object.keys(responseValidate)).toEqual(["id", "nome", "email", "telefone", "senha", "cep", "estado", "cidade", "foto_perfil", "password"]);
     });
 
     it('it should return user data and jwt token when authentication process is complete', async () => {

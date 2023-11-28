@@ -105,6 +105,10 @@ Table Alerta {
   usuario_id String [not null]
   filtrado_por_localizacao Boolean [not null, default: false]
   filtrado_por_envio Boolean [not null, default: false]
+
+  indexes {
+    (usuario_id, nome_livro) [unique]
+  }
 }
 
 Table Avaliacao {

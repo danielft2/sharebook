@@ -53,6 +53,6 @@ export class RescueController {
 
   @Get(':id')
   async findRescueById(@Param('id') id: string, @Req() req) {
-    return this.rescueService.findRescueById(id, req.user);
+    return this.rescueService.findRescueById(id, req.user.id);
   }
 }

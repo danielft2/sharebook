@@ -1,6 +1,6 @@
 import { Body, Controller, Post } from "@nestjs/common";
-import { AlertService } from "src/application/services/alert.service";
-import { Alert } from "src/domain/entities/alert.entity";
+import { AlertService } from "../../application/services/alert.service";
+import { Alert } from "../../domain/entities/alert.entity";
 
 @Controller('alert')
 export class AlertController {
