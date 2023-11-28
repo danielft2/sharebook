@@ -55,8 +55,10 @@ VALUES ('9e8716ef-a32c-4dac-8158-2a6e654a96cf', 'b7d791c1-2060-4aae-a788-bef9773
 ('1f65ae09-61e4-49eb-ba3e-f7aa5a72eddc', '1c527b0a-6da8-4ccd-b23f-fcd946cf488a');
 
 INSERT INTO "Solicitacao"( id, usuario_solicitante_id, livro_id, livro_oferecido_id, "status") VALUES 
-('13139b6c-6b53-41e6-9c6e-91d3bc3120be', '1734ed59-eaa8-4c31-9b38-f546790668e8', 'dfe8be88-3b0d-496e-baab-395b63751f43', 'c0741322-0592-46a2-8206-9fd950b97f00', 'ATIVO'),
-('e6239585-b8e1-4110-827f-5bebeff66ce4', '58d43f0c-5442-48b4-8103-4ec2bcd42ea6', 'dfe8be88-3b0d-496e-baab-395b63751f43', 'eb43f38c-887b-410e-ad5f-624861cf6c95', 'ATIVO');
+('13139b6c-6b53-41e6-9c6e-91d3bc3120be', '1734ed59-eaa8-4c31-9b38-f546790668e8', 'dfe8be88-3b0d-496e-baab-395b63751f43', 'c0741322-0592-46a2-8206-9fd950b97f00', 'Solicitação Cancelada / Rejeitada'),
+('da8fbaa2-16a4-4cf3-89b4-f6308bed88e4', '58d43f0c-5442-48b4-8103-4ec2bcd42ea6', 'c0741322-0592-46a2-8206-9fd950b97f00', '9e8716ef-a32c-4dac-8158-2a6e654a96cf', 'Solicitação Finalizada'),
+('6ae9c4b1-c24f-4e0b-9feb-08300d80cadb', '05304a82-8a06-11ee-b9d1-0242ac120002', 'eb43f38c-887b-410e-ad5f-624861cf6c95', 'dfe8be88-3b0d-496e-baab-395b63751f43', 'Solicitação Aceita'),
+('e6239585-b8e1-4110-827f-5bebeff66ce4', '58d43f0c-5442-48b4-8103-4ec2bcd42ea6', 'dfe8be88-3b0d-496e-baab-395b63751f43', 'eb43f38c-887b-410e-ad5f-624861cf6c95', 'Aguardando Confirmação');
 
 -- INSERT INTO "ProcessoDeTroca"( id, usuario_solicitante_id, livro_id, "status")
 -- VALUES ('05306472-8a06-11ee-b9d1-0242ac120002', '05304a82-8a06-11ee-b9d1-0242ac120002', 'dfe8be88-3b0d-496e-baab-395b63751f43', 'ATIVO');
