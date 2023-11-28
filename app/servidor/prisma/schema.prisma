@@ -48,6 +48,8 @@ model Livro {
   genero_livro      GeneroLivro[]
   estado            Estado            @relation(fields: [estado_id], references: [id])
   estado_id         String
+  latitude          String
+  longitude         String
   solicitacao       Solicitacao[]
   processo_de_troca ProcessoDeTroca[]
 }
@@ -89,7 +91,7 @@ model Solicitacao {
   usuario_solicitante_id String
   livro                  Livro   @relation(fields: [livro_id], references: [id])
   livro_id               String
-  livro_oferecido_id String
+  livro_oferecido_id     String
   status                 String
 }
 
@@ -99,7 +101,7 @@ model ProcessoDeTroca {
   usuario_solicitante_id String
   livro                  Livro   @relation(fields: [livro_id], references: [id])
   livro_id               String
-  livro_oferecido_id String
+  livro_oferecido_id     String
   status                 String
 }
 
