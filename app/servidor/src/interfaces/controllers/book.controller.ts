@@ -1,4 +1,4 @@
-import { Body, Controller, Get, Param, Post, Req } from '@nestjs/common';
+import { Body, Controller, Get, Param, Post, Put, Req } from '@nestjs/common';
 import { BookService } from '../../application/services/book.service';
 import { ApiBody, ApiParam } from '@nestjs/swagger';
 import { Book } from '../../domain/entities/book.entity';
@@ -31,18 +31,18 @@ export class BookControler {
     schema: {
       example: {
         isbn: '9788498672220',
-        name: 'Diário de um Banana',
-        synopsis:
+        nome: 'Diário de um Banana',
+        sinopse:
           'A escola não é uma experiência agradável para o quase adolescente Greg Heffley, mas sim um campo minado que ele precisa enfrentar.',
-        writer: ['Jeff Kinney'],
-        owner_id: '05304a82-8a06-11ee-b9d1-0242ac120002',
-        edition: 1,
-        language: 'Espanhol',
-        can_receive: true,
-        can_get: false,
-        cape: 'Diario de um Banana',
-        images: [''],
-        state_id: '448358ea-c333-4982-ac6e-627b75d2e6cc',
+        autor: ['Jeff Kinney'],
+        usuario_id: '05304a82-8a06-11ee-b9d1-0242ac120002',
+        edicao: 1,
+        idioma: 'Espanhol',
+        quer_receber: true,
+        pode_buscar: false,
+        capa: 'Diario de um Banana',
+        imagens: [''],
+        estado_id: '448358ea-c333-4982-ac6e-627b75d2e6cc',
         latitude: '-4.97813',
         longitude: '-39.0188',
       },
@@ -50,5 +50,32 @@ export class BookControler {
   })
   async create(@Body() book: Book) {
     return this.bookService.create(book);
+  }
+
+  @Put()
+  @ApiBody({
+    schema: {
+      example: {
+        id: 'valid_id',
+        isbn: '9788498672220',
+        nome: 'Diário de um Banana 2',
+        sinopse:
+          'A escola não é uma experiência agradável para o quase adolescente Greg Heffley, mas sim um campo minado que ele precisa enfrentar.',
+        autor: ['Jeff Kinney'],
+        usuario_id: '05304a82-8a06-11ee-b9d1-0242ac120002',
+        edicao: 1,
+        idioma: 'Espanhol',
+        quer_receber: true,
+        pode_buscar: false,
+        capa: 'Diario de um Banana 2',
+        imagens: [''],
+        estado_id: '448358ea-c333-4982-ac6e-627b75d2e6cc',
+        latitude: '-4.97813',
+        longitude: '-39.0188',
+      },
+    },
+  })
+  async update(@Body() book: Book) {
+    return this.bookService.update(book);
   }
 }

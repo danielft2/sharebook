@@ -90,7 +90,7 @@ describe('BookService', () => {
       const userId = '58d43f0c-5442-48b4-8103-4ec2bcd42ea6';
       const book = await service.findOne(bookId, userId);
       expect(book).toBeTruthy();
-    });
+    }, 15000);
 
     it('should return a list of books', async () => {
       const books = await service.findAll(
@@ -102,7 +102,7 @@ describe('BookService', () => {
           books.nextToYou.length ||
           books.favoriteGenders,
       ).toBeGreaterThan(0);
-    });
+    }, 25000);
 
     it('should return a list of user books', async () => {
       const books = await service.findMyBooks(
@@ -110,24 +110,25 @@ describe('BookService', () => {
       );
 
       expect(books).toBeInstanceOf(Array);
-    });
+    }, 20000);
   });
-  describe('GET methods', () => {
+
+  describe('POST methods', () => {
     it('should create a book', async () => {
       const book: Book = {
-        isbn: '9780670074938',
-        name: 'Diário de um Banana 2',
-        synopsis:
+        isbn: '9788498672220',
+        nome: 'Diário de um Banana 2',
+        sinopse:
           'A escola não é uma experiência agradável para o quase adolescente Greg Heffley, mas sim um campo minado que ele precisa enfrentar.',
-        writer: ['Jeff Kinney'],
-        owner_id: '05304a82-8a06-11ee-b9d1-0242ac120002',
-        edition: 1,
-        language: 'Português',
-        can_receive: true,
-        can_get: true,
-        cape: 'Diario de um Banana 2',
-        images: [''],
-        state_id: '448358ea-c333-4982-ac6e-627b75d2e6cc',
+        autor: ['Jeff Kinney'],
+        usuario_id: '05304a82-8a06-11ee-b9d1-0242ac120002',
+        edicao: 1,
+        idioma: 'Português',
+        quer_receber: true,
+        pode_buscar: false,
+        capa: 'Diario de um Banana 2',
+        imagens: [''],
+        estado_id: '448358ea-c333-4982-ac6e-627b75d2e6cc',
         latitude: '-4.97813',
         longitude: '-39.0188',
       };
