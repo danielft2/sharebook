@@ -3,12 +3,12 @@ import {
   Injectable,
   NotFoundException,
 } from '@nestjs/common';
-import { RescueRepository } from 'src/infraestructure/repositories/rescue.repository';
+import { RescueRepository } from '../../infraestructure/repositories/rescue.repository';
 import { SupabaseService } from './supabase.service';
-import { Rescue } from 'src/domain/entities/rescue.entity';
-import { BookRepository } from 'src/infraestructure/repositories/book.repository';
-import { UserRepository } from 'src/infraestructure/repositories/user.repository';
-import { BookStateRepository } from 'src/infraestructure/repositories/book-state.repository';
+import { Rescue } from '../../domain/entities/rescue.entity';
+import { BookRepository } from '../../infraestructure/repositories/book.repository';
+import { UserRepository } from '../../infraestructure/repositories/user.repository';
+import { BookStateRepository } from '../../infraestructure/repositories/book-state.repository';
 import { BookGendersService } from './book-gender.service';
 
 @Injectable()
@@ -72,9 +72,10 @@ export class RescueService {
         bookId: bookUser.id,
         capa: bookUser.capa,
         titulo: bookUser.nome,
+        autor: bookUser.autor,
         genero: await this.bookGenderService.findGenderName(bookUser.id),
         edicao: bookUser.edicao,
-        estado: await this.bookStateRepository.findOne(bookUser.estado_id),
+        estado: (await this.bookStateRepository.findOne(bookUser.estado_id)).nome,
         podeBuscar: bookUser.pode_buscar,
         querReceber: bookUser.quer_receber,
         perfil: (await this.userRepository.findById(req.id)).foto_perfil,
@@ -83,12 +84,13 @@ export class RescueService {
       extertalUserRescueData = {
         bookId: externalBokUser.id,
         capa: externalBokUser.capa,
-        genero: await this.bookGenderService.findGenderName(externalBokUser.id),
         titulo: externalBokUser.nome,
+        genero: await this.bookGenderService.findGenderName(externalBokUser.id),
+        autor: externalBokUser.autor,
         edicao: externalBokUser.edicao,
-        estado: await this.bookStateRepository.findOne(
+        estado: (await this.bookStateRepository.findOne(
           externalBokUser.estado_id,
-        ),
+        )).nome,
         podeBuscar: externalBokUser.pode_buscar,
         querReceber: externalBokUser.quer_receber,
         nome: externalUser.nome,
@@ -112,9 +114,10 @@ export class RescueService {
         bookId: bookUser.id,
         capa: bookUser.capa,
         titulo: bookUser.nome,
+        autor: bookUser.autor,
         genero: await this.bookGenderService.findGenderName(bookUser.id),
         edicao: bookUser.edicao,
-        estado: await this.bookStateRepository.findOne(bookUser.estado_id),
+        estado: (await this.bookStateRepository.findOne(bookUser.estado_id)).nome,
         podeBuscar: bookUser.pode_buscar,
         querReceber: bookUser.quer_receber,
         perfil: (await this.userRepository.findById(req.id)).foto_perfil,
@@ -125,10 +128,11 @@ export class RescueService {
         capa: externalBokUser.capa,
         titulo: externalBokUser.nome,
         genero: await this.bookGenderService.findGenderName(externalBokUser.id),
+        autor: externalBokUser.autor,
         edicao: externalBokUser.edicao,
-        estado: await this.bookStateRepository.findOne(
+        estado: (await this.bookStateRepository.findOne(
           externalBokUser.estado_id,
-        ),
+        )).nome,
         podeBuscar: externalBokUser.pode_buscar,
         querReceber: externalBokUser.quer_receber,
         nome: externalUser.nome,
@@ -153,6 +157,7 @@ export class RescueService {
     }
 
     const returnData = {
+      status: rescue.status,
       userRescueData,
       extertalUserRescueData,
     };

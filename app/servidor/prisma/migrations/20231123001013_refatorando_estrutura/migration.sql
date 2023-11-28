@@ -65,3 +65,6 @@ ALTER TABLE "Solicitacao" ADD CONSTRAINT "Solicitacao_livro_id_fkey" FOREIGN KEY
 
 -- AddForeignKey
 ALTER TABLE "ProcessoDeTroca" ADD CONSTRAINT "ProcessoDeTroca_livro_id_fkey" FOREIGN KEY ("livro_id") REFERENCES "Livro"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+
+ALTER TABLE "Livro" ADD COLUMN     "latitude" TEXT NOT NULL,
+ADD COLUMN     "longitude" TEXT NOT NULL;

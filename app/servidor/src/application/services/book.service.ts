@@ -1,4 +1,5 @@
-import { Injectable } from '@nestjs/common';
+/* eslint-disable prettier/prettier */
+import { ConflictException, Injectable, NotFoundException } from '@nestjs/common';
 import { BookRepository } from '../../infraestructure/repositories/book.repository';
 import { IbgeFinderService } from './ibge-finder.service';
 import { UserRepository } from '../../infraestructure/repositories/user.repository';
@@ -6,6 +7,7 @@ import { UserGendersService } from './user-gender.service';
 import { BookGendersService } from './book-gender.service';
 import { BookStateService } from './book-state.service';
 import { RescueService } from './rescue.service';
+import { Book } from '../../domain/entities/book.entity';
 
 @Injectable()
 export class BookService {
@@ -151,5 +153,16 @@ export class BookService {
         is_request,
       };
     }
+  }
+
+  async create(book: Book) {
+    return await this.bookRepository.create(book);
+  }
+
+  async update(book: Book){
+    const findedBook = await this.bookRepository.findOne(book.id);
+
+    if(!findedBook.id) throw new NotFoundException();
+    return this.bookRepository.update(book);
   }
 }
