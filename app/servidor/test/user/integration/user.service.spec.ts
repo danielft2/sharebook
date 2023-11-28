@@ -3,6 +3,10 @@ import { UserService } from "../../../src/application/services/user.service";
 import { PrismaService } from "../../../src/infraestructure/database/prisma/prisma.service";
 import { UserRepository } from "../../../src/infraestructure/repositories/user.repository";
 import { ConflictException } from "@nestjs/common";
+import { JwtModule } from "@nestjs/jwt";
+import { JwtStrategy } from "../../../src/application/strategies/jwt.strategy";
+import { SupabaseService } from "../../../src/application/services/supabase.service";
+import { BookGendersService } from "../../../src/application/services/book-gender.service";
 
 describe('UserService', () => {
     let service: UserService;
@@ -16,8 +20,10 @@ describe('UserService', () => {
   
       const userRepository = new UserRepository(prismaService);
       const module: TestingModule = await Test.createTestingModule({
+        imports: [JwtModule.register({secret: process.env.JWT_SECRET, signOptions: {expiresIn:'1h'}})],
         providers: [
           UserService,
+          JwtStrategy,
           {
             provide: UserRepository,
             useValue: userRepository,
