@@ -109,4 +109,6 @@
     <string name="something_wrong_title">Ops! Parece que algo deu errado.</string>
     <string name="something_wrong_description">Algo inesperado aconteceu, tente novamente abaixo.</string>
     <string name="something_wrong_try_again">Tentar novamente</string>
+
+    <string name="request_details_header">Detalhes da Solicitação</string>
 </resources>

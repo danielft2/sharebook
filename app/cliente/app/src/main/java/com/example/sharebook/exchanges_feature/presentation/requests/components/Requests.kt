@@ -14,6 +14,7 @@ import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.example.sharebook.core.presentation.components.FloatingButtonNewBook
 import com.example.sharebook.core.presentation.components.statewrapper.StateWraper
+import com.example.sharebook.core.presentation.navigation.routes.authenticated.PrivateRoutes
 import com.example.sharebook.core.presentation.ui.theme.background
 import com.example.sharebook.exchanges_feature.presentation.requests.RequestsViewModel
 
@@ -43,7 +44,9 @@ fun Requests(
                         verticalArrangement = Arrangement.spacedBy(16.dp)
                     ) {
                         items(uiState.requestsList) {
-                            RequestItem(requestBook = it) {}
+                            RequestItem(requestBook = it) {
+                                onNavigate(PrivateRoutes.RequestDetails.withArgs(it.id))
+                            }
                         }
                     }
                 }

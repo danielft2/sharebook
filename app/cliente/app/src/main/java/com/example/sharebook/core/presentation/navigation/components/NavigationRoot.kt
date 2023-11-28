@@ -20,6 +20,7 @@ import com.example.sharebook.core.presentation.navigation.routes.unauthenticated
 import com.example.sharebook.core.presentation.ui.theme.*
 import com.example.sharebook.core.utils.Constants
 import com.example.sharebook.exchangerequest_feature.presentation.exchangerequest.components.ExchangeRequest
+import com.example.sharebook.exchanges_feature.presentation.request_details.components.RequestDetails
 import com.example.sharebook.notification_feature.presentation.components.Notification
 import com.example.sharebook.welcome_feature.presentation.Welcome
 
@@ -75,6 +76,13 @@ fun NavigationRoot(
                 arguments = listOf(navArgument(Constants.BOOK_PARAM_ID) { type = NavType.StringType })
             ) {
                 ExchangeRequest(navController = navController)
+            }
+
+            composable(
+                route = PrivateRoutes.RequestDetails.route + "/{request_id}",
+                arguments = listOf(navArgument(Constants.REQUEST_PARAM_ID) { type = NavType.StringType })
+            ) {
+                RequestDetails(navController = navController)
             }
 
             composable(PrivateRoutes.Notification.route) {
