@@ -6,6 +6,7 @@ import com.example.sharebook.auth_feature.data.remote.service.AuthService
 import com.example.sharebook.auth_feature.domain.adpater.AuthRepository
 import com.example.sharebook.auth_feature.domain.usecase.*
 import com.example.sharebook.auth_feature.domain.usecase.validations.*
+import com.example.sharebook.core.domain.usecase.ValidateRequiredUseCase
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn

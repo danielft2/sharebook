@@ -26,7 +26,7 @@ fun FloatingButtonNewBook(onClick: () -> Unit) {
         contentAlignment = Alignment.BottomEnd
     ) {
         FloatingActionButton(
-            onClick = { onClick },
+            onClick = { onClick() },
             elevation = FloatingActionButtonDefaults.elevation(12.dp),
             backgroundColor = green500,
             contentColor = white
