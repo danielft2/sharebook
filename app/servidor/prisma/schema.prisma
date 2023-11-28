@@ -112,6 +112,8 @@ model Alerta {
   usuario_id               String
   filtrado_por_localizacao Boolean @default(false)
   filtrado_por_envio       Boolean @default(false)
+
+  @@unique([usuario_id, nome_livro])
 }
 
 model Avaliacao {

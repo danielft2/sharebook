@@ -1,4 +1,5 @@
-import { Alert } from "src/domain/entities/alert.entity";
+import { userInfo } from "os";
+import { Alert } from "../../domain/entities/alert.entity";
 import { PrismaService } from "../database/prisma/prisma.service";
 import { Injectable } from "@nestjs/common";
 
@@ -24,10 +25,13 @@ export class AlertRepository {
   }
 
   async findByUserAndBook(userId: string, bookName: string) {
-    return this.prisma.alerta.findFirst({
+    //const unique = {userId, bookName}
+    return await this.prisma.alerta.findUnique({
         where: {
+          usuario_id_nome_livro: {
             usuario_id: userId,
             nome_livro: bookName
+          }
         }
     })
   }

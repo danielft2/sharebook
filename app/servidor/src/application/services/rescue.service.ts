@@ -51,9 +51,9 @@ export class RescueService {
     return requestedByUser;
   }
 
-  async findRescueById(id: string, req: any) {
+  async findRescueById(id: string, userId: string) {
     const rescue = await this.rescueRepository.findById(id);
-    const isRescueFromUserLogged = rescue.usuario_solicitante_id === req.id;
+    const isRescueFromUserLogged = rescue.usuario_solicitante_id === userId;
     let userRescueData = {};
     let extertalUserRescueData = {};
 
@@ -78,7 +78,7 @@ export class RescueService {
         estado: (await this.bookStateRepository.findOne(bookUser.estado_id)).nome,
         podeBuscar: bookUser.pode_buscar,
         querReceber: bookUser.quer_receber,
-        perfil: (await this.userRepository.findById(req.id)).foto_perfil,
+        perfil: (await this.userRepository.findById(userId)).foto_perfil,
       };
 
       extertalUserRescueData = {
@@ -120,7 +120,7 @@ export class RescueService {
         estado: (await this.bookStateRepository.findOne(bookUser.estado_id)).nome,
         podeBuscar: bookUser.pode_buscar,
         querReceber: bookUser.quer_receber,
-        perfil: (await this.userRepository.findById(req.id)).foto_perfil,
+        perfil: (await this.userRepository.findById(userId)).foto_perfil,
       };
 
       extertalUserRescueData = {
@@ -158,6 +158,7 @@ export class RescueService {
 
     const returnData = {
       status: rescue.status,
+      isRescueFromUserLogged,
       userRescueData,
       extertalUserRescueData,
     };

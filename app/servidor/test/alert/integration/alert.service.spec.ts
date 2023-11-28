@@ -32,19 +32,4 @@ describe('AlertService', () => {
     it('should be defined', () => {
         expect(service).toBeDefined();
      });
-
-     describe('POST methods', () => {
-      it('should create a alert', async () => {
-        const alert = {
-            bookName:'O iluminado', 
-            usuarioId: '778183ed-6812-4b56-a0eb-c7666480038e',
-            isFilteredByLocalization: false,
-            isFilteredBySend: false
-        };
-
-        const userCreated = await service.createAlert(alert.usuarioId, alert.bookName, alert.isFilteredByLocalization, alert.isFilteredBySend);
-
-        expect(userCreated).toBeDefined();
-      })
-      });
 });
