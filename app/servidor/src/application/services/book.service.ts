@@ -1,5 +1,5 @@
 /* eslint-disable prettier/prettier */
-import { ConflictException, Injectable, NotFoundException } from '@nestjs/common';
+import { Injectable, NotFoundException } from '@nestjs/common';
 import { BookRepository } from '../../infraestructure/repositories/book.repository';
 import { IbgeFinderService } from './ibge-finder.service';
 import { UserRepository } from '../../infraestructure/repositories/user.repository';
@@ -8,6 +8,7 @@ import { BookGendersService } from './book-gender.service';
 import { BookStateService } from './book-state.service';
 import { RescueService } from './rescue.service';
 import { Book } from '../../domain/entities/book.entity';
+import { SupabaseService } from './supabase.service';
 
 @Injectable()
 export class BookService {
@@ -19,6 +20,7 @@ export class BookService {
     private bookGenderService: BookGendersService,
     private bookStateService: BookStateService,
     private rescueService: RescueService,
+    private supabaseService: SupabaseService,
   ) {}
 
   private async getUserIBGE(user_cep: string) {
@@ -39,17 +41,26 @@ export class BookService {
   private async detailedBook(book_id: string) {
     const book = await this.bookRepository.findOne(book_id);
     const bookOwner = await this.userRepository.findById(book.usuario_id);
-
+  
     const userInformation = {
       profilePhoto: bookOwner.foto_perfil,
       userName: bookOwner.nome,
       city: bookOwner.cidade,
       uf: await this.getUserUf(bookOwner.cep),
     };
+  
     let images = [];
+  
     if (book.imagens && Array.isArray(book.imagens)) {
-      images = book.imagens.filter((image) => image !== '');
+      images = await Promise.all(
+        book.imagens
+          .filter((image) => image !== '')
+          .map((image) =>
+            this.supabaseService.getFileURL(image, 'BookImages')
+          )
+      );
     }
+  
     return {
       userInformation,
       book: {
@@ -63,10 +74,12 @@ export class BookService {
         idioma: book.idioma,
         pode_buscar: book.pode_buscar,
         pode_receber: book.quer_receber,
-        capa: book.capa,
+        capa: await this.supabaseService.getFileURL(book.capa, 'BookImages'),
         imagens: images,
         genders: await this.bookGenderService.findGenderName(book.id),
-        book_state: (await this.bookStateService.findOne(book.estado_id)).nome,
+        book_state: (
+          await this.bookStateService.findOne(book.estado_id)
+        ).nome,
       },
     };
   }
@@ -74,42 +87,37 @@ export class BookService {
   async findAll(user_id: string) {
     const user = await this.userRepository.findById(user_id);
     const userUf = await this.getUserUf(user.cep);
-
+  
     const books = await this.bookRepository.findMany();
-
     const filteredBooks = books.filter((book) => book.usuario_id !== user_id);
-
-    const availableBooks = filteredBooks.map((book) => ({
+  
+    const getFileURL = async (book: Book) => ({
       id: book.id,
       nome: book.nome,
       autores: book.autor,
-      capa: book.capa,
-    }));
-
-    const favoriteGenders = filteredBooks
-      .filter((book) => this.containsGender(user_id, book.id))
-      .map((book) => ({
-        id: book.id,
-        nome: book.nome,
-        autores: book.autor,
-        capa: book.capa,
-      }));
-
-    const nextToYou = filteredBooks
-      .filter(async (book) => {
-        const userNextToYou = await this.userRepository.findById(
-          book.usuario_id,
-        );
-        const userNextToYouUf = await this.getUserUf(userNextToYou.cep);
-        return userUf === userNextToYouUf;
-      })
-      .map((book) => ({
-        id: book.id,
-        nome: book.nome,
-        autores: book.autor,
-        capa: book.capa,
-      }));
-
+      capa: await this.supabaseService.getFileURL(book.capa, 'BookImages'),
+    });
+  
+    const [availableBooks, favoriteGenders, nextToYou] = await Promise.all([
+      Promise.all(filteredBooks.map(getFileURL)),
+      Promise.all(
+        filteredBooks
+          .filter((book) => this.containsGender(user_id, book.id))
+          .map(getFileURL)
+      ),
+      Promise.all(
+        filteredBooks
+          .filter(async (book) => {
+            const userNextToYou = await this.userRepository.findById(
+              book.usuario_id
+            );
+            const userNextToYouUf = await this.getUserUf(userNextToYou.cep);
+            return userUf === userNextToYouUf;
+          })
+          .map(getFileURL)
+      ),
+    ]);
+  
     return { availableBooks, favoriteGenders, nextToYou };
   }
 
@@ -123,7 +131,7 @@ export class BookService {
           id: book.id,
           nome: book.nome,
           autores: book.autor,
-          capa: book.capa,
+          capa: await this.supabaseService.getFileURL(book.capa, 'BookImages'),
           edicao: book.edicao,
           pode_receber: book.quer_receber,
           pode_enviar: book.pode_buscar,
