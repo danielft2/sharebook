@@ -51,6 +51,10 @@ export class RescueService {
     return requestedByUser;
   }
 
+  async findAll() {
+    return await this.rescueRepository.findAll();
+  }
+
   async findRescueById(id: string, req: any) {
     const rescue = await this.rescueRepository.findById(id);
     const isRescueFromUserLogged = rescue.usuario_solicitante_id === req.id;
@@ -75,7 +79,8 @@ export class RescueService {
         autor: bookUser.autor,
         genero: await this.bookGenderService.findGenderName(bookUser.id),
         edicao: bookUser.edicao,
-        estado: (await this.bookStateRepository.findOne(bookUser.estado_id)).nome,
+        estado: (await this.bookStateRepository.findOne(bookUser.estado_id))
+          .nome,
         podeBuscar: bookUser.pode_buscar,
         querReceber: bookUser.quer_receber,
         perfil: (await this.userRepository.findById(req.id)).foto_perfil,
@@ -88,9 +93,9 @@ export class RescueService {
         genero: await this.bookGenderService.findGenderName(externalBokUser.id),
         autor: externalBokUser.autor,
         edicao: externalBokUser.edicao,
-        estado: (await this.bookStateRepository.findOne(
-          externalBokUser.estado_id,
-        )).nome,
+        estado: (
+          await this.bookStateRepository.findOne(externalBokUser.estado_id)
+        ).nome,
         podeBuscar: externalBokUser.pode_buscar,
         querReceber: externalBokUser.quer_receber,
         nome: externalUser.nome,
@@ -117,7 +122,8 @@ export class RescueService {
         autor: bookUser.autor,
         genero: await this.bookGenderService.findGenderName(bookUser.id),
         edicao: bookUser.edicao,
-        estado: (await this.bookStateRepository.findOne(bookUser.estado_id)).nome,
+        estado: (await this.bookStateRepository.findOne(bookUser.estado_id))
+          .nome,
         podeBuscar: bookUser.pode_buscar,
         querReceber: bookUser.quer_receber,
         perfil: (await this.userRepository.findById(req.id)).foto_perfil,
@@ -130,9 +136,9 @@ export class RescueService {
         genero: await this.bookGenderService.findGenderName(externalBokUser.id),
         autor: externalBokUser.autor,
         edicao: externalBokUser.edicao,
-        estado: (await this.bookStateRepository.findOne(
-          externalBokUser.estado_id,
-        )).nome,
+        estado: (
+          await this.bookStateRepository.findOne(externalBokUser.estado_id)
+        ).nome,
         podeBuscar: externalBokUser.pode_buscar,
         querReceber: externalBokUser.quer_receber,
         nome: externalUser.nome,

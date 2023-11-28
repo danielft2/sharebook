@@ -9,6 +9,7 @@ import { BookStateService } from './book-state.service';
 import { RescueService } from './rescue.service';
 import { Book } from '../../domain/entities/book.entity';
 import { SupabaseService } from './supabase.service';
+import { v4 as uuidv4 } from 'uuid';
 
 @Injectable()
 export class BookService {
@@ -148,9 +149,20 @@ export class BookService {
     const user = await this.userRepository.findById(user_id);
     const detailedBook = await this.detailedBook(book_id);
     if (user.id === book.usuario_id) {
-      // const rescues = await this.rescueService.findRescuesFromAUser(user_id);
+      const rescueDataPromises = (await this.rescueService.findAll())
+        .filter(rescue => rescue.livro_id === book_id)
+        .map(async (rescue) => {
+          const user = await this.userRepository.findById(rescue.usuario_solicitante_id);
+          return {
+            nome: user.nome,
+            cidade: user.cidade,
+            uf: await this.getUserUf(user.cep),
+            foto_perfil: await this.supabaseService.getFileURL(user.nome, 'UserImages')
+          };
+        });
+      const rescues = await Promise.all(rescueDataPromises);
       return {
-        // rescues,
+        rescues,
         detailedBook,
         is_request: false,
       };
@@ -163,7 +175,31 @@ export class BookService {
     }
   }
 
+  async removerAcentos(str: string){
+    return str.normalize('NFD').replace(/[\u0300-\u036f]/g, '');
+  }
+
   async create(book: Book) {
+    // const capa = await this.removerAcentos(book.nome);
+    // this.supabaseService.create(capa, 'BookImages', Buffer.from(book.capa, 'base64'));
+    
+    // let images: string[] = [];
+
+    // if (book.imagens && Array.isArray(book.imagens)) {
+    //   images = await Promise.all(
+    //     book.imagens.map(async (imagemBase64) => {
+    //       const imageName = uuidv4();
+    //       await this.supabaseService.create(imageName, 'BookImages', Buffer.from(imagemBase64, 'base64'));
+    //       return imageName;
+    //     })
+    //   );
+    // }
+    // const updatedBook = {
+    //   ...book,
+    //   capa: capa,
+    //   images: images
+    // }
+    // return await this.bookRepository.create(updatedBook);
     return await this.bookRepository.create(book);
   }
 
