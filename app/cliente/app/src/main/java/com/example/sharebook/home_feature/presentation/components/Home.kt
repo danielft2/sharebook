@@ -24,9 +24,7 @@ fun Home(
     homeViewModel: HomeViewModel = hiltViewModel()
 ) {
     Surface(modifier = Modifier.fillMaxSize()) {
-        FloatingButtonNewBook {
-            navController.navigate(PrivateRoutes.ExternalBook.route)
-        }
+        FloatingButtonNewBook { navController.navigate(PrivateRoutes.AddBookScreen.route) }
 
         Column(modifier = Modifier
             .fillMaxSize()
