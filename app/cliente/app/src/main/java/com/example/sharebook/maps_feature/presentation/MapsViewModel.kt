@@ -22,7 +22,7 @@ import javax.inject.Inject
 class MapsViewModel @Inject constructor(
     val deviceLocationUseCase: DeviceLocationUseCase
 ): ViewModel() {
-    private val navigationChangeChanel = Channel<Boolean>()
+    private val navigationChangeChanel = Channel<String>()
     val navigationChangeEvent = navigationChangeChanel.receiveAsFlow()
 
     var state by mutableStateOf(MapState())
@@ -56,9 +56,9 @@ class MapsViewModel @Inject constructor(
         }
     }
 
-    fun clickMarked() {
+    fun clickMarked(bookId: String) {
         viewModelScope.launch {
-            navigationChangeChanel.send(true)
+            navigationChangeChanel.send(bookId)
         }
     }
 }
