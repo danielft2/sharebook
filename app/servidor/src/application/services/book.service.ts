@@ -97,6 +97,8 @@ export class BookService {
       nome: book.nome,
       autores: book.autor,
       capa: await this.supabaseService.getFileURL(book.capa, 'BookImages'),
+      latitude: book.latitude,
+      longitude: book.longitude
     });
   
     const [availableBooks, favoriteGenders, nextToYou] = await Promise.all([
