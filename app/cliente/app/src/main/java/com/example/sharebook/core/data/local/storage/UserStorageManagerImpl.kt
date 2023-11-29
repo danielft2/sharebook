@@ -35,6 +35,8 @@ class UserStorageManagerImpl @Inject constructor(
     }
 
     override suspend fun delete() {
-
+        store.edit { preference ->
+            preference.remove(userKey)
+        }
     }
 }
