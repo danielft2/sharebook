@@ -8,6 +8,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavHostController
+import com.example.sharebook.core.presentation.components.loading.LoadingWithBackground
 import com.example.sharebook.core.presentation.navigation.routes.authenticated.PrivateRoutes
 import com.example.sharebook.maps_feature.presentation.MapsViewModel
 import com.google.android.gms.maps.model.LatLng
@@ -32,9 +33,7 @@ fun Maps(
     Box(modifier = Modifier.fillMaxSize()) {
         GoogleMap(
             modifier = Modifier.fillMaxSize(),
-            properties = MapProperties(
-                isMyLocationEnabled = mapsViewModel.state.lastKnownLocation != null
-            ),
+            properties = MapProperties(isMyLocationEnabled = mapsViewModel.state.lastKnownLocation != null),
             cameraPositionState = cameraPositionState
         ) {
             mapsViewModel.state.listMarkerBooks.forEach { marker ->
@@ -50,5 +49,7 @@ fun Maps(
                 )
             }
         }
+
+        if (mapsViewModel.state.isLoading) LoadingWithBackground()
     }
 }
