@@ -176,7 +176,7 @@ export class RescueService {
 
     const returnData = {
       status: rescue.status,
-      isRescueFromUserLogged,
+      rescueUserId: rescue.usuario_solicitante_id,
       userRescueData,
       extertalUserRescueData,
     };
