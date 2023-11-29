@@ -7,5 +7,8 @@ import com.google.android.gms.maps.model.CameraPosition
 data class MapState(
     val lastKnownLocation: Location? = null,
     val listMarkerBooks: List<BookMarker> = listOf(),
-    val initialPosition: CameraPosition? = null
+    val initialPosition: CameraPosition? = null,
+
+    val isLoading: Boolean = false,
+    val isError: String? = null
 )

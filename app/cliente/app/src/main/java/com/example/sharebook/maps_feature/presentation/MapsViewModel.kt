@@ -5,8 +5,9 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.sharebook.maps_feature.data.BookMarkers
+import com.example.sharebook.core.utils.Resource
 import com.example.sharebook.maps_feature.domain.usecases.DeviceLocationUseCase
+import com.example.sharebook.maps_feature.domain.usecases.ListBooksForMapsUseCase
 import com.example.sharebook.maps_feature.presentation.state.MapState
 import com.example.sharebook.maps_feature.utils.DeviceLocationResult
 import com.google.android.gms.location.FusedLocationProviderClient
@@ -20,7 +21,8 @@ import javax.inject.Inject
 
 @HiltViewModel
 class MapsViewModel @Inject constructor(
-    val deviceLocationUseCase: DeviceLocationUseCase
+    val deviceLocationUseCase: DeviceLocationUseCase,
+    val listBooksForMapsUseCase: ListBooksForMapsUseCase
 ): ViewModel() {
     private val navigationChangeChanel = Channel<String>()
     val navigationChangeEvent = navigationChangeChanel.receiveAsFlow()
@@ -30,7 +32,6 @@ class MapsViewModel @Inject constructor(
 
     init {
         state = state.copy(
-            listMarkerBooks = BookMarkers,
             initialPosition = CameraPosition.fromLatLngZoom(
                 LatLng(
                 -9.592679513516732,
@@ -38,6 +39,29 @@ class MapsViewModel @Inject constructor(
                 2f
             )
         )
+
+        listBookMarkers()
+    }
+
+    fun listBookMarkers() {
+        viewModelScope.launch {
+            listBooksForMapsUseCase().collect { response ->
+                state = when (response) {
+                    is Resource.Success -> {
+                        state.copy(listMarkerBooks = response.data ?: listOf())
+                    }
+                    is Resource.Error -> {
+                        state.copy(isError = response.message)
+                    }
+                    is Resource.Finnaly -> {
+                        state.copy(isLoading = false)
+                    }
+                    is Resource.Loading -> {
+                        state.copy(isLoading = true)
+                    }
+                }
+            }
+        }
     }
 
 

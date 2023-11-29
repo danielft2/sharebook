@@ -17,11 +17,9 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.LifecycleEventObserver
 import androidx.lifecycle.LifecycleOwner
-import com.example.sharebook.core.presentation.components.FloatingButtonNewBook
 import com.example.sharebook.core.presentation.components.statewrapper.StateWraper
 import com.example.sharebook.core.presentation.navigation.routes.authenticated.PrivateRoutes
 import com.example.sharebook.core.presentation.ui.theme.background
-import com.example.sharebook.exchanges_feature.presentation.request_details.event.RequestDetailsEvent
 import com.example.sharebook.exchanges_feature.presentation.requests.RequestsViewModel
 import com.example.sharebook.exchanges_feature.presentation.requests.event.RequestsEvent
 
