@@ -86,6 +86,10 @@ Table Solicitacao {
   livro_id String [not null]
   livro_oferecido_id String [not null]
   status String [not null]
+
+  indexes {
+    (usuario_solicitante_id, livro_id) [unique]
+  }
 }
 
 Table ProcessoDeTroca {

@@ -93,6 +93,8 @@ model Solicitacao {
   livro_id               String
   livro_oferecido_id     String
   status                 String
+
+  @@unique([usuario_solicitante_id, livro_id])
 }
 
 model ProcessoDeTroca {

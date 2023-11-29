@@ -30,10 +30,12 @@ export class RescueRepository {
   }
 
   async findByBookAndUserId(bookId: string, userId: string) {
-    return await this.prisma.solicitacao.findFirst({
+    return await this.prisma.solicitacao.findUnique({
       where: {
-        livro_id: bookId,
-        usuario_solicitante_id: userId
+        usuario_solicitante_id_livro_id : {
+          usuario_solicitante_id: userId,
+          livro_id: bookId
+        }
       }
     })
   }
@@ -46,9 +48,17 @@ export class RescueRepository {
 
   async update(rescue: Rescue) {
     return await this.prisma.solicitacao.update({
-        where: {id: rescue.id},
+        where: {
+          usuario_solicitante_id_livro_id: {
+            usuario_solicitante_id: rescue.idRescueUser,
+            livro_id: rescue.idBook
+          }
+        },
         data: {
-            ...rescue
+            livro_oferecido_id: rescue.idBookFromRescue,
+            livro_id: rescue.idBook,
+            usuario_solicitante_id: rescue.idRescueUser,
+            status: rescue.status
         }
     })
   }

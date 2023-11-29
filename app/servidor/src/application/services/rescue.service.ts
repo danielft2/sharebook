@@ -51,7 +51,11 @@ export class RescueService {
     return requestedByUser;
   }
 
-  async findRescueById(id: string, userId: string) {
+  async findAll() {
+    return await this.rescueRepository.findAll();
+  }
+
+  async findRescueById(id: string, userId: any) {
     const rescue = await this.rescueRepository.findById(id);
     const isRescueFromUserLogged = rescue.usuario_solicitante_id === userId;
     let userRescueData = {};
@@ -70,12 +74,16 @@ export class RescueService {
 
       userRescueData = {
         bookId: bookUser.id,
-        capa: bookUser.capa,
+        capa: await this.supabaseService.getFileURL(
+          bookUser.capa,
+          'BookImages',
+        ),
         titulo: bookUser.nome,
         autor: bookUser.autor,
         genero: await this.bookGenderService.findGenderName(bookUser.id),
         edicao: bookUser.edicao,
-        estado: (await this.bookStateRepository.findOne(bookUser.estado_id)).nome,
+        estado: (await this.bookStateRepository.findOne(bookUser.estado_id))
+          .nome,
         podeBuscar: bookUser.pode_buscar,
         querReceber: bookUser.quer_receber,
         perfil: (await this.userRepository.findById(userId)).foto_perfil,
@@ -83,14 +91,17 @@ export class RescueService {
 
       extertalUserRescueData = {
         bookId: externalBokUser.id,
-        capa: externalBokUser.capa,
+        capa: await this.supabaseService.getFileURL(
+          externalBokUser.capa,
+          'BookImages',
+        ),
         titulo: externalBokUser.nome,
         genero: await this.bookGenderService.findGenderName(externalBokUser.id),
         autor: externalBokUser.autor,
         edicao: externalBokUser.edicao,
-        estado: (await this.bookStateRepository.findOne(
-          externalBokUser.estado_id,
-        )).nome,
+        estado: (
+          await this.bookStateRepository.findOne(externalBokUser.estado_id)
+        ).nome,
         podeBuscar: externalBokUser.pode_buscar,
         querReceber: externalBokUser.quer_receber,
         nome: externalUser.nome,
@@ -112,12 +123,16 @@ export class RescueService {
 
       userRescueData = {
         bookId: bookUser.id,
-        capa: bookUser.capa,
+        capa: await this.supabaseService.getFileURL(
+          bookUser.capa,
+          'BookImages',
+        ),
         titulo: bookUser.nome,
         autor: bookUser.autor,
         genero: await this.bookGenderService.findGenderName(bookUser.id),
         edicao: bookUser.edicao,
-        estado: (await this.bookStateRepository.findOne(bookUser.estado_id)).nome,
+        estado: (await this.bookStateRepository.findOne(bookUser.estado_id))
+          .nome,
         podeBuscar: bookUser.pode_buscar,
         querReceber: bookUser.quer_receber,
         perfil: (await this.userRepository.findById(userId)).foto_perfil,
@@ -125,14 +140,17 @@ export class RescueService {
 
       extertalUserRescueData = {
         bookId: externalBokUser.id,
-        capa: externalBokUser.capa,
+        capa: await this.supabaseService.getFileURL(
+          externalBokUser.capa,
+          'BookImages',
+        ),
         titulo: externalBokUser.nome,
         genero: await this.bookGenderService.findGenderName(externalBokUser.id),
         autor: externalBokUser.autor,
         edicao: externalBokUser.edicao,
-        estado: (await this.bookStateRepository.findOne(
-          externalBokUser.estado_id,
-        )).nome,
+        estado: (
+          await this.bookStateRepository.findOne(externalBokUser.estado_id)
+        ).nome,
         podeBuscar: externalBokUser.pode_buscar,
         querReceber: externalBokUser.quer_receber,
         nome: externalUser.nome,
@@ -158,7 +176,7 @@ export class RescueService {
 
     const returnData = {
       status: rescue.status,
-      isRescueFromUserLogged,
+      rescueUserId: rescue.usuario_solicitante_id,
       userRescueData,
       extertalUserRescueData,
     };
