@@ -10,6 +10,6 @@ data class RequestDetailsModel(
     val userExternalPhone: String,
     val userExternalLocation: String,
 
-    val isRequestFromUserLogged: Boolean,
+    val userRequestId: String,
     val status: BookRequestStatus
 )

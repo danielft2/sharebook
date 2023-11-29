@@ -17,8 +17,8 @@ data class RequestDetailsResponse(
     @SerializedName("status")
     val status: String,
 
-    @SerializedName("isRescueFromUserLogged")
-    val isRescueFromUserLogged: Boolean
+    @SerializedName("rescueUserId")
+    val rescueUserId: String
 )
 
 fun RequestDetailsResponse.toRequestDetailsModel(userNameLogged: String): RequestDetailsModel {
@@ -28,6 +28,6 @@ fun RequestDetailsResponse.toRequestDetailsModel(userNameLogged: String): Reques
         userExternalLocation = extertalUserRequest.localizacao ?: "",
         userExternalPhone = extertalUserRequest.telefone ?: "",
         status = Functions.getStatusByName(status),
-        isRequestFromUserLogged = isRescueFromUserLogged
+        userRequestId = rescueUserId
     )
 }

@@ -13,6 +13,9 @@ fun BookUserLoggedConditional(uiState: ExchangeState, onClick: () -> Unit) {
             onClick = { onClick() }
         )
     } else {
-        ChooseBook(onClick = { onClick() })
+        ChooseBook(
+            isSent = uiState.requestSent,
+            onClick = { onClick() }
+        )
     }
 }

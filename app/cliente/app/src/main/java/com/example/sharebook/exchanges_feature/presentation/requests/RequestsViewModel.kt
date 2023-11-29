@@ -8,6 +8,7 @@ import androidx.lifecycle.viewModelScope
 import com.example.sharebook.core.domain.adapter.UserStorageManagement
 import com.example.sharebook.core.utils.Resource
 import com.example.sharebook.exchanges_feature.domain.usecases.ListRequestsUseCase
+import com.example.sharebook.exchanges_feature.presentation.requests.event.RequestsEvent
 import com.example.sharebook.exchanges_feature.presentation.requests.state.UiState
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.first
@@ -29,7 +30,15 @@ class RequestsViewModel @Inject constructor(
         listRequests(user?.id ?: "")
     }
 
-    fun listRequests(userId: String) {
+    fun onEvent(event: RequestsEvent) {
+        when (event) {
+            RequestsEvent.ListRequest -> {
+                if (!uiState.isLoading) listRequests(uiState.userLogged?.id ?: "")
+            }
+        }
+    }
+
+    private fun listRequests(userId: String) {
         viewModelScope.launch {
             listRequestsUseCase(userId).collect { response ->
                 uiState = when (response) {

@@ -5,5 +5,5 @@ data class SendRequestModel(
     val idRescueUser: String,
     val idBook: String,
     val idBookFromRescue: String,
-    val status: BookRequestStatus
+    val status: String
 )

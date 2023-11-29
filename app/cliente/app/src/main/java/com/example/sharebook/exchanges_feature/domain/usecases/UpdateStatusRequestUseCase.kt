@@ -17,13 +17,7 @@ class UpdateStatusRequestUseCase @Inject constructor(private val exchangesReposi
         status: BookRequestStatus,
         userLoggedId: String
     ): Flow<Resource<Boolean>>  {
-
-        val body = SendRequestModel(
-            idRescueUser = userLoggedId,
-            idBook = data.userExternalBook.id ?: "",
-            idBookFromRescue = data.userLoggedBook.id ?: "",
-            status = status
-        )
+        val body = getBody(data, userLoggedId, status)
 
         return flow {
             try {
@@ -38,6 +32,28 @@ class UpdateStatusRequestUseCase @Inject constructor(private val exchangesReposi
             } finally {
                 emit(Resource.Finnaly())
             }
+        }
+    }
+
+    private fun getBody(
+        data: RequestDetailsModel,
+        userLoggedId: String,
+        status: BookRequestStatus
+    ): SendRequestModel {
+        return if (userLoggedId == data.userRequestId) {
+            SendRequestModel(
+                idRescueUser = data.userRequestId,
+                idBookFromRescue = data.userLoggedBook.id ?: "",
+                idBook = data.userExternalBook.id ?: "",
+                status = status.tag
+            )
+        } else {
+            SendRequestModel(
+                idRescueUser = data.userRequestId,
+                idBookFromRescue = data.userExternalBook.id ?: "",
+                idBook = data.userLoggedBook.id ?: "",
+                status = status.tag
+            )
         }
     }
 }

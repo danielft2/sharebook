@@ -36,7 +36,7 @@ fun ButtonConditional(
             }
         }
         BookRequestStatus.SEND -> {
-            if (isRequestFromUserLogged) {
+            if (!isRequestFromUserLogged) {
                 Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
                     ButtonPrimary(
                         text = stringResource(id = R.string.request_details_button_reject_request),
@@ -48,14 +48,14 @@ fun ButtonConditional(
                         text = stringResource(id = R.string.request_details_button_accepet_request),
                         modifier = Modifier.weight(1f),
                         loading = isLoading
-                    ) { onChangeStatusRequest(BookRequestStatus.FINALIZE) }
+                    ) { onChangeStatusRequest(BookRequestStatus.ACCEPTED) }
                 }
             } else {
                 ButtonPrimary(
                     text = stringResource(id = R.string.request_details_button_cancel_request),
                     buttonType = ButtonType.SECONDARY,
                     loading = isLoading
-                ) { onChangeStatusRequest(BookRequestStatus.FINALIZE) }
+                ) { onChangeStatusRequest(BookRequestStatus.CANCEL) }
             }
         }
         BookRequestStatus.FINALIZE, BookRequestStatus.CANCEL -> {
