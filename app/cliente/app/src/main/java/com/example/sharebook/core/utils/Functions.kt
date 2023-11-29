@@ -47,7 +47,7 @@ object Functions {
             BookRequestStatus.FINALIZE.tag -> BookRequestStatus.FINALIZE
             BookRequestStatus.CANCEL.tag -> BookRequestStatus.CANCEL
             BookRequestStatus.ACCEPTED.tag -> BookRequestStatus.ACCEPTED
-            else -> BookRequestStatus.ANONYMUS
+            else -> { BookRequestStatus.SEND }
         }
     }
 

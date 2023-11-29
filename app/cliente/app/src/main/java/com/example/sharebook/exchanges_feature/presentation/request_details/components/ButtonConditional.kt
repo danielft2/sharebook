@@ -14,6 +14,7 @@ import com.example.sharebook.core.presentation.components.button.types.ButtonTyp
 @Composable
 fun ButtonConditional(
     bookRequestStatus: BookRequestStatus,
+    isRequestFromUserLogged: Boolean,
     onChangeStatusRequest: (status: BookRequestStatus) -> Unit,
     onNavigateBack: () -> Unit,
     isLoading: Boolean = false
@@ -35,11 +36,27 @@ fun ButtonConditional(
             }
         }
         BookRequestStatus.SEND -> {
-            ButtonPrimary(
-                text = stringResource(id = R.string.request_details_button_cancel_request),
-                buttonType = ButtonType.SECONDARY,
-                loading = isLoading
-            ) { onChangeStatusRequest(BookRequestStatus.FINALIZE) }
+            if (isRequestFromUserLogged) {
+                Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
+                    ButtonPrimary(
+                        text = stringResource(id = R.string.request_details_button_reject_request),
+                        buttonType = ButtonType.SECONDARY,
+                        modifier = Modifier.weight(1f),
+                        loading = isLoading
+                    ) { onChangeStatusRequest(BookRequestStatus.CANCEL) }
+                    ButtonPrimary(
+                        text = stringResource(id = R.string.request_details_button_accepet_request),
+                        modifier = Modifier.weight(1f),
+                        loading = isLoading
+                    ) { onChangeStatusRequest(BookRequestStatus.FINALIZE) }
+                }
+            } else {
+                ButtonPrimary(
+                    text = stringResource(id = R.string.request_details_button_cancel_request),
+                    buttonType = ButtonType.SECONDARY,
+                    loading = isLoading
+                ) { onChangeStatusRequest(BookRequestStatus.FINALIZE) }
+            }
         }
         BookRequestStatus.FINALIZE, BookRequestStatus.CANCEL -> {
             ButtonPrimary(
@@ -48,7 +65,6 @@ fun ButtonConditional(
                 loading = isLoading
             ) { onNavigateBack() }
         }
-        else -> {}
     }
 }
 

@@ -5,10 +5,10 @@ import com.example.sharebook.core.utils.UiText
 
 data class LoginFormState (
     val email: String = "",
-    val emailError: UiText = UiText.DynamicText(""),
+    val emailError: UiText = UiText.DynamicString(""),
 
     val password: String = "",
-    val passwordError: UiText = UiText.DynamicText("")
+    val passwordError: UiText = UiText.DynamicString("")
 )
 
 fun LoginFormState.toLoginModel() : LoginModel {

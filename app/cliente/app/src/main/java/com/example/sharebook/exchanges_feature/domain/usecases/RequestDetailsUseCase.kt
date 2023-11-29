@@ -1,9 +1,7 @@
 package com.example.sharebook.exchanges_feature.domain.usecases
 
-import com.example.sharebook.core.utils.Functions
 import com.example.sharebook.core.utils.Resource
-import com.example.sharebook.exchanges_feature.data.remote.model.toBookSumaryExternalModel
-import com.example.sharebook.exchanges_feature.data.remote.model.toBookYourSumaryModel
+import com.example.sharebook.exchanges_feature.data.remote.response.toRequestDetailsModel
 import com.example.sharebook.exchanges_feature.domain.adapter.ExchangesRepository
 import com.example.sharebook.exchanges_feature.domain.model.RequestDetailsModel
 import kotlinx.coroutines.flow.Flow
@@ -22,17 +20,7 @@ class RequestDetailsUseCase @Inject constructor(
             try {
                 emit(Resource.Loading())
                 val response = exchangesRepository.requestDetails(requestId)
-                emit(Resource.Success(
-                    RequestDetailsModel(
-                        userLoggedBook = response.userLoggedRequest
-                            .toBookYourSumaryModel(userNameLogged ?: ""),
-                        userExternalBook = response.extertalUserRequest
-                            .toBookSumaryExternalModel(),
-                        userExternalLocation = response.extertalUserRequest.localizacao ?: "",
-                        userExternalPhone = response.extertalUserRequest.telefone ?: "",
-                        status = Functions.getStatusByName(response.status)
-                    )
-                ))
+                emit(Resource.Success(response.toRequestDetailsModel(userNameLogged ?: "")))
             } catch (e: HttpException) {
                 emit(Resource.Error("Ocorreu um erro inesperado!"))
             } catch (e: IOException) {

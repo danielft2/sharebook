@@ -150,11 +150,12 @@ fun RequestDetails(
                     Column(modifier = Modifier.padding(16.dp)) {
                         ButtonConditional(
                             bookRequestStatus = uiState.requestDetails.status,
-                            onChangeStatusRequest = {
-                               status -> RequestDetailsEvent.UpdateStatusRequest(status)
+                            isLoading = uiState.isLoadingUpdateRequest,
+                            isRequestFromUserLogged = uiState.requestDetails.isRequestFromUserLogged,
+                            onChangeStatusRequest = { status ->
+                                requestDetailsViewModel.onEvent(RequestDetailsEvent.UpdateStatusRequest(status))
                             },
                             onNavigateBack = { navController.popBackStack() },
-                            isLoading = uiState.isLoadingUpdateRequest
                         )
                     }
                 }

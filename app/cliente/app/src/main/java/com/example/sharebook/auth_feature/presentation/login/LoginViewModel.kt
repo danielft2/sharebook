@@ -63,8 +63,8 @@ class LoginViewModel @Inject constructor(
         }
 
         uiFormState = uiFormState.copy(
-            emailError = UiText.DynamicText(""),
-            passwordError = UiText.DynamicText("")
+            emailError = UiText.DynamicString(""),
+            passwordError = UiText.DynamicString("")
         )
 
         login()

@@ -118,7 +118,7 @@ class RegisterViewModel @Inject constructor(
                         )
                     }
                     is Resource.Error -> {
-                        uiFormState = uiFormState.copy(cepError = UiText.DynamicText(it.message))
+                        uiFormState = uiFormState.copy(cepError = UiText.DynamicString(it.message!!))
                     }
                     is Resource.Finnaly -> {
                         uiFormState = uiFormState.copy(cepSearchIsLoading = false)
@@ -134,7 +134,7 @@ class RegisterViewModel @Inject constructor(
                 when (it) {
                     is Resource.Error -> {
                         if (it.code == 409) {
-                            uiFormState = uiFormState.copy(telefoneError = UiText.DynamicText(it.message))
+                            uiFormState = uiFormState.copy(telefoneError = UiText.DynamicString(it.message!!))
                         } else {
                             requestState = requestState.copy(error = it.message)
                         }

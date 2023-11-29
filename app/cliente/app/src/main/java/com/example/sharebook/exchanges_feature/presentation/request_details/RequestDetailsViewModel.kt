@@ -70,15 +70,11 @@ class RequestDetailsViewModel @Inject constructor(
     }
 
     private fun updateStatusRequest(status: BookRequestStatus) {
-        val body = SendRequestModel(
-            status = status,
-            idRescueUser = "",
-            idBookFromRescue = "",
-            idBook = ""
-        )
-
         viewModelScope.launch {
-            updateStatusRequestUseCase(body).collect { response ->
+            updateStatusRequestUseCase(
+                uiState.requestDetails!!,
+                status, uiState.userLogged!!.id
+            ).collect { response ->
                 when (response) {
                     is Resource.Success -> {
                         updateRequestChannel.send(UpdateRequestChannel.Success())

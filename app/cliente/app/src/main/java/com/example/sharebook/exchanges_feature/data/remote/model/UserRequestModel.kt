@@ -65,6 +65,7 @@ fun UserRequestModel.toBookYourSumaryModel(
     userName: String
 ): BookSummaryModel {
     return BookSummaryModel(
+        id = bookId,
         name = titulo,
         edition = edicao,
         authors = Functions.getValuesFromList(autor),
