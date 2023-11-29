@@ -13,7 +13,6 @@ import javax.inject.Inject
 @HiltViewModel
 class NavigationViewModel @Inject constructor(private val userStorageManagement: UserStorageManagement) : ViewModel() {
     var isLogged by mutableStateOf(false)
-        private set
 
     init {
         retryUser()
@@ -23,9 +22,7 @@ class NavigationViewModel @Inject constructor(private val userStorageManagement:
         val user = userStorageManagement.retry()
         viewModelScope.launch {
             user.collect {
-                if (it != null) {
-                    isLogged = true
-                }
+                isLogged = it != null
             }
         }
     }

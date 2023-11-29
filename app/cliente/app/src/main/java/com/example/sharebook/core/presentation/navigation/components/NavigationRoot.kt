@@ -57,7 +57,11 @@ fun NavigationRoot(
             route = Constants.NAVIGATION_PRIVATE
         ) {
             composable(PrivateRoutes.MainScreen.route) {
-                BottomNavigation(navControllerRoot = navController, itens = bottomNavigationItens)
+                BottomNavigation(
+                    navControllerRoot = navController,
+                    itens = bottomNavigationItens,
+                    navigationViewModel = navigationViewModel
+                )
             }
             composable(
                 route = PrivateRoutes.ExternalBook.route + "/{book_id}",

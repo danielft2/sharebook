@@ -2,7 +2,7 @@ package com.example.sharebook.maps_feature.data
 
 import com.example.sharebook.maps_feature.domain.model.BookMarker
 
-val BookMarkers = listOf<BookMarker>(
+val BookMarkers = listOf(
     BookMarker(
         title = "O Menino do Pijama Listrado",
         latitude = -4.977776043599151,

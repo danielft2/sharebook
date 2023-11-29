@@ -6,6 +6,7 @@ import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.*
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
@@ -14,15 +15,26 @@ import androidx.navigation.NavController
 import com.example.sharebook.R
 import com.example.sharebook.core.presentation.components.FloatingButtonNewBook
 import com.example.sharebook.core.presentation.components.statewrapper.StateWraper
+import com.example.sharebook.core.presentation.navigation.NavigationViewModel
 import com.example.sharebook.core.presentation.navigation.routes.authenticated.PrivateRoutes
 import com.example.sharebook.core.presentation.ui.theme.*
+import com.example.sharebook.core.utils.Constants
 import com.example.sharebook.home_feature.presentation.HomeViewModel
 
 @Composable
+
 fun Home(
     navController: NavController,
-    homeViewModel: HomeViewModel = hiltViewModel()
+    homeViewModel: HomeViewModel = hiltViewModel(),
+    navigationViewModel: NavigationViewModel
 ) {
+    LaunchedEffect(true) {
+        homeViewModel.logoutChannelState.collect {
+            navigationViewModel.isLogged = false
+            navController.navigate(Constants.NAVIGATION_PUBLIC) {}
+        }
+    }
+
     Surface(modifier = Modifier.fillMaxSize()) {
         FloatingButtonNewBook { navController.navigate(PrivateRoutes.AddBookScreen.route) }
 

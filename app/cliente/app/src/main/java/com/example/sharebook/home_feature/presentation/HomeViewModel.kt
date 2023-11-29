@@ -11,7 +11,11 @@ import com.example.sharebook.home_feature.domain.usecases.ListBooksUseCase
 import com.example.sharebook.home_feature.presentation.state.ListBooksRequestState
 import com.example.sharebook.home_feature.presentation.state.UiState
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.channels.Channel
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.receiveAsFlow
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.runBlocking
 import javax.inject.Inject
 
 @HiltViewModel
@@ -19,6 +23,10 @@ class HomeViewModel @Inject constructor(
     private val userStorageManagement: UserStorageManagement,
     private val listBooksUseCase: ListBooksUseCase
     ): ViewModel() {
+
+    private val logoutChannel = Channel<Boolean>()
+    val logoutChannelState = logoutChannel.receiveAsFlow()
+
     var uiState by mutableStateOf(UiState())
         private set
 
@@ -42,6 +50,13 @@ class HomeViewModel @Inject constructor(
                     uiState = uiState.copy(user = it)
                 }
             }
+        }
+    }
+
+    fun logout() {
+        runBlocking {
+            userStorageManagement.delete()
+            logoutChannel.send(true)
         }
     }
 
