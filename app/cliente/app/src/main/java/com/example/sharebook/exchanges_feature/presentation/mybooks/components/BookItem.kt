@@ -10,7 +10,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.example.sharebook.core.presentation.components.BookTag
+import com.example.sharebook.core.presentation.components.book.BookTag
 import com.example.sharebook.core.presentation.components.DividerCustom
 import com.example.sharebook.core.presentation.components.ImageCustom
 import com.example.sharebook.core.presentation.components.book.BookCoverSkeleton

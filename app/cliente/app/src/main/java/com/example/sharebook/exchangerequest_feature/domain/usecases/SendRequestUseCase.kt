@@ -2,6 +2,7 @@ package com.example.sharebook.exchangerequest_feature.domain.usecases
 
 import com.example.sharebook.core.utils.Resource
 import com.example.sharebook.exchangerequest_feature.data.remote.model.SendRequestModel
+import com.example.sharebook.exchangerequest_feature.data.remote.response.SendRequestResponse
 import com.example.sharebook.exchangerequest_feature.domain.adapter.ExchangeRequestRepository
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
@@ -12,12 +13,12 @@ import javax.inject.Inject
 class SendRequestUseCase @Inject constructor(
     private val exchangeRequestRepository: ExchangeRequestRepository
 ) {
-    operator fun invoke(body: SendRequestModel): Flow<Resource<Boolean>> {
+    operator fun invoke(body: SendRequestModel): Flow<Resource<String>> {
        return flow {
            try {
                emit(Resource.Loading())
-               exchangeRequestRepository.sendRequest(body)
-               emit(Resource.Success(true))
+               val response = exchangeRequestRepository.sendRequest(body)
+               emit(Resource.Success(response.id))
            } catch (e: HttpException) {
                emit(Resource.Error("Ocorreu um erro inesperado!"))
            } catch (e: IOException) {

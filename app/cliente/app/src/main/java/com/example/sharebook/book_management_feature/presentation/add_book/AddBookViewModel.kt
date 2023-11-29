@@ -139,7 +139,7 @@ class AddBookViewModel @Inject constructor(
                     is Resource.Error -> {
                         if (it.code == 409) {
                             uiFormState =
-                                uiFormState.copy(generoError = UiText.DynamicText(it.message))
+                                uiFormState.copy(generoError = UiText.DynamicString(it.message!!))
                         } else {
                             requestState = requestState.copy(error = it.message)
                         }

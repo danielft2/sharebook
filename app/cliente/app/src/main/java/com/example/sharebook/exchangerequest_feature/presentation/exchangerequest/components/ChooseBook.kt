@@ -19,11 +19,14 @@ import com.example.sharebook.R
 import com.example.sharebook.core.presentation.ui.theme.*
 
 @Composable
-fun ChooseBook(onClick: () -> Unit) {
+fun ChooseBook(
+    isSent: Boolean = false,
+    onClick: () -> Unit
+) {
     Row(
         horizontalArrangement = Arrangement.spacedBy(20.dp),
         verticalAlignment = Alignment.CenterVertically,
-        modifier = Modifier.clickable { onClick() }
+        modifier = Modifier.clickable(enabled = !isSent) { onClick() }
     ) {
         Box(modifier = Modifier
             .height(150.dp)

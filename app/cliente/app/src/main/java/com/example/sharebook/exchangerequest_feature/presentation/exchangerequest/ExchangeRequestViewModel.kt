@@ -82,9 +82,9 @@ class ExchangeRequestViewModel @Inject constructor(
         ) {
             val body = SendRequestModel(
                 idBook = uiState.requestBookId!!,
-                idBookFromRescue = uiState.bookSelected!!.id ?: "",
-                idRescueUser = uiState.userLogged!!.id ?: "",
-                status = BookRequestStatus.SEND
+                idBookFromRescue = uiState.bookSelected!!.id,
+                idRescueUser = uiState.userLogged!!.id,
+                status = BookRequestStatus.SEND.tag
             )
 
             viewModelScope.launch {

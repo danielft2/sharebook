@@ -6,35 +6,35 @@ import com.example.sharebook.core.utils.UiText
 // Analisar adição dos campos capa, imagem e sinopse
 data class AddBookFormState (
     val nome: String = "",
-    val nomeError: UiText = UiText.DynamicText(""),
+    val nomeError: UiText = UiText.DynamicString(""),
 
     val genero: String = "",
-    val generoError: UiText = UiText.DynamicText(""),
+    val generoError: UiText = UiText.DynamicString(""),
 
     val autor: String = "",
-    val autorError: UiText = UiText.DynamicText(""),
+    val autorError: UiText = UiText.DynamicString(""),
 
     val edicao: String = "",
-    val edicaoError: UiText = UiText.DynamicText(""),
+    val edicaoError: UiText = UiText.DynamicString(""),
 
     val idioma: String = "",
-    val idiomaError: UiText = UiText.DynamicText(""),
+    val idiomaError: UiText = UiText.DynamicString(""),
 
     val estadoLivro: String = "",
-    val estadoLivroError: UiText = UiText.DynamicText(""),
+    val estadoLivroError: UiText = UiText.DynamicString(""),
 
     val sinopse: String = "",
-    val sinopseError: UiText = UiText.DynamicText(""),
+    val sinopseError: UiText = UiText.DynamicString(""),
 
     val capaLivro: String = "",
-    val capaLivroError: UiText = UiText.DynamicText(""),
+    val capaLivroError: UiText = UiText.DynamicString(""),
 
     val imagemLivro: String = "",
-    val imagemLivroError: UiText = UiText.DynamicText(""),
+    val imagemLivroError: UiText = UiText.DynamicString(""),
 
     val isbn: String = "",
     val isbnSearchIsLoading: Boolean = false,
-    val isbnError: UiText = UiText.DynamicText(""),
+    val isbnError: UiText = UiText.DynamicString(""),
 
     val preferenciaBuscar: Boolean = false,
     val preferenciaReceber: Boolean = false

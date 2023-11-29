@@ -5,6 +5,8 @@ import com.example.sharebook.exchanges_feature.data.remote.repository.ExchangesR
 import com.example.sharebook.exchanges_feature.data.remote.service.ExchangesService
 import com.example.sharebook.exchanges_feature.domain.adapter.ExchangesRepository
 import com.example.sharebook.exchanges_feature.domain.usecases.ListMyBooksUseCase
+import com.example.sharebook.exchanges_feature.domain.usecases.RequestDetailsUseCase
+import com.example.sharebook.exchanges_feature.domain.usecases.UpdateStatusRequestUseCase
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -44,4 +46,17 @@ object ExchangesModule {
         return ListMyBooksUseCase(exchangesRepository)
     }
 
+    @Provides
+    @Singleton
+    fun provideRequestDetailsUseCase(exchangesRepository: ExchangesRepository): RequestDetailsUseCase {
+        return RequestDetailsUseCase(exchangesRepository)
+    }
+
+    @Provides
+    @Singleton
+    fun provideUpdateStatusRequestUseCase(
+        exchangesRepository: ExchangesRepository
+    ): UpdateStatusRequestUseCase {
+        return UpdateStatusRequestUseCase(exchangesRepository)
+    }
 }

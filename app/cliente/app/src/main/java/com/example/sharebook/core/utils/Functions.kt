@@ -41,6 +41,16 @@ object Functions {
         else BookPreferenceTag.RECEIVE
     }
 
+    fun getStatusByName(name: String): BookRequestStatus {
+        return when (name) {
+            BookRequestStatus.SEND.tag -> BookRequestStatus.SEND
+            BookRequestStatus.FINALIZE.tag -> BookRequestStatus.FINALIZE
+            BookRequestStatus.CANCEL.tag -> BookRequestStatus.CANCEL
+            BookRequestStatus.ACCEPTED.tag -> BookRequestStatus.ACCEPTED
+            else -> { BookRequestStatus.SEND }
+        }
+    }
+
     @Composable
     fun getColorsByRequestStatus(status: BookRequestStatus): RequestStatusColros {
         when (status) {
@@ -50,16 +60,22 @@ object Functions {
                     background = blue100
                 )
             }
-            BookRequestStatus.CANCEL -> {
+            BookRequestStatus.ACCEPTED -> {
                 return RequestStatusColros(
-                    colorText = blue100,
-                    background = blue500
+                    colorText = green600,
+                    background = green100
                 )
             }
             BookRequestStatus.FINALIZE -> {
                 return RequestStatusColros(
                     colorText = green600,
                     background = green100
+                )
+            }
+            BookRequestStatus.CANCEL -> {
+                return RequestStatusColros(
+                    colorText = orange700,
+                    background = orange100
                 )
             }
             else -> {
