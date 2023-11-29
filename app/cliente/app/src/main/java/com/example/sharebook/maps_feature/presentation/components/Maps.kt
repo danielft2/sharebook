@@ -25,7 +25,7 @@ fun Maps(
 
     LaunchedEffect(context) {
         mapsViewModel.navigationChangeEvent.collect {
-            navController.navigate(PrivateRoutes.ExternalBook.route)
+            navController.navigate(PrivateRoutes.ExternalBook.withArgs(it))
         }
     }
 
@@ -37,14 +37,14 @@ fun Maps(
             ),
             cameraPositionState = cameraPositionState
         ) {
-            mapsViewModel.state.listMarkerBooks.forEach {
+            mapsViewModel.state.listMarkerBooks.forEach { marker ->
                 Marker(
-                    state = rememberMarkerState(position = LatLng(it.latitude, it.longitude)),
-                    title = it.title,
-                    snippet = it.userName,
-                    onInfoWindowClick = { mapsViewModel.clickMarked() },
-                    onClick = { marker ->
-                        marker.showInfoWindow()
+                    state = rememberMarkerState(position = LatLng(marker.latitude, marker.longitude)),
+                    title = marker.title,
+                    snippet = marker.userName,
+                    onInfoWindowClick = { mapsViewModel.clickMarked(marker.id ?: "") },
+                    onClick = {
+                        it.showInfoWindow()
                         true
                     }
                 )
