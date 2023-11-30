@@ -184,14 +184,14 @@ export class BookService {
     }
   }
 
-  async create(book: Book, cape: Buffer) {
-    const capa = book.nome.normalize('NFD').replace(/[\u0300-\u036f]/g, '');
-    this.supabaseService.create(capa, 'BookImages', cape);
-    
-    return {
-      ...book,
-      capa: capa,
-    }
+  async create(book: Book) {
+    // const capa = book.nome.normalize('NFD').replace(/[\u0300-\u036f]/g, '');
+    // this.supabaseService.create(capa, 'BookImages', cape);
+    return await this.bookRepository.create(book);
+    // return {
+    //   ...book,
+    //   capa: capa,
+    // }
   }
 
   async update(book: Book){

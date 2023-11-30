@@ -60,9 +60,9 @@ export class BookControler {
       },
     },
   })
-  @UseInterceptors(FileInterceptor('cape'))
-  async create(@Body() book: Book, @UploadedFile() cape: Express.Multer.File) {
-    return this.bookService.create(book, cape.buffer);
+  // @UseInterceptors(FileInterceptor('cape'))
+  async create(@Body() book: Book/* , @UploadedFile() cape: Express.Multer.File */) {
+    return this.bookService.create(book);
   }
 
   @Put()
