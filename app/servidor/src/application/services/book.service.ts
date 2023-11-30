@@ -191,6 +191,21 @@ export class BookService {
     const findedBook = await this.bookRepository.findOne(book.id);
 
     if(!findedBook.id) throw new NotFoundException();
-    return this.bookRepository.update(book);
+    return this.bookRepository.update({
+      ...book,
+      capa: findedBook.capa
+    });
+  }
+
+  async delete(book_id: string){
+    const book = await this.bookRepository.findOne(book_id);
+    
+    if(this.rescueService.findIfUserHasRequestedBook(book_id, book.usuario_id)){
+      throw new Error("Esse livro foi solicitado por outro usuario")
+    } else if(!book) {
+      throw new NotFoundException();
+    } else {
+      this.bookRepository.delete(book_id);
+    }
   }
 }

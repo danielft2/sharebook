@@ -16,7 +16,7 @@ import { GenderService } from '../../../src/application/services/gender.service'
 import { SupabaseService } from '../../../src/application/services/supabase.service';
 import { GenderRepository } from '../../../src/infraestructure/repositories/gender.repository';
 import { Book } from '../../../src/domain/entities/book.entity';
-
+import * as fs from 'fs-extra';
 describe('BookService', () => {
   let service: BookService;
   let prismaService: PrismaService;
@@ -132,8 +132,9 @@ describe('BookService', () => {
         latitude: '-4.97813',
         longitude: '-39.0188',
       };
+      const fileBuffer = await fs.readFile('test/assets/Diario de um banana.jpg');
 
-      expect(await service.create(book)).resolves;
+      expect(await service.create(book, fileBuffer)).resolves;
     });
   });
 });
