@@ -84,9 +84,38 @@ describe('BookService', () => {
     expect(service).toBeDefined();
   });
 
+  describe('miscellaneous methods', () => {
+    it('should return a IBGE', async () => {
+      const ibge = await service.getUserIBGE('63800000');
+      expect(ibge).toBe('2311405');
+    });
+
+    it('should return a UF', async () => {
+      const uf = await service.getUserUf('63800000');
+      expect(uf).toBe('CE');
+    });
+
+    it('should return true when a book contains a gender', async () => {
+      const book_id = 'dfe8be88-3b0d-496e-baab-395b63751f43';
+      const user_id = '05304a82-8a06-11ee-b9d1-0242ac120002';
+      expect(await service.containsGender(user_id, book_id)).toBeTruthy();
+    });
+
+    it('should return a book with more informations', async () => {
+      const book_id = '1f65ae09-61e4-49eb-ba3e-f7aa5a72eddc';
+      expect(await service.detailedBook(book_id)).toBeTruthy();
+    });
+  });
   describe('GET methods', () => {
-    it('should return a book', async () => {
+    it('should return a book of another user', async () => {
       const bookId = 'dfe8be88-3b0d-496e-baab-395b63751f43';
+      const userId = '58d43f0c-5442-48b4-8103-4ec2bcd42ea6';
+      const book = await service.findOne(bookId, userId);
+      expect(book).toBeTruthy();
+    }, 15000);
+
+    it('should return a book of the user', async () => {
+      const bookId = 'eb43f38c-887b-410e-ad5f-624861cf6c95';
       const userId = '58d43f0c-5442-48b4-8103-4ec2bcd42ea6';
       const book = await service.findOne(bookId, userId);
       expect(book).toBeTruthy();
@@ -132,9 +161,17 @@ describe('BookService', () => {
         latitude: '-4.97813',
         longitude: '-39.0188',
       };
-      const fileBuffer = await fs.readFile('test/assets/Diario de um banana.jpg');
+      const fileBuffer = await fs.readFile(
+        'test/assets/Diario de um banana.jpg',
+      );
 
       expect(await service.create(book, fileBuffer)).resolves;
+    });
+  });
+
+  describe('PUT methods', () => {
+    it('should update a book', async () => {
+      const book = await service.getBookByISBN('9788498672220');
     });
   });
 });

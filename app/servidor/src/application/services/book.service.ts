@@ -24,22 +24,29 @@ export class BookService {
     private supabaseService: SupabaseService,
   ) {}
 
-  private async getUserIBGE(user_cep: string) {
+  async getUserIBGE(user_cep: string) {
     return await this.ibgeFinderService.getIBGE(user_cep);
   }
 
-  private async getUserUf(user_cep: string) {
+  async getUserUf(user_cep: string) {
     return await this.ibgeFinderService.getUf(user_cep);
   }
 
-  private async containsGender(user_id: string, book_id: string) {
+  async containsGender(user_id: string, book_id: string) {
     const userGenders = await this.userGenderService.findAllByUserId(user_id);
     const bookGenders = await this.bookGenderService.findAllByBookId(book_id);
 
     return userGenders.some((userGenders) => bookGenders.includes(userGenders));
   }
 
-  private async detailedBook(book_id: string) {
+  async getBookByISBN(isbn: string){
+    const book = (await this.bookRepository.findMany()).find(
+      book => book.isbn === isbn
+    )
+    return book;
+  }
+
+  async detailedBook(book_id: string) {
     const book = await this.bookRepository.findOne(book_id);
     const bookOwner = await this.userRepository.findById(book.usuario_id);
   
