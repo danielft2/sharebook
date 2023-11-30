@@ -4,8 +4,13 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.Text
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Delete
+import androidx.compose.material3.Icon
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
@@ -38,38 +43,50 @@ fun BookItem(book: MyBookModel, onClick: () -> Unit) {
             }
 
             Column(modifier = Modifier.padding(20.dp)) {
-                Column {
-                    Text(
-                        text = "${book.genders} - ${book.edition}° Edição",
-                        color = green600,
-                        fontSize = 14.sp,
-                        fontFamily = Lato,
-                        fontWeight = FontWeight.SemiBold
-                    )
+                Row {
+                    Column (
+                        modifier = Modifier.weight(2f)
+                    ) {
+                        Text(
+                            text = "${book.genders} - ${book.edition}° Edição",
+                            color = green600,
+                            fontSize = 14.sp,
+                            fontFamily = Lato,
+                            fontWeight = FontWeight.SemiBold
+                        )
 
-                    Spacer(modifier = Modifier.height(4.dp))
+                        Spacer(modifier = Modifier.height(4.dp))
 
-                    Text(
-                        text = book.name,
-                        color = green900,
-                        fontSize = 15.sp,
-                        fontFamily = Lato,
-                        fontWeight = FontWeight.SemiBold,
-                        maxLines = 1,
-                        overflow = TextOverflow.Ellipsis
-                    )
+                        Text(
+                            text = book.name,
+                            color = green900,
+                            fontSize = 15.sp,
+                            fontFamily = Lato,
+                            fontWeight = FontWeight.SemiBold,
+                            maxLines = 1,
+                            overflow = TextOverflow.Ellipsis
+                        )
 
-                    Spacer(modifier = Modifier.height(4.dp))
+                        Spacer(modifier = Modifier.height(4.dp))
 
-                    Text(
-                        text = book.authors,
-                        color = gray500,
-                        fontSize = 14.sp,
-                        fontFamily = Lato,
-                        maxLines = 1,
-                        overflow = TextOverflow.Ellipsis
+                        Text(
+                            text = book.authors,
+                            color = gray500,
+                            fontSize = 14.sp,
+                            fontFamily = Lato,
+                            maxLines = 1,
+                            overflow = TextOverflow.Ellipsis
+                        )
+                    }
+
+                    Icon(
+                        imageVector = Icons.Default.Delete,
+                        contentDescription = null,
+                        modifier = Modifier.size(24.dp).weight(1f),
+                        tint = Color.Red
                     )
                 }
+
 
                 DividerCustom(spaceTop = 16.dp, spaceBottom = 16.dp)
 
