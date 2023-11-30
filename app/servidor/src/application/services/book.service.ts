@@ -24,22 +24,29 @@ export class BookService {
     private supabaseService: SupabaseService,
   ) {}
 
-  private async getUserIBGE(user_cep: string) {
+  async getUserIBGE(user_cep: string) {
     return await this.ibgeFinderService.getIBGE(user_cep);
   }
 
-  private async getUserUf(user_cep: string) {
+  async getUserUf(user_cep: string) {
     return await this.ibgeFinderService.getUf(user_cep);
   }
 
-  private async containsGender(user_id: string, book_id: string) {
+  async containsGender(user_id: string, book_id: string) {
     const userGenders = await this.userGenderService.findAllByUserId(user_id);
     const bookGenders = await this.bookGenderService.findAllByBookId(book_id);
 
     return userGenders.some((userGenders) => bookGenders.includes(userGenders));
   }
 
-  private async detailedBook(book_id: string) {
+  async getBookByISBN(isbn: string){
+    const book = (await this.bookRepository.findMany()).find(
+      book => book.isbn === isbn
+    )
+    return book;
+  }
+
+  async detailedBook(book_id: string) {
     const book = await this.bookRepository.findOne(book_id);
     const bookOwner = await this.userRepository.findById(book.usuario_id);
   
@@ -177,20 +184,35 @@ export class BookService {
     }
   }
 
-  async create(book: Book, cape: Buffer) {
-    const capa = book.nome.normalize('NFD').replace(/[\u0300-\u036f]/g, '');
-    this.supabaseService.create(capa, 'BookImages', cape);
-    
-    return {
-      ...book,
-      capa: capa,
-    }
+  async create(book: Book) {
+    // const capa = book.nome.normalize('NFD').replace(/[\u0300-\u036f]/g, '');
+    // this.supabaseService.create(capa, 'BookImages', cape);
+    return await this.bookRepository.create(book);
+    // return {
+    //   ...book,
+    //   capa: capa,
+    // }
   }
 
   async update(book: Book){
     const findedBook = await this.bookRepository.findOne(book.id);
 
     if(!findedBook.id) throw new NotFoundException();
-    return this.bookRepository.update(book);
+    return this.bookRepository.update({
+      ...book,
+      capa: findedBook.capa
+    });
+  }
+
+  async delete(book_id: string){
+    const book = await this.bookRepository.findOne(book_id);
+    
+    if(this.rescueService.findIfUserHasRequestedBook(book_id, book.usuario_id)){
+      throw new Error("Esse livro foi solicitado por outro usuario")
+    } else if(!book) {
+      throw new NotFoundException();
+    } else {
+      this.bookRepository.delete(book_id);
+    }
   }
 }

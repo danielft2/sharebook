@@ -3,7 +3,7 @@
 <html lang="en">
 
 <head>
-    <title>Code coverage report for application/modules/auth.module.ts</title>
+    <title>Code coverage report for application/modules/book-gender.module.ts</title>
     <meta charset="utf-8" />
     <link rel="stylesheet" href="../../prettify.css" />
     <link rel="stylesheet" href="../../base.css" />
@@ -19,13 +19,13 @@
 <body>
 <div class='wrapper'>
     <div class='pad1'>
-        <h1><a href="../../index.html">All files</a> / <a href="index.html">application/modules</a> auth.module.ts</h1>
+        <h1><a href="../../index.html">All files</a> / <a href="index.html">application/modules</a> book-gender.module.ts</h1>
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
                 <span class="strong">0% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>0/12</span>
+                <span class='fraction'>0/9</span>
             </div>
         
             
@@ -37,16 +37,16 @@
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">0% </span>
+                <span class="strong">100% </span>
                 <span class="quiet">Functions</span>
-                <span class='fraction'>0/1</span>
+                <span class='fraction'>0/0</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
                 <span class="strong">0% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>0/10</span>
+                <span class='fraction'>0/7</span>
             </div>
         
             
@@ -82,17 +82,12 @@
 <a name='L17'></a><a href='#L17'>17</a>
 <a name='L18'></a><a href='#L18'>18</a>
 <a name='L19'></a><a href='#L19'>19</a>
-<a name='L20'></a><a href='#L20'>20</a>
-<a name='L21'></a><a href='#L21'>21</a>
-<a name='L22'></a><a href='#L22'>22</a>
-<a name='L23'></a><a href='#L23'>23</a>
-<a name='L24'></a><a href='#L24'>24</a></td><td class="line-coverage quiet"><span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<a name='L20'></a><a href='#L20'>20</a></td><td class="line-coverage quiet"><span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -104,35 +99,28 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js"><span class="cstat-no" title="statement not covered" >import { MiddlewareConsumer, Module, NestModule } from '@nestjs/common';</span>
-<span class="cstat-no" title="statement not covered" >import { JwtModule } from '@nestjs/jwt';</span>
-&nbsp;
-<span class="cstat-no" title="statement not covered" >import { AuthService } from '../services/auth.service';</span>
-<span class="cstat-no" title="statement not covered" >import { AuthController } from '../../interfaces/controllers/auth.controller';</span>
-<span class="cstat-no" title="statement not covered" >import { LocalStrategy } from '../strategies/local.strategy';</span>
-<span class="cstat-no" title="statement not covered" >import { UserModule } from './user.module';</span>
-<span class="cstat-no" title="statement not covered" >import { JwtStrategy } from '../strategies/jwt.strategy';</span>
-<span class="cstat-no" title="statement not covered" >import { LoginValidationMiddleware } from 'src/interfaces/middlewares/login-validation.middleware';</span>
+<span class="cline-any cline-no">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js"><span class="cstat-no" title="statement not covered" >import { Module } from '@nestjs/common';</span>
+import { GenderController } from '../../interfaces/controllers/gender.controller';
+<span class="cstat-no" title="statement not covered" >import { GenderService } from '../services/gender.service';</span>
+<span class="cstat-no" title="statement not covered" >import { BookGendersService } from '../services/book-gender.service';</span>
+<span class="cstat-no" title="statement not covered" >import { BookGendersRepository } from 'src/infraestructure/repositories/book-gender.repository';</span>
+import { PrismaModule } from 'src/infraestructure/database/prisma/prisma.module';
+<span class="cstat-no" title="statement not covered" >import { PrismaService } from 'src/infraestructure/database/prisma/prisma.service';</span>
+<span class="cstat-no" title="statement not covered" >import { GenderRepository } from 'src/infraestructure/repositories/gender.repository';</span>
 &nbsp;
 @Module({
-  imports:[UserModule, 
-    JwtModule.register({secret: process.env.JWT_SECRET, signOptions: {expiresIn:'1d'}})
-  ],
-  controllers: [AuthController],
-  providers: [AuthService, LocalStrategy, JwtStrategy],
+  providers: [
+    BookGendersService,
+    BookGendersRepository,
+    PrismaService,
+    GenderService,
+    GenderRepository
+    ],
+    imports: [BookGenderModule]
 })
-&nbsp;
-export <span class="cstat-no" title="statement not covered" >class <span class="cstat-no" title="statement not covered" ><span class="cstat-no" title="statement not covered" >AuthModule </span>implements NestModule {</span></span>
-<span class="fstat-no" title="function not covered" >  configure(</span>consumer: MiddlewareConsumer) {
-<span class="cstat-no" title="statement not covered" >    consumer.apply(LoginValidationMiddleware).forRoutes('login');</span>
-  }
-}
-&nbsp;</pre></td></tr></table></pre>
+export class <span class="cstat-no" title="statement not covered" ><span class="cstat-no" title="statement not covered" >BookGenderModule<span class="cstat-no" title="statement not covered" > </span>{}</span></span></pre></td></tr></table></pre>
 
                 <div class='push'></div><!-- for sticky footer -->
             </div><!-- /wrapper -->

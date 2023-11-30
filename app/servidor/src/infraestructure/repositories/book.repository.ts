@@ -45,4 +45,10 @@ export class BookRepository {
   async findMany() {
     return await this.prisma.livro.findMany();
   }
+
+  async delete(id: string) {
+    return await this.prisma.livro.delete({
+      where: { id },
+    });
+  }
 }

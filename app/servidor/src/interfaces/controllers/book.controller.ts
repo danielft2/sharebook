@@ -1,6 +1,7 @@
 import {
   Body,
   Controller,
+  Delete,
   Get,
   Param,
   Post,
@@ -59,9 +60,9 @@ export class BookControler {
       },
     },
   })
-  @UseInterceptors(FileInterceptor('cape'))
-  async create(@Body() book: Book, @UploadedFile() cape: Express.Multer.File) {
-    return this.bookService.create(book, cape.buffer);
+  // @UseInterceptors(FileInterceptor('cape'))
+  async create(@Body() book: Book/* , @UploadedFile() cape: Express.Multer.File */) {
+    return this.bookService.create(book);
   }
 
   @Put()
@@ -89,5 +90,14 @@ export class BookControler {
   })
   async update(@Body() book: Book) {
     return this.bookService.update(book);
+  }
+
+  @Delete(':id')
+  @ApiParam({
+    name: 'book id',
+    description: 'delete a book based on its id',
+  })
+  delete(@Param('id') id: string) {
+    return this.bookService.delete(id);
   }
 }
