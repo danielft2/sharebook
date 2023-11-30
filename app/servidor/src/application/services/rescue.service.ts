@@ -41,12 +41,19 @@ export class RescueService {
     return this.rescueRepository.update(rescue);
   }
 
-  async findIfUserHasRequestedBook(book_id: string, user_id: string) {
+  async findIfUserHasRequestedBook(book_id: string, user_id: string): Promise<boolean> {
     const rescueFromUser = await this.rescueRepository.findByUser(user_id);
+    let requestedByUser;
 
-    const requestedByUser = rescueFromUser.some(
-      (rescue) => rescue.livro_id === book_id,
-    );
+    if (rescueFromUser.length > 0) {
+      console.log("É")
+      requestedByUser = rescueFromUser.some(
+        (rescue) => rescue.livro_id === book_id
+      );
+    } else {
+      requestedByUser = false;
+    }
+       
 
     return requestedByUser;
   }

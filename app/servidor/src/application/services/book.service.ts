@@ -207,7 +207,7 @@ export class BookService {
   async delete(book_id: string){
     const book = await this.bookRepository.findOne(book_id);
     
-    if(this.rescueService.findIfUserHasRequestedBook(book_id, book.usuario_id)){
+    if(await this.rescueService.findIfUserHasRequestedBook(book_id, book.usuario_id) === true){
       throw new Error("Esse livro foi solicitado por outro usuario")
     } else if(!book) {
       throw new NotFoundException();
