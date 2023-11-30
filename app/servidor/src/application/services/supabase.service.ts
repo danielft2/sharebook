@@ -1,5 +1,6 @@
 import { Injectable, InternalServerErrorException } from '@nestjs/common';
 import { SupabaseClient, createClient } from '@supabase/supabase-js';
+import { randomUUID } from 'crypto';
 
 @Injectable()
 export class SupabaseService {
@@ -15,7 +16,10 @@ export class SupabaseService {
   async create(fileName: string, bucketName: string, file: Buffer) {
     const { error } = await this.supabase.storage
       .from(bucketName)
-      .upload(fileName, file);
+      .upload(fileName, file, {
+        contentType: 'image/png',
+        upsert: true,
+      });
 
     if (error)
       throw new InternalServerErrorException(
@@ -24,7 +28,6 @@ export class SupabaseService {
   }
 
   async findOne(fileName: string, bucketName: string) {
-    console.log(fileName)
     const { data, error } = await this.supabase.storage
       .from(bucketName)
       .download(fileName);
@@ -47,7 +50,7 @@ export class SupabaseService {
       .from(bucketName)
       .createSignedUrl(fileName, 120);
 
-    if (error)  throw new InternalServerErrorException('Error in file access');
+    if (error) throw new InternalServerErrorException('Error in file access');
 
     return data.signedUrl;
   }

@@ -1,7 +1,18 @@
-import { Body, Controller, Get, Param, Post, Put, Req } from '@nestjs/common';
+import {
+  Body,
+  Controller,
+  Get,
+  Param,
+  Post,
+  Put,
+  Req,
+  UploadedFile,
+  UseInterceptors,
+} from '@nestjs/common';
 import { BookService } from '../../application/services/book.service';
 import { ApiBody, ApiParam } from '@nestjs/swagger';
 import { Book } from '../../domain/entities/book.entity';
+import { FileInterceptor } from '@nestjs/platform-express';
 
 @Controller('book')
 export class BookControler {
@@ -48,8 +59,9 @@ export class BookControler {
       },
     },
   })
-  async create(@Body() book: Book) {
-    return this.bookService.create(book);
+  @UseInterceptors(FileInterceptor('cape'))
+  async create(@Body() book: Book, @UploadedFile() cape: Express.Multer.File) {
+    return this.bookService.create(book, cape.buffer);
   }
 
   @Put()

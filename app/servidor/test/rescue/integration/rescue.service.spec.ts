@@ -81,7 +81,7 @@ describe('RescueService', () => {
   })
 
   it('should return a rescue', async () => {
-    const rescueId = "b8590ed3-5e5d-4a75-9c9a-a868ae945334";
+    const rescueId = "13139b6c-6b53-41e6-9c6e-91d3bc3120be";
     const userId = "05304a82-8a06-11ee-b9d1-0242ac120002"
 
     const rescueReturned = await service.findRescueById(rescueId, userId);
