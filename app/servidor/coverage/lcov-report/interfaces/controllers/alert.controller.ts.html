@@ -3,7 +3,7 @@
 <html lang="en">
 
 <head>
-    <title>Code coverage report for interfaces/controllers/auth.controller.ts</title>
+    <title>Code coverage report for interfaces/controllers/alert.controller.ts</title>
     <meta charset="utf-8" />
     <link rel="stylesheet" href="../../prettify.css" />
     <link rel="stylesheet" href="../../base.css" />
@@ -19,13 +19,13 @@
 <body>
 <div class='wrapper'>
     <div class='pad1'>
-        <h1><a href="../../index.html">All files</a> / <a href="index.html">interfaces/controllers</a> auth.controller.ts</h1>
+        <h1><a href="../../index.html">All files</a> / <a href="index.html">interfaces/controllers</a> alert.controller.ts</h1>
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
                 <span class="strong">0% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>0/10</span>
+                <span class='fraction'>0/9</span>
             </div>
         
             
@@ -46,7 +46,7 @@
             <div class='fl pad1y space-right2'>
                 <span class="strong">0% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>0/8</span>
+                <span class='fraction'>0/7</span>
             </div>
         
             
@@ -75,16 +75,10 @@
 <a name='L10'></a><a href='#L10'>10</a>
 <a name='L11'></a><a href='#L11'>11</a>
 <a name='L12'></a><a href='#L12'>12</a>
-<a name='L13'></a><a href='#L13'>13</a>
-<a name='L14'></a><a href='#L14'>14</a>
-<a name='L15'></a><a href='#L15'>15</a>
-<a name='L16'></a><a href='#L16'>16</a>
-<a name='L17'></a><a href='#L17'>17</a>
-<a name='L18'></a><a href='#L18'>18</a>
-<a name='L19'></a><a href='#L19'>19</a>
-<a name='L20'></a><a href='#L20'>20</a></td><td class="line-coverage quiet"><span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
+<a name='L13'></a><a href='#L13'>13</a></td><td class="line-coverage quiet"><span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
@@ -93,34 +87,19 @@
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js"><span class="cstat-no" title="statement not covered" >import { Controller, Post, Request, HttpCode, HttpStatus, UseGuards } from '@nestjs/common';</span>
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js"><span class="cstat-no" title="statement not covered" >import { Body, Controller, Post } from "@nestjs/common";</span>
+<span class="cstat-no" title="statement not covered" >import { AlertService } from "../../application/services/alert.service";</span>
+<span class="cstat-no" title="statement not covered" >import { Alert } from "../../domain/entities/alert.entity";</span>
 &nbsp;
-<span class="cstat-no" title="statement not covered" >import { AuthService } from '../../application/services/auth.service';</span>
-import { AuthRequest } from '../../domain/models/AuthRequest';
-<span class="cstat-no" title="statement not covered" >import { IsPublic } from '../decorators/is-public.decorator';</span>
-<span class="cstat-no" title="statement not covered" >import { LocalAuthGuard } from '../guards/local-auth.guard';</span>
+@Controller('alert')
+export <span class="cstat-no" title="statement not covered" >class <span class="cstat-no" title="statement not covered" ><span class="cstat-no" title="statement not covered" >AlertController </span>{</span></span>
+<span class="fstat-no" title="function not covered" >    constructor (private readonly <span class="cstat-no" title="statement not covered" >a</span>lertService: A</span>lertService){}
 &nbsp;
-@Controller()
-export <span class="cstat-no" title="statement not covered" >class <span class="cstat-no" title="statement not covered" ><span class="cstat-no" title="statement not covered" >AuthController </span>{</span></span>
-<span class="fstat-no" title="function not covered" >  constructor(private readonly <span class="cstat-no" title="statement not covered" >A</span>uthService: A</span>uthService) {}
-&nbsp;
-<span class="cstat-no" title="statement not covered" >  @IsPublic()</span>
-  @Post('login')
-  @HttpCode(HttpStatus.OK)
-  @UseGuards(LocalAuthGuard)
-<span class="fstat-no" title="function not covered" >  login(</span>@Request() req: AuthRequest) {
-<span class="cstat-no" title="statement not covered" >    return this.AuthService.login(req.user);</span>
-  }
-}
-&nbsp;</pre></td></tr></table></pre>
+    @Post()
+<span class="fstat-no" title="function not covered" >    async <span class="cstat-no" title="statement not covered" ></span>create(@Body() alert: Alert) {</span>
+<span class="cstat-no" title="statement not covered" >        return this.alertService.createAlert(alert.usuarioId, alert.bookName, alert.isFilteredByLocalization, alert.isFilteredBySend);</span>
+    }
+}</pre></td></tr></table></pre>
 
                 <div class='push'></div><!-- for sticky footer -->
             </div><!-- /wrapper -->

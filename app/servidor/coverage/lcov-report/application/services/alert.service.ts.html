@@ -3,7 +3,7 @@
 <html lang="en">
 
 <head>
-    <title>Code coverage report for interfaces/controllers/auth.controller.ts</title>
+    <title>Code coverage report for application/services/alert.service.ts</title>
     <meta charset="utf-8" />
     <link rel="stylesheet" href="../../prettify.css" />
     <link rel="stylesheet" href="../../base.css" />
@@ -19,34 +19,34 @@
 <body>
 <div class='wrapper'>
     <div class='pad1'>
-        <h1><a href="../../index.html">All files</a> / <a href="index.html">interfaces/controllers</a> auth.controller.ts</h1>
+        <h1><a href="../../index.html">All files</a> / <a href="index.html">application/services</a> alert.service.ts</h1>
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">0% </span>
+                <span class="strong">54.54% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>0/10</span>
+                <span class='fraction'>6/11</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">100% </span>
+                <span class="strong">0% </span>
                 <span class="quiet">Branches</span>
-                <span class='fraction'>0/0</span>
+                <span class='fraction'>0/5</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">0% </span>
+                <span class="strong">50% </span>
                 <span class="quiet">Functions</span>
-                <span class='fraction'>0/2</span>
+                <span class='fraction'>1/2</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">0% </span>
+                <span class="strong">44.44% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>0/8</span>
+                <span class='fraction'>4/9</span>
             </div>
         
             
@@ -61,7 +61,7 @@
             </div>
         </template>
     </div>
-    <div class='status-line low'></div>
+    <div class='status-line medium'></div>
     <pre><table class="coverage">
 <tr><td class="line-count quiet"><a name='L1'></a><a href='#L1'>1</a>
 <a name='L2'></a><a href='#L2'>2</a>
@@ -82,7 +82,23 @@
 <a name='L17'></a><a href='#L17'>17</a>
 <a name='L18'></a><a href='#L18'>18</a>
 <a name='L19'></a><a href='#L19'>19</a>
-<a name='L20'></a><a href='#L20'>20</a></td><td class="line-coverage quiet"><span class="cline-any cline-no">&nbsp;</span>
+<a name='L20'></a><a href='#L20'>20</a>
+<a name='L21'></a><a href='#L21'>21</a>
+<a name='L22'></a><a href='#L22'>22</a>
+<a name='L23'></a><a href='#L23'>23</a>
+<a name='L24'></a><a href='#L24'>24</a>
+<a name='L25'></a><a href='#L25'>25</a>
+<a name='L26'></a><a href='#L26'>26</a>
+<a name='L27'></a><a href='#L27'>27</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -91,36 +107,41 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js"><span class="cstat-no" title="statement not covered" >import { Controller, Post, Request, HttpCode, HttpStatus, UseGuards } from '@nestjs/common';</span>
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import { ConflictException, Injectable } from "@nestjs/common";
+import { Alert } from "../../domain/entities/alert.entity";
+import { AlertRepository } from "../../infraestructure/repositories/alert.repository";
 &nbsp;
-<span class="cstat-no" title="statement not covered" >import { AuthService } from '../../application/services/auth.service';</span>
-import { AuthRequest } from '../../domain/models/AuthRequest';
-<span class="cstat-no" title="statement not covered" >import { IsPublic } from '../decorators/is-public.decorator';</span>
-<span class="cstat-no" title="statement not covered" >import { LocalAuthGuard } from '../guards/local-auth.guard';</span>
+@Injectable()
+export class AlertService {
+  constructor(
+    private readonly alertRepository: AlertRepository,
+  ) {}
 &nbsp;
-@Controller()
-export <span class="cstat-no" title="statement not covered" >class <span class="cstat-no" title="statement not covered" ><span class="cstat-no" title="statement not covered" >AuthController </span>{</span></span>
-<span class="fstat-no" title="function not covered" >  constructor(private readonly <span class="cstat-no" title="statement not covered" >A</span>uthService: A</span>uthService) {}
+<span class="fstat-no" title="function not covered" >  async </span>createAlert(userId: string, bookName: string, isFilteredByLocalization: boolean, isFilteredBySend: boolean) {
+    const alert = <span class="cstat-no" title="statement not covered" >await this.alertRepository.findByUserAndBook(userId, bookName);</span>
 &nbsp;
-<span class="cstat-no" title="statement not covered" >  @IsPublic()</span>
-  @Post('login')
-  @HttpCode(HttpStatus.OK)
-  @UseGuards(LocalAuthGuard)
-<span class="fstat-no" title="function not covered" >  login(</span>@Request() req: AuthRequest) {
-<span class="cstat-no" title="statement not covered" >    return this.AuthService.login(req.user);</span>
+<span class="cstat-no" title="statement not covered" >    <span class="missing-if-branch" title="if path not taken" >I</span>if (alert) {</span>
+<span class="cstat-no" title="statement not covered" >      throw new ConflictException();</span>
+    } 
+&nbsp;
+    const alertData: Alert = <span class="cstat-no" title="statement not covered" >{</span>
+        bookName: bookName,
+        usuarioId: userId,
+        isFilteredByLocalization: isFilteredByLocalization ? isFilteredByLocalization : false,
+        isFilteredBySend: isFilteredBySend ? isFilteredBySend : false
+    }
+&nbsp;
+<span class="cstat-no" title="statement not covered" >    return await this.alertRepository.create(alertData);</span>
   }
-}
-&nbsp;</pre></td></tr></table></pre>
+}</pre></td></tr></table></pre>
 
                 <div class='push'></div><!-- for sticky footer -->
             </div><!-- /wrapper -->

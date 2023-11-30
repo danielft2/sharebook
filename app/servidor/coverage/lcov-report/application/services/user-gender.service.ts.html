@@ -3,7 +3,7 @@
 <html lang="en">
 
 <head>
-    <title>Code coverage report for interfaces/controllers/auth.controller.ts</title>
+    <title>Code coverage report for application/services/user-gender.service.ts</title>
     <meta charset="utf-8" />
     <link rel="stylesheet" href="../../prettify.css" />
     <link rel="stylesheet" href="../../base.css" />
@@ -19,13 +19,13 @@
 <body>
 <div class='wrapper'>
     <div class='pad1'>
-        <h1><a href="../../index.html">All files</a> / <a href="index.html">interfaces/controllers</a> auth.controller.ts</h1>
+        <h1><a href="../../index.html">All files</a> / <a href="index.html">application/services</a> user-gender.service.ts</h1>
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
                 <span class="strong">0% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>0/10</span>
+                <span class='fraction'>0/12</span>
             </div>
         
             
@@ -39,14 +39,14 @@
             <div class='fl pad1y space-right2'>
                 <span class="strong">0% </span>
                 <span class="quiet">Functions</span>
-                <span class='fraction'>0/2</span>
+                <span class='fraction'>0/5</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
                 <span class="strong">0% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>0/8</span>
+                <span class='fraction'>0/10</span>
             </div>
         
             
@@ -82,42 +82,48 @@
 <a name='L17'></a><a href='#L17'>17</a>
 <a name='L18'></a><a href='#L18'>18</a>
 <a name='L19'></a><a href='#L19'>19</a>
-<a name='L20'></a><a href='#L20'>20</a></td><td class="line-coverage quiet"><span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<a name='L20'></a><a href='#L20'>20</a>
+<a name='L21'></a><a href='#L21'>21</a>
+<a name='L22'></a><a href='#L22'>22</a></td><td class="line-coverage quiet"><span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js"><span class="cstat-no" title="statement not covered" >import { Controller, Post, Request, HttpCode, HttpStatus, UseGuards } from '@nestjs/common';</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js"><span class="cstat-no" title="statement not covered" >import { Injectable } from '@nestjs/common';</span>
+<span class="cstat-no" title="statement not covered" >import { UserGendersRepository } from '../../infraestructure/repositories/user-gender.repository';</span>
 &nbsp;
-<span class="cstat-no" title="statement not covered" >import { AuthService } from '../../application/services/auth.service';</span>
-import { AuthRequest } from '../../domain/models/AuthRequest';
-<span class="cstat-no" title="statement not covered" >import { IsPublic } from '../decorators/is-public.decorator';</span>
-<span class="cstat-no" title="statement not covered" >import { LocalAuthGuard } from '../guards/local-auth.guard';</span>
+@Injectable()
+export <span class="cstat-no" title="statement not covered" >class <span class="cstat-no" title="statement not covered" ><span class="cstat-no" title="statement not covered" >UserGendersService </span>{</span></span>
+<span class="fstat-no" title="function not covered" >  constructor(private <span class="cstat-no" title="statement not covered" >u</span>serGenderRepository: U</span>serGendersRepository) {}
 &nbsp;
-@Controller()
-export <span class="cstat-no" title="statement not covered" >class <span class="cstat-no" title="statement not covered" ><span class="cstat-no" title="statement not covered" >AuthController </span>{</span></span>
-<span class="fstat-no" title="function not covered" >  constructor(private readonly <span class="cstat-no" title="statement not covered" >A</span>uthService: A</span>uthService) {}
+<span class="fstat-no" title="function not covered" >  async </span>findAll() {
+<span class="cstat-no" title="statement not covered" >    return await this.userGenderRepository.findMany();</span>
+  }
 &nbsp;
-<span class="cstat-no" title="statement not covered" >  @IsPublic()</span>
-  @Post('login')
-  @HttpCode(HttpStatus.OK)
-  @UseGuards(LocalAuthGuard)
-<span class="fstat-no" title="function not covered" >  login(</span>@Request() req: AuthRequest) {
-<span class="cstat-no" title="statement not covered" >    return this.AuthService.login(req.user);</span>
+<span class="fstat-no" title="function not covered" >  async </span>findAllByUserId(usuario_id: string) {
+    const userGenders = <span class="cstat-no" title="statement not covered" >await this.findAll();</span>
+&nbsp;
+    const genders = <span class="cstat-no" title="statement not covered" >userGenders</span>
+      .filter(<span class="fstat-no" title="function not covered" >(u</span>serGender) =&gt; <span class="cstat-no" title="statement not covered" >userGender.usuario_id === usuario_id)</span>
+      .map(<span class="fstat-no" title="function not covered" >(u</span>serGender) =&gt; <span class="cstat-no" title="statement not covered" >userGender.genero_id)</span>;
+&nbsp;
+<span class="cstat-no" title="statement not covered" >    return genders;</span>
   }
 }
 &nbsp;</pre></td></tr></table></pre>
