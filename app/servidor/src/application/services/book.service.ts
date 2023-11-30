@@ -177,32 +177,14 @@ export class BookService {
     }
   }
 
-  async removerAcentos(str: string){
-    return str.normalize('NFD').replace(/[\u0300-\u036f]/g, '');
-  }
-
-  async create(book: Book) {
-    // const capa = await this.removerAcentos(book.nome);
-    // this.supabaseService.create(capa, 'BookImages', Buffer.from(book.capa, 'base64'));
+  async create(book: Book, cape: Buffer) {
+    const capa = book.nome.normalize('NFD').replace(/[\u0300-\u036f]/g, '');
+    this.supabaseService.create(capa, 'BookImages', cape);
     
-    // let images: string[] = [];
-
-    // if (book.imagens && Array.isArray(book.imagens)) {
-    //   images = await Promise.all(
-    //     book.imagens.map(async (imagemBase64) => {
-    //       const imageName = uuidv4();
-    //       await this.supabaseService.create(imageName, 'BookImages', Buffer.from(imagemBase64, 'base64'));
-    //       return imageName;
-    //     })
-    //   );
-    // }
-    // const updatedBook = {
-    //   ...book,
-    //   capa: capa,
-    //   images: images
-    // }
-    // return await this.bookRepository.create(updatedBook);
-    return await this.bookRepository.create(book);
+    return {
+      ...book,
+      capa: capa,
+    }
   }
 
   async update(book: Book){
