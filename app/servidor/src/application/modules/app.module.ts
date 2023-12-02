@@ -15,9 +15,10 @@ import { AlertModule } from './alert.module';
 import { JwtService } from '@nestjs/jwt';
 import { RescueModule } from './rescue.module';
 import { JwtMiddleware } from 'src/interfaces/middlewares/jwt-request.middleware';
+import { BookStateModule } from './book-state.module';
 
 @Module({
-  imports: [UserModule, AuthModule, BookModule, AlertModule, RescueModule],
+  imports: [UserModule, AuthModule, BookModule, AlertModule, RescueModule, BookStateModule],
   controllers: [AppController],
   providers: [AppService, { provide: APP_GUARD, useClass: JwtAuthGuard}, JwtService],
 })

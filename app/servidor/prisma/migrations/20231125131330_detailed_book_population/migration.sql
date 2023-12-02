@@ -28,7 +28,7 @@ INSERT INTO "Livro"(
     TRUE,
     'O Iluminado',
     '{"b468a625-1b22-42fe-a15d-ac8ed82a4808"}',
-    '448358ea-c333-4982-ac6e-627b75d2e6cc',
+    'dc592b9f-a078-498f-a8b7-cf314273a15e',
     '-4.966680',
     '-39.015421'), 
     (
