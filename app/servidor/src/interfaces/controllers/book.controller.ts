@@ -8,12 +8,18 @@ import {
   Put,
   Req,
   UploadedFile,
+  UploadedFiles,
   UseInterceptors,
 } from '@nestjs/common';
 import { BookService } from '../../application/services/book.service';
 import { ApiBody, ApiParam } from '@nestjs/swagger';
 import { Book } from '../../domain/entities/book.entity';
-import { FileInterceptor } from '@nestjs/platform-express';
+import {
+  FileFieldsInterceptor,
+  FileInterceptor,
+  FilesInterceptor,
+} from '@nestjs/platform-express';
+import { CreatedBookDto } from '../dto/createdBook.dto';
 
 @Controller('book')
 export class BookControler {
@@ -52,17 +58,37 @@ export class BookControler {
         idioma: 'Espanhol',
         quer_receber: true,
         pode_buscar: false,
-        capa: 'Diario de um Banana',
-        imagens: [''],
         estado_id: '448358ea-c333-4982-ac6e-627b75d2e6cc',
         latitude: '-4.97813',
         longitude: '-39.0188',
+        cape: 'file',
+        images: 'files[]',
       },
     },
   })
-  // @UseInterceptors(FileInterceptor('cape'))
-  async create(@Body() book: Book/* , @UploadedFile() cape: Express.Multer.File */) {
-    return this.bookService.create(book);
+  @UseInterceptors(
+    FileFieldsInterceptor([
+      {
+        name: 'cape',
+        maxCount: 1,
+      },
+      {
+        name: 'images',
+        maxCount: 4,
+      },
+    ]),
+  )
+  async create(
+    @Body() book: CreatedBookDto,
+    @UploadedFiles()
+    collection: Record<'cape' | 'images', Express.Multer.File[]>,
+  ) {
+    const data: Book = {
+      ...book,
+      capa: '',
+      imagens: [''],
+    };
+    return this.bookService.create(data, collection);
   }
 
   @Put()

@@ -10,8 +10,10 @@ VALUES ('1c527b0a-6da8-4ccd-b23f-fcd946cf488a', 'Romance'),
 ('b7d791c1-2060-4aae-a788-bef977341a2f', 'Suspense');
 
 INSERT INTO "Estado"( id, nome )
-VALUES('05989174-b0fe-47a9-b8ee-394228fb66ca', 'Bom Estado'),
-('448358ea-c333-4982-ac6e-627b75d2e6cc', 'Perfeito');
+VALUES('05989174-b0fe-47a9-b8ee-394228fb66ca', 'Desgastado'),
+('448358ea-c333-4982-ac6e-627b75d2e6cc', 'Usado'),
+('ab5fd415-2805-496d-8ad3-9332b00cdeb2', 'Novo'),
+('dc592b9f-a078-498f-a8b7-cf314273a15e', 'Lacrado');
 
 INSERT INTO "Livro"(id,isbn,nome,sinopse,autor,usuario_id,edicao,idioma,pode_buscar,quer_receber, capa, imagens, estado_id, latitude, longitude)
 VALUES ('dfe8be88-3b0d-496e-baab-395b63751f43', '9780857533937','O Menino do Pijama Listrado', 

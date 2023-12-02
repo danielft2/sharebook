@@ -47,6 +47,23 @@ INSERT INTO "Livro"(
     '448358ea-c333-4982-ac6e-627b75d2e6cc',
     '-3.729616',
     '-38.524885'
+    ),
+    (
+    '654a5bfa-2245-4094-9b8b-93727a7bc778',
+    '9780075536321',
+    'Ana carienina',
+    'Anna Karenina, casada um alto funcionário do governo russo, envolve-se com o Conde Vronsky, oficial da cavalaria, chocando a alta sociedade de 1874. Ela pede o divórcio, mas o marido, além de se recusar a concedê-lo, ainda a impede de ver o filho.',
+    '{"Liev Tolstoi"}',
+    '1734ed59-eaa8-4c31-9b38-f546790668e8',
+    1,
+    'Inglês',
+    TRUE,
+    TRUE,
+    'Ana Carienina',
+    '{""}',
+    '448358ea-c333-4982-ac6e-627b75d2e6cc',
+    '-3.729616',
+    '-38.524885'
     );
 
 INSERT INTO "GeneroLivro"( livro_id, genero_id )
