@@ -82,10 +82,12 @@ export class BookControler {
     @UploadedFiles()
     collection: Record<'cape' | 'images', Express.Multer.File[]>,
   ) {
+    const autores: string[] = book.autor.split(', ');
     const data: Book = {
       ...book,
       capa: '',
       imagens: [''],
+      autor: autores,
     };
     return this.bookService.create(data, collection);
   }
@@ -117,10 +119,12 @@ export class BookControler {
     @Body() book: CreatedBookDto,
     @UploadedFile() cape: Express.Multer.File,
   ) {
+    const autores: string[] = book.autor.split(', ');
     const data: Book = {
       ...book,
       capa: '',
       imagens: [''],
+      autor: autores,
     };
     return this.bookService.update(data, cape);
   }
