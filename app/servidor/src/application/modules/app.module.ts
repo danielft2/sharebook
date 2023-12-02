@@ -16,16 +16,32 @@ import { JwtService } from '@nestjs/jwt';
 import { RescueModule } from './rescue.module';
 import { JwtMiddleware } from 'src/interfaces/middlewares/jwt-request.middleware';
 import { BookStateModule } from './book-state.module';
+import { GenderModule } from './gender.module';
 
 @Module({
-  imports: [UserModule, AuthModule, BookModule, AlertModule, RescueModule, BookStateModule],
+  imports: [
+    UserModule,
+    AuthModule,
+    BookModule,
+    AlertModule,
+    RescueModule,
+    BookStateModule,
+    GenderModule,
+  ],
   controllers: [AppController],
-  providers: [AppService, { provide: APP_GUARD, useClass: JwtAuthGuard}, JwtService],
+  providers: [
+    AppService,
+    { provide: APP_GUARD, useClass: JwtAuthGuard },
+    JwtService,
+  ],
 })
 export class AppModule {
   configure(consumer: MiddlewareConsumer) {
     consumer
       .apply(JwtMiddleware)
-      .forRoutes({ path: '/book', method: RequestMethod.GET }, {path: '/rescue/{id}', method: RequestMethod.GET});
+      .forRoutes(
+        { path: '/book', method: RequestMethod.GET },
+        { path: '/rescue/{id}', method: RequestMethod.GET },
+      );
   }
 }
