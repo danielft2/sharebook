@@ -1,4 +1,4 @@
-package com.example.sharebook.book_feature.presentation.external_book.event
+package com.example.sharebook.book_feature.presentation.details_book_external.event
 
 
 sealed class SendRequestBookEvent {

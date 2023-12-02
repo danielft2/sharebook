@@ -1,4 +1,4 @@
-package com.example.sharebook.book_feature.presentation.self_book.event
+package com.example.sharebook.book_feature.presentation.details_book_self.event
 
 sealed class RequestBookEvent {
     object AcceptRequest: RequestBookEvent()

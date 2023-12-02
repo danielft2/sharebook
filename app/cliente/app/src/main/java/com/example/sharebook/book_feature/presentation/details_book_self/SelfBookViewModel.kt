@@ -1,4 +1,4 @@
-package com.example.sharebook.book_feature.presentation.self_book
+package com.example.sharebook.book_feature.presentation.details_book_self
 
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -7,7 +7,7 @@ import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.sharebook.book_feature.domain.usecase.DetailsBookUseCase
-import com.example.sharebook.book_feature.presentation.external_book.state.UiState
+import com.example.sharebook.book_feature.presentation.details_book_external.state.UiState
 import com.example.sharebook.core.utils.Constants
 import com.example.sharebook.core.utils.Resource
 import dagger.hilt.android.lifecycle.HiltViewModel

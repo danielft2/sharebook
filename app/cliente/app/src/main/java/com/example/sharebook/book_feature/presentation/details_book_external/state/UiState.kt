@@ -1,4 +1,4 @@
-package com.example.sharebook.book_feature.presentation.self_book.state
+package com.example.sharebook.book_feature.presentation.details_book_external.state
 
 import com.example.sharebook.book_feature.domain.model.BookDetailsModel
 

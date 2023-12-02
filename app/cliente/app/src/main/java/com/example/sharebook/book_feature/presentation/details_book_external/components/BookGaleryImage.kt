@@ -1,4 +1,4 @@
-package com.example.sharebook.book_feature.presentation.external_book.components
+package com.example.sharebook.book_feature.presentation.details_book_external.components
 
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyRow
