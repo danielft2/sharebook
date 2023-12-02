@@ -9,7 +9,7 @@ import { BookStateService } from './book-state.service';
 import { RescueService } from './rescue.service';
 import { Book } from '../../domain/entities/book.entity';
 import { SupabaseService } from './supabase.service';
-import { v4 as uuidv4 } from 'uuid';
+import { randomUUID } from 'crypto';
 
 @Injectable()
 export class BookService {
@@ -44,6 +44,10 @@ export class BookService {
       book => book.isbn === isbn
     )
     return book;
+  }
+
+  async findUnique(id: string){
+    return await this.bookRepository.findOne(id);
   }
 
   async detailedBook(book_id: string) {
@@ -184,35 +188,53 @@ export class BookService {
     }
   }
 
-  async create(book: Book) {
-    // const capa = book.nome.normalize('NFD').replace(/[\u0300-\u036f]/g, '');
-    // this.supabaseService.create(capa, 'BookImages', cape);
-    return await this.bookRepository.create(book);
-    // return {
-    //   ...book,
-    //   capa: capa,
-    // }
+  async create(book: Book, collection: Record<'cape' | 'images', Express.Multer.File[]>) {
+    const cape = collection.cape.at(0).buffer;
+    const capa = book.nome.normalize('NFD').replace(/[\u0300-\u036f]/g, '');
+    this.supabaseService.create(capa, 'BookImages', cape);
+
+    const imagesName: string[] = await Promise.all(
+      collection.images.map(async (image) => {
+        const imageName = randomUUID();
+        await this.supabaseService.create(imageName, 'BookImages', image.buffer);
+        return imageName;
+      })
+    );  
+    return await this.bookRepository.create({
+      ...book,
+      capa: capa,
+      imagens: imagesName
+    });
   }
 
-  async update(book: Book){
+  async update(book: Book, cape: Express.Multer.File){
     const findedBook = await this.bookRepository.findOne(book.id);
-
     if(!findedBook.id) throw new NotFoundException();
-    return this.bookRepository.update({
-      ...book,
-      capa: findedBook.capa
-    });
+    else if(await this.rescueService.findIfABookWasRequested(book.id)){
+      throw new Error("Você não pode editar esse livro, ele ja foi solicitado")
+    }
+    else{
+      const updatedCapeName = book.nome;
+      this.supabaseService.remove(findedBook.nome, 'BookImages');
+      this.supabaseService.create(updatedCapeName, 'BookImages', cape.buffer);
+      return this.bookRepository.update({
+        ...book,
+        capa: updatedCapeName,
+        imagens: findedBook.imagens
+      });
+    }
   }
 
   async delete(book_id: string){
     const book = await this.bookRepository.findOne(book_id);
     
-    if(await this.rescueService.findIfUserHasRequestedBook(book_id, book.usuario_id) === true){
-      throw new Error("Esse livro foi solicitado por outro usuario")
-    } else if(!book) {
+    if(!book){
       throw new NotFoundException();
+    } else if(await this.rescueService.findIfABookWasRequested(book_id)) {
+      throw new Error("Você não pode excluir esse livro, ele ja foi solicitado")
     } else {
       this.bookRepository.delete(book_id);
+      return true;
     }
   }
 }

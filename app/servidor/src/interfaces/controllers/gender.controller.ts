@@ -5,7 +5,7 @@ import { GenderService } from '../../../src/application/services/gender.service'
 export class GenderController {
   constructor(private genderService: GenderService) {}
 
-  @Get('id')
+  @Get('/:id')
   async findOne(@Param('id') id: string) {
     return this.genderService.findOne(id);
   }

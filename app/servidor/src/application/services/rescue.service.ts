@@ -58,11 +58,20 @@ export class RescueService {
     return requestedByUser;
   }
 
+  async findIfABookWasRequested(book_id: string) {
+    const wasRescues = (await this.rescueRepository.findAll()).some(
+      (rescue) => {
+        rescue.livro_id === book_id;
+      },
+    );
+    return wasRescues;
+  }
+
   async findAll() {
     return await this.rescueRepository.findAll();
   }
 
-  async findRescueById(id: string, userId: any) {
+  async findRescueById(id: string, userId: string) {
     const rescue = await this.rescueRepository.findById(id);
     const isRescueFromUserLogged = rescue.usuario_solicitante_id === userId;
     let userRescueData = {};

@@ -14,11 +14,10 @@ import { GenderRepository } from '../../../src/infraestructure/repositories/gend
 describe('RescueService', () => {
   let service: RescueService;
   let prismaService: PrismaService;
-    
-    
+
   beforeEach(async () => {
     const prismaModule: TestingModule = await Test.createTestingModule({
-      providers: [PrismaService]
+      providers: [PrismaService],
     }).compile();
     prismaService = prismaModule.get<PrismaService>(PrismaService);
 
@@ -26,7 +25,7 @@ describe('RescueService', () => {
     const bookRepository = new BookRepository(prismaService);
     const bookStateRepository = new BookStateRepository(prismaService);
     const userRepository = new UserRepository(prismaService);
-    const bookGendersRepository =  new BookGendersRepository(prismaService);
+    const bookGendersRepository = new BookGendersRepository(prismaService);
     const genderRepository = new GenderRepository(prismaService);
     const module: TestingModule = await Test.createTestingModule({
       providers: [
@@ -40,11 +39,11 @@ describe('RescueService', () => {
         },
         {
           provide: BookRepository,
-          useValue: bookRepository
+          useValue: bookRepository,
         },
         {
           provide: BookStateRepository,
-          useValue: bookStateRepository
+          useValue: bookStateRepository,
         },
         {
           provide: UserRepository,
@@ -52,12 +51,12 @@ describe('RescueService', () => {
         },
         {
           provide: BookGendersRepository,
-          useValue: bookGendersRepository
+          useValue: bookGendersRepository,
         },
         {
           provide: GenderRepository,
-          useValue: genderRepository
-        }
+          useValue: genderRepository,
+        },
       ],
     }).compile();
 
@@ -68,23 +67,62 @@ describe('RescueService', () => {
     expect(service).toBeDefined();
   });
 
-  it('should create a rescue', async () => {
-    const rescueData = {
-      idRescueUser:"05304a82-8a06-11ee-b9d1-0242ac120002",
-      idBook: "1f65ae09-61e4-49eb-ba3e-f7aa5a72eddc",
-      idBookFromRescue: "dfe8be88-3b0d-496e-baab-395b63751f43",
-      status: "Aguardando Confirmação"
-    }
+  describe('POST methods', () => {
+    it('should create a rescue', async () => {
+      const rescueData = {
+        idRescueUser: '05304a82-8a06-11ee-b9d1-0242ac120002',
+        idBook: '1f65ae09-61e4-49eb-ba3e-f7aa5a72eddc',
+        idBookFromRescue: 'dfe8be88-3b0d-496e-baab-395b63751f43',
+        status: 'Aguardando Confirmação',
+      };
 
-    const rescueCreated = await service.create(rescueData);
-    expect(rescueCreated).toBeDefined();
-  })
+      const rescueCreated = await service.create(rescueData);
+      expect(rescueCreated).toBeDefined();
+    });
+  });
 
-  it('should return a rescue', async () => {
-    const rescueId = "13139b6c-6b53-41e6-9c6e-91d3bc3120be";
-    const userId = "05304a82-8a06-11ee-b9d1-0242ac120002"
+  // describe('PUT methods', () => {
+  //   it('should update a rescue', async () => {
+  //     const rescues = (await service.findAll()).find((rescue) => {
+  //       rescue.livro_id === '1f65ae09-61e4-49eb-ba3e-f7aa5a72eddc' &&
+  //         rescue.livro_oferecido_id ===
+  //           'dfe8be88-3b0d-496e-baab-395b63751f43' &&
+  //         rescue.usuario_solicitante_id ===
+  //           '05304a82-8a06-11ee-b9d1-0242ac120002';
+  //     });
+  //     const rescueData = {
+  //       id: rescues.id,
+  //       idRescueUser: '05304a82-8a06-11ee-b9d1-0242ac120002',
+  //       idBook: '1f65ae09-61e4-49eb-ba3e-f7aa5a72eddc',
+  //       idBookFromRescue: 'dfe8be88-3b0d-496e-baab-395b63751f43',
+  //       status: 'Solicitação Aceita',
+  //     };
 
-    const rescueReturned = await service.findRescueById(rescueId, userId);
-    expect(rescueReturned).toBeDefined();
-  })
+  //     expect(await service.update(rescueData)).toBeDefined();
+  //   });
+  // });
+
+  describe('GET methods', () => {
+    it('should return a rescue', async () => {
+      const rescueId = '13139b6c-6b53-41e6-9c6e-91d3bc3120be';
+      const userId = '05304a82-8a06-11ee-b9d1-0242ac120002';
+
+      const rescueReturned = await service.findRescueById(rescueId, userId);
+      expect(rescueReturned).toBeDefined();
+    });
+
+    it('should return a different rescue if the user is the owner of the book', async () => {
+      const rescueId = '13139b6c-6b53-41e6-9c6e-91d3bc3120be';
+      const userId = '1734ed59-eaa8-4c31-9b38-f546790668e8';
+
+      const rescueReturned = await service.findRescueById(rescueId, userId);
+      expect(rescueReturned).toBeDefined();
+    });
+
+    it('should return the rescues of a user', async () => {
+      const userId = '1734ed59-eaa8-4c31-9b38-f546790668e8';
+
+      expect(await service.findRescuesFromAUser(userId)).toBeDefined();
+    });
+  });
 });
