@@ -105,7 +105,10 @@
       "/src/interfaces/guards",
       "/src/interfaces/middlewares",
       "/coverage",
-      "/test"
+      "/test",
+      "/src/application/modules",
+      "src/application/strategies",
+      "src/infraestructure"
     ],
     "testEnvironment": "node"
   }

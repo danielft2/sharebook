@@ -17,16 +17,27 @@ import { SupabaseService } from '../../../src/application/services/supabase.serv
 import { GenderRepository } from '../../../src/infraestructure/repositories/gender.repository';
 import { Book } from '../../../src/domain/entities/book.entity';
 import * as fs from 'fs-extra';
+import { NotFoundException } from '@nestjs/common';
+
 describe('BookService', () => {
   let service: BookService;
   let prismaService: PrismaService;
 
-  beforeEach(async () => {
-    const prismaModule: TestingModule = await Test.createTestingModule({
-      providers: [PrismaService],
-    }).compile();
+  beforeAll(async () => {
+    prismaService = new PrismaService();
+    await prismaService.$connect();
+  });
 
-    prismaService = prismaModule.get<PrismaService>(PrismaService);
+  afterAll(async () => {
+    await prismaService.$disconnect();
+  });
+
+  beforeEach(async () => {
+    // const prismaModule: TestingModule = await Test.createTestingModule({
+    //   providers: [PrismaService],
+    // }).compile();
+
+    // prismaService = prismaModule.get<PrismaService>(PrismaService);
 
     const bookRepository = new BookRepository(prismaService);
     const userGenderRepository = new UserGendersRepository(prismaService);
@@ -145,7 +156,7 @@ describe('BookService', () => {
   describe('POST methods', () => {
     it('should create a book', async () => {
       const book: Book = {
-        isbn: '9788498672220',
+        isbn: '9788498672222',
         nome: 'Diário de um Banana 2',
         sinopse:
           'A escola não é uma experiência agradável para o quase adolescente Greg Heffley, mas sim um campo minado que ele precisa enfrentar.',
@@ -165,13 +176,51 @@ describe('BookService', () => {
         'test/assets/Diario de um banana.jpg',
       );
 
-      expect(await service.create(book, fileBuffer)).resolves;
+      expect(await service.create(book)).toBeTruthy();
     });
   });
 
   describe('PUT methods', () => {
     it('should update a book', async () => {
-      const book = await service.getBookByISBN('9788498672220');
+      const book = await service.getBookByISBN('9788498672222');
+      const updatedBook: Book = {
+        id: book.id,
+        isbn: '9788498672222',
+        nome: 'Diário de um Banana 2',
+        sinopse:
+          'A escola não é uma experiência agradável para o quase adolescente Greg Heffley, mas sim um campo minado que ele precisa enfrentar.',
+        autor: ['Jeff Kinney'],
+        usuario_id: '05304a82-8a06-11ee-b9d1-0242ac120002',
+        edicao: 1,
+        idioma: 'Português',
+        quer_receber: true,
+        pode_buscar: false,
+        capa: 'Diario de um Banana 2',
+        imagens: [''],
+        estado_id: '448358ea-c333-4982-ac6e-627b75d2e6cc',
+        latitude: '-4.97813',
+        longitude: '-39.0188',
+      };
+      expect(await service.update(updatedBook)).toBeTruthy();
     });
+  });
+
+  describe('DELETE methods', () => {
+    it('should delete a book', async () => {
+      const book = await service.getBookByISBN('9788498672222');
+      expect(await service.delete(book.id)).toBeTruthy();
+    });
+
+    // it('should return a error when deleting a requested book', async () => {
+    //   const book_id = 'dfe8be88-3b0d-496e-baab-395b63751f43';
+    //   expect(await service.delete(book_id)).rejects.toThrowError(
+    //     'Esse livro foi solicitado por outro usuario',
+    //   );
+    // });
+
+    // it('should return a error when deleting a book that does not exist', async () => {
+    //   const book_id = 'fe8be88-3b0d-496e-baab-395b63751f43';
+    //   expect(await service.delete(book_id)).rejects.toThrow(NotFoundException);
+    // });
   });
 });
