@@ -207,14 +207,22 @@ export class BookService {
     });
   }
 
-  async update(book: Book){
+  async update(book: Book, cape: Express.Multer.File){
     const findedBook = await this.bookRepository.findOne(book.id);
-
     if(!findedBook.id) throw new NotFoundException();
-    return this.bookRepository.update({
-      ...book,
-      capa: findedBook.capa
-    });
+    else if(await this.rescueService.findIfABookWasRequested(book.id)){
+      throw new Error("Você não pode editar esse livro, ele ja foi solicitado")
+    }
+    else{
+      const updatedCapeName = book.nome;
+      this.supabaseService.remove(findedBook.nome, 'BookImages');
+      this.supabaseService.create(updatedCapeName, 'BookImages', cape.buffer);
+      return this.bookRepository.update({
+        ...book,
+        capa: updatedCapeName,
+        imagens: findedBook.imagens
+      });
+    }
   }
 
   async delete(book_id: string){
@@ -223,7 +231,7 @@ export class BookService {
     if(!book){
       throw new NotFoundException();
     } else if(await this.rescueService.findIfABookWasRequested(book_id)) {
-      throw new Error("Esse livro foi solicitado por outro usuario")
+      throw new Error("Você não pode excluir esse livro, ele ja foi solicitado")
     } else {
       this.bookRepository.delete(book_id);
       return true;

@@ -17,7 +17,6 @@ import { Book } from '../../domain/entities/book.entity';
 import {
   FileFieldsInterceptor,
   FileInterceptor,
-  FilesInterceptor,
 } from '@nestjs/platform-express';
 import { CreatedBookDto } from '../dto/createdBook.dto';
 
@@ -106,16 +105,24 @@ export class BookControler {
         idioma: 'Espanhol',
         quer_receber: true,
         pode_buscar: false,
-        capa: 'Diario de um Banana 2',
-        imagens: [''],
         estado_id: '448358ea-c333-4982-ac6e-627b75d2e6cc',
         latitude: '-4.97813',
         longitude: '-39.0188',
+        cape: 'file',
       },
     },
   })
-  async update(@Body() book: Book) {
-    return this.bookService.update(book);
+  @UseInterceptors(FileInterceptor('cape'))
+  async update(
+    @Body() book: CreatedBookDto,
+    @UploadedFile() cape: Express.Multer.File,
+  ) {
+    const data: Book = {
+      ...book,
+      capa: '',
+      imagens: [''],
+    };
+    return this.bookService.update(data, cape);
   }
 
   @Delete(':id')
