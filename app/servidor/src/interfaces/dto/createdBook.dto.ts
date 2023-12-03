@@ -7,7 +7,7 @@ export class CreatedBookDto {
   isbn: string;
   nome: string;
   sinopse?: string;
-  autor: string[];
+  autor: string;
   usuario_id: string;
   @IsInt()
   @Transform((v) => parseInt(v.value))
@@ -17,9 +17,8 @@ export class CreatedBookDto {
   quer_receber: boolean;
   @Transform(({ value }) => !!optionalBooleanMapper.get(value))
   pode_buscar: boolean;
-  capa: Express.Multer.File;
-  imagens: Express.Multer.File[];
   estado_id: string;
   latitude: string;
   longitude: string;
+  genero: string;
 }
