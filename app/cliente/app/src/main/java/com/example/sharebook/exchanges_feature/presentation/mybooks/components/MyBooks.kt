@@ -6,9 +6,14 @@ import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material.Surface
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.DisposableEffect
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalLifecycleOwner
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.LifecycleEventObserver
+import androidx.lifecycle.LifecycleOwner
 import com.example.sharebook.core.presentation.ui.theme.*
 import com.example.sharebook.core.presentation.components.*
 import com.example.sharebook.core.presentation.components.statewrapper.StateWraper
@@ -17,9 +22,23 @@ import com.example.sharebook.exchanges_feature.presentation.mybooks.MyBooksViewM
 
 @Composable
 fun MyBooks(
+    lifecycleOwner: LifecycleOwner = LocalLifecycleOwner.current,
     myBooksViewModel: MyBooksViewModel = hiltViewModel(),
     onNavigate: (route: String) -> Unit
 ) {
+    DisposableEffect(lifecycleOwner) {
+        val observer = LifecycleEventObserver { _, event ->
+            if (event == Lifecycle.Event.ON_RESUME) {
+                myBooksViewModel.getListMyBooks()
+            }
+        }
+
+        lifecycleOwner.lifecycle.addObserver(observer)
+        onDispose {
+            lifecycleOwner.lifecycle.removeObserver(observer)
+        }
+    }
+
     Surface(modifier = Modifier.fillMaxSize()) {
         FloatingButtonNewBook { onNavigate(PrivateRoutes.AddBookScreen.route) }
 

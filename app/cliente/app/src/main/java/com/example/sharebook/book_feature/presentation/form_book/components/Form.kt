@@ -83,6 +83,7 @@ fun Form(
         TextFieldCustom(
             label = stringResource(id = R.string.form_book_field_synopsis),
             value = uiState.sinopse,
+            singleLine = false,
             errorMessage = uiState.sinopseError.asString(),
             onChange = { onChange(FormBookEvent.SinopseChange(it)) },
             modifier = Modifier.height(80.dp)

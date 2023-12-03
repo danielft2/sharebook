@@ -21,6 +21,7 @@ fun TextFieldCustom(
     errorMessage: String = "",
     onChange: (value: String) -> Unit,
     enable: Boolean = true,
+    singleLine: Boolean = true,
     keyboardOptions: KeyboardOptions = KeyboardOptions.Default,
     visualTransformation: VisualTransformation = VisualTransformation.None,
 
@@ -40,7 +41,7 @@ fun TextFieldCustom(
         BasicTextField(
             value = value,
             onValueChange = { onChange(it) },
-            singleLine = true,
+            singleLine = singleLine,
             keyboardOptions = keyboardOptions,
             visualTransformation = visualTransformation,
             enabled = enable,
@@ -50,7 +51,6 @@ fun TextFieldCustom(
                 .border(width = 0.8.dp, color = borderColor, shape = Shapes.medium)
                 .padding(16.dp)
                 .then(modifier)
-
         )
 
         if (errorMessage.isNotBlank()) {
