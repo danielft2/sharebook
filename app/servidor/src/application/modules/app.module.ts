@@ -17,6 +17,7 @@ import { RescueModule } from './rescue.module';
 import { JwtMiddleware } from 'src/interfaces/middlewares/jwt-request.middleware';
 import { BookStateModule } from './book-state.module';
 import { GenderModule } from './gender.module';
+import { BookGenderModule } from './book-gender.module';
 
 @Module({
   imports: [
@@ -27,6 +28,7 @@ import { GenderModule } from './gender.module';
     RescueModule,
     BookStateModule,
     GenderModule,
+    BookGenderModule,
   ],
   controllers: [AppController],
   providers: [
