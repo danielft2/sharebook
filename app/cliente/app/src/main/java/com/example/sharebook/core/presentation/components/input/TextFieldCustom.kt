@@ -1,4 +1,4 @@
-package com.example.sharebook.core.presentation.components
+package com.example.sharebook.core.presentation.components.input
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
@@ -15,6 +15,7 @@ import com.example.sharebook.core.presentation.ui.theme.*
 
 @Composable
 fun TextFieldCustom(
+    modifier: Modifier = Modifier,
     label: String,
     value: String,
     errorMessage: String = "",
@@ -34,7 +35,7 @@ fun TextFieldCustom(
             style = Typography.subtitle1
         )
 
-        Spacer(modifier = Modifier.height(4.dp))
+        Spacer(modifier = Modifier.height(8.dp))
 
         BasicTextField(
             value = value,
@@ -48,6 +49,7 @@ fun TextFieldCustom(
                 .fillMaxWidth()
                 .border(width = 0.8.dp, color = borderColor, shape = Shapes.medium)
                 .padding(16.dp)
+                .then(modifier)
 
         )
 

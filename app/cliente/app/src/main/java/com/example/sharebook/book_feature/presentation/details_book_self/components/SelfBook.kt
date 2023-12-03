@@ -25,6 +25,7 @@ import com.example.sharebook.core.presentation.ui.theme.green900
 import com.example.sharebook.core.presentation.ui.theme.white
 import com.example.sharebook.core.presentation.components.*
 import com.example.sharebook.core.presentation.components.book.BookSummary
+import com.example.sharebook.core.presentation.components.divider.DividerCustom
 import com.example.sharebook.core.presentation.components.statewrapper.StateWraper
 import com.example.sharebook.core.utils.UiText
 

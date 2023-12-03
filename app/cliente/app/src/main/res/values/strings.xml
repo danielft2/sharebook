@@ -54,35 +54,6 @@
 
     <string name="home_carousel_available">Disponivéis para troca</string>
     <string name="home_caroseul_nearToYou">Perto de você</string>
-
-    <string name="add_book_title">Adicionar Livro para troca</string>
-    <string name="add_book_step_1_subtitle">Etapa 1 - Dados</string>
-    <string name="add_book_step_2_subtitle">Etapa 2 - Imagens</string>
-    <string name="field_isbn">Isbn</string>
-    <string name="field_book_name">Nome do Livro</string>
-    <string name="field_genre">Gênero</string>
-    <string name="field_author">Autor</string>
-    <string name="field_edition">Edição</string>
-    <string name="field_language">Idioma</string>
-    <string name="field_book_state">Estado do Livro</string>
-    <string name="check_get_preference">Tenho preferência em buscar</string>
-    <string name="description_get_preference">
-        Marque se você tem disponibilidade para buscar o livro no outro usuário.
-    </string>
-    <string name="check_receive_preference">Tenho preferencia em receber</string>
-    <string name="description_receive_preference">
-        Marque se você tem preferência para receber o livro do outro usuário.
-    </string>
-
-    <string name="field_isbn_invalid">Insira um Isbn Válido</string>
-
-    <string name="save_book">Salvar</string>
-
-    <string name="book_cape_title">Capa do Livro</string>
-    <string name="book_cape_field">Escolher Ficheiro</string>
-
-    <string name="book_images_title">Imagens Extras</string>
-    <string name="book_images_field">Adicionar Imagens</string>
     <string name="home_carousel_nearToYou">Perto de você</string>
 
     <string name="book_details_header">Detalhes do Livro</string>
@@ -151,4 +122,31 @@
     <string name="request_details_button_cancel_exchange">Cancelar Troca</string>
     <string name="request_details_button_back">Voltar</string>
     <string name="request_update_success">Solicitação atualizada com sucesso!</string>
+
+    <string name="form_book_title">Adicionar Livro</string>
+    <string name="form_book_field_isbn">Isbn</string>
+    <string name="form_book_field_name">Nome do Livro</string>
+    <string name="form_book_field_gender">Gênero</string>
+    <string name="form_book_field_author">Autor(es)</string>
+    <string name="form_book_field_edition">Edição</string>
+    <string name="form_book_field_language">Idioma</string>
+    <string name="form_book_field_lat">Latitude</string>
+    <string name="form_book_field_lon">Longitude</string>
+    <string name="form_book_field_state">Estado do Livro</string>
+    <string name="form_book_field_synopsis">Sinopse</string>
+    <string name="form_book_field_cover">Capa do Livro</string>
+    <string name="form_book_field_cover_placeholder">Escolher Ficheiro</string>
+    <string name="form_book_field_images">Imagens Extras</string>
+
+    <string name="check_get_preference">Tenho preferência em buscar</string>
+    <string name="description_get_preference">
+        Marque se você tem disponibilidade para buscar o livro no outro usuário.
+    </string>
+    <string name="check_receive_preference">Tenho preferencia em receber</string>
+    <string name="description_receive_preference">
+        Marque se você tem preferência para receber o livro do outro usuário.
+    </string>
+
+    <string name="field_isbn_invalid">Insira um Isbn Válido</string>
+    <string name="save_book">Salvar</string>
 </resources>

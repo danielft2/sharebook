@@ -21,6 +21,7 @@ import com.example.sharebook.book_feature.presentation.details_book_external.Ext
 import com.example.sharebook.core.presentation.components.*
 import com.example.sharebook.core.presentation.components.book.BookSummary
 import com.example.sharebook.core.presentation.components.button.ButtonPrimary
+import com.example.sharebook.core.presentation.components.divider.DividerCustom
 import com.example.sharebook.core.presentation.components.statewrapper.StateWraper
 import com.example.sharebook.core.presentation.navigation.routes.authenticated.PrivateRoutes
 import com.example.sharebook.core.presentation.ui.theme.*

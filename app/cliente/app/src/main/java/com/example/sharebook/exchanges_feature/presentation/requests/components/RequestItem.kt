@@ -11,7 +11,7 @@ import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.sharebook.core.presentation.components.book.BookTag
-import com.example.sharebook.core.presentation.components.DividerCustom
+import com.example.sharebook.core.presentation.components.divider.DividerCustom
 import com.example.sharebook.core.presentation.components.ImageCustom
 import com.example.sharebook.core.presentation.components.book.BookOwnerInformations
 import com.example.sharebook.core.presentation.ui.theme.*

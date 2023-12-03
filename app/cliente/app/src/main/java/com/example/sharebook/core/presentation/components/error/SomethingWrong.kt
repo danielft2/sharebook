@@ -9,6 +9,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.sharebook.R
@@ -47,7 +48,8 @@ fun SomethingWrong(onClickTryAgain: () -> Unit) {
                 text = stringResource(id = R.string.something_wrong_description),
                 fontFamily = Inter,
                 fontSize = 14.sp,
-                color = gray500
+                color = gray500,
+                textAlign = TextAlign.Center
             )
 
             Spacer(modifier = Modifier.height(16.dp))

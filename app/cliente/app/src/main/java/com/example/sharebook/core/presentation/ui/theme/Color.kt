@@ -23,7 +23,7 @@ val blue100 = Color(0xFFD4EAFF)
 val blue500 = Color(0xFF005B9D)
 
 val red100 = Color(0xFFFF8383)
-val red400 = Color(0xFFFF3030)
+val red400 = Color(0xFFEA4A4A)
 
 val orange700 = Color(0xFFB16E00)
 val orange100 = Color(0xFFFFE6D4)

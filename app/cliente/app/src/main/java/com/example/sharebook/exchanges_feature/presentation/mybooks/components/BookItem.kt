@@ -10,13 +10,12 @@ import androidx.compose.material3.Icon
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.sharebook.core.presentation.components.book.BookTag
-import com.example.sharebook.core.presentation.components.DividerCustom
+import com.example.sharebook.core.presentation.components.divider.DividerCustom
 import com.example.sharebook.core.presentation.components.ImageCustom
 import com.example.sharebook.core.presentation.components.book.BookCoverSkeleton
 import com.example.sharebook.core.presentation.ui.theme.*

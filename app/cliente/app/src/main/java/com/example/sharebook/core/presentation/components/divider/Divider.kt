@@ -1,4 +1,4 @@
-package com.example.sharebook.core.presentation.components
+package com.example.sharebook.core.presentation.components.divider
 
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth

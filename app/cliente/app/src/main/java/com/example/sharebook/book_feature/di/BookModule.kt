@@ -4,7 +4,9 @@ import com.example.sharebook.BuildConfig
 import com.example.sharebook.book_feature.data.remote.repository.BookRepositoryImpl
 import com.example.sharebook.book_feature.data.remote.service.BookService
 import com.example.sharebook.book_feature.domain.adapter.BookRepository
+import com.example.sharebook.book_feature.domain.usecase.CreateBookUseCase
 import com.example.sharebook.book_feature.domain.usecase.DetailsBookUseCase
+import com.example.sharebook.book_feature.domain.usecase.ListStatesUseCase
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -42,5 +44,17 @@ object BookModule {
     @Singleton
     fun provideDetailsBookUseCase(bookRepository: BookRepository): DetailsBookUseCase {
         return DetailsBookUseCase(bookRepository)
+    }
+
+    @Provides
+    @Singleton
+    fun provideCreateBookUseCase(bookRepository: BookRepository): CreateBookUseCase {
+        return CreateBookUseCase(bookRepository)
+    }
+
+    @Provides
+    @Singleton
+    fun provideListStatesUseCase(bookRepository: BookRepository): ListStatesUseCase {
+        return ListStatesUseCase(bookRepository)
     }
 }
