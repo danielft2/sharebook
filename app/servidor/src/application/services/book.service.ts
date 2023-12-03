@@ -10,6 +10,7 @@ import { RescueService } from './rescue.service';
 import { Book } from '../../domain/entities/book.entity';
 import { SupabaseService } from './supabase.service';
 import { randomUUID } from 'crypto';
+import { GenderService } from './gender.service';
 
 @Injectable()
 export class BookService {
@@ -22,6 +23,7 @@ export class BookService {
     private bookStateService: BookStateService,
     private rescueService: RescueService,
     private supabaseService: SupabaseService,
+    private genderService: GenderService
   ) {}
 
   async getUserIBGE(user_cep: string) {
@@ -188,7 +190,36 @@ export class BookService {
     }
   }
 
-  async create(book: Book, collection: Record<'cape' | 'images', Express.Multer.File[]>) {
+  async registerBookGender(generos: string[], book_id: string) {
+    await Promise.all(
+      generos.map(
+        async (genero) => {
+          let genderObj = (await this.genderService.findMany()).find(
+            (gender) => gender.nome === genero
+          );
+          if(!genderObj) {
+            await this.genderService.create({
+              genderName: genero
+            })
+            genderObj = (await this.genderService.findMany()).find(
+              (gender) => gender.nome === genero
+            );
+          }
+          
+          this.bookGenderService.create({
+            genderId: genderObj.id,
+            bookId: book_id
+          })
+        }
+      )
+    )
+  }
+
+  async create(
+    book: Book, 
+    collection: Record<'cape' | 'images', Express.Multer.File[]>, 
+    generos: string[]
+    ) {
     const cape = collection.cape.at(0).buffer;
     const capa = book.nome.normalize('NFD').replace(/[\u0300-\u036f]/g, '');
     this.supabaseService.create(capa, 'BookImages', cape);
@@ -200,14 +231,37 @@ export class BookService {
         return imageName;
       })
     );  
-    return await this.bookRepository.create({
+    const createdBook = await this.bookRepository.create({
       ...book,
       capa: capa,
       imagens: imagesName
     });
+    this.registerBookGender(generos, createdBook.id);
+    return {
+      ...createdBook,
+      generos
+    };
   }
 
-  async update(book: Book, cape: Express.Multer.File){
+  async updateBookGender(generos: string[], book_id: string){
+    const oldGenders = await this.bookGenderService.findAllByBookId(book_id);
+    await Promise.all(
+      oldGenders.map(
+        async (genders) => {
+          this.bookGenderService.delete({
+            bookId: book_id,
+            genderId: genders,
+          })
+        }
+      ),
+    )
+    await this.registerBookGender(generos, book_id);
+  }
+
+  async update(
+    book: Book, 
+    cape: Express.Multer.File
+    ){
     const findedBook = await this.bookRepository.findOne(book.id);
     if(!findedBook.id) throw new NotFoundException();
     else if(await this.rescueService.findIfABookWasRequested(book.id)){
@@ -217,7 +271,7 @@ export class BookService {
       const updatedCapeName = book.nome;
       this.supabaseService.remove(findedBook.nome, 'BookImages');
       this.supabaseService.create(updatedCapeName, 'BookImages', cape.buffer);
-      return this.bookRepository.update({
+      return await this.bookRepository.update({
         ...book,
         capa: updatedCapeName,
         imagens: findedBook.imagens

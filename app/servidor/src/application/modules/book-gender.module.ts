@@ -2,10 +2,10 @@ import { Module } from '@nestjs/common';
 import { GenderController } from '../../interfaces/controllers/gender.controller';
 import { GenderService } from '../services/gender.service';
 import { BookGendersService } from '../services/book-gender.service';
-import { BookGendersRepository } from 'src/infraestructure/repositories/book-gender.repository';
-import { PrismaModule } from 'src/infraestructure/database/prisma/prisma.module';
-import { PrismaService } from 'src/infraestructure/database/prisma/prisma.service';
-import { GenderRepository } from 'src/infraestructure/repositories/gender.repository';
+import { BookGendersRepository } from '../../infraestructure/repositories/book-gender.repository';
+import { PrismaService } from '../../infraestructure/database/prisma/prisma.service';
+import { GenderRepository } from '../../infraestructure/repositories/gender.repository';
+import { BookGenderController } from '../../interfaces/controllers/book-gender.controller';
 
 @Module({
   providers: [
@@ -13,8 +13,9 @@ import { GenderRepository } from 'src/infraestructure/repositories/gender.reposi
     BookGendersRepository,
     PrismaService,
     GenderService,
-    GenderRepository
-    ],
-    imports: [BookGenderModule]
+    GenderRepository,
+  ],
+  controllers: [BookGenderController],
+  imports: [BookGenderModule],
 })
 export class BookGenderModule {}

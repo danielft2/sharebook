@@ -1,6 +1,7 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, NotFoundException } from '@nestjs/common';
 import { BookGendersRepository } from '../../infraestructure/repositories/book-gender.repository';
 import { GenderService } from './gender.service';
+import { BookGender } from '../../domain/entities/book-gender.entity';
 
 @Injectable()
 export class BookGendersService {
@@ -33,5 +34,20 @@ export class BookGendersService {
     );
 
     return genderList;
+  }
+
+  async create(bookGender: BookGender) {
+    return await this.bookGenderRepository.create(bookGender);
+  }
+
+  async delete(bookGender: BookGender) {
+    const findedBookGender = (await this.bookGenderRepository.findMany()).find(
+      (findedbookGender) => {
+        findedbookGender.genero_id === bookGender.genderId &&
+          findedbookGender.livro_id === bookGender.bookId;
+      },
+    );
+    if (!findedBookGender) throw new NotFoundException();
+    return this.bookGenderRepository.delete(bookGender);
   }
 }
