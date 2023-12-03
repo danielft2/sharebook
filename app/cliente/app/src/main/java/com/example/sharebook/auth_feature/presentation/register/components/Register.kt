@@ -27,7 +27,7 @@ import com.example.sharebook.auth_feature.presentation.register.RegisterViewMode
 import com.example.sharebook.auth_feature.presentation.register.event.RegisterFormEvent
 import com.example.sharebook.core.presentation.components.button.ButtonPrimary
 import com.example.sharebook.core.presentation.components.Header
-import com.example.sharebook.core.presentation.components.TextFieldCustom
+import com.example.sharebook.core.presentation.components.input.TextFieldCustom
 import com.example.sharebook.core.presentation.navigation.routes.unauthenticated.PublicRoutes
 import com.example.sharebook.core.presentation.ui.theme.*
 import com.example.sharebook.core.utils.UiText

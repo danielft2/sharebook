@@ -11,9 +11,9 @@ import androidx.navigation.compose.navigation
 import androidx.navigation.navArgument
 import com.example.sharebook.auth_feature.presentation.login.components.Login
 import com.example.sharebook.auth_feature.presentation.register.components.Register
-import com.example.sharebook.book_management_feature.presentation.add_book.components.AddBook
-import com.example.sharebook.book_feature.presentation.external_book.components.ExternalBook
-import com.example.sharebook.book_feature.presentation.self_book.components.SelfBook
+import com.example.sharebook.book_feature.presentation.details_book_external.components.ExternalBook
+import com.example.sharebook.book_feature.presentation.details_book_self.components.SelfBook
+import com.example.sharebook.book_feature.presentation.form_book.components.FormBook
 import com.example.sharebook.core.presentation.navigation.NavigationViewModel
 import com.example.sharebook.core.presentation.navigation.routes.authenticated.PrivateRoutes
 import com.example.sharebook.core.presentation.navigation.routes.authenticated.bottomNavigationItens
@@ -79,7 +79,7 @@ fun NavigationRoot(
             composable(
                 route = PrivateRoutes.AddBookScreen.route
             ){
-                AddBook(navController = navController)
+                FormBook(navController = navController)
             }
             composable(
                 route = PrivateRoutes.ExchangeRequest.route + "/{book_id}",

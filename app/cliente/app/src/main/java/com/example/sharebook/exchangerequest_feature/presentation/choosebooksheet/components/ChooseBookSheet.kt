@@ -25,7 +25,7 @@ import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.example.sharebook.core.presentation.ui.theme.*
 import com.example.sharebook.R
-import com.example.sharebook.core.presentation.components.DividerCustom
+import com.example.sharebook.core.presentation.components.divider.DividerCustom
 import com.example.sharebook.core.presentation.components.statewrapper.StateWraper
 import com.example.sharebook.exchangerequest_feature.presentation.choosebooksheet.ChooseBookViewModel
 import com.example.sharebook.exchangerequest_feature.presentation.choosebooksheet.event.ChooseBookEvent

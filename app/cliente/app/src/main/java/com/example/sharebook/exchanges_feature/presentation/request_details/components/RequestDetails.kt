@@ -21,7 +21,7 @@ import androidx.navigation.NavHostController
 import com.example.sharebook.R
 import com.example.sharebook.core.domain.enum.BookRequestStatus
 import com.example.sharebook.core.presentation.components.book.BookTag
-import com.example.sharebook.core.presentation.components.DividerCustom
+import com.example.sharebook.core.presentation.components.divider.DividerCustom
 import com.example.sharebook.core.presentation.components.HeaderWithBackground
 import com.example.sharebook.core.presentation.components.IconButtonAction
 import com.example.sharebook.core.presentation.components.book.BookSummary

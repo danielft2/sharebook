@@ -1,10 +1,13 @@
 package com.example.sharebook.core.utils
 
+import android.content.Context
+import android.net.Uri
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.graphics.Color
 import com.example.sharebook.core.domain.enum.BookPreferenceTag
 import com.example.sharebook.core.domain.enum.BookRequestStatus
 import com.example.sharebook.core.presentation.ui.theme.*
+import java.io.File
 import java.util.*
 
 object Functions {
@@ -84,6 +87,18 @@ object Functions {
                     background = gray200
                 )
             }
+        }
+    }
+
+    fun createTmpFileFromUri(context: Context, uri: Uri, fileName: String): File? {
+        return try {
+            val stream = context.contentResolver.openInputStream(uri)
+            val file = File.createTempFile(fileName, "file", context.cacheDir)
+            org.apache.commons.io.FileUtils.copyInputStreamToFile(stream,file)
+            file
+        } catch (e: Exception) {
+            e.printStackTrace()
+            null
         }
     }
 }
