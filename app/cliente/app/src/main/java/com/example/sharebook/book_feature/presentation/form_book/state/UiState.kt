@@ -58,8 +58,8 @@ fun UiState.toFormBookModel(): FormBookModel {
     return FormBookModel(
         isbn = isbn,
         nome = nome,
-        autor = autor.split(", "),
-        genero = genero.split(", "),
+        autor = autor,
+        genero = genero,
         edicao = edicao,
         idioma = idioma,
         sinopse = sinopse,

@@ -19,7 +19,6 @@ import com.example.sharebook.book_feature.presentation.form_book.channel.FormBoo
 import com.example.sharebook.book_feature.presentation.form_book.event.FormBookEvent
 import com.example.sharebook.core.presentation.components.button.ButtonPrimary
 import com.example.sharebook.core.presentation.components.statewrapper.StateWraper
-import com.example.sharebook.core.presentation.navigation.routes.authenticated.PrivateRoutes
 import com.example.sharebook.core.presentation.ui.theme.white
 import com.example.sharebook.core.utils.UiText
 
@@ -45,7 +44,7 @@ fun FormBook(
                         Toast.LENGTH_LONG
                     ).show()
 
-                    navController.navigate(PrivateRoutes.ExchangesScreen.route)
+                    navController.popBackStack()
                 }
             }
         }
@@ -64,7 +63,7 @@ fun FormBook(
                  isLoading = uiState.isLoadingStateRequest,
                  isError = !uiState.isErrorStateRequest.isNullOrEmpty()
              ) {
-                 Column(modifier = Modifier.weight(1f),) {
+                 Column(modifier = Modifier.weight(1f)) {
                      Form(uiState) { formBookViewModel.onEvent(it) }
                  }
                  Column(modifier = Modifier.padding(top = 32.dp)) {

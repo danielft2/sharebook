@@ -7,8 +7,8 @@ import java.io.File
 data class FormBookModel(
     val isbn: String,
     val nome: String,
-    val autor: List<String>,
-    val genero: List<String>,
+    val autor: String,
+    val genero: String,
     val sinopse: String,
     val edicao: String,
     val idioma: String,
@@ -26,8 +26,8 @@ fun FormBookModel.toFormBookMultipartform(): FormBookModelMultipartForm {
     return FormBookModelMultipartForm(
         isbn = MultipartBody.Part.createFormData("isbn", isbn),
         nome = MultipartBody.Part.createFormData("nome", nome),
-        autor = MultipartBody.Part.createFormData("autor", autor.toString()),
-        genero = MultipartBody.Part.createFormData("genero", genero.toString()),
+        autor = MultipartBody.Part.createFormData("autor", autor),
+        genero = MultipartBody.Part.createFormData("genero", genero),
         sinopse = MultipartBody.Part.createFormData("sinopse", sinopse),
         edicao = MultipartBody.Part.createFormData("edicao", edicao),
         idioma = MultipartBody.Part.createFormData("idioma", idioma),

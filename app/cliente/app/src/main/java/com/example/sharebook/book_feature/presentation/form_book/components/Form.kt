@@ -2,9 +2,11 @@ package com.example.sharebook.book_feature.presentation.form_book.components
 
 import androidx.compose.foundation.*
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.unit.dp
 import com.example.sharebook.core.presentation.components.divider.DividerCustom
 import com.example.sharebook.core.presentation.components.input.TextFieldCustom
@@ -58,6 +60,7 @@ fun Form(
         TextFieldCustom(
             label = stringResource(id = R.string.form_book_field_edition),
             value = uiState.edicao,
+            keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number),
             errorMessage = uiState.edicaoError.asString(),
             onChange = { onChange(FormBookEvent.EdicaoChange(it)) }
         )
@@ -88,6 +91,7 @@ fun Form(
         TextFieldCustom(
             label = stringResource(id = R.string.form_book_field_lat),
             value = uiState.latitude,
+            keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number),
             errorMessage = uiState.latitudeError.asString(),
             onChange = { onChange(FormBookEvent.LatitudeChange(it)) }
         )
@@ -95,6 +99,7 @@ fun Form(
         TextFieldCustom(
             label = stringResource(id = R.string.form_book_field_lon),
             value = uiState.longitude,
+            keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number),
             errorMessage = uiState.longitudeError.asString(),
             onChange = { onChange(FormBookEvent.LongitudeChange(it)) }
         )
