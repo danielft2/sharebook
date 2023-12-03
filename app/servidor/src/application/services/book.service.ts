@@ -224,13 +224,18 @@ export class BookService {
     const capa = book.nome.normalize('NFD').replace(/[\u0300-\u036f]/g, '');
     this.supabaseService.create(capa, 'BookImages', cape);
 
-    const imagesName: string[] = await Promise.all(
-      collection.images.map(async (image) => {
-        const imageName = randomUUID();
-        await this.supabaseService.create(imageName, 'BookImages', image.buffer);
-        return imageName;
-      })
-    );  
+    let imagesName: string[];
+    if(collection.images === undefined) {
+      imagesName = [''];
+    } else {
+      imagesName = await Promise.all(
+        collection.images.map(async (image) => {
+          const imageName = randomUUID();
+          await this.supabaseService.create(imageName, 'BookImages', image.buffer);
+          return imageName;
+        })
+      );  
+    }
     const createdBook = await this.bookRepository.create({
       ...book,
       capa: capa,
