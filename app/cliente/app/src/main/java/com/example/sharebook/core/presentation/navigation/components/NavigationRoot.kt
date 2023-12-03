@@ -79,7 +79,7 @@ fun NavigationRoot(
             composable(
                 route = PrivateRoutes.AddBookScreen.route
             ){
-                FormBook()
+                FormBook(navController = navController)
             }
             composable(
                 route = PrivateRoutes.ExchangeRequest.route + "/{book_id}",

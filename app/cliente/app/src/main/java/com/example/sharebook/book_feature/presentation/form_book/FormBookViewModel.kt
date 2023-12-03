@@ -7,6 +7,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.sharebook.book_feature.domain.usecase.CreateBookUseCase
 import com.example.sharebook.book_feature.domain.usecase.ListStatesUseCase
+import com.example.sharebook.book_feature.presentation.form_book.channel.FormBookRequestChannel
 import com.example.sharebook.book_feature.presentation.form_book.event.FormBookEvent
 import com.example.sharebook.book_feature.presentation.form_book.state.UiState
 import com.example.sharebook.book_feature.presentation.form_book.state.toFormBookModel
@@ -15,7 +16,9 @@ import com.example.sharebook.core.domain.usecase.ValidateRequiredUseCase
 import com.example.sharebook.core.utils.Resource
 import com.example.sharebook.core.utils.UiText
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.flow.first
+import kotlinx.coroutines.flow.receiveAsFlow
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.runBlocking
 import javax.inject.Inject
@@ -27,6 +30,9 @@ class FormBookViewModel @Inject constructor(
     private val userStorageManagement: UserStorageManagement,
     private val validateRequiredUseCase: ValidateRequiredUseCase
 ) : ViewModel() {
+    private val formBookRequestChannel = Channel<FormBookRequestChannel>()
+    val formBookRequestState = formBookRequestChannel.receiveAsFlow()
+
     var uiState by mutableStateOf(UiState())
         private set
 
@@ -58,7 +64,7 @@ class FormBookViewModel @Inject constructor(
             is FormBookEvent.ReceberChange -> { uiState = uiState.copy(preferenciaReceber = event.preferencia) }
             is FormBookEvent.SinopseChange -> { uiState = uiState.copy(sinopse = event.sinopse) }
             is FormBookEvent.LatitudeChange -> { uiState = uiState.copy(latitude = event.latitude) }
-            is FormBookEvent.LongitudeChange -> { uiState = uiState.copy(latitude = event.longitude) }
+            is FormBookEvent.LongitudeChange -> { uiState = uiState.copy(longitude = event.longitude) }
 
             is FormBookEvent.Submit -> { submitForm() }
         }
@@ -114,8 +120,10 @@ class FormBookViewModel @Inject constructor(
         viewModelScope.launch {
             createBookUseCase(uiState.toFormBookModel()).collect {response ->
                 when (response) {
-                    is Resource.Success -> { println(response.data) }
-                    is Resource.Error -> { println(response.message) }
+                    is Resource.Success -> { formBookRequestChannel.send(FormBookRequestChannel.Success()) }
+                    is Resource.Error -> {
+                        formBookRequestChannel.send(FormBookRequestChannel.Error(response.message!!))
+                    }
                     is Resource.Loading -> { uiState = uiState.copy(isLoadingFormRequest = true) }
                     is Resource.Finnaly -> { uiState = uiState.copy(isLoadingFormRequest = false) }
                 }

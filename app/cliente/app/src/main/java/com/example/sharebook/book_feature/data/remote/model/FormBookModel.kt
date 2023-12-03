@@ -28,15 +28,15 @@ fun FormBookModel.toFormBookMultipartform(): FormBookModelMultipartForm {
         nome = MultipartBody.Part.createFormData("nome", nome),
         autor = MultipartBody.Part.createFormData("autor", autor.toString()),
         genero = MultipartBody.Part.createFormData("genero", genero.toString()),
-        sinopse = MultipartBody.Part.createFormData("sinopse", "testeste"),
+        sinopse = MultipartBody.Part.createFormData("sinopse", sinopse),
         edicao = MultipartBody.Part.createFormData("edicao", edicao),
         idioma = MultipartBody.Part.createFormData("idioma", idioma),
         usuarioId = MultipartBody.Part.createFormData("usuario_id", usuarioId),
         estadoId = MultipartBody.Part.createFormData("estado_id", estadoId),
         querRecber = MultipartBody.Part.createFormData("quer_receber", querRecber.toString()),
         podeBuscar = MultipartBody.Part.createFormData("pode_buscar", podeBuscar.toString()),
-        latitude = MultipartBody.Part.createFormData("latitude", "-8.51209832177395"),
-        longitude = MultipartBody.Part.createFormData("longitude", " -55.5595487572886"),
+        latitude = MultipartBody.Part.createFormData("latitude", latitude),
+        longitude = MultipartBody.Part.createFormData("longitude", longitude),
         cape = MultipartBody.Part.createFormData("cape", cape.name, cape.asRequestBody()),
         images = images.map {
             MultipartBody.Part.createFormData("images", it.name, it.asRequestBody())
