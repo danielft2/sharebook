@@ -27,9 +27,9 @@ export class BookRepository {
     });
   }
 
-  async update(book: Book) {
+  async update(book_id: string, book: Book) {
     return await this.prisma.livro.update({
-      where: { id: book.id },
+      where: { id: book_id },
       data: {
         ...book,
       },

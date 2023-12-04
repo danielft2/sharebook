@@ -249,14 +249,14 @@ export class BookService {
   }
 
   async updateBookGender(generos: string[], book_id: string){
-    const oldGenders = await this.bookGenderService.findAllByBookId(book_id);
+    const oldBookGenders = await this.bookGenderService.findBookGenderById(book_id);
     await Promise.all(
-      oldGenders.map(
-        async (genders) => {
+      oldBookGenders.map(
+        async (oldBookGender) => {
           this.bookGenderService.delete({
-            bookId: book_id,
-            genderId: genders,
-          })
+            bookId: oldBookGender.livro_id,
+            genderId: oldBookGender.genero_id,
+          });
         }
       ),
     )
@@ -264,23 +264,37 @@ export class BookService {
   }
 
   async update(
+    book_id: string,
     book: Book, 
-    cape: Express.Multer.File
+    cape: Express.Multer.File,
+    generos: string[]
     ){
-    const findedBook = await this.bookRepository.findOne(book.id);
-    if(!findedBook.id) throw new NotFoundException();
-    else if(await this.rescueService.findIfABookWasRequested(book.id)){
+    const findedBook = await this.bookRepository.findOne(book_id);
+    
+    if(!findedBook.id) {
+      throw new NotFoundException();
+    }
+    else if(await this.rescueService.findIfABookWasRequested(book_id)){
       throw new Error("Você não pode editar esse livro, ele ja foi solicitado")
     }
     else{
       const updatedCapeName = book.nome;
       this.supabaseService.remove(findedBook.nome, 'BookImages');
       this.supabaseService.create(updatedCapeName, 'BookImages', cape.buffer);
-      return await this.bookRepository.update({
+      this.updateBookGender(generos, book_id);
+      const updatedBook = await this.bookRepository.update(book_id, {
         ...book,
         capa: updatedCapeName,
-        imagens: findedBook.imagens
+        imagens: findedBook.imagens,
+        latitude: findedBook.latitude,
+        longitude: findedBook.longitude,
+        usuario_id: findedBook.usuario_id
       });
+
+      return {
+        ...updatedBook,
+        generos
+      }
     }
   }
 
@@ -292,8 +306,16 @@ export class BookService {
     } else if(await this.rescueService.findIfABookWasRequested(book_id)) {
       throw new Error("Você não pode excluir esse livro, ele ja foi solicitado")
     } else {
+      this.supabaseService.remove(book.capa, 'BookImages');
+      book.imagens.map(
+        (imagem) => {
+          this.supabaseService.remove(imagem, 'BookImages');
+        }
+      )
       this.bookRepository.delete(book_id);
-      return true;
+      return {
+        message: 'Successfully deleted'
+      };
     }
   }
 }

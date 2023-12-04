@@ -36,17 +36,22 @@ export class BookGendersService {
     return genderList;
   }
 
+  async findBookGenderById(book_id: string) {
+    const bookGenders = (await this.bookGenderRepository.findMany()).filter(
+      (bookGender) => bookGender.livro_id === book_id,
+    );
+    return bookGenders;
+  }
+
   async create(bookGender: BookGender) {
     return await this.bookGenderRepository.create(bookGender);
   }
 
   async delete(bookGender: BookGender) {
-    const findedBookGender = (await this.bookGenderRepository.findMany()).find(
-      (findedbookGender) => {
-        findedbookGender.genero_id === bookGender.genderId &&
-          findedbookGender.livro_id === bookGender.bookId;
-      },
+    const findedBookGender = await this.bookGenderRepository.findOne(
+      bookGender,
     );
+
     if (!findedBookGender) throw new NotFoundException();
     return this.bookGenderRepository.delete(bookGender);
   }

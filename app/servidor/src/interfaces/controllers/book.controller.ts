@@ -19,6 +19,7 @@ import {
   FileInterceptor,
 } from '@nestjs/platform-express';
 import { CreatedBookDto } from '../dto/createdBook.dto';
+import { UpdatedBookDto } from '../dto/updatedBook.dto';
 
 @Controller('book')
 export class BookControler {
@@ -93,7 +94,7 @@ export class BookControler {
     return this.bookService.create(data, collection, generos);
   }
 
-  @Put()
+  @Put(':id')
   @ApiBody({
     schema: {
       example: {
@@ -103,31 +104,40 @@ export class BookControler {
         sinopse:
           'A escola não é uma experiência agradável para o quase adolescente Greg Heffley, mas sim um campo minado que ele precisa enfrentar.',
         autor: ['Jeff Kinney'],
-        usuario_id: '05304a82-8a06-11ee-b9d1-0242ac120002',
         edicao: 1,
         idioma: 'Espanhol',
         quer_receber: true,
         pode_buscar: false,
         estado_id: '448358ea-c333-4982-ac6e-627b75d2e6cc',
-        latitude: '-4.97813',
-        longitude: '-39.0188',
         cape: 'file',
       },
     },
   })
   @UseInterceptors(FileInterceptor('cape'))
   async update(
-    @Body() book: CreatedBookDto,
+    @Param('id') id: string,
+    @Body() book: UpdatedBookDto,
     @UploadedFile() cape: Express.Multer.File,
   ) {
     const autores: string[] = book.autor.split(', ');
+    const genders: string[] = book.genero.split(', ');
     const data: Book = {
-      ...book,
+      isbn: book.isbn,
+      nome: book.nome,
+      sinopse: book.sinopse,
+      usuario_id: '',
+      edicao: book.edicao,
+      idioma: book.idioma,
+      pode_buscar: book.pode_buscar,
+      quer_receber: book.quer_receber,
+      estado_id: book.estado_id,
+      latitude: '',
+      longitude: '',
       capa: '',
       imagens: [''],
       autor: autores,
     };
-    return this.bookService.update(data, cape);
+    return this.bookService.update(id, data, cape, genders);
   }
 
   @Delete(':id')
