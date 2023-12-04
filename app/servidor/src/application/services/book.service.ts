@@ -298,6 +298,21 @@ export class BookService {
     }
   }
 
+  async deleteBookGender(book_id: string){
+    const oldBookGenders = await this.bookGenderService.findBookGenderById(book_id);
+    
+    await Promise.all(
+      oldBookGenders.map(
+        async (oldBookGender) => {
+          await this.bookGenderService.delete({
+            bookId: oldBookGender.livro_id,
+            genderId: oldBookGender.genero_id,
+          });
+        }
+      ),
+    )
+  }
+
   async delete(book_id: string){
     const book = await this.bookRepository.findOne(book_id);
     
@@ -306,15 +321,19 @@ export class BookService {
     } else if(await this.rescueService.findIfABookWasRequested(book_id)) {
       throw new Error("Você não pode excluir esse livro, ele ja foi solicitado")
     } else {
+      await this.deleteBookGender(book_id);
+
+      const deletedBook = await this.bookRepository.delete(book_id);
+      
       this.supabaseService.remove(book.capa, 'BookImages');
       book.imagens.map(
         (imagem) => {
           this.supabaseService.remove(imagem, 'BookImages');
         }
       )
-      this.bookRepository.delete(book_id);
       return {
-        message: 'Successfully deleted'
+        message: 'Successfully deleted',
+        deletedBook: deletedBook
       };
     }
   }
