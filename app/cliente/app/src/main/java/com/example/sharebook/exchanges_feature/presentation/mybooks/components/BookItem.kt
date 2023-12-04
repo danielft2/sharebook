@@ -22,12 +22,15 @@ import com.example.sharebook.core.presentation.ui.theme.*
 import com.example.sharebook.exchanges_feature.domain.model.MyBookModel
 
 @Composable
-fun BookItem(book: MyBookModel, onClick: () -> Unit) {
+fun BookItem(
+    book: MyBookModel,
+    onNavigate: () -> Unit,
+    onDelete: () -> Unit
+) {
     Box(modifier = Modifier
         .fillMaxWidth()
         .height(200.dp)
         .background(white)
-        .clickable { onClick() }
     ) {
         Row {
             ImageCustom(
@@ -35,6 +38,7 @@ fun BookItem(book: MyBookModel, onClick: () -> Unit) {
                 modifier = Modifier
                     .fillMaxHeight()
                     .width(115.dp)
+                    .clickable { onNavigate() }
             ) {
                 BookCoverSkeleton(Modifier
                 .fillMaxHeight()
@@ -81,7 +85,7 @@ fun BookItem(book: MyBookModel, onClick: () -> Unit) {
                     Icon(
                         imageVector = Icons.Default.Delete,
                         contentDescription = null,
-                        modifier = Modifier.size(24.dp).weight(1f),
+                        modifier = Modifier.size(24.dp).weight(1f).clickable { onDelete() },
                         tint = Color.Red
                     )
                 }

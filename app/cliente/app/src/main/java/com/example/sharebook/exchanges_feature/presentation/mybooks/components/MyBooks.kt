@@ -16,6 +16,7 @@ import androidx.lifecycle.LifecycleEventObserver
 import androidx.lifecycle.LifecycleOwner
 import com.example.sharebook.core.presentation.ui.theme.*
 import com.example.sharebook.core.presentation.components.*
+import com.example.sharebook.core.presentation.components.loading.LoadingWithBackground
 import com.example.sharebook.core.presentation.components.statewrapper.StateWraper
 import com.example.sharebook.core.presentation.navigation.routes.authenticated.PrivateRoutes
 import com.example.sharebook.exchanges_feature.presentation.mybooks.MyBooksViewModel
@@ -24,7 +25,7 @@ import com.example.sharebook.exchanges_feature.presentation.mybooks.MyBooksViewM
 fun MyBooks(
     lifecycleOwner: LifecycleOwner = LocalLifecycleOwner.current,
     myBooksViewModel: MyBooksViewModel = hiltViewModel(),
-    onNavigate: (route: String) -> Unit
+    onNavigate: (route: String) -> Unit,
 ) {
     DisposableEffect(lifecycleOwner) {
         val observer = LifecycleEventObserver { _, event ->
@@ -42,7 +43,9 @@ fun MyBooks(
     Surface(modifier = Modifier.fillMaxSize()) {
         FloatingButtonNewBook { onNavigate(PrivateRoutes.AddBookScreen.route) }
 
-        Column(modifier = Modifier.background(background).fillMaxSize()) {
+        Column(modifier = Modifier
+            .background(background)
+            .fillMaxSize()) {
             StateWraper(
                 onClickTryAgain = { myBooksViewModel.getListMyBooks() },
                 isLoading = myBooksViewModel.uiState.isLoading,
@@ -56,11 +59,19 @@ fun MyBooks(
                         verticalArrangement = Arrangement.spacedBy(16.dp)
                     ) {
                         items(myBooksViewModel.uiState.listMyBooks) {
-                            BookItem(book = it) { onNavigate(PrivateRoutes.UserBook.withArgs(it.id)) }
+                            BookItem(
+                                book = it,
+                                onNavigate = { onNavigate(PrivateRoutes.UserBook.withArgs(it.id)) },
+                                onDelete = { myBooksViewModel.deleteMyBook(it.id) }
+                            )
                         }
                     }
                 }
             }
+        }
+
+        if (myBooksViewModel.uiState.isLoadingDeleteBook) {
+            LoadingWithBackground(modifier = Modifier.background(background))
         }
     }
 }

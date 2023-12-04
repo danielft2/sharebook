@@ -6,6 +6,7 @@ import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.sharebook.core.utils.Resource
+import com.example.sharebook.exchanges_feature.domain.usecases.DeleteMyBookUseCase
 import com.example.sharebook.exchanges_feature.domain.usecases.ListMyBooksUseCase
 import com.example.sharebook.exchanges_feature.presentation.mybooks.state.UiState
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -14,7 +15,8 @@ import javax.inject.Inject
 
 @HiltViewModel
 class MyBooksViewModel @Inject constructor(
-    private val listMyBooksUseCase: ListMyBooksUseCase
+    private val listMyBooksUseCase: ListMyBooksUseCase,
+    private val deleteMyBookUseCase: DeleteMyBookUseCase
 ) : ViewModel() {
     var uiState by mutableStateOf(UiState())
         private set
@@ -31,6 +33,25 @@ class MyBooksViewModel @Inject constructor(
                     is Resource.Error -> { uiState.copy(isError = response.message) }
                     is Resource.Loading -> { uiState.copy(isLoading = true) }
                     is Resource.Finnaly -> { uiState.copy(isLoading = false) }
+                }
+            }
+        }
+    }
+
+    fun deleteMyBook(bookId: String) {
+        viewModelScope.launch {
+            deleteMyBookUseCase(bookId).collect { response ->
+                when (response) {
+                    is Resource.Success -> {}
+                    is Resource.Error -> {
+                        uiState = uiState.copy(isErrorDeleteBook = response.message)
+                    }
+                    is Resource.Loading -> {
+                        uiState = uiState.copy(isLoadingDeleteBook = false)
+                    }
+                    is Resource.Finnaly -> {
+                        uiState = uiState.copy(isLoadingDeleteBook = false)
+                    }
                 }
             }
         }
