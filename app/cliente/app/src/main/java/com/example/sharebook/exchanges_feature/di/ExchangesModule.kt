@@ -4,6 +4,7 @@ import com.example.sharebook.BuildConfig
 import com.example.sharebook.exchanges_feature.data.remote.repository.ExchangesRepositoryImpl
 import com.example.sharebook.exchanges_feature.data.remote.service.ExchangesService
 import com.example.sharebook.exchanges_feature.domain.adapter.ExchangesRepository
+import com.example.sharebook.exchanges_feature.domain.usecases.DeleteMyBookUseCase
 import com.example.sharebook.exchanges_feature.domain.usecases.ListMyBooksUseCase
 import com.example.sharebook.exchanges_feature.domain.usecases.RequestDetailsUseCase
 import com.example.sharebook.exchanges_feature.domain.usecases.UpdateStatusRequestUseCase
@@ -50,6 +51,12 @@ object ExchangesModule {
     @Singleton
     fun provideRequestDetailsUseCase(exchangesRepository: ExchangesRepository): RequestDetailsUseCase {
         return RequestDetailsUseCase(exchangesRepository)
+    }
+
+    @Provides
+    @Singleton
+    fun provideDeleteMyBookUseCase(exchangesRepository: ExchangesRepository): DeleteMyBookUseCase {
+        return DeleteMyBookUseCase(exchangesRepository)
     }
 
     @Provides

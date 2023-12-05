@@ -6,6 +6,7 @@ import com.example.sharebook.exchanges_feature.data.remote.response.MyBooksRespo
 import com.example.sharebook.exchanges_feature.data.remote.response.RequestDetailsResponse
 import com.example.sharebook.exchanges_feature.data.remote.response.RequestsReponse
 import retrofit2.http.Body
+import retrofit2.http.DELETE
 import retrofit2.http.GET
 import retrofit2.http.PUT
 import retrofit2.http.Path
@@ -13,6 +14,9 @@ import retrofit2.http.Path
 interface ExchangesService {
     @GET("/book/mybooks")
     suspend fun listMyBooks(): MyBooksResponse
+
+    @DELETE("/book/{book_id}")
+    suspend fun deleteMyBook(@Path("book_id") bookId: String)
 
     @GET("/rescue/user/{user_id}")
     suspend fun listRequests(@Path("user_id") userId: String): RequestsReponse

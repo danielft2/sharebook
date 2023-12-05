@@ -16,6 +16,10 @@ class ExchangesRepositoryImpl @Inject constructor(
         return exchangesService.listMyBooks()
     }
 
+    override suspend fun deleteMyBook(bookId: String) {
+        return exchangesService.deleteMyBook(bookId)
+    }
+
     override suspend fun listRequests(userId: String): RequestsReponse {
         return exchangesService.listRequests(userId)
     }

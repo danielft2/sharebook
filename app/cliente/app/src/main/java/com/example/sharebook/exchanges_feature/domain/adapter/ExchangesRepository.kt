@@ -8,6 +8,7 @@ import com.example.sharebook.exchanges_feature.data.remote.response.RequestsRepo
 
 interface ExchangesRepository {
     suspend fun listMyBooks(): MyBooksResponse
+    suspend fun deleteMyBook(bookId: String)
     suspend fun listRequests(userId: String): RequestsReponse
     suspend fun requestDetails(requestId: String): RequestDetailsResponse
     suspend fun updateStatusRequest(body: SendRequestModel): SendRequestResponse
