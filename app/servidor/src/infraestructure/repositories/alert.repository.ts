@@ -19,11 +19,14 @@ export class AlertRepository {
   }
 
   async findAlertByUserIdAndBookName(user_id: string, book_name: string) {
-    const alerts = (await this.prisma.alerta.findMany()).find((alerta) => {
-      alerta.nome_livro === book_name && alerta.usuario_id === user_id;
+    return this.prisma.alerta.findUnique({
+      where: {
+        usuario_id_nome_livro: {
+          usuario_id: user_id,
+          nome_livro: book_name,
+        },
+      },
     });
-
-    return alerts;
   }
 
   async findById(id: string) {

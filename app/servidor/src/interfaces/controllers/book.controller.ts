@@ -148,4 +148,9 @@ export class BookControler {
   delete(@Param('id') id: string) {
     return this.bookService.delete(id);
   }
+
+  @Get('/search/:query')
+  async searchBook(@Param('query') query: string) {
+    return this.bookService.searchBook(query);
+  }
 }

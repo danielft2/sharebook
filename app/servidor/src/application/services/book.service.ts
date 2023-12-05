@@ -337,4 +337,10 @@ export class BookService {
       };
     }
   }
+
+  async searchBook(query: string) {
+    const book = await this.bookRepository.searchBook(query);
+    if (book.length <= 0) throw new NotFoundException();
+    return book
+  }
 }
