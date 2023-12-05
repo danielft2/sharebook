@@ -83,6 +83,8 @@
 
     <string name="maps_device_location">Ocorreu um erro inesperado ao recuperar sua localização!</string>
 
+    <string name="exchange_delete_my_book_success">Livro excluido com sucesso!</string>
+
     <string name="exchange_request_header_title">Solicitação de Troca</string>
     <string name="exchange_request_choose_book_title">Escolha seu livro</string>
     <string name="exchange_request_choose_book_description">
