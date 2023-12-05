@@ -4,6 +4,8 @@ import android.content.Context
 import android.net.Uri
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.graphics.Color
+import androidx.core.content.FileProvider
+import com.example.sharebook.BuildConfig
 import com.example.sharebook.core.domain.enum.BookPreferenceTag
 import com.example.sharebook.core.domain.enum.BookRequestStatus
 import com.example.sharebook.core.presentation.ui.theme.*
@@ -52,6 +54,20 @@ object Functions {
             BookRequestStatus.ACCEPTED.tag -> BookRequestStatus.ACCEPTED
             else -> { BookRequestStatus.SEND }
         }
+    }
+
+    fun Context.createTempPictureUri(
+        provider: String = "${BuildConfig.APPLICATION_ID}.provider",
+        fileName: String = "picture_${System.currentTimeMillis()}",
+        fileExtension: String = ".png"
+    ): Uri {
+        val tempFile = File.createTempFile(
+            fileName, fileExtension, cacheDir
+        ).apply {
+            createNewFile()
+        }
+
+        return FileProvider.getUriForFile(applicationContext, provider, tempFile)
     }
 
     @Composable
