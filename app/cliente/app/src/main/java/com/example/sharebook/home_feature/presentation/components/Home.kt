@@ -13,7 +13,6 @@ import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import com.example.sharebook.R
-import com.example.sharebook.core.presentation.components.FloatingButtonNewBook
 import com.example.sharebook.core.presentation.components.statewrapper.StateWraper
 import com.example.sharebook.core.presentation.navigation.NavigationViewModel
 import com.example.sharebook.core.presentation.navigation.routes.authenticated.PrivateRoutes
@@ -36,8 +35,6 @@ fun Home(
     }
 
     Surface(modifier = Modifier.fillMaxSize()) {
-        FloatingButtonNewBook { navController.navigate(PrivateRoutes.AddBookScreen.route) }
-
         Column(modifier = Modifier
             .fillMaxSize()
             .background(background)) {
