@@ -51,4 +51,16 @@ export class BookRepository {
       where: { id },
     });
   }
+
+  async searchBook(query: string) {
+    return await this.prisma.livro.findMany({
+      where: {
+        OR: [
+          {
+            nome: { contains: query, mode: 'insensitive' },
+          },
+        ],
+      },
+    });
+  }
 }
