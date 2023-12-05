@@ -18,6 +18,7 @@ import androidx.compose.material.CircularProgressIndicator
 import androidx.compose.material.ExperimentalMaterialApi
 import androidx.compose.material.Surface
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Brush
@@ -38,13 +39,17 @@ import com.example.sharebook.core.presentation.components.TextFieldCustom
 import com.example.sharebook.core.presentation.components.button.ButtonPrimary
 import com.example.sharebook.core.presentation.ui.theme.green500
 import com.example.sharebook.core.utils.UiText
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
 
 val listOfBookStates = listOf("Muito Desgastado", "Pouco Desgastado", "Sem Desgaste", "Lacrado")
 
 @Composable
 fun AddBook(
     viewModel: AddBookViewModel = hiltViewModel(),
-    navController: NavController
+    navController: NavController,
 ) {
     Surface(modifier = Modifier.fillMaxSize()) {
         Column(
@@ -186,7 +191,12 @@ fun AddBook(
                 ButtonPrimary(
                     text = UiText.StringResource(R.string.save_book).asString(),
                     loading = viewModel.requestState.isLoading,
-                    onClick = { viewModel.onEvent(AddBookFormEvent.Submit) }
+                    onClick = {
+                        CoroutineScope(Dispatchers.Main).launch {
+                            delay(2000) // 1000 milissegundos = 1 segundo
+                            navController.popBackStack()
+                        }
+                    }
                 )
             }
         }
