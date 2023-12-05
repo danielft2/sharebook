@@ -8,12 +8,18 @@ import {
   Put,
   Req,
   UploadedFile,
+  UploadedFiles,
   UseInterceptors,
 } from '@nestjs/common';
 import { BookService } from '../../application/services/book.service';
 import { ApiBody, ApiParam } from '@nestjs/swagger';
 import { Book } from '../../domain/entities/book.entity';
-import { FileInterceptor } from '@nestjs/platform-express';
+import {
+  FileFieldsInterceptor,
+  FileInterceptor,
+} from '@nestjs/platform-express';
+import { CreatedBookDto } from '../dto/createdBook.dto';
+import { UpdatedBookDto } from '../dto/updatedBook.dto';
 
 @Controller('book')
 export class BookControler {
@@ -38,6 +44,11 @@ export class BookControler {
     return this.bookService.findOne(book_id, req.user.id);
   }
 
+  @Get('/search/:query') 
+  async searchBook(@Param('query') query: string) {
+    return this.bookService.searchBook(query);
+  }
+
   @Post()
   @ApiBody({
     schema: {
@@ -52,20 +63,43 @@ export class BookControler {
         idioma: 'Espanhol',
         quer_receber: true,
         pode_buscar: false,
-        capa: 'Diario de um Banana',
-        imagens: [''],
         estado_id: '448358ea-c333-4982-ac6e-627b75d2e6cc',
         latitude: '-4.97813',
         longitude: '-39.0188',
+        cape: 'file',
+        images: 'files[]',
       },
     },
   })
-  // @UseInterceptors(FileInterceptor('cape'))
-  async create(@Body() book: Book/* , @UploadedFile() cape: Express.Multer.File */) {
-    return this.bookService.create(book);
+  @UseInterceptors(
+    FileFieldsInterceptor([
+      {
+        name: 'cape',
+        maxCount: 1,
+      },
+      {
+        name: 'images',
+        maxCount: 4,
+      },
+    ]),
+  )
+  async create(
+    @Body() book: CreatedBookDto,
+    @UploadedFiles()
+    collection: Record<'cape' | 'images', Express.Multer.File[]>,
+  ) {
+    const autores: string[] = book.autor.split(', ');
+    const generos: string[] = book.genero.split(', ');
+    const data: Book = {
+      ...book,
+      capa: '',
+      imagens: [''],
+      autor: autores,
+    };
+    return this.bookService.create(data, collection, generos);
   }
 
-  @Put()
+  @Put(':id')
   @ApiBody({
     schema: {
       example: {
@@ -75,21 +109,40 @@ export class BookControler {
         sinopse:
           'A escola não é uma experiência agradável para o quase adolescente Greg Heffley, mas sim um campo minado que ele precisa enfrentar.',
         autor: ['Jeff Kinney'],
-        usuario_id: '05304a82-8a06-11ee-b9d1-0242ac120002',
         edicao: 1,
         idioma: 'Espanhol',
         quer_receber: true,
         pode_buscar: false,
-        capa: 'Diario de um Banana 2',
-        imagens: [''],
         estado_id: '448358ea-c333-4982-ac6e-627b75d2e6cc',
-        latitude: '-4.97813',
-        longitude: '-39.0188',
+        cape: 'file',
       },
     },
   })
-  async update(@Body() book: Book) {
-    return this.bookService.update(book);
+  @UseInterceptors(FileInterceptor('cape'))
+  async update(
+    @Param('id') id: string,
+    @Body() book: UpdatedBookDto,
+    @UploadedFile() cape: Express.Multer.File,
+  ) {
+    const autores: string[] = book.autor.split(', ');
+    const genders: string[] = book.genero.split(', ');
+    const data: Book = {
+      isbn: book.isbn,
+      nome: book.nome,
+      sinopse: book.sinopse,
+      usuario_id: '',
+      edicao: book.edicao,
+      idioma: book.idioma,
+      pode_buscar: book.pode_buscar,
+      quer_receber: book.quer_receber,
+      estado_id: book.estado_id,
+      latitude: '',
+      longitude: '',
+      capa: '',
+      imagens: [''],
+      autor: autores,
+    };
+    return this.bookService.update(id, data, cape, genders);
   }
 
   @Delete(':id')
@@ -100,4 +153,6 @@ export class BookControler {
   delete(@Param('id') id: string) {
     return this.bookService.delete(id);
   }
+
+
 }

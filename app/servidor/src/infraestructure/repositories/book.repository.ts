@@ -27,13 +27,26 @@ export class BookRepository {
     });
   }
 
-  async update(book: Book) {
+  async update(book_id: string, book: Book) {
     return await this.prisma.livro.update({
-      where: { id: book.id },
+      where: { id: book_id },
       data: {
         ...book,
       },
     });
+  }
+
+
+  async searchBook(query: string) {
+    return await this.prisma.livro.findMany({
+      where: {
+        OR: [
+          {
+            nome: {contains: query, mode: 'insensitive'}
+          }
+        ]
+      }
+    })
   }
 
   async findOne(id: string) {

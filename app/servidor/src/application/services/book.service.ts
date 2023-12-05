@@ -9,7 +9,8 @@ import { BookStateService } from './book-state.service';
 import { RescueService } from './rescue.service';
 import { Book } from '../../domain/entities/book.entity';
 import { SupabaseService } from './supabase.service';
-import { v4 as uuidv4 } from 'uuid';
+import { randomUUID } from 'crypto';
+import { GenderService } from './gender.service';
 
 @Injectable()
 export class BookService {
@@ -22,6 +23,7 @@ export class BookService {
     private bookStateService: BookStateService,
     private rescueService: RescueService,
     private supabaseService: SupabaseService,
+    private genderService: GenderService
   ) {}
 
   async getUserIBGE(user_cep: string) {
@@ -44,6 +46,10 @@ export class BookService {
       book => book.isbn === isbn
     )
     return book;
+  }
+
+  async findUnique(id: string){
+    return await this.bookRepository.findOne(id);
   }
 
   async detailedBook(book_id: string) {
@@ -184,35 +190,157 @@ export class BookService {
     }
   }
 
-  async create(book: Book) {
-    // const capa = book.nome.normalize('NFD').replace(/[\u0300-\u036f]/g, '');
-    // this.supabaseService.create(capa, 'BookImages', cape);
-    return await this.bookRepository.create(book);
-    // return {
-    //   ...book,
-    //   capa: capa,
-    // }
+  async registerBookGender(generos: string[], book_id: string) {
+    await Promise.all(
+      generos.map(
+        async (genero) => {
+          let genderObj = (await this.genderService.findMany()).find(
+            (gender) => gender.nome === genero
+          );
+          if(!genderObj) {
+            await this.genderService.create({
+              genderName: genero
+            })
+            genderObj = (await this.genderService.findMany()).find(
+              (gender) => gender.nome === genero
+            );
+          }
+          
+          this.bookGenderService.create({
+            genderId: genderObj.id,
+            bookId: book_id
+          })
+        }
+      )
+    )
   }
 
-  async update(book: Book){
-    const findedBook = await this.bookRepository.findOne(book.id);
+  async create(
+    book: Book, 
+    collection: Record<'cape' | 'images', Express.Multer.File[]>, 
+    generos: string[]
+    ) {
+    const cape = collection.cape.at(0).buffer;
+    const capa = book.nome.normalize('NFD').replace(/[\u0300-\u036f]/g, '');
+    this.supabaseService.create(capa, 'BookImages', cape);
 
-    if(!findedBook.id) throw new NotFoundException();
-    return this.bookRepository.update({
+    let imagesName: string[];
+    if(collection.images === undefined) {
+      imagesName = [''];
+    } else {
+      imagesName = await Promise.all(
+        collection.images.map(async (image) => {
+          const imageName = randomUUID();
+          await this.supabaseService.create(imageName, 'BookImages', image.buffer);
+          return imageName;
+        })
+      );  
+    }
+    const createdBook = await this.bookRepository.create({
       ...book,
-      capa: findedBook.capa
+      capa: capa,
+      imagens: imagesName
     });
+    this.registerBookGender(generos, createdBook.id);
+    return {
+      ...createdBook,
+      generos
+    };
+  }
+
+  async updateBookGender(generos: string[], book_id: string){
+    const oldBookGenders = await this.bookGenderService.findBookGenderById(book_id);
+    await Promise.all(
+      oldBookGenders.map(
+        async (oldBookGender) => {
+          this.bookGenderService.delete({
+            bookId: oldBookGender.livro_id,
+            genderId: oldBookGender.genero_id,
+          });
+        }
+      ),
+    )
+    await this.registerBookGender(generos, book_id);
+  }
+
+  async update(
+    book_id: string,
+    book: Book, 
+    cape: Express.Multer.File,
+    generos: string[]
+    ){
+    const findedBook = await this.bookRepository.findOne(book_id);
+    
+    if(!findedBook.id) {
+      throw new NotFoundException();
+    }
+    else if(await this.rescueService.findIfABookWasRequested(book_id)){
+      throw new Error("Você não pode editar esse livro, ele ja foi solicitado")
+    }
+    else{
+      const updatedCapeName = book.nome;
+      this.supabaseService.remove(findedBook.nome, 'BookImages');
+      this.supabaseService.create(updatedCapeName, 'BookImages', cape.buffer);
+      this.updateBookGender(generos, book_id);
+      const updatedBook = await this.bookRepository.update(book_id, {
+        ...book,
+        capa: updatedCapeName,
+        imagens: findedBook.imagens,
+        latitude: findedBook.latitude,
+        longitude: findedBook.longitude,
+        usuario_id: findedBook.usuario_id
+      });
+
+      return {
+        ...updatedBook,
+        generos
+      }
+    }
+  }
+
+  async deleteBookGender(book_id: string){
+    const oldBookGenders = await this.bookGenderService.findBookGenderById(book_id);
+    
+    await Promise.all(
+      oldBookGenders.map(
+        async (oldBookGender) => {
+          await this.bookGenderService.delete({
+            bookId: oldBookGender.livro_id,
+            genderId: oldBookGender.genero_id,
+          });
+        }
+      ),
+    )
   }
 
   async delete(book_id: string){
     const book = await this.bookRepository.findOne(book_id);
     
-    if(await this.rescueService.findIfUserHasRequestedBook(book_id, book.usuario_id) === true){
-      throw new Error("Esse livro foi solicitado por outro usuario")
-    } else if(!book) {
+    if(!book){
       throw new NotFoundException();
+    } else if(await this.rescueService.findIfABookWasRequested(book_id)) {
+      throw new Error("Você não pode excluir esse livro, ele ja foi solicitado")
     } else {
-      this.bookRepository.delete(book_id);
+      await this.deleteBookGender(book_id);
+
+      const deletedBook = await this.bookRepository.delete(book_id);
+      
+      this.supabaseService.remove(book.capa, 'BookImages');
+      book.imagens.map(
+        (imagem) => {
+          this.supabaseService.remove(imagem, 'BookImages');
+        }
+      )
+      return {
+        message: 'Successfully deleted',
+        deletedBook: deletedBook
+      };
     }
+  }
+
+  async searchBook(query: string) {
+    const book = await this.bookRepository.searchBook(query);
+    if (book.length <= 0) throw new NotFoundException();
+    return book
   }
 }
