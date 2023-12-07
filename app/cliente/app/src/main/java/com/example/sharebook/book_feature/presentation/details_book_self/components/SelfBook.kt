@@ -30,6 +30,7 @@ import com.example.sharebook.core.presentation.ui.theme.green900
 import com.example.sharebook.core.presentation.ui.theme.white
 import com.example.sharebook.core.presentation.components.*
 import com.example.sharebook.core.presentation.components.book.BookSummary
+import com.example.sharebook.core.presentation.components.button.IconButtonAction
 import com.example.sharebook.core.presentation.components.divider.DividerCustom
 import com.example.sharebook.core.presentation.components.statewrapper.StateWraper
 import com.example.sharebook.core.presentation.navigation.routes.authenticated.PrivateRoutes
@@ -82,7 +83,8 @@ fun SelfBook(
                 IconButtonAction(
                     resource = R.drawable.icon_edit,
                     sizeValue = 24,
-                    modifier = Modifier
+                    modifier = Modifier,
+                    enable = !uiState.isLoadingDetails
                 ) {
                     navController.navigate(
                         "${PrivateRoutes.FormBook.route}?book_id=${uiState.bookDetails?.id ?: ""}"
@@ -91,7 +93,7 @@ fun SelfBook(
             }
 
             StateWraper(
-                onClickTryAgain = {  },
+                onClickTryAgain = { selfViewModel.updateDetailsBook() },
                 isLoading = uiState.isLoadingDetails,
                 isError = !uiState.isErrorDetails.isNullOrEmpty()
             ) {

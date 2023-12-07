@@ -57,7 +57,7 @@ fun FormBook(
              .padding(16.dp),
              verticalArrangement = Arrangement.spacedBy(12.dp)
          ) {
-             HeaderForm { navController.popBackStack() }
+             HeaderForm(isNotUpdateBook = uiState.bookId.isNullOrEmpty()) { navController.popBackStack() }
              StateWraper(
                  onClickTryAgain = { },
                  isLoading = uiState.isLoadingStateRequest,

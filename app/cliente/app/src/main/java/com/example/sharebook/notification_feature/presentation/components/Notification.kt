@@ -36,7 +36,7 @@ import androidx.navigation.NavController
 import com.example.sharebook.R
 import com.example.sharebook.core.presentation.components.divider.DividerCustom
 import com.example.sharebook.core.presentation.components.HeaderWithBackground
-import com.example.sharebook.core.presentation.components.IconButtonAction
+import com.example.sharebook.core.presentation.components.button.IconButtonAction
 import com.example.sharebook.core.presentation.ui.theme.Lato
 import com.example.sharebook.core.presentation.ui.theme.Shapes
 import com.example.sharebook.core.presentation.ui.theme.gray200

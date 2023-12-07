@@ -24,11 +24,12 @@ class SelfBookViewModel @Inject constructor(
 
     init {
         stateHandle.get<String>(Constants.BOOK_PARAM_ID)?.let { bookId ->
+            uiState = uiState.copy(bookId = bookId)
             getDetailsBook(bookId)
         }
     }
 
-    fun getDetailsBook(bookId: String) {
+    private fun getDetailsBook(bookId: String) {
         viewModelScope.launch {
             detailsBookUseCase(bookId).collect {response ->
                 uiState = when(response) {
