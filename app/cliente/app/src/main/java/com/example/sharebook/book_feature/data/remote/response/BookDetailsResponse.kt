@@ -28,15 +28,18 @@ fun BookDetailsResponse.toBookDetailsModel(): BookDetailsModel {
 
     return BookDetailsModel(
         id = book.id,
+        isbn = book.isbn,
         name = book.nome,
         edition = book.edicao,
         authors = Functions.getValuesFromList(book.autor),
-        bookState = book.bookState,
+        bookState = book.bookState.nome,
         genders = Functions.getValuesFromList(book.genders),
         cover = book.capa,
         images = book.imagens,
         synopsis = book.sinopse,
-        preference = Functions.getPreference(book.podeBuscar),
+        language = book.idioma,
+        canSearch = book.podeBuscar,
+        canReceive = book.podeReceber,
 
         usuarioId = book.usuarioId,
         userName = userInformation.userName,

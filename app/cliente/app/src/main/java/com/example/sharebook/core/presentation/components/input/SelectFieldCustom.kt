@@ -32,12 +32,14 @@ fun SelectFieldCustom(
     var expanded by remember { mutableStateOf(false) }
     val borderColor = if (errorMessage.isNotBlank()) red100 else Color.Transparent
 
-    Column(modifier = Modifier.fillMaxWidth(),) {
+    Column(modifier = Modifier.fillMaxWidth()) {
         Text(
             text = label,
             color = green800,
             style = Typography.subtitle1
         )
+
+        Spacer(modifier = Modifier.height(8.dp))
 
         ExposedDropdownMenuBox(
             expanded = expanded,

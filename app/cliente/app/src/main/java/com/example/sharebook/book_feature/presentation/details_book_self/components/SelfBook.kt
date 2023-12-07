@@ -27,6 +27,7 @@ import com.example.sharebook.core.presentation.components.*
 import com.example.sharebook.core.presentation.components.book.BookSummary
 import com.example.sharebook.core.presentation.components.divider.DividerCustom
 import com.example.sharebook.core.presentation.components.statewrapper.StateWraper
+import com.example.sharebook.core.presentation.navigation.routes.authenticated.PrivateRoutes
 import com.example.sharebook.core.utils.UiText
 
 @Composable
@@ -63,7 +64,11 @@ fun SelfBook(
                     resource = R.drawable.icon_edit,
                     sizeValue = 24,
                     modifier = Modifier
-                ) {  }
+                ) {
+                    navController.navigate(
+                        "${PrivateRoutes.FormBook.route}?book_id=${uiState.bookDetails?.id ?: ""}"
+                    )
+                }
             }
 
             StateWraper(

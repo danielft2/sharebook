@@ -51,7 +51,8 @@ data class UiState(
 
     val isLoadingFormRequest: Boolean = false,
 
-    val userLogged: UserModel? = null
+    val userLogged: UserModel? = null,
+    val bookId: String? = null
 )
 
 fun UiState.toFormBookModel(): FormBookModel {

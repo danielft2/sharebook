@@ -7,6 +7,7 @@ import com.example.sharebook.book_feature.domain.adapter.BookRepository
 import com.example.sharebook.book_feature.domain.usecase.CreateBookUseCase
 import com.example.sharebook.book_feature.domain.usecase.DetailsBookUseCase
 import com.example.sharebook.book_feature.domain.usecase.ListStatesUseCase
+import com.example.sharebook.book_feature.domain.usecase.UpdateBookUseCase
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -50,6 +51,12 @@ object BookModule {
     @Singleton
     fun provideCreateBookUseCase(bookRepository: BookRepository): CreateBookUseCase {
         return CreateBookUseCase(bookRepository)
+    }
+
+    @Provides
+    @Singleton
+    fun provideUpdateBookUseCase(bookRepository: BookRepository): UpdateBookUseCase {
+        return UpdateBookUseCase(bookRepository)
     }
 
     @Provides

@@ -22,8 +22,8 @@ data class FormBookModel(
     val images: List<File> = listOf()
 )
 
-fun FormBookModel.toFormBookMultipartform(): FormBookModelMultipartForm {
-    return FormBookModelMultipartForm(
+fun FormBookModel.toCreateBookModel(): CreateBookModel {
+    return CreateBookModel(
         isbn = MultipartBody.Part.createFormData("isbn", isbn),
         nome = MultipartBody.Part.createFormData("nome", nome),
         autor = MultipartBody.Part.createFormData("autor", autor),
@@ -41,5 +41,20 @@ fun FormBookModel.toFormBookMultipartform(): FormBookModelMultipartForm {
         images = images.map {
             MultipartBody.Part.createFormData("images", it.name, it.asRequestBody())
         },
+    )
+}
+
+fun FormBookModel.toUpdateBookModel(): UpdateBookModel {
+    return UpdateBookModel(
+        nome = MultipartBody.Part.createFormData("nome", nome),
+        autor = MultipartBody.Part.createFormData("autor", autor),
+        genero = MultipartBody.Part.createFormData("genero", genero),
+        sinopse = MultipartBody.Part.createFormData("sinopse", sinopse),
+        edicao = MultipartBody.Part.createFormData("edicao", edicao),
+        idioma = MultipartBody.Part.createFormData("idioma", idioma),
+        estadoId = MultipartBody.Part.createFormData("estado_id", estadoId),
+        querRecber = MultipartBody.Part.createFormData("quer_receber", querRecber.toString()),
+        podeBuscar = MultipartBody.Part.createFormData("pode_buscar", podeBuscar.toString()),
+        cape = MultipartBody.Part.createFormData("cape", cape.name, cape.asRequestBody())
     )
 }
