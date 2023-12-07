@@ -251,7 +251,7 @@ export class BookService {
     await Promise.all(
       oldBookGenders.map(
         async (oldBookGender) => {
-          this.bookGenderService.delete({
+          await this.bookGenderService.delete({
             bookId: oldBookGender.livro_id,
             genderId: oldBookGender.genero_id,
           });
