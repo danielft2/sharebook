@@ -91,9 +91,7 @@ export class BookService {
         capa: await this.supabaseService.getFileURL(book.capa, 'BookImages'),
         imagens: images,
         genders: await this.bookGenderService.findGenderName(book.id),
-        book_state: (
-          await this.bookStateService.findOne(book.estado_id)
-        ).nome,
+        book_state: await this.bookStateService.findOne(book.estado_id),
       },
     };
   }
