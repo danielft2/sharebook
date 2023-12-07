@@ -77,7 +77,7 @@ fun NavigationRoot(
             }
 
             composable(
-                route = PrivateRoutes.AddBookScreen.route
+                route = PrivateRoutes.FormBook.route + "?book_id={book_id}"
             ){
                 FormBook(navController = navController)
             }

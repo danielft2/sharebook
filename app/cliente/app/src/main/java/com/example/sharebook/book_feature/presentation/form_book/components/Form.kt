@@ -23,18 +23,22 @@ fun Form(
     uiState: UiState,
     onChange: (event: FormBookEvent) -> Unit
 ) {
+    val isNotUpdateBook = uiState.bookId.isNullOrEmpty()
+
     Column(
         modifier = Modifier
             .fillMaxSize()
             .verticalScroll(rememberScrollState()),
         verticalArrangement = Arrangement.spacedBy(18.dp),
     ) {
-        TextFieldCustom(
-            label = stringResource(id = R.string.form_book_field_isbn),
-            value = uiState.isbn,
-            errorMessage = uiState.isbnError.asString(),
-            onChange = { onChange(FormBookEvent.IsbnChange(it)) }
-        )
+        if (isNotUpdateBook) {
+            TextFieldCustom(
+                label = stringResource(id = R.string.form_book_field_isbn),
+                value = uiState.isbn,
+                errorMessage = uiState.isbnError.asString(),
+                onChange = { onChange(FormBookEvent.IsbnChange(it)) }
+            )
+        }
 
         TextFieldCustom(
             label = stringResource(id = R.string.form_book_field_name),
@@ -89,21 +93,23 @@ fun Form(
             modifier = Modifier.height(80.dp)
         )
 
-        TextFieldCustom(
-            label = stringResource(id = R.string.form_book_field_lat),
-            value = uiState.latitude,
-            keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number),
-            errorMessage = uiState.latitudeError.asString(),
-            onChange = { onChange(FormBookEvent.LatitudeChange(it)) }
-        )
+        if (isNotUpdateBook) {
+            TextFieldCustom(
+                label = stringResource(id = R.string.form_book_field_lat),
+                value = uiState.latitude,
+                keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number),
+                errorMessage = uiState.latitudeError.asString(),
+                onChange = { onChange(FormBookEvent.LatitudeChange(it)) }
+            )
 
-        TextFieldCustom(
-            label = stringResource(id = R.string.form_book_field_lon),
-            value = uiState.longitude,
-            keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number),
-            errorMessage = uiState.longitudeError.asString(),
-            onChange = { onChange(FormBookEvent.LongitudeChange(it)) }
-        )
+            TextFieldCustom(
+                label = stringResource(id = R.string.form_book_field_lon),
+                value = uiState.longitude,
+                keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number),
+                errorMessage = uiState.longitudeError.asString(),
+                onChange = { onChange(FormBookEvent.LongitudeChange(it)) }
+            )
+        }
 
         FileInputCustom(
             label = stringResource(id = R.string.form_book_field_cover),
@@ -112,8 +118,10 @@ fun Form(
             onChange = { onChange(FormBookEvent.CapaChange(it)) }
         )
 
-        ImagesAdditional { index, file, isAdd ->
-            onChange(FormBookEvent.ImagensChange(index, file, isAdd))
+        if (isNotUpdateBook) {
+            ImagesAdditional { index, file, isAdd ->
+                onChange(FormBookEvent.ImagensChange(index, file, isAdd))
+            }
         }
 
         Column {

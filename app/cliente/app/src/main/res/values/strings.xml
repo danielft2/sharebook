@@ -125,7 +125,8 @@
     <string name="request_details_button_back">Voltar</string>
     <string name="request_update_success">Solicitação atualizada com sucesso!</string>
 
-    <string name="form_book_title">Adicionar Livro</string>
+    <string name="create_book_title">Adicionar Livro</string>
+    <string name="update_book_title">Atualizar Livro</string>
     <string name="form_book_field_isbn">Isbn</string>
     <string name="form_book_field_name">Nome do Livro</string>
     <string name="form_book_field_gender">Gênero</string>
@@ -139,7 +140,8 @@
     <string name="form_book_field_cover">Capa do Livro</string>
     <string name="form_book_field_cover_placeholder">Escolher Ficheiro</string>
     <string name="form_book_field_images">Imagens Extras</string>
-    <string name="form_book_request_success">Livro adicionado com sucesso!</string>
+    <string name="create_book_request_success">Livro adicionado com sucesso!</string>
+    <string name="update_book_request_success">Livro atualizado com sucesso!</string>
 
     <string name="check_get_preference">Tenho preferência em buscar</string>
     <string name="description_get_preference">

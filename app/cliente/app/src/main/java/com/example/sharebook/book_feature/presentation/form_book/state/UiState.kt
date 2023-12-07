@@ -1,9 +1,12 @@
 package com.example.sharebook.book_feature.presentation.form_book.state
 
-import com.example.sharebook.book_feature.data.remote.model.FormBookModel
+import com.example.sharebook.book_feature.data.remote.model.CreateBookModel
+import com.example.sharebook.book_feature.data.remote.model.UpdateBookModel
 import com.example.sharebook.core.domain.model.UserModel
 import com.example.sharebook.core.presentation.components.input.types.SelectItem
 import com.example.sharebook.core.utils.UiText
+import okhttp3.MultipartBody
+import okhttp3.RequestBody.Companion.asRequestBody
 import java.io.File
 
 data class UiState(
@@ -51,25 +54,48 @@ data class UiState(
 
     val isLoadingFormRequest: Boolean = false,
 
-    val userLogged: UserModel? = null
+    val userLogged: UserModel? = null,
+    val bookId: String? = null
 )
 
-fun UiState.toFormBookModel(): FormBookModel {
-    return FormBookModel(
-        isbn = isbn,
-        nome = nome,
-        autor = autor,
-        genero = genero,
-        edicao = edicao,
-        idioma = idioma,
-        sinopse = sinopse,
-        podeBuscar = preferenciaBuscar,
-        querRecber = preferenciaReceber,
-        usuarioId = userLogged?.id ?: "",
-        estadoId = estado.value,
-        longitude = longitude,
-        latitude = latitude,
-        cape = capa!!,
-        images = imagens.toList()
+fun UiState.toCreateBookModel(): CreateBookModel {
+    return CreateBookModel(
+        isbn = MultipartBody.Part.createFormData("isbn", isbn),
+        nome = MultipartBody.Part.createFormData("nome", nome),
+        autor = MultipartBody.Part.createFormData("autor", autor),
+        genero = MultipartBody.Part.createFormData("genero", genero),
+        sinopse = MultipartBody.Part.createFormData("sinopse", sinopse),
+        edicao = MultipartBody.Part.createFormData("edicao", edicao),
+        idioma = MultipartBody.Part.createFormData("idioma", idioma),
+        usuarioId = MultipartBody.Part.createFormData("usuario_id", userLogged!!.id),
+        estadoId = MultipartBody.Part.createFormData("estado_id", estado.value),
+        querRecber = MultipartBody.Part.createFormData("quer_receber", preferenciaReceber.toString()),
+        podeBuscar = MultipartBody.Part.createFormData("pode_buscar", preferenciaBuscar.toString()),
+        latitude = MultipartBody.Part.createFormData("latitude", latitude),
+        longitude = MultipartBody.Part.createFormData("longitude", longitude),
+        cape = MultipartBody.Part.createFormData("cape", capa!!.name, capa.asRequestBody()),
+        images = imagens.map {
+            MultipartBody.Part.createFormData("images", it.name, it.asRequestBody())
+        },
+    )
+}
+
+fun UiState.toUpdateBookModel(): UpdateBookModel {
+    var capaMultiPart: MultipartBody.Part? = null
+    if (capa != null) {
+        capaMultiPart = MultipartBody.Part.createFormData("cape", capa.name, capa.asRequestBody())
+    }
+
+    return UpdateBookModel(
+        nome = MultipartBody.Part.createFormData("nome", nome),
+        autor = MultipartBody.Part.createFormData("autor", autor),
+        genero = MultipartBody.Part.createFormData("genero", genero),
+        sinopse = MultipartBody.Part.createFormData("sinopse", sinopse),
+        edicao = MultipartBody.Part.createFormData("edicao", edicao),
+        idioma = MultipartBody.Part.createFormData("idioma", idioma),
+        estadoId = MultipartBody.Part.createFormData("estado_id", estado.value),
+        querRecber = MultipartBody.Part.createFormData("quer_receber", preferenciaReceber.toString()),
+        podeBuscar = MultipartBody.Part.createFormData("pode_buscar", preferenciaBuscar.toString()),
+        cape = capaMultiPart
     )
 }

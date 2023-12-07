@@ -23,7 +23,10 @@ class SelfBookViewModel @Inject constructor(
         private set
 
     init {
-        stateHandle.get<String>(Constants.BOOK_PARAM_ID)?.let { bookId -> getDetailsBook(bookId) }
+        stateHandle.get<String>(Constants.BOOK_PARAM_ID)?.let { bookId ->
+            uiState = uiState.copy(bookId = bookId)
+            getDetailsBook(bookId)
+        }
     }
 
     private fun getDetailsBook(bookId: String) {
@@ -37,5 +40,9 @@ class SelfBookViewModel @Inject constructor(
                 }
             }
         }
+    }
+
+    fun updateDetailsBook() {
+        if (!uiState.bookId.isNullOrEmpty()) getDetailsBook(uiState.bookId!!)
     }
 }

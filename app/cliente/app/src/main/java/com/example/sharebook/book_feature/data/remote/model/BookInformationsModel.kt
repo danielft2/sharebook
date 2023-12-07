@@ -34,13 +34,13 @@ data class BookInformationsModel(
     val nome: String,
 
     @SerializedName("book_state")
-    val bookState: String,
+    val bookState: BookStateModel,
 
     @SerializedName("pode_busca")
     val podeBuscar: Boolean,
 
-    @SerializedName("quer_receber")
-    val querReceber: Boolean,
+    @SerializedName("pode_receber")
+    val podeReceber: Boolean,
 
     @SerializedName("sinopse")
     val sinopse: String,

@@ -24,7 +24,10 @@ import com.example.sharebook.core.presentation.ui.theme.green400
 import com.example.sharebook.core.presentation.ui.theme.green900
 
 @Composable
-fun HeaderForm(onClick: () -> Unit) {
+fun HeaderForm(
+    isNotUpdateBook: Boolean = true,
+    onClick: () -> Unit
+) {
     Row(
         modifier = Modifier.fillMaxWidth(),
         horizontalArrangement = Arrangement.SpaceBetween,
@@ -51,7 +54,7 @@ fun HeaderForm(onClick: () -> Unit) {
         }
 
         Text(
-            text = stringResource(id = R.string.form_book_title),
+            text = stringResource(id = if (isNotUpdateBook) R.string.create_book_title else R.string.update_book_title),
             fontFamily = Lato,
             fontWeight = FontWeight.Bold,
             fontSize = 15.sp,

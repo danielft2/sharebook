@@ -8,7 +8,9 @@ import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.Surface
 import androidx.compose.material.Text
+import androidx.compose.runtime.DisposableEffect
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalLifecycleOwner
 import androidx.compose.ui.text.font.Font
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
@@ -16,6 +18,9 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.LifecycleEventObserver
+import androidx.lifecycle.LifecycleOwner
 import androidx.navigation.NavHostController
 import com.example.sharebook.R
 import com.example.sharebook.book_feature.domain.model.toBookBookYourSummaryModel
@@ -25,16 +30,32 @@ import com.example.sharebook.core.presentation.ui.theme.green900
 import com.example.sharebook.core.presentation.ui.theme.white
 import com.example.sharebook.core.presentation.components.*
 import com.example.sharebook.core.presentation.components.book.BookSummary
+import com.example.sharebook.core.presentation.components.button.IconButtonAction
 import com.example.sharebook.core.presentation.components.divider.DividerCustom
 import com.example.sharebook.core.presentation.components.statewrapper.StateWraper
+import com.example.sharebook.core.presentation.navigation.routes.authenticated.PrivateRoutes
 import com.example.sharebook.core.utils.UiText
 
 @Composable
 fun SelfBook(
+    lifecycleOwner: LifecycleOwner = LocalLifecycleOwner.current,
     selfViewModel: SelfBookViewModel = hiltViewModel(),
     navController: NavHostController
 ) {
     val uiState = selfViewModel.uiState
+
+    DisposableEffect(lifecycleOwner) {
+        val observer = LifecycleEventObserver { _, event ->
+            if (event == Lifecycle.Event.ON_RESUME) {
+                selfViewModel.updateDetailsBook()
+            }
+        }
+
+        lifecycleOwner.lifecycle.addObserver(observer)
+        onDispose {
+            lifecycleOwner.lifecycle.removeObserver(observer)
+        }
+    }
 
     Surface(
         modifier = Modifier.fillMaxSize(),
@@ -62,12 +83,17 @@ fun SelfBook(
                 IconButtonAction(
                     resource = R.drawable.icon_edit,
                     sizeValue = 24,
-                    modifier = Modifier
-                ) {  }
+                    modifier = Modifier,
+                    enable = !uiState.isLoadingDetails
+                ) {
+                    navController.navigate(
+                        "${PrivateRoutes.FormBook.route}?book_id=${uiState.bookDetails?.id ?: ""}"
+                    )
+                }
             }
 
             StateWraper(
-                onClickTryAgain = {  },
+                onClickTryAgain = { selfViewModel.updateDetailsBook() },
                 isLoading = uiState.isLoadingDetails,
                 isError = !uiState.isErrorDetails.isNullOrEmpty()
             ) {

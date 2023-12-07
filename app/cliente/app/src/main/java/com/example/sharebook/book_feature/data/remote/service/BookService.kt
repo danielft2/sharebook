@@ -5,6 +5,7 @@ import okhttp3.MultipartBody
 import retrofit2.http.GET
 import retrofit2.http.Multipart
 import retrofit2.http.POST
+import retrofit2.http.PUT
 import retrofit2.http.Part
 import retrofit2.http.Path
 
@@ -30,6 +31,22 @@ interface BookService {
         @Part longitude: MultipartBody.Part,
         @Part images: List<MultipartBody.Part>,
         @Part cape: MultipartBody.Part,
+    )
+
+    @Multipart
+    @PUT("/book/{book_id}")
+    suspend fun updateBook(
+        @Path("book_id") bookId: String,
+        @Part nome: MultipartBody.Part,
+        @Part sinopse: MultipartBody.Part,
+        @Part autor: MultipartBody.Part,
+        @Part edicao: MultipartBody.Part,
+        @Part idioma: MultipartBody.Part,
+        @Part genero: MultipartBody.Part,
+        @Part pode_buscar: MultipartBody.Part,
+        @Part quer_receber: MultipartBody.Part,
+        @Part estado_id: MultipartBody.Part,
+        @Part cape: MultipartBody.Part?,
     )
 
     @GET("/book-state")

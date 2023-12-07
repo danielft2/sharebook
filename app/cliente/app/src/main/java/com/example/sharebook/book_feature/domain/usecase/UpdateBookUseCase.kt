@@ -1,6 +1,6 @@
 package com.example.sharebook.book_feature.domain.usecase
 
-import com.example.sharebook.book_feature.data.remote.model.CreateBookModel
+import com.example.sharebook.book_feature.data.remote.model.UpdateBookModel
 import com.example.sharebook.book_feature.domain.adapter.BookRepository
 import com.example.sharebook.core.utils.Resource
 import kotlinx.coroutines.flow.Flow
@@ -9,12 +9,12 @@ import retrofit2.HttpException
 import java.io.IOException
 import javax.inject.Inject
 
-class CreateBookUseCase @Inject constructor(private val bookRepository: BookRepository) {
-    operator fun invoke(body: CreateBookModel): Flow<Resource<Boolean>> {
+class UpdateBookUseCase @Inject constructor(private val bookRepository: BookRepository) {
+    operator fun invoke(bookId: String, body: UpdateBookModel): Flow<Resource<Boolean>> {
         return flow {
             try {
                 emit(Resource.Loading())
-                bookRepository.createBook(body)
+                bookRepository.updateBook(bookId = bookId, book = body)
                 emit(Resource.Success(true))
             } catch (e: HttpException) {
                 emit(Resource.Error("Ocorreu um erro inesperado!"))

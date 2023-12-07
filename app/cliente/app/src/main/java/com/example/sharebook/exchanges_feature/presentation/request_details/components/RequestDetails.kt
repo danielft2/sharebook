@@ -23,7 +23,7 @@ import com.example.sharebook.core.domain.enum.BookRequestStatus
 import com.example.sharebook.core.presentation.components.book.BookTag
 import com.example.sharebook.core.presentation.components.divider.DividerCustom
 import com.example.sharebook.core.presentation.components.HeaderWithBackground
-import com.example.sharebook.core.presentation.components.IconButtonAction
+import com.example.sharebook.core.presentation.components.button.IconButtonAction
 import com.example.sharebook.core.presentation.components.book.BookSummary
 import com.example.sharebook.core.presentation.components.loading.LoadingWithBackground
 import com.example.sharebook.core.presentation.components.statewrapper.StateWraper

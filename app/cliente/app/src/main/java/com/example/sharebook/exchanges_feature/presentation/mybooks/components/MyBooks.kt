@@ -69,7 +69,7 @@ fun MyBooks(
     }
 
     Surface(modifier = Modifier.fillMaxSize()) {
-        FloatingButtonNewBook { onNavigate(PrivateRoutes.AddBookScreen.route) }
+        FloatingButtonNewBook { onNavigate(PrivateRoutes.FormBook.route) }
 
         Column(modifier = Modifier
             .background(background)

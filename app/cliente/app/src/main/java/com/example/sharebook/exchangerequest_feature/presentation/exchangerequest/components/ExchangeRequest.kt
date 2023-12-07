@@ -16,7 +16,7 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavHostController
 import com.example.sharebook.R
 import com.example.sharebook.core.presentation.components.HeaderWithBackground
-import com.example.sharebook.core.presentation.components.IconButtonAction
+import com.example.sharebook.core.presentation.components.button.IconButtonAction
 import com.example.sharebook.core.presentation.ui.theme.*
 import com.example.sharebook.exchangerequest_feature.presentation.choosebooksheet.components.ChooseBookSheet
 import com.example.sharebook.exchangerequest_feature.presentation.exchangerequest.ExchangeRequestViewModel
