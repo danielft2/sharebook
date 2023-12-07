@@ -276,9 +276,16 @@ export class BookService {
       throw new Error("Você não pode editar esse livro, ele ja foi solicitado")
     }
     else{
-      const updatedCapeName = book.nome;
-      this.supabaseService.remove(findedBook.nome, 'BookImages');
-      this.supabaseService.create(updatedCapeName, 'BookImages', cape.buffer);
+      let updatedCapeName: string;
+
+      if(cape == undefined || cape == null) {
+        updatedCapeName = findedBook.capa;
+      }else{
+        updatedCapeName = book.nome;
+        this.supabaseService.remove(findedBook.nome, 'BookImages');
+        this.supabaseService.create(updatedCapeName, 'BookImages', cape.buffer);
+      }
+
       this.updateBookGender(generos, book_id);
       const updatedBook = await this.bookRepository.update(book_id, {
         ...book,
