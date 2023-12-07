@@ -15,7 +15,8 @@ import com.example.sharebook.book_feature.domain.usecase.UpdateBookUseCase
 import com.example.sharebook.book_feature.presentation.form_book.channel.FormBookRequestChannel
 import com.example.sharebook.book_feature.presentation.form_book.event.FormBookEvent
 import com.example.sharebook.book_feature.presentation.form_book.state.UiState
-import com.example.sharebook.book_feature.presentation.form_book.state.toFormBookModel
+import com.example.sharebook.book_feature.presentation.form_book.state.toCreateBookModel
+import com.example.sharebook.book_feature.presentation.form_book.state.toUpdateBookModel
 import com.example.sharebook.core.domain.adapter.UserStorageManagement
 import com.example.sharebook.core.domain.usecase.ValidateRequiredUseCase
 import com.example.sharebook.core.utils.Constants
@@ -131,7 +132,6 @@ class FormBookViewModel @Inject constructor(
                 idiomaError = UiText.StringResource(resId = validateIdiomaResult.resId),
                 sinopseError = UiText.StringResource(resId = validateSinopseResult.resId),
                 estadoError = UiText.StringResource(resId = validateEstadoResult.resId),
-                capaError = UiText.StringResource(resId = validateCapaResult.resId),
             )
 
             if (uiState.bookId.isNullOrEmpty()) {
@@ -139,6 +139,7 @@ class FormBookViewModel @Inject constructor(
                     isbnError = UiText.StringResource(resId = validateIsbnResult.resId),
                     latitudeError = UiText.StringResource(resId = validateLatitudeResult.resId),
                     longitudeError = UiText.StringResource(resId = validateLongitudeResult.resId),
+                    capaError = UiText.StringResource(resId = validateCapaResult.resId)
                 )
             }
 
@@ -151,7 +152,7 @@ class FormBookViewModel @Inject constructor(
 
     private fun createBook() {
         viewModelScope.launch {
-            createBookUseCase(uiState.toFormBookModel()).collect {response ->
+            createBookUseCase(uiState.toCreateBookModel()).collect {response ->
                 when (response) {
                     is Resource.Success -> { formBookRequestChannel.send(FormBookRequestChannel.Success(
                         R.string.create_book_request_success
@@ -168,7 +169,7 @@ class FormBookViewModel @Inject constructor(
 
     private fun updateBook() {
         viewModelScope.launch {
-            updateBookUseCase(uiState.bookId!!, uiState.toFormBookModel()).collect {response ->
+            updateBookUseCase(uiState.bookId!!, uiState.toUpdateBookModel()).collect {response ->
                 when (response) {
                     is Resource.Success -> { formBookRequestChannel.send(FormBookRequestChannel.Success(
                         R.string.update_book_request_success
@@ -188,7 +189,10 @@ class FormBookViewModel @Inject constructor(
            listStatesUseCase().collect { response ->
                when (response) {
                    is Resource.Success -> {
-                       uiState = uiState.copy(statesItens = response.data ?: listOf())
+                       uiState = uiState.copy(
+                           statesItens = response.data ?: listOf(),
+                           isLoadingStateRequest = false
+                       )
                        if (!uiState.bookId.isNullOrEmpty()) getBookData(uiState.bookId!!)
                    }
                    is Resource.Error -> {

@@ -32,7 +32,7 @@ fun BookDetailsResponse.toBookDetailsModel(): BookDetailsModel {
         name = book.nome,
         edition = book.edicao,
         authors = Functions.getValuesFromList(book.autor),
-        bookState = book.bookState.nome,
+        bookState = book.bookState,
         genders = Functions.getValuesFromList(book.genders),
         cover = book.capa,
         images = book.imagens,

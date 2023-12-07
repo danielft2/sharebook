@@ -46,7 +46,7 @@ interface BookService {
         @Part pode_buscar: MultipartBody.Part,
         @Part quer_receber: MultipartBody.Part,
         @Part estado_id: MultipartBody.Part,
-        @Part cape: MultipartBody.Part,
+        @Part cape: MultipartBody.Part?,
     )
 
     @GET("/book-state")

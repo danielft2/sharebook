@@ -1,7 +1,6 @@
 package com.example.sharebook.book_feature.domain.usecase
 
-import com.example.sharebook.book_feature.data.remote.model.FormBookModel
-import com.example.sharebook.book_feature.data.remote.model.toCreateBookModel
+import com.example.sharebook.book_feature.data.remote.model.CreateBookModel
 import com.example.sharebook.book_feature.domain.adapter.BookRepository
 import com.example.sharebook.core.utils.Resource
 import kotlinx.coroutines.flow.Flow
@@ -11,11 +10,11 @@ import java.io.IOException
 import javax.inject.Inject
 
 class CreateBookUseCase @Inject constructor(private val bookRepository: BookRepository) {
-    operator fun invoke(body: FormBookModel): Flow<Resource<Boolean>> {
+    operator fun invoke(body: CreateBookModel): Flow<Resource<Boolean>> {
         return flow {
             try {
                 emit(Resource.Loading())
-                bookRepository.createBook(book = body.toCreateBookModel())
+                bookRepository.createBook(body)
                 emit(Resource.Success(true))
             } catch (e: HttpException) {
                 emit(Resource.Error("Ocorreu um erro inesperado!"))

@@ -12,5 +12,5 @@ data class UpdateBookModel(
     val estadoId: MultipartBody.Part,
     val querRecber: MultipartBody.Part,
     val podeBuscar: MultipartBody.Part,
-    val cape: MultipartBody.Part,
+    val cape: MultipartBody.Part?,
 )
