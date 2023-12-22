@@ -24,6 +24,7 @@ A ideia do projeto é desenvolver uma aplicação mobile que tem como finalidade
 #### Aplicativo Android (Cliente)
 
 - [**Kotlin**](https://kotlinlang.org/)
+- [**JetPacker Composer**](https://developer.android.com/jetpack?hl=pt-br)
 
 #### Server
 
