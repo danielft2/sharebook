@@ -18,8 +18,7 @@ import javax.inject.Singleton
 
 @Module
 @InstallIn(SingletonComponent::class)
-class StorageModule {
-
+object StorageModule {
     @Singleton
     @Provides
     fun provideDataStorePreferences(@ApplicationContext context: Context): DataStore<Preferences> {
@@ -43,4 +42,5 @@ class StorageModule {
     fun provideGson(): Gson {
         return Gson()
     }
+
 }

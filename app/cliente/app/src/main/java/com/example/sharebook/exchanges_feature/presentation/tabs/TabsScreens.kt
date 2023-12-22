@@ -5,10 +5,7 @@ val tabsList = listOf(
     TabScreen.EnteredProcessScreen
 )
 
-sealed class TabScreen(
-    val title: String,
-    val badgeValue: Int
-) {
-    object MyBooksScreen: TabScreen("Meus livros", 3)
-    object EnteredProcessScreen: TabScreen("Entrou em processo", 1)
+sealed class TabScreen(val title: String) {
+    object MyBooksScreen: TabScreen("Meus livros")
+    object EnteredProcessScreen: TabScreen("Solicitações")
 }

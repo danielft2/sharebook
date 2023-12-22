@@ -17,13 +17,15 @@ Table Usuario {
   processo_de_troca ProcessoDeTroca [not null]
   alerta Alerta [not null]
   avaliacao Avaliacao [not null]
+  generosFavoritos GeneroUsuario [not null]
 }
 
 Table Livro {
-  isbn String [pk]
+  id String [pk]
+  isbn String [not null]
   nome String [not null]
   sinopse String
-  autor String [not null]
+  autor String[] [not null]
   dono_publicacao Usuario [not null]
   usuario_id String [not null]
   edicao Int [not null, default: 1]
@@ -35,18 +37,31 @@ Table Livro {
   genero_livro GeneroLivro [not null]
   estado Estado [not null]
   estado_id String [not null]
+  latitude String [not null]
+  longitude String [not null]
   solicitacao Solicitacao [not null]
   processo_de_troca ProcessoDeTroca [not null]
 }
 
 Table GeneroLivro {
   livro Livro [not null]
-  livro_isbn String [not null]
+  livro_id String [not null]
   genero Genero [not null]
   genero_id String [not null]
 
   indexes {
-    (livro_isbn, genero_id) [pk]
+    (livro_id, genero_id) [pk]
+  }
+}
+
+Table GeneroUsuario {
+  usuario Usuario [not null]
+  usuario_id String [not null]
+  genero Genero [not null]
+  genero_id String [not null]
+
+  indexes {
+    (usuario_id, genero_id) [pk]
   }
 }
 
@@ -54,6 +69,7 @@ Table Genero {
   id String [pk]
   nome String [not null]
   generoLivro GeneroLivro [not null]
+  GeneroUsuario GeneroUsuario [not null]
 }
 
 Table Estado {
@@ -67,8 +83,13 @@ Table Solicitacao {
   usuario_solicitante Usuario [not null]
   usuario_solicitante_id String [not null]
   livro Livro [not null]
-  livro_isbn String [not null]
+  livro_id String [not null]
+  livro_oferecido_id String [not null]
   status String [not null]
+
+  indexes {
+    (usuario_solicitante_id, livro_id) [unique]
+  }
 }
 
 Table ProcessoDeTroca {
@@ -76,7 +97,8 @@ Table ProcessoDeTroca {
   usuario_solicitante Usuario [not null]
   usuario_solicitante_id String [not null]
   livro Livro [not null]
-  livro_isbn String [not null]
+  livro_id String [not null]
+  livro_oferecido_id String [not null]
   status String [not null]
 }
 
@@ -85,8 +107,12 @@ Table Alerta {
   nome_livro String [not null]
   usuario Usuario [not null]
   usuario_id String [not null]
-  filtrado_por_estado Boolean [not null, default: false]
-  filtrado_por_cidade Boolean [not null, default: false]
+  filtrado_por_localizacao Boolean [not null, default: false]
+  filtrado_por_envio Boolean [not null, default: false]
+
+  indexes {
+    (usuario_id, nome_livro) [unique]
+  }
 }
 
 Table Avaliacao {
@@ -102,17 +128,21 @@ Ref: Livro.usuario_id > Usuario.id
 
 Ref: Livro.estado_id > Estado.id
 
-Ref: GeneroLivro.livro_isbn > Livro.isbn
+Ref: GeneroLivro.livro_id > Livro.id
 
 Ref: GeneroLivro.genero_id > Genero.id
 
+Ref: GeneroUsuario.usuario_id > Usuario.id
+
+Ref: GeneroUsuario.genero_id > Genero.id
+
 Ref: Solicitacao.usuario_solicitante_id > Usuario.id
 
-Ref: Solicitacao.livro_isbn > Livro.isbn
+Ref: Solicitacao.livro_id > Livro.id
 
 Ref: ProcessoDeTroca.usuario_solicitante_id > Usuario.id
 
-Ref: ProcessoDeTroca.livro_isbn > Livro.isbn
+Ref: ProcessoDeTroca.livro_id > Livro.id
 
 Ref: Alerta.usuario_id > Usuario.id
 

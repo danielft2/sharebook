@@ -1,8 +1,13 @@
 package com.example.sharebook.book_feature.di
 
 import com.example.sharebook.BuildConfig
-import com.example.sharebook.auth_feature.data.remote.service.AuthService
-import com.example.sharebook.book_feature.data.remote.service.RequestBookService
+import com.example.sharebook.book_feature.data.remote.repository.BookRepositoryImpl
+import com.example.sharebook.book_feature.data.remote.service.BookService
+import com.example.sharebook.book_feature.domain.adapter.BookRepository
+import com.example.sharebook.book_feature.domain.usecase.CreateBookUseCase
+import com.example.sharebook.book_feature.domain.usecase.DetailsBookUseCase
+import com.example.sharebook.book_feature.domain.usecase.ListStatesUseCase
+import com.example.sharebook.book_feature.domain.usecase.UpdateBookUseCase
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -18,12 +23,45 @@ object BookModule {
 
     @Provides
     @Singleton
-    fun provideRequestBookService(): RequestBookService {
+    fun provideRequestBookService(
+        gsonConverterFactory: GsonConverterFactory,
+        okHttpClient: OkHttpClient,
+    ): BookService {
         return Retrofit.Builder()
             .baseUrl(BuildConfig.BASE_URL)
-            .client(OkHttpClient.Builder().build())
-            .addConverterFactory(GsonConverterFactory.create())
+            .client(okHttpClient)
+            .addConverterFactory(gsonConverterFactory)
             .build()
-            .create(RequestBookService::class.java)
+            .create(BookService::class.java)
+    }
+
+    @Provides
+    @Singleton
+    fun provideBookRepository(bookService: BookService): BookRepository {
+        return BookRepositoryImpl(bookService)
+    }
+
+    @Provides
+    @Singleton
+    fun provideDetailsBookUseCase(bookRepository: BookRepository): DetailsBookUseCase {
+        return DetailsBookUseCase(bookRepository)
+    }
+
+    @Provides
+    @Singleton
+    fun provideCreateBookUseCase(bookRepository: BookRepository): CreateBookUseCase {
+        return CreateBookUseCase(bookRepository)
+    }
+
+    @Provides
+    @Singleton
+    fun provideUpdateBookUseCase(bookRepository: BookRepository): UpdateBookUseCase {
+        return UpdateBookUseCase(bookRepository)
+    }
+
+    @Provides
+    @Singleton
+    fun provideListStatesUseCase(bookRepository: BookRepository): ListStatesUseCase {
+        return ListStatesUseCase(bookRepository)
     }
 }

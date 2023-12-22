@@ -2,7 +2,6 @@ package com.example.sharebook.core.presentation.ui.theme
 
 import androidx.compose.ui.graphics.Color
 
-val green50 = Color(0xFFE6F2F1)
 val green100 = Color(0xFFD9EBEA)
 val green200 = Color(0xFF6BB3A6)
 val green300 = Color(0xFF00856D)
@@ -24,10 +23,10 @@ val blue100 = Color(0xFFD4EAFF)
 val blue500 = Color(0xFF005B9D)
 
 val red100 = Color(0xFFFF8383)
-val red400 = Color(0xFFFF3030)
+val red400 = Color(0xFFEA4A4A)
 
-val golden = Color(0xFFFF9E00)
-val lightGolden = Color(0xFFFFF2DD)
+val orange700 = Color(0xFFB16E00)
+val orange100 = Color(0xFFFFE6D4)
 
 val background = Color(0xFFF3F3F3)
 val white = Color(0xFFFFFFFF)

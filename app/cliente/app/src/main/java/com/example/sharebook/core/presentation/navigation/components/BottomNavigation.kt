@@ -26,13 +26,16 @@ import com.example.sharebook.core.presentation.ui.theme.*
 import com.example.sharebook.core.utils.Constants
 import com.example.sharebook.core.utils.UiText
 import com.example.sharebook.discovery_feature.presentation.components.Discovery
-import com.example.sharebook.exchanges_feature.presentation.tabs.components.Exchanges
 import com.example.sharebook.home_feature.presentation.components.Home
 import com.example.sharebook.maps_feature.presentation.components.Maps
+import androidx.compose.material.BottomNavigation
+import com.example.sharebook.core.presentation.navigation.NavigationViewModel
+import com.example.sharebook.exchanges_feature.presentation.tabs.components.Exchanges
 
 @SuppressLint("UnusedMaterialScaffoldPaddingParameter")
 @Composable
 fun BottomNavigation(
+    navigationViewModel: NavigationViewModel,
     navControllerRoot: NavHostController,
     itens: List<BottomNavigationItem>
 ) {
@@ -40,7 +43,7 @@ fun BottomNavigation(
     val backStackEntry = navBottomController.currentBackStackEntryAsState()
 
     Scaffold(bottomBar = {
-        androidx.compose.material.BottomNavigation(
+        BottomNavigation(
             modifier = Modifier.clip(RoundedCornerShape(12.dp, 12.dp, 0.dp, 0.dp)),
             elevation = 40.dp,
             backgroundColor = white,
@@ -80,10 +83,13 @@ fun BottomNavigation(
         }
     }) {
         NavHost(navController = navBottomController, startDestination = Constants.HOME_ROUTE) {
-            composable(PrivateRoutes.HomeScreen.route) { Home(navControllerRoot) }
-            composable(PrivateRoutes.DiscoveryScreen.route) { Discovery() }
+            composable(PrivateRoutes.HomeScreen.route) { Home(
+                navControllerRoot,
+                navigationViewModel = navigationViewModel
+            ) }
+            //composable(PrivateRoutes.DiscoveryScreen.route) { Discovery(navController = navControllerRoot) }
+            composable(PrivateRoutes.MapsScreen.route) { Maps(navControllerRoot) }
             composable(PrivateRoutes.ExchangesScreen.route) { Exchanges(navControllerRoot) }
-            composable(PrivateRoutes.MapsScreen.route) { Maps() }
         }
     }
 }

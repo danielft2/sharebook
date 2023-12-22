@@ -25,9 +25,9 @@ import androidx.navigation.NavController
 import com.example.sharebook.R
 import com.example.sharebook.auth_feature.presentation.register.RegisterViewModel
 import com.example.sharebook.auth_feature.presentation.register.event.RegisterFormEvent
-import com.example.sharebook.core.presentation.components.ButtonPrimary
+import com.example.sharebook.core.presentation.components.button.ButtonPrimary
 import com.example.sharebook.core.presentation.components.Header
-import com.example.sharebook.core.presentation.components.TextFieldCustom
+import com.example.sharebook.core.presentation.components.input.TextFieldCustom
 import com.example.sharebook.core.presentation.navigation.routes.unauthenticated.PublicRoutes
 import com.example.sharebook.core.presentation.ui.theme.*
 import com.example.sharebook.core.utils.UiText
@@ -141,14 +141,14 @@ fun Register(
                         onChange = { viewModel.onEvent(RegisterFormEvent.CepChange(it.take(8))) }
                     )
                     if (viewModel.uiFormState.cepSearchIsLoading) {
-                        CircularProgressIndicator(
-                            color = green500,
+                        CircularProgressIndicator(color = green500,
                             strokeWidth = 2.dp,
                             modifier = Modifier
                                 .width(18.dp)
                                 .height(18.dp)
                                 .align(Alignment.CenterEnd)
                                 .offset(y = 10.dp, x = (-14).dp)
+
                         )
                     }
                 }
