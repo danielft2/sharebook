@@ -2,24 +2,6 @@
   <img width="250px" title="Logo goorg" alt="Logo ShareBook" src="/logo.svg">
 </h1>
 
-## 🚩 Status Report 3:
-
-**Link Atualizado do Notion** - https://quixotic-zephyr-14e.notion.site/ShareBook-PI3-9394c7372c794188947d3cdfbb453e3f?pvs=4
-<br>
-
-**Video da Apresentação** - https://drive.google.com/file/d/1grePq1gr1DgW2Y5zHHbjW7sPDM0u0ctK/view?usp=sharing
-<br>
-
-**Documento de Requisitos Atualizado** - https://docs.google.com/document/d/1dub9zq42SKB65NXj_hXShz_w1WiHzDGzqkjJc-n2p90/edit#heading=h.lmao9w9i8s0s
-<br>
-
-**Documento de Escopo Atualizado** - https://docs.google.com/document/d/1vuJnEYzRhwt86NPMNhOOySjTMevtoxxZ/edit
-<br>
-
-**Documento de Arquitetura Atualizado** - https://docs.google.com/document/d/1Nw65DceqZodmHG7-GU9B2m-nI2gShkFOWlb1eS2SMpM/edit?usp=sharing <br>
-
-**Link Figma** - https://www.figma.com/file/Gvz9lZVWX845bpMhtfgkvu/ShareBook?type=design&node-id=14%3A4&mode=design&t=RaCqUq1KFVRuvtj0-1 <br>
-
 ## 🎯 Sobre o Projeto
 
 A ideia do projeto é desenvolver uma aplicação mobile que tem como finalidade servir como ponte entre leitores que desejam trocar livros físicos entre si. Permitindo que leitores que têm ou não esse hábito possam ter mais facilidade e maior número de opções na hora de trocarem seus livros.
